@@ -1,3 +1,3 @@
 # Android-project
 
-This is a school project for a Mobile app development course, mainly using Java.
+This is a school project for a Mobile app development course, mainly using Java. The project name will be later added.
