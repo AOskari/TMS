@@ -46,9 +46,12 @@ public class Elintarvike {
         return lista;
     }
 
+    public String haeNimi() {
+        return this.name;
+    }
 
     public String toString() {
-        return name + "\r\n" + "Ravintosisältö / 100g" + "\r\n" + "Kilokalorit: " + df.format(this.kcal) +  "\r\n" + "Proteiini: " +
+        return "Ravintosisältö / 100g" + "\r\n" + "Kilokalorit: " + df.format(this.kcal) +  "\r\n" + "Proteiini: " +
                 df.format(this.protein) + "g" + "\r\n" + "Hiilihydraatit: " + df.format(this.carb)  + "g" + "\r\n" + "Rasva: " + df.format(this.fat)  + "g";
     }
 

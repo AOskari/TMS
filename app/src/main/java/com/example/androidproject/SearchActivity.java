@@ -36,6 +36,8 @@ public class SearchActivity extends AppCompatActivity {
     Button search;
     ListView lv;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,6 @@ public class SearchActivity extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         Log.d("response info", "onResponse called");
                         foodInfo.clear();
-                  //      info.clear();
                         Log.d("current info", foodInfo.toString());
                         for (int i = 0; i < response.length(); i++) {
                             try {
@@ -101,20 +102,25 @@ public class SearchActivity extends AppCompatActivity {
 
                     }
                 });
-        
-        requestQueue.add(jsonArrayRequest);
-        Log.d("checking info", foodInfo.toString());
 
+        // Tehdään API-kutsu ainoastaan jos hakukentässä on tekstiä.
+        if (input.getText().toString().length() > 0) {
+            requestQueue.add(jsonArrayRequest);
+            Log.d("checking info", foodInfo.toString());
+        }
     }
 
 
     private void initList() {
+        RuokaAdapter adapter = new RuokaAdapter(this, foodInfo);
         // Päivitetään lista haetuilla ruoka-aineilla.
-        lv.setAdapter(new ArrayAdapter<Elintarvike>(
+    /*    lv.setAdapter(new ArrayAdapter<Elintarvike>(
                 this,
                 android.R.layout.simple_list_item_1,
                 foodInfo
         ));
+        */
+        lv.setAdapter(adapter);
 
         // Lopuksi piilotetaan virtuaalinen näppäimistö
         InputMethodManager inputManager = (InputMethodManager)
