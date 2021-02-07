@@ -1,16 +1,11 @@
 package com.example.androidproject.aktiviteetit;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -26,7 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.androidproject.Ateria;
 import com.example.androidproject.Elintarvike;
 import com.example.androidproject.R;
-import com.example.androidproject.RuokaAdapter;
+import com.example.androidproject.HakuAdapter;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -142,7 +137,7 @@ public class HaeActivity extends AppCompatActivity {
 
     private void initList() {
         // Päivitetään lista asettamalla RuokaAdapter ListViewille.
-        RuokaAdapter adapter = new RuokaAdapter(this, foodInfo, pref, this);
+        HakuAdapter adapter = new HakuAdapter(this, foodInfo, pref, this);
         lv.setAdapter(adapter);
 
         // Lopuksi piilotetaan virtuaalinen näppäimistö

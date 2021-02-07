@@ -2,24 +2,20 @@ package com.example.androidproject.aktiviteetit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.androidproject.Ateria;
+import com.example.androidproject.AteriaAdapter;
 import com.example.androidproject.Elintarvike;
 import com.example.androidproject.R;
-import com.example.androidproject.RuokaAdapter;
 import com.google.gson.Gson;
-
-import java.util.List;
 
 public class AteriaActivity extends AppCompatActivity {
 
@@ -49,6 +45,15 @@ public class AteriaActivity extends AppCompatActivity {
         super.onResume();
         paivitaLista();
     }
+
+    public void paivitaTiedot() {
+        ateriaJson = pref.getString("ateria", "");
+        ateria = gson.fromJson(ateriaJson, Ateria.class);
+
+        TextView tv = findViewById(R.id.ravintotiedot);
+        tv.setText(ateria.toString());
+    }
+
     public void paivitaLista() {
         ateriaJson = pref.getString("ateria", "");
         ateria = gson.fromJson(ateriaJson, Ateria.class);
@@ -63,12 +68,8 @@ public class AteriaActivity extends AppCompatActivity {
         TextView tv = findViewById(R.id.ravintotiedot);
         tv.setText(ateria.toString());
 
-
-       lv.setAdapter(new ArrayAdapter<Elintarvike>(
-               this,
-               android.R.layout.simple_list_item_1,
-               ateria.haeTarvikkeet()
-       ));
+        AteriaAdapter adapter = new AteriaAdapter(this, pref);
+        lv.setAdapter(adapter);
     }
 
 

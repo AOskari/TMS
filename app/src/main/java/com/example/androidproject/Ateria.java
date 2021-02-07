@@ -45,6 +45,24 @@ public class Ateria {
         return this.raakaAineet;
     }
 
+    public void poista(int i) {
+
+        /* Vähennetään poistettavan elintarvikkeen ravintoarvot
+         kokonaisuudesta, jonka jälkeen poistetaan Elintarvike. */
+
+        this.salt = Math.max(this.salt - (raakaAineet.get(i).haeRavintoarvot().get(0)), 0);
+        this.kcal = Math.max(this.kcal - (raakaAineet.get(i).haeRavintoarvot().get(1)), 0);
+        this.fat = Math.max(this.fat - (raakaAineet.get(i).haeRavintoarvot().get(2)), 0);
+        this.protein = Math.max(this.protein - (raakaAineet.get(i).haeRavintoarvot().get(3)), 0);
+        this.carb = Math.max(this.carb - (raakaAineet.get(i).haeRavintoarvot().get(4)), 0);
+        this.organicAcid = Math.max(this.organicAcid - (raakaAineet.get(i).haeRavintoarvot().get(5)), 0);
+        this.saturatedFat = Math.max(this.saturatedFat - (raakaAineet.get(i).haeRavintoarvot().get(6)), 0);
+        this.sugar = Math.max(this.sugar - (raakaAineet.get(i).haeRavintoarvot().get(7)), 0);
+        this.fiber = Math.max(this.fiber - (raakaAineet.get(i).haeRavintoarvot().get(8)), 0);
+
+        raakaAineet.remove(i);
+    }
+
     @Override
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.#");

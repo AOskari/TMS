@@ -1,20 +1,14 @@
 package com.example.androidproject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Parcelable;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +25,7 @@ import java.util.List;
  * ja kaksi nappia tietojen selaamiseen ja elintarvikkeen lisäämiseen ateriaan.
  */
 
-public class RuokaAdapter extends BaseAdapter {
+public class HakuAdapter extends BaseAdapter {
 
     Context context;
     List<Elintarvike> lista;
@@ -45,7 +39,7 @@ public class RuokaAdapter extends BaseAdapter {
 
     HaeActivity activity;
 
-    public RuokaAdapter(Context context, List<Elintarvike> lista, SharedPreferences pref, HaeActivity activity) {
+    public HakuAdapter(Context context, List<Elintarvike> lista, SharedPreferences pref, HaeActivity activity) {
         this.context = context;
         this.lista = lista;
         this.pref = pref;
@@ -89,7 +83,7 @@ public class RuokaAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        convertView = LayoutInflater.from(context).inflate(R.layout.rowdesign, parent, false);
+        convertView = LayoutInflater.from(context).inflate(R.layout.hakurivi_layout, parent, false);
 
         TextView nimi = convertView.findViewById(R.id.nimi);
         Button lisaa = convertView.findViewById(R.id.lisaa);
@@ -172,8 +166,6 @@ public class RuokaAdapter extends BaseAdapter {
                   }
             }
         });
-
-   // Ei toimi vielä
 
         tiedotNappi.setOnClickListener(new View.OnClickListener() {
             @Override
