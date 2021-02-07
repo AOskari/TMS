@@ -1,9 +1,12 @@
-package com.example.androidproject;
+package com.example.androidproject.aktiviteetit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.example.androidproject.Elintarvike;
+import com.example.androidproject.R;
 
 public class TiedotActivity extends AppCompatActivity {
 

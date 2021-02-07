@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".TiedotActivity"
+        <activity android:name=".aktiviteetit.TiedotActivity"
             android:parentActivityName=".aktiviteetit.HaeActivity"/>
         <activity
             android:name=".aktiviteetit.AteriaActivity"
