@@ -7,24 +7,14 @@
 
     <TextView
         android:id="@+id/nimi"
-        android:layout_width="148dp"
-        android:layout_height="wrap_content"
+        android:layout_width="214dp"
+        android:layout_height="17dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/info"
+        app:layout_constraintBottom_toTopOf="@+id/maaraInput"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/info"
-        android:layout_width="148dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nimi" />
 
     <Button
         android:id="@+id/lisaa"
@@ -40,20 +30,31 @@
 
     <EditText
         android:id="@+id/maaraInput"
-        android:layout_width="59dp"
-        android:layout_height="29dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_width="61dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/maara_input"
         android:gravity="center"
         android:inputType="numberPassword"
-        android:maxLength="4"
-        android:text="0"
+        android:maxLength="5"
+        android:text="0g"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/lisaa"
-        app:layout_constraintStart_toEndOf="@+id/nimi"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/nimi"
+        app:layout_constraintStart_toStartOf="@+id/nimi"
+        app:layout_constraintTop_toBottomOf="@+id/nimi" />
+
+    <Button
+        android:id="@+id/plus"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:background="@drawable/plus_nappi_layout"
+        android:text="+"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/maaraInput"
+        app:layout_constraintStart_toEndOf="@+id/maaraInput"
+        app:layout_constraintTop_toTopOf="@+id/maaraInput" />
 
     <Button
         android:id="@+id/tiedot"
@@ -67,42 +68,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lisaa" />
 
-    <TextView
-        android:id="@+id/gramma"
-        android:layout_width="18dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:text="g"
-        app:layout_constraintBaseline_toBaselineOf="@+id/maaraInput"
-        app:layout_constraintStart_toEndOf="@+id/maaraInput" />
-
-    <Button
-        android:id="@+id/plus"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="+"
-        android:textSize="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/maaraInput"
-        app:layout_constraintEnd_toEndOf="@+id/maaraInput"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="@+id/maaraInput"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/miinus"
         android:layout_width="37dp"
         android:layout_height="38dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
+        android:background="@drawable/miinus_nappi_layout"
         android:text="-"
         android:textSize="13dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/maaraInput"
-        app:layout_constraintStart_toStartOf="@+id/maaraInput"
-        app:layout_constraintTop_toBottomOf="@+id/maaraInput" />
+        app:layout_constraintBottom_toBottomOf="@+id/maaraInput"
+        app:layout_constraintEnd_toStartOf="@+id/maaraInput"
+        app:layout_constraintTop_toTopOf="@+id/maaraInput" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Parcelable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.androidproject.aktiviteetit.HaeActivity;
+import com.example.androidproject.aktiviteetit.TiedotActivity;
 import com.google.gson.Gson;
 import java.util.List;
 
@@ -89,7 +92,6 @@ public class RuokaAdapter extends BaseAdapter {
         convertView = LayoutInflater.from(context).inflate(R.layout.rowdesign, parent, false);
 
         TextView nimi = convertView.findViewById(R.id.nimi);
-        TextView tiedot = convertView.findViewById(R.id.info);
         Button lisaa = convertView.findViewById(R.id.lisaa);
         Button plus = convertView.findViewById(R.id.plus);
         Button miinus = convertView.findViewById(R.id.miinus);
@@ -99,16 +101,31 @@ public class RuokaAdapter extends BaseAdapter {
         // EditTextin inputTypeksi on asetettu numberPassword; poistetaan asteriskit seuraavalla komennolla
         editText.setTransformationMethod(null);
 
+        // Asetetaan muutoksen kuuntelija, joka asettaa gramma-merkkijonon syöttökenttään mikäli sieltä puuttuu sellainen.
+        editText.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                if (!editText.getText().toString().contains("g")) {
+                    editText.setText(editText.getText().toString() + "g");
+                }
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        });
+
         nimi.setText(lista.get(position).haeNimi());
-        tiedot.setText(lista.get(position).toString());
 
         lisaa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // Reagoidaan klikkaukseen vain, jos tekstikenttä sisältää merkkejä.
-                if (editText.getText().toString().length() > 0) {
-                    Double maara = Double.parseDouble(editText.getText().toString());
+                if (!editText.getText().toString().equals("0g")) {
+                    Double maara = Double.parseDouble(editText.getText().toString().replaceAll("g", ""));
                     List<Double> ravinto = lista.get(position).haeRavintoarvot();
 
                     // Luodaan uusi Elintarvike-olio, joka sisältää valitun grammamäärän.
@@ -124,7 +141,7 @@ public class RuokaAdapter extends BaseAdapter {
                     Log.d("Päivitetty", "lisätty " + lista.get(position).haeNimi() + " ateriaan.");
 
                     // Lopuksi tyhjennetään tekstikenttä ja piilotetaan näppäimistö.
-                    editText.setText("0");
+                    editText.setText("0g");
                     activity.suljeNappaimisto();
                 }
             }
@@ -135,12 +152,12 @@ public class RuokaAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
 
-                if (editText.getText().toString().length() == 0) {
-                    editText.setText("1");
+                if (editText.getText().toString().equals("0g")) {
+                    editText.setText("1g");
                 } else {
-                    int maara = Integer.parseInt(editText.getText().toString());
+                    int maara = Integer.parseInt(editText.getText().toString().replaceAll("g", ""));
                     maara++;
-                    editText.setText(String.valueOf(maara));
+                    editText.setText(maara + "g");
                 }
             }
         });
@@ -148,25 +165,26 @@ public class RuokaAdapter extends BaseAdapter {
         miinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int maara = Integer.parseInt(editText.getText().toString());
+                int maara = Integer.parseInt(editText.getText().toString().replaceAll("g", ""));
                   if (maara > 0) {
                       maara--;
-                      editText.setText(String.valueOf(maara));
+                      editText.setText(maara + "g");
                   }
             }
         });
 
    // Ei toimi vielä
-        /*
+
         tiedotNappi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent nextActivity = new Intent(activity, TiedotActivity.class);
-                nextActivity.putExtra("TARVIKE", (Parcelable) lista.get(position));
-                activity.startActivity(nextActivity);
+                Intent nextActivity = new Intent(v.getContext(), TiedotActivity.class);
+                String ateriaJson = gson.toJson(lista.get(position));
+                nextActivity.putExtra("TARVIKE", ateriaJson);
+                v.getContext().startActivity(nextActivity);
             }
         });
-        */
+
         return convertView;
     }
 }

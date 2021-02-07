@@ -13,7 +13,8 @@
         android:theme="@style/Theme.AndroidProject"
         android:usesCleartextTraffic="true">
         <activity android:name=".aktiviteetit.TiedotActivity"
-            android:parentActivityName=".aktiviteetit.HaeActivity"/>
+            android:parentActivityName=".aktiviteetit.HaeActivity"
+            android:theme="@style/Theme.AndroidProject.PopupTheme"/>
         <activity
             android:name=".aktiviteetit.AteriaActivity"
             android:parentActivityName=".aktiviteetit.AteriatActivity" />

@@ -44,7 +44,12 @@ public class AteriaActivity extends AppCompatActivity {
         lv = findViewById(R.id.ateria);
     }
 
-    public void paivitaLista(View v) {
+    @Override
+    public void onResume() {
+        super.onResume();
+        paivitaLista();
+    }
+    public void paivitaLista() {
         ateriaJson = pref.getString("ateria", "");
         ateria = gson.fromJson(ateriaJson, Ateria.class);
 

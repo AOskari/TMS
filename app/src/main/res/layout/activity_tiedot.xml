@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/primaryColor"
     tools:context=".aktiviteetit.TiedotActivity">
 
     <TextView
@@ -11,29 +12,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/textPrimaryColor"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_info"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tiedot_info"
-        android:layout_width="266dp"
-        android:layout_height="276dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/tiedot_muu"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textPrimaryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tiedot_nimi" />
 
-    <TextView
-        android:id="@+id/tiedot_muu"
-        android:layout_width="266dp"
-        android:layout_height="283dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tiedot_info" />
 </androidx.constraintlayout.widget.ConstraintLayout>
