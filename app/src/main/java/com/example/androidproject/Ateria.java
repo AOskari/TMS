@@ -19,12 +19,10 @@ public class Ateria {
     private double sugar;
     private double fiber;
 
-    private DecimalFormat df = new DecimalFormat("#.##");
-
-    public Ateria() {
+    public Ateria(String name) {
         raakaAineet = new ArrayList<>();
+        this.name = name;
     }
-
 
     public void lisaaAine(Elintarvike tarvike) {
 
@@ -43,11 +41,17 @@ public class Ateria {
         fiber += tarvike.haeRavintoarvot().get(8);
     }
 
+    public List<Elintarvike> haeTarvikkeet() {
+        return this.raakaAineet;
+    }
 
+    @Override
     public String toString() {
-        return name + "\r\n" + "\r\n" + "Kilokalorit: " + df.format(this.kcal) +  "\r\n" + "Proteiini: " +
-                df.format(this.protein) + "\r\n" + "Hiilihydraatit: " + df.format(this.carb) + "Joista sokeria: " + df.format(this.sugar)
-                + "\r\n" + "Rasva: " + df.format(this.fat) + "Tyydyttynyt rasva: " + df.format(this.saturatedFat) +  "\r\n"  + "\r\n" + "Suola: " +
-                df.format(this.salt) + "\r\n" + "Kuitua: " + df.format(this.fiber) + "\r\n" + "Orgaaniset hapot: " + df.format(this.organicAcid);
+        DecimalFormat df = new DecimalFormat("#.#");
+
+        return name + "\r\n" + "\r\n" + "Energia: " + df.format(this.kcal) +  " kcal \r\n" + "Proteiini: " +
+                df.format(this.protein) + "g \r\n" + "Hiilihydraatit: " + df.format(this.carb) +  "g \r\n" + "Joista sokeria: " + df.format(this.sugar)
+                + "g \r\n" + "Rasva: " + df.format(this.fat) + "g \r\n" + "Tyydyttynyt rasva: " + df.format(this.saturatedFat) +  "g \r\n"  + "\r\n" + "Suola: " +
+                df.format(this.salt) + "g \r\n" + "Kuitua: " + df.format(this.fiber) + "g \r\n" + "Orgaaniset hapot: " + df.format(this.organicAcid) + "g";
     }
 }

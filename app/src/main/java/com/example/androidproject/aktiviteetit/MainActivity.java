@@ -1,15 +1,16 @@
-package com.example.androidproject;
+package com.example.androidproject.aktiviteetit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.androidproject.fragmentit.Koti;
-import com.example.androidproject.fragmentit.Profiili;
+import com.example.androidproject.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -22,33 +23,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Asetetaan alapalkille Listener, joka vaihtaa aktiviteettia nappien perusteella.
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavMethod);
-        getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, new Koti()).commit();
-
+        bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
     }
 
     // Luodaan metodi, jonka avulla muutetaan näytön tilaa riippuen mitä nappia on painettu.
-    private BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod=new
+    private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod=new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    Fragment fragment = null;
-
                     switch(item.getItemId()) {
 
                         case R.id.koti:
-                            fragment = new Koti();
-                            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fragment).commit();
+                            //TODO: luo koodi, joka menee takaisin koti-ikkunaan
                             break;
                         case R.id.suunnittele:
-                            startActivity(new Intent(MainActivity.this, SearchActivity.class));
+                            startActivity(new Intent(MainActivity.this, AteriatActivity.class));
                             break;
                         case R.id.profiili:
-                            fragment = new Profiili();
-                            getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, fragment).commit();
+                            //TODO: luo koodi, joka menee profiili-ikkunaan
                             break;
                     }
                     return false;

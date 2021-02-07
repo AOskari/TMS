@@ -19,26 +19,34 @@ public class Elintarvike {
     private double sugar;
     private double fiber;
 
-    private DecimalFormat df = new DecimalFormat("#.##");
+    private double maara;
 
     public Elintarvike(String name, double salt, double kcal, double fat, double protein, double carb,
-                       double organicAcid, double saturatedFat, double sugar, double fiber) {
+                       double organicAcid, double saturatedFat, double sugar, double fiber, double maara) {
+
+        this.maara = maara;
+        double maaraKerroin = this.maara / 100.0;
 
         this.name = name;
-        this.salt = salt;
-        this.kcal = kcal;
-        this.fat = fat;
-        this.protein = protein;
-        this.carb = carb;
-        this.organicAcid = organicAcid;
-        this.saturatedFat = saturatedFat;
-        this.sugar = sugar;
-        this.fiber = fiber;
+        this.salt = salt * maaraKerroin;
+        this.kcal = kcal * maaraKerroin;
+        this.fat = fat * maaraKerroin;
+        this.protein = protein * maaraKerroin;
+        this.carb = carb * maaraKerroin;
+        this.organicAcid = organicAcid * maaraKerroin;
+        this.saturatedFat = saturatedFat * maaraKerroin;
+        this.sugar = sugar * maaraKerroin;
+        this.fiber = fiber * maaraKerroin;
     }
 
-    public String specificInfo() {
-        //TODO: Palauta tarkat ravintotiedot.
-        return null;
+    public String tarkatArvot() {
+        DecimalFormat df = new DecimalFormat("#.#");
+
+        return "Ravintosisältö / " + df.format(this.maara) + "g \r\n" + "Energia: " + df.format(this.kcal) +  " kcal \r\n" + "Proteiini: " +
+                df.format(this.protein) + "g" + "\r\n" + "Hiilihydraatit: " + df.format(this.carb)  + "g" + "\r\n" + "Joista sokeria: " + df.format(this.sugar)  + "g" +
+                "\r\n" + "Rasva: " + df.format(this.fat)  + "g"  +
+                "\r\n" + "Tyydyttynyt rasva: " + df.format(this.saturatedFat)  + "g"  + "\r\n" + "Kuitua: " + df.format(this.fiber)  + "g"  + "\r\n" +
+                "Orgaaniset hapot: " + df.format(this.organicAcid)  + "g";
     }
 
     public List<Double> haeRavintoarvot() {
@@ -51,7 +59,9 @@ public class Elintarvike {
     }
 
     public String toString() {
-        return "Ravintosisältö / 100g" + "\r\n" + "Kilokalorit: " + df.format(this.kcal) +  "\r\n" + "Proteiini: " +
+        DecimalFormat df = new DecimalFormat("#.#");
+
+        return "Ravintosisältö / " + df.format(this.maara) + "g \r\n" + "Energia: " + df.format(this.kcal) +  " kcal \r\n" + "Proteiini: " +
                 df.format(this.protein) + "g" + "\r\n" + "Hiilihydraatit: " + df.format(this.carb)  + "g" + "\r\n" + "Rasva: " + df.format(this.fat)  + "g";
     }
 

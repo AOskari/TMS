@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,22 +7,22 @@
 
     <TextView
         android:id="@+id/nimi"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/info"
-        android:layout_width="wrap_content"
+        android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nimi" />
 
@@ -35,7 +34,25 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Lisää"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/maaraInput"
+        android:layout_width="59dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/maara_input"
+        android:gravity="center"
+        android:inputType="numberPassword"
+        android:maxLength="4"
+        android:text="0"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/lisaa"
+        app:layout_constraintStart_toEndOf="@+id/nimi"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -46,8 +63,46 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Tiedot"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lisaa" />
+
+    <TextView
+        android:id="@+id/gramma"
+        android:layout_width="18dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:text="g"
+        app:layout_constraintBaseline_toBaselineOf="@+id/maaraInput"
+        app:layout_constraintStart_toEndOf="@+id/maaraInput" />
+
+    <Button
+        android:id="@+id/plus"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="+"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/maaraInput"
+        app:layout_constraintEnd_toEndOf="@+id/maaraInput"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="@+id/maaraInput"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/miinus"
+        android:layout_width="37dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="-"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/maaraInput"
+        app:layout_constraintStart_toStartOf="@+id/maaraInput"
+        app:layout_constraintTop_toBottomOf="@+id/maaraInput" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

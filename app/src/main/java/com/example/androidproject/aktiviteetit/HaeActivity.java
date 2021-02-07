@@ -1,13 +1,16 @@
-package com.example.androidproject;
+package com.example.androidproject.aktiviteetit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,6 +21,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.androidproject.Ateria;
+import com.example.androidproject.Elintarvike;
+import com.example.androidproject.R;
+import com.example.androidproject.RuokaAdapter;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.*;
 
-public class SearchActivity extends AppCompatActivity {
+public class HaeActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private List<Elintarvike> foodInfo;
@@ -36,18 +44,33 @@ public class SearchActivity extends AppCompatActivity {
     Button search;
     ListView lv;
 
+    Gson gson = new Gson();
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
+    Ateria ateria;
+    String ateriaJson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_hae);
+
+        // Asetetaan takaisin nappi yläpalkkiin
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         foodInfo = new ArrayList<>();
 
         input = findViewById(R.id.text_input);
         search = findViewById(R.id.searchbtn);
         lv = findViewById(R.id.list_view);
+
+        // Haetaan yhteinen SharedPreferences-olio, jonka avulla talletetaan lisätyt Elintarvikkeet aterioihin.
+        pref = getApplicationContext().getSharedPreferences("mainPref",0);
+        editor = pref.edit();
+
+        ateriaJson = pref.getString("ateria", "");
+        ateria = gson.fromJson(ateriaJson, Ateria.class);
 
     }
 
@@ -70,16 +93,14 @@ public class SearchActivity extends AppCompatActivity {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 JSONObject obj = response.getJSONObject(i);
-                                JSONObject type = obj.getJSONObject("type");
-                                String code = type.getString("code");
                                 JSONObject names = obj.getJSONObject("name");
                                 String name = names.getString("fi");
 
                                 Log.d("looping", obj.toString() + " " + i);
-                                Elintarvike elintarvike = new Elintarvike(name, obj.getDouble("salt"), obj.getDouble("energyKcal"), obj.getDouble("fat"),
+                                Elintarvike elintarvike = new Elintarvike(name, obj.getDouble("salt") / 1000, obj.getDouble("energyKcal"), obj.getDouble("fat"),
                                         obj.getDouble("protein"), obj.getDouble("carbohydrate"),
                                         obj.getDouble("organicAcids"), obj.getDouble("saturatedFat"), obj.getDouble("sugar"),
-                                        obj.getDouble("fiber")
+                                        obj.getDouble("fiber"), 100.0
                                 );
 
                                 foodInfo.add(elintarvike);
@@ -90,7 +111,6 @@ public class SearchActivity extends AppCompatActivity {
                         }
 
                         initList();
-                        Log.d("Iterated", "Info-list data:");
                         Log.d("Iterated", foodInfo.toString());
                     }
 
@@ -110,24 +130,23 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-
-    private void initList() {
-        RuokaAdapter adapter = new RuokaAdapter(this, foodInfo);
-        // Päivitetään lista haetuilla ruoka-aineilla.
-    /*    lv.setAdapter(new ArrayAdapter<Elintarvike>(
-                this,
-                android.R.layout.simple_list_item_1,
-                foodInfo
-        ));
-        */
-        lv.setAdapter(adapter);
-
-        // Lopuksi piilotetaan virtuaalinen näppäimistö
+    public void suljeNappaimisto() {
         InputMethodManager inputManager = (InputMethodManager)
                 getSystemService(Context.INPUT_METHOD_SERVICE);
 
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+
+
+    private void initList() {
+        // Päivitetään lista asettamalla RuokaAdapter ListViewille.
+        RuokaAdapter adapter = new RuokaAdapter(this, foodInfo, pref, this);
+        lv.setAdapter(adapter);
+
+        // Lopuksi piilotetaan virtuaalinen näppäimistö
+        suljeNappaimisto();
     }
 
 

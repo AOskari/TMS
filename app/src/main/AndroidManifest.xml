@@ -12,9 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SearchActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".MainActivity"
+        <activity android:name=".TiedotActivity"
+            android:parentActivityName=".aktiviteetit.HaeActivity"/>
+        <activity
+            android:name=".aktiviteetit.AteriaActivity"
+            android:parentActivityName=".aktiviteetit.AteriatActivity" />
+        <activity
+            android:name=".aktiviteetit.AteriatActivity"
+            android:parentActivityName=".aktiviteetit.MainActivity" />
+        <activity
+            android:name=".aktiviteetit.HaeActivity"
+            android:parentActivityName=".aktiviteetit.AteriaActivity"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".aktiviteetit.MainActivity"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
