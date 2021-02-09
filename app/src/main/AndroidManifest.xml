@@ -12,8 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".aktiviteetit.TiedotActivity"
-            android:theme="@style/Theme.AndroidProject.PopupTheme"/>
+        <activity android:name=".aktiviteetit.KalenteriActivity"
+            android:theme="@style/Theme.AndroidProject.PopupTheme" />
+        <activity
+            android:name=".aktiviteetit.TiedotActivity"
+            android:theme="@style/Theme.AndroidProject.PopupTheme" />
         <activity
             android:name=".aktiviteetit.AteriaActivity"
             android:parentActivityName=".aktiviteetit.AteriatActivity" />

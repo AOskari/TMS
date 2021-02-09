@@ -7,69 +7,223 @@
     tools:context=".aktiviteetit.AteriaActivity">
 
 
-    <ListView
-        android:id="@+id/ateria"
-        android:layout_width="369dp"
-        android:layout_height="210dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+    <TextView
+        android:id="@+id/suola_maara"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:gravity="right"
+        android:text="0g"
+        app:layout_constraintBaseline_toBaselineOf="@+id/suola"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tyydyttynyt_rasva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Tyydyttynyt rasva"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sokeri" />
+
+    <TextView
+        android:id="@+id/kuitu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Kuitua"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/suola" />
+
+    <TextView
+        android:id="@+id/suola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Suolaa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tyydyttynyt_rasva" />
+
+    <TextView
+        android:id="@+id/hiilihydraatti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="#cc5500"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/kalorit"
+        app:layout_constraintStart_toEndOf="@+id/piiras"
+        app:layout_constraintTop_toTopOf="@+id/kalorit"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ListView
+        android:id="@+id/ateria"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#2464D4"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/ravintotiedot"
-        android:layout_width="321dp"
-        android:layout_height="202dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:id="@+id/sokeri_maara"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/ateria"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:gravity="right"
+        android:text="0g"
+        app:layout_constraintBaseline_toBaselineOf="@+id/sokeri"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="127dp"
-        android:layout_height="33dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="center"
-        android:text="Ravintotiedot"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/ravintotiedot"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:id="@+id/paivays"
+        android:layout_width="86dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="right"
+        android:text="Päiväys"
+        app:layout_constraintEnd_toStartOf="@+id/kalenteri_nappi"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/kuitu_maara"
+        android:layout_width="126dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:onClick="hae"
-        android:text="Hae ravintoaineita"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.502" />
+        android:gravity="right"
+        android:text="0g"
+        app:layout_constraintBaseline_toBaselineOf="@+id/kuitu"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/button3"
+    <TextView
+        android:id="@+id/sokeri"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Luo"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        android:gravity="center"
+        android:text="Joista sokeria"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/piiras" />
+
+    <TextView
+        android:id="@+id/proteiini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="#891C1F"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/hiilihydraatti"
+        app:layout_constraintStart_toEndOf="@+id/piiras"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/rasva_maara"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="right"
+        android:text="0g"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tyydyttynyt_rasva"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/rasva"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:textColor="#ffc04d"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/piiras"
+        app:layout_constraintTop_toBottomOf="@+id/hiilihydraatti"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/kalorit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="30dp"
+        android:text=""
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/piiras"
+        app:layout_constraintEnd_toEndOf="@+id/piiras"
+        app:layout_constraintStart_toStartOf="@+id/piiras"
+        app:layout_constraintTop_toTopOf="@+id/piiras" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/piiras"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_hae"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:onClick="hae"
+        android:src="@drawable/add"
+        app:backgroundTint="#880BA9C9"
+        app:elevation="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/ateria"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/kalenteri_nappi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#00000000"
+        android:tint="@color/primaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calendar"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ImageButton
+        android:id="@+id/create"
+        android:layout_width="43dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#00000000"
+        android:tint="@color/primaryColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ok"
+        tools:ignore="VectorDrawableCompat" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

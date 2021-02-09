@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/nimi"
         android:layout_width="214dp"
-        android:layout_height="17dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:textStyle="bold"

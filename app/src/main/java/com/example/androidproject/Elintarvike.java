@@ -46,11 +46,11 @@ public class Elintarvike {
                 df.format(this.protein) + "g" + "\r\n" + "Hiilihydraatit: " + df.format(this.carb)  + "g" + "\r\n" + "Joista sokeria: " + df.format(this.sugar)  + "g" +
                 "\r\n" + "Rasva: " + df.format(this.fat)  + "g"  +
                 "\r\n" + "Tyydyttynyt rasva: " + df.format(this.saturatedFat)  + "g"  + "\r\n" + "Kuitua: " + df.format(this.fiber)  + "g"  + "\r\n" +
-                "Orgaaniset hapot: " + df.format(this.organicAcid)  + "g";
+                "Suolaa: " + df.format(this.salt)  + "g";
     }
 
     public List<Double> haeRavintoarvot() {
-        List<Double> lista = Arrays.asList(this.salt, this.kcal, this.fat, this.protein, this.carb, this.organicAcid, this.saturatedFat, this.sugar, this.fiber);
+        List<Double> lista = Arrays.asList(this.salt, this.kcal, this.fat, this.protein, this.carb, this.organicAcid, this.saturatedFat, this.sugar, this.fiber, this.maara);
         return lista;
     }
 

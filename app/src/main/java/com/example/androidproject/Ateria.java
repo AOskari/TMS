@@ -2,6 +2,7 @@ package com.example.androidproject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Ateria {
@@ -18,6 +19,7 @@ public class Ateria {
     private double saturatedFat;
     private double sugar;
     private double fiber;
+    private double maara;
 
     public Ateria(String name) {
         raakaAineet = new ArrayList<>();
@@ -39,6 +41,7 @@ public class Ateria {
         saturatedFat += tarvike.haeRavintoarvot().get(6);
         sugar += tarvike.haeRavintoarvot().get(7);
         fiber += tarvike.haeRavintoarvot().get(8);
+        maara += tarvike.haeRavintoarvot().get(9);
     }
 
     public List<Elintarvike> haeTarvikkeet() {
@@ -59,17 +62,21 @@ public class Ateria {
         this.saturatedFat = Math.max(this.saturatedFat - (raakaAineet.get(i).haeRavintoarvot().get(6)), 0);
         this.sugar = Math.max(this.sugar - (raakaAineet.get(i).haeRavintoarvot().get(7)), 0);
         this.fiber = Math.max(this.fiber - (raakaAineet.get(i).haeRavintoarvot().get(8)), 0);
-
         raakaAineet.remove(i);
     }
 
-    @Override
+    public List<Double> haeRavinto() {
+        List<Double> lista = Arrays.asList(this.protein + this.carb + this.fat, this.protein, this.carb, this.fat, this.kcal, this.sugar, this.saturatedFat, this.salt, this.fiber);
+        return lista;
+    }
+
+
     public String toString() {
-        DecimalFormat df = new DecimalFormat("#.#");
+        DecimalFormat df = new DecimalFormat("#.##");
 
         return name + "\r\n" + "\r\n" + "Energia: " + df.format(this.kcal) +  " kcal \r\n" + "Proteiini: " +
                 df.format(this.protein) + "g \r\n" + "Hiilihydraatit: " + df.format(this.carb) +  "g \r\n" + "Joista sokeria: " + df.format(this.sugar)
                 + "g \r\n" + "Rasva: " + df.format(this.fat) + "g \r\n" + "Tyydyttynyt rasva: " + df.format(this.saturatedFat) +  "g \r\n"  + "\r\n" + "Suola: " +
-                df.format(this.salt) + "g \r\n" + "Kuitua: " + df.format(this.fiber) + "g \r\n" + "Orgaaniset hapot: " + df.format(this.organicAcid) + "g";
+                df.format(this.salt) + "mg \r\n" + "Kuitua: " + df.format(this.fiber) + "g \r\n";
     }
 }
