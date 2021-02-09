@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.androidproject.aktiviteetit.AteriaActivity;
@@ -62,8 +63,8 @@ public class AteriaAdapter extends BaseAdapter {
         TextView nimi = convertView.findViewById(R.id.tarvike_nimi);
         nimi.setText(tarvikkeenNimi);
 
-        Button tiedot = convertView.findViewById(R.id.tarvike_tiedot);
-        Button poista = convertView.findViewById(R.id.tiedot_poista);
+        ImageButton tiedot = convertView.findViewById(R.id.tarvike_tiedot);
+        ImageButton poista = convertView.findViewById(R.id.tiedot_poista);
 
         poista.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/tarvike_nimi"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
@@ -16,25 +16,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
+        android:id="@+id/tarvike_tiedot"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:backgroundTint="#00000000"
+        android:tint="@color/primaryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tiedot_poista"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/info"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ImageButton
         android:id="@+id/tiedot_poista"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="Poista"
+        android:backgroundTint="#00000000"
+        android:tint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tarvike_tiedot" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cancel"
+        tools:ignore="VectorDrawableCompat" />
 
-    <Button
-        android:id="@+id/tarvike_tiedot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Tiedot"
-        app:layout_constraintBottom_toTopOf="@+id/tiedot_poista"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

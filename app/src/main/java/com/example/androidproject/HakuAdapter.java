@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.androidproject.aktiviteetit.HaeActivity;
@@ -86,10 +87,10 @@ public class HakuAdapter extends BaseAdapter {
         convertView = LayoutInflater.from(context).inflate(R.layout.hakurivi_layout, parent, false);
 
         TextView nimi = convertView.findViewById(R.id.nimi);
-        Button lisaa = convertView.findViewById(R.id.lisaa);
+        ImageButton lisaa = convertView.findViewById(R.id.lisaa);
         Button plus = convertView.findViewById(R.id.plus);
         Button miinus = convertView.findViewById(R.id.miinus);
-        Button tiedotNappi = convertView.findViewById(R.id.tiedot);
+        ImageButton tiedotNappi = convertView.findViewById(R.id.tiedot);
         EditText editText = convertView.findViewById(R.id.maaraInput);
 
         // EditTextin inputTypeksi on asetettu numberPassword; poistetaan asteriskit seuraavalla komennolla

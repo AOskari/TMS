@@ -16,18 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/lisaa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Lisää"
-        app:layout_constraintBottom_toTopOf="@+id/tiedot"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/maaraInput"
         android:layout_width="61dp"
@@ -57,18 +45,6 @@
         app:layout_constraintTop_toTopOf="@+id/maaraInput" />
 
     <Button
-        android:id="@+id/tiedot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Tiedot"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lisaa" />
-
-    <Button
         android:id="@+id/miinus"
         android:layout_width="37dp"
         android:layout_height="38dp"
@@ -78,6 +54,34 @@
         app:layout_constraintBottom_toBottomOf="@+id/maaraInput"
         app:layout_constraintEnd_toStartOf="@+id/maaraInput"
         app:layout_constraintTop_toTopOf="@+id/maaraInput" />
+
+    <ImageButton
+        android:id="@+id/tiedot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="#00000000"
+        android:tint="@color/primaryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lisaa"
+        app:srcCompat="@drawable/info"
+        tools:ignore="VectorDrawableCompat" />
+
+    <ImageButton
+        android:id="@+id/lisaa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="#00000000"
+        android:tint="@color/primaryColor"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/plus"
+        tools:ignore="VectorDrawableCompat" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

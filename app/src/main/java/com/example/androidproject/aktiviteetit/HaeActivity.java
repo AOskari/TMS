@@ -38,7 +38,6 @@ public class HaeActivity extends AppCompatActivity {
     private List<Elintarvike> foodInfo;
 
     EditText input;
-    Button search;
     ListView lv;
 
     Gson gson = new Gson();
@@ -59,7 +58,6 @@ public class HaeActivity extends AppCompatActivity {
         foodInfo = new ArrayList<>();
 
         input = findViewById(R.id.text_input);
-        search = findViewById(R.id.searchbtn);
         lv = findViewById(R.id.list_view);
 
         // Haetaan yhteinen SharedPreferences-olio, jonka avulla talletetaan lisätyt Elintarvikkeet aterioihin.
