@@ -26,7 +26,8 @@
         app:layout_constraintEnd_toStartOf="@+id/tiedot_poista"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/info"
-        tools:ignore="VectorDrawableCompat" />
+        tools:ignore="VectorDrawableCompat"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/tiedot_poista"

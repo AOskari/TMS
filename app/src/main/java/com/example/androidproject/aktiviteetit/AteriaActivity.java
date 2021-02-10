@@ -47,6 +47,10 @@ public class AteriaActivity extends AppCompatActivity {
     private TextView suola;
     private TextView kuitu;
 
+    private int paiva;
+    private int kuukausi;
+    private int vuosi;
+
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     PieChart piiras;
@@ -74,7 +78,6 @@ public class AteriaActivity extends AppCompatActivity {
         editor = pref.edit();
 
         lv = findViewById(R.id.ateria);
-        ViewCompat.setNestedScrollingEnabled(lv, true);
         ImageButton kalenterNappi = findViewById(R.id.kalenteri_nappi);
 
         // Lisätään mahdollisuus lisätä päiväys käyttäen kalenteria.
@@ -92,16 +95,13 @@ public class AteriaActivity extends AppCompatActivity {
         super.onResume();
         paivitaLista();
 
-        String paivays = pref.getString("paivays", "");
+        paiva = pref.getInt("paiva", 0);
+        kuukausi = pref.getInt("kuukausi", 0);
+        vuosi = pref.getInt("vuosi", 0);
 
-        if (paivays != "") {
-            ((TextView)findViewById(R.id.paivays)).setText(paivays);
+        if (paiva != 0) {
+            ((TextView)findViewById(R.id.paivays)).setText(paiva + "/" + kuukausi + "/" + vuosi);
         }
-    }
-
-    public void paivitaTiedot() {
-        ateriaJson = pref.getString("ateria", "");
-        ateria = gson.fromJson(ateriaJson, Ateria.class);
     }
 
     public void paivitaLista() {
@@ -173,6 +173,11 @@ public class AteriaActivity extends AppCompatActivity {
         lv.setAdapter(adapter);
     }
 
+    // Luodaan metodi aterian tallentamiseen
+
+    public void tallennaAteria(View v) {
+
+    }
 
     public void hae(View v) {
         startActivity(new Intent(AteriaActivity.this, HaeActivity.class));

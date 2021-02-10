@@ -21,9 +21,27 @@ public class Ateria {
     private double fiber;
     private double maara;
 
+    private int paiva;
+    private int kuukausi;
+    private int vuosi;
+
+    private int tunnit;
+    private int minuutit;
+
     public Ateria(String name) {
         raakaAineet = new ArrayList<>();
         this.name = name;
+    }
+
+    public void asetaPaivamaara(int paiva, int kuukausi, int vuosi) {
+        this.paiva = paiva;
+        this.kuukausi = kuukausi;
+        this.vuosi = vuosi;
+    }
+
+    public void asetaAika(int tunnit, int minuutit) {
+        this.tunnit = tunnit;
+        this.minuutit = minuutit;
     }
 
     public void lisaaAine(Elintarvike tarvike) {
@@ -70,6 +88,15 @@ public class Ateria {
         return lista;
     }
 
+    public List<Integer> haePaivamaara() {
+        List<Integer> paivamaara = Arrays.asList(this.paiva, this.kuukausi, this.vuosi);
+        return paivamaara;
+    }
+
+    public List<Integer> haeAika() {
+        List<Integer> aika = Arrays.asList(this.tunnit, this.minuutit);
+        return aika;
+    }
 
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.##");

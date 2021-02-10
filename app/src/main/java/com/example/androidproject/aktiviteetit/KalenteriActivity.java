@@ -17,8 +17,6 @@ import com.google.gson.Gson;
 
 public class KalenteriActivity extends AppCompatActivity {
 
-    Gson gson = new Gson();
-
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -48,9 +46,9 @@ public class KalenteriActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
 
-                String paivays = dayOfMonth + "/" + month + "/" + year;
-
-                editor.putString("paivays", paivays);
+                editor.putInt("vuosi", year);
+                editor.putInt("kuukausi", month);
+                editor.putInt("paiva", dayOfMonth);
                 editor.commit();
 
                 finish();

@@ -4,9 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AteriaLista {
-    private static final List<Ateria> lista = new ArrayList<>();
+    private List<Ateria> lista = new ArrayList<>();
+    private static final AteriaLista haeLista = new AteriaLista();
+
+    public static AteriaLista haeLista() {
+        return haeLista;
+    }
 
     private AteriaLista() {
+    }
+
+    public List<Ateria> ateriat() {
+        return lista;
     }
 
 
