@@ -75,7 +75,7 @@ public class AteriaAdapter extends BaseAdapter {
                 builder.setCancelable(true);
                 builder.setMessage("Poista " + tarvikkeenNimi + "?");
 
-                // Jos pelaaja valitsee poista,
+                // Jos käyttäjä valitsee poista,
                 builder.setPositiveButton("Poista",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -100,7 +100,6 @@ public class AteriaAdapter extends BaseAdapter {
                 dialog.show();
             }
         });
-
 
         tiedot.setOnClickListener(new View.OnClickListener() {
             @Override

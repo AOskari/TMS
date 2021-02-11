@@ -81,6 +81,7 @@
             android:layout_marginLeft="4dp"
             android:layout_marginTop="4dp"
             android:background="#00000000"
+            android:onClick="tallennaAteria"
             android:tint="@color/primaryColor"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -149,6 +150,31 @@
             app:layout_constraintTop_toTopOf="parent">
 
         </com.github.mikephil.charting.charts.PieChart>
+
+        <ImageButton
+            android:id="@+id/timebutton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#00000000"
+            android:onClick="asetaAika"
+            android:tint="@color/primaryColor"
+            app:layout_constraintEnd_toEndOf="@+id/kalenteri_nappi"
+            app:layout_constraintStart_toStartOf="@+id/kalenteri_nappi"
+            app:layout_constraintTop_toBottomOf="@+id/kalenteri_nappi"
+            app:srcCompat="@drawable/time"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/aika"
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:gravity="right"
+            app:layout_constraintBottom_toBottomOf="@+id/timebutton"
+            app:layout_constraintEnd_toStartOf="@+id/timebutton"
+            app:layout_constraintTop_toTopOf="@+id/timebutton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

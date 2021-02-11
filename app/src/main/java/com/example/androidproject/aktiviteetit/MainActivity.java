@@ -2,48 +2,23 @@ package com.example.androidproject.aktiviteetit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.androidproject.AteriaLista;
 import com.example.androidproject.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.gson.Gson;
-
-import static com.example.androidproject.AteriaLista.haeLista;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
 
-
-    Gson gson = new Gson();
-
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        pref = getApplicationContext().getSharedPreferences("mainPref",0);
-        editor = pref.edit();
-
-        // Tallennetaan alustavasti aterialista SharedPreferencesiin, jos se on tyhjä.
-
-        if (haeLista().haeAteriat().size() == 0) {
-            String ateriaListaJson = gson.toJson(haeLista(), AteriaLista.class);
-            editor.putString("aterialista", ateriaListaJson);
-            editor.commit();
-        }
-
 
         // Asetetaan alapalkille Listener, joka vaihtaa aktiviteettia nappien perusteella.
         bottomNavigationView = findViewById(R.id.bottomNavigationView);

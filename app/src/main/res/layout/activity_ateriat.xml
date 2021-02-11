@@ -7,37 +7,63 @@
     tools:context=".aktiviteetit.AteriatActivity">
 
     <ListView
-        android:id="@+id/list_view"
+        android:id="@+id/aterialista"
         android:layout_width="299dp"
         android:layout_height="425dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="183dp"
         android:layout_height="35dp"
-        android:layout_marginBottom="40dp"
-        android:text="Suunnitellut ateriat"
         android:gravity="center"
+        android:text="Suunnitellut ateriat"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/list_view"
+        app:layout_constraintBottom_toTopOf="@+id/aterialista"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
         android:onClick="luoAteria"
         android:text="Luo uusi"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/paivamaaraNappi"
+        android:backgroundTint="#00000000"
+        android:tint="@color/primaryColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/calendar"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/paivamaara"
+        android:layout_width="98dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        app:layout_constraintBottom_toBottomOf="@+id/paivamaaraNappi"
+        app:layout_constraintEnd_toStartOf="@+id/paivamaaraNappi"
+        app:layout_constraintTop_toTopOf="@+id/paivamaaraNappi" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

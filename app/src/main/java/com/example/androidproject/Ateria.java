@@ -98,10 +98,28 @@ public class Ateria {
         return aika;
     }
 
+    public String aikaString() {
+
+        String tunti = "";
+        String minuutti = "";
+
+        if (String.valueOf(tunnit).length() == 1) {
+            tunti = "0" + tunnit;
+        } else {
+            tunti = String.valueOf(tunnit);
+        }
+        if (String.valueOf(minuutit).length() == 1) {
+            minuutti = "0" + minuutit;
+        } else {
+            minuutti = String.valueOf(minuutit);
+        }
+        return tunti + ":" + minuutti;
+    }
+
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.##");
 
-        return name + "\r\n" + "\r\n" + "Energia: " + df.format(this.kcal) +  " kcal \r\n" + "Proteiini: " +
+        return aikaString() + "\r\n" + name + "\r\n" + "\r\n" + "Energia: " + df.format(this.kcal) +  " kcal \r\n" + "Proteiini: " +
                 df.format(this.protein) + "g \r\n" + "Hiilihydraatit: " + df.format(this.carb) +  "g \r\n" + "Joista sokeria: " + df.format(this.sugar)
                 + "g \r\n" + "Rasva: " + df.format(this.fat) + "g \r\n" + "Tyydyttynyt rasva: " + df.format(this.saturatedFat) +  "g \r\n"  + "\r\n" + "Suola: " +
                 df.format(this.salt) + "mg \r\n" + "Kuitua: " + df.format(this.fiber) + "g \r\n";

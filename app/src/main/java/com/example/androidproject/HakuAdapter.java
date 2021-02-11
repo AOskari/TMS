@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -49,21 +50,8 @@ public class HakuAdapter extends BaseAdapter {
         this.activity = activity;
         ateriaJson = pref.getString("ateria", "");
 
-
-        // Jos SharedPreferences ei sisällä ateria-nimikkeellä tallennettua merkkijonoa,
-        if (ateriaJson == "") {
-
-            // Luodaan uusi Ateria-olio, johon tullaan tallentamaan kaikki valitut Elintarvike-oliot.
-            ateria = new Ateria("Luonnos ateria");
-            ateriaJson = gson.toJson(ateria);
-            editor.putString("ateria", ateriaJson);
-            editor.commit();
-            Log.d("ateria", ateria.toString());
-        } else {
-            // Jos on tallennettu, muunnetaan Json-merkkijono Ateria-olioksi.
-            ateria = gson.fromJson(ateriaJson, Ateria.class);
-            Log.d("ateria", ateria.toString());
-        }
+        ateria = gson.fromJson(ateriaJson, Ateria.class);
+        ateriaJson = gson.toJson(ateria);
     }
 
     @Override
@@ -96,19 +84,22 @@ public class HakuAdapter extends BaseAdapter {
         // EditTextin inputTypeksi on asetettu numberPassword; poistetaan asteriskit seuraavalla komennolla
         editText.setTransformationMethod(null);
 
-        // Asetetaan muutoksen kuuntelija, joka asettaa gramma-merkkijonon syöttökenttään mikäli sieltä puuttuu sellainen.
-        editText.addTextChangedListener(new TextWatcher() {
+        // Tyhjennetään tekstikenttä sitä klikattaessa
+        editText.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                editText.setText("");
+                return false;
+            }
+        });
 
-            public void afterTextChanged(Editable s) {
-                if (!editText.getText().toString().contains("g")) {
-                    editText.setText(editText.getText().toString() + "g");
+        // Lopuksi lisätään "g" numeron perään.
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus && !editText.getText().toString().contains("g")) {
+                        editText.setText(editText.getText() + "g");
                 }
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
         });
 
