@@ -1,7 +1,6 @@
 package com.example.androidproject.aktiviteetit;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.ViewCompat;
 
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
@@ -280,6 +279,6 @@ public class AteriaActivity extends AppCompatActivity {
     }
 
     public void hae(View v) {
-        startActivity(new Intent(AteriaActivity.this, HaeActivity.class));
+        startActivity(new Intent(AteriaActivity.this, HakuActivity.class));
     }
 }

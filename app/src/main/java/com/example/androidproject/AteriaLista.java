@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ *  Singleton jota käytetään aterioiden listaamiseen ja SharedPreferencesiin tallentamiseen..
+ */
 public class AteriaLista {
     private List<Ateria> lista;
     private static final AteriaLista haeLista = new AteriaLista();
@@ -21,8 +24,16 @@ public class AteriaLista {
         lista.add(ateria);
     }
 
-    /* Luodaan metodi, joka ensin hakee listalta kaikki Ateriat jotka sisältävät halutun päivämäärän,
-    * jonka jälkeen järjestää ateriat kellonajan mukaan.  */
+
+    /**
+     * Hakee AteriaListalta ateriat jotka sisältävät valitun päivämäärän, jonka jälkeen
+     * järjestää listan kellonajan mukaan.
+     *
+     * @param paiva valittu päivä
+     * @param kuukausi valittu kuukausi
+     * @param vuosi valittu vuosi
+     * @return palauttaa listan.
+     */
     public List<Ateria> haePaivamaaralla(int paiva, int kuukausi, int vuosi) {
         //TODO: Luo toiminnallisuus, joka palauttaa kaikki ateriat haetulta päivämäärältä.
 
@@ -60,5 +71,12 @@ public class AteriaLista {
         }
 
         return palautettavat;
+    }
+
+    /**
+     * Poistaa valitun aterian listalta.
+     */
+    public void poistaAteria(int i) {
+        lista.remove(i);
     }
 }

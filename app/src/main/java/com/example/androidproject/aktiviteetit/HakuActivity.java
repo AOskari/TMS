@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.lang.*;
 
-public class HaeActivity extends AppCompatActivity {
+public class HakuActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private List<Elintarvike> foodInfo;

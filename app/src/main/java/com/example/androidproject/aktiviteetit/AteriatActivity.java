@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.example.androidproject.Ateria;
 import com.example.androidproject.AteriaLista;
+import com.example.androidproject.AteriatAdapter;
 import com.example.androidproject.R;
 import com.google.gson.Gson;
 
@@ -83,13 +84,9 @@ public class AteriatActivity extends AppCompatActivity {
         naytaAteriat();
     }
 
-    private void naytaAteriat() {
-        AteriaLista lista = gson.fromJson(ateriatJson, AteriaLista.class);
-        lv.setAdapter(new ArrayAdapter<Ateria>(
-                this,
-                android.R.layout.simple_list_item_1,
-                lista.haePaivamaaralla(paiva, kuukausi, vuosi)
-        ));
+    public void naytaAteriat() {
+        AteriatAdapter adapter = new AteriatAdapter(this, pref, paiva, kuukausi, vuosi);
+        lv.setAdapter(adapter);
     }
 
     // Luodaan funktio, joka avaa SearchActivity aktiviteetin.

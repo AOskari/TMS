@@ -3,8 +3,6 @@ package com.example.androidproject;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.androidproject.aktiviteetit.HaeActivity;
+import com.example.androidproject.aktiviteetit.HakuActivity;
 import com.example.androidproject.aktiviteetit.TiedotActivity;
 import com.google.gson.Gson;
 import java.util.List;
@@ -39,9 +37,9 @@ public class HakuAdapter extends BaseAdapter {
     Ateria ateria;
     String ateriaJson;
 
-    HaeActivity activity;
+    HakuActivity activity;
 
-    public HakuAdapter(Context context, List<Elintarvike> lista, SharedPreferences pref, HaeActivity activity) {
+    public HakuAdapter(Context context, List<Elintarvike> lista, SharedPreferences pref, HakuActivity activity) {
         this.context = context;
         this.lista = lista;
         this.pref = pref;

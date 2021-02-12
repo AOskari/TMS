@@ -66,6 +66,9 @@ public class Ateria {
         return this.raakaAineet;
     }
 
+    /**
+     * Poistaa valitun Elintarvike-olion listalta ja sen sisältämät ravintoarvot.
+     */
     public void poista(int i) {
 
         /* Vähennetään poistettavan elintarvikkeen ravintoarvot
@@ -81,6 +84,10 @@ public class Ateria {
         this.sugar = Math.max(this.sugar - (raakaAineet.get(i).haeRavintoarvot().get(7)), 0);
         this.fiber = Math.max(this.fiber - (raakaAineet.get(i).haeRavintoarvot().get(8)), 0);
         raakaAineet.remove(i);
+    }
+
+    public String haeNimi() {
+        return this.name;
     }
 
     public List<Double> haeRavinto() {

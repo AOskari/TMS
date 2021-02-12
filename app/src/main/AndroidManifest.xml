@@ -24,7 +24,7 @@
             android:name=".aktiviteetit.AteriatActivity"
             android:parentActivityName=".aktiviteetit.MainActivity" />
         <activity
-            android:name=".aktiviteetit.HaeActivity"
+            android:name=".aktiviteetit.HakuActivity"
             android:parentActivityName=".aktiviteetit.AteriaActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
