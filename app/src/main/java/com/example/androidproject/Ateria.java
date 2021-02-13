@@ -105,6 +105,14 @@ public class Ateria {
         return aika;
     }
 
+    public void asetaNimi(String nimi) {
+        this.name = nimi;
+    }
+
+    public String paivamaaraString() {
+        return this.paiva + "/" + this.kuukausi + "/" + this.vuosi;
+    }
+
     public String aikaString() {
 
         String tunti = "";

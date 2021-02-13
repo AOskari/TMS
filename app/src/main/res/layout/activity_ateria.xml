@@ -24,7 +24,7 @@
     <ListView
         android:id="@+id/ateria"
         android:layout_width="346dp"
-        android:layout_height="215dp"
+        android:layout_height="200dp"
         android:background="@drawable/alusta"
         android:elevation="10dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -39,7 +39,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/alusta1"
         android:layout_width="346dp"
-        android:layout_height="241dp"
+        android:layout_height="271dp"
         android:background="@drawable/alusta"
         android:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/alusta2"
@@ -48,16 +48,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <EditText
+            android:id="@+id/aterianimi"
+            android:layout_width="235dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:hint="Nimi..."
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/paivays"
             android:layout_width="86dp"
             android:layout_height="18dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="4dp"
             android:layout_marginRight="4dp"
             android:gravity="right"
+            app:layout_constraintBottom_toBottomOf="@+id/kalenteri_nappi"
             app:layout_constraintEnd_toStartOf="@+id/kalenteri_nappi"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/kalenteri_nappi" />
 
         <ImageButton
             android:id="@+id/kalenteri_nappi"
@@ -66,10 +81,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
             android:background="#00000000"
             android:tint="@color/primaryColor"
+            app:layout_constraintBottom_toTopOf="@+id/timebutton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/aterianimi"
             app:srcCompat="@drawable/calendar"
             tools:ignore="VectorDrawableCompat" />
 
@@ -143,11 +160,14 @@
             android:id="@+id/piiras"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="32dp"
             android:elevation="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
         </com.github.mikephil.charting.charts.PieChart>
 
@@ -155,12 +175,14 @@
             android:id="@+id/timebutton"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
             android:backgroundTint="#00000000"
             android:onClick="asetaAika"
             android:tint="@color/primaryColor"
-            app:layout_constraintEnd_toEndOf="@+id/kalenteri_nappi"
-            app:layout_constraintStart_toStartOf="@+id/kalenteri_nappi"
+            app:layout_constraintBottom_toTopOf="@+id/piiras"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kalenteri_nappi"
             app:srcCompat="@drawable/time"
             tools:ignore="VectorDrawableCompat" />

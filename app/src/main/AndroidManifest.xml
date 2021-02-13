@@ -19,9 +19,11 @@
             android:theme="@style/Theme.AndroidProject.PopupTheme" />
         <activity
             android:name=".aktiviteetit.AteriaActivity"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".aktiviteetit.AteriatActivity" />
         <activity
             android:name=".aktiviteetit.AteriatActivity"
+            android:windowSoftInputMode="adjustPan"
             android:parentActivityName=".aktiviteetit.MainActivity" />
         <activity
             android:name=".aktiviteetit.HakuActivity"

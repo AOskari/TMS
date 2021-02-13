@@ -3,6 +3,7 @@ package com.example.androidproject;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,6 +76,7 @@ public class AteriatAdapter extends BaseAdapter {
         TextView aika = convertView.findViewById(R.id.kellonaika);
 
         ImageButton poista = convertView.findViewById(R.id.poista);
+        ImageButton muokkaa = convertView.findViewById(R.id.muokkaa);
 
         poista.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +112,29 @@ public class AteriatAdapter extends BaseAdapter {
             }
         });
 
+        /**
+         *  Lisätään muokkaa-napille mahdollisuus muokata ateriaa.
+         */
+        muokkaa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Asetetaan valittu ateria SharedPreferencesiin muokkausta varten,
+                String ateriaJson = gson.toJson(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
+                edit.putString("ateria", ateriaJson);
+                edit.commit();
+
+                // Lisätään intenttiin true ja aterian indeksi, jonka jälkeen päivitetään AteriaActivityn näkymä.
+
+                Intent intent = new Intent(context, AteriaActivity.class);
+                boolean bool = true;
+
+                intent.putExtra("EXTRA", bool);
+                intent.putExtra("INDEX", position);
+
+                context.startActivity(intent);
+            }
+        });
 
         aterianNimi.setText(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeNimi());
         aika.setText(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).aikaString());
