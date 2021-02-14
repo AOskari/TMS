@@ -19,7 +19,6 @@ import android.widget.TimePicker;
 
 import com.example.androidproject.Ateria;
 import com.example.androidproject.AteriaAdapter;
-
 import com.example.androidproject.AteriaLista;
 import com.example.androidproject.R;
 import com.github.mikephil.charting.charts.PieChart;
@@ -88,7 +87,7 @@ public class AteriaActivity extends AppCompatActivity {
         ateriaJson = pref.getString("ateria", "");
 
         /**
-         * Tarkastellaan sisältääkö pysyväismuisti Ateria-olio, jos ei, luodaan uusi Ateria-olio.
+         * Tarkastellaan sisältääkö pysyväismuisti Ateria-oliota, jos ei, luodaan uusi Ateria-olio.
          */
         if (ateriaJson.equals("")) {
             ateria = new Ateria("Luonnos ateria");
@@ -245,8 +244,6 @@ public class AteriaActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Tallennetaan ateria AteriaListaan, päivitetään tiedot SharedPreferencesiin ja tyhjennetään AteriaActivityn ikkuna.
-
                         String aterialistaJson = pref.getString("aterialista", "");
                         AteriaLista lista = gson.fromJson(aterialistaJson, AteriaLista.class);
 
@@ -264,7 +261,6 @@ public class AteriaActivity extends AppCompatActivity {
                         ateria = new Ateria("luonnos ateria");
                         tallenna();
                         paivitaLista();
-                        Log.d("aterialista", aterialistaJson);
                     }
                 });
 
@@ -324,6 +320,9 @@ public class AteriaActivity extends AppCompatActivity {
         this.kuitu.setText(kuitu);
     }
 
+    /**
+     * Tallentaa nykyisen aterian pysyväismuistiin.
+     */
     private void tallenna() {
         ateriaJson = gson.toJson(ateria);
         editor.putString("ateria", ateriaJson);
