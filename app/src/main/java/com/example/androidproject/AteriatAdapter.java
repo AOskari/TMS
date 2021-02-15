@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,16 +123,15 @@ public class AteriatAdapter extends BaseAdapter {
                 // Asetetaan valittu ateria SharedPreferencesiin muokkausta varten,
                 String ateriaJson = gson.toJson(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
                 edit.putString("ateria", ateriaJson);
-                edit.commit();
 
                 // Lisätään intenttiin true ja aterian indeksi, jonka jälkeen päivitetään AteriaActivityn näkymä.
 
+                edit.putBoolean("muokkaus", true);
+                edit.putInt("index", position);
+
+                edit.commit();
+
                 Intent intent = new Intent(context, AteriaActivity.class);
-                boolean bool = true;
-
-                intent.putExtra("EXTRA", bool);
-                intent.putExtra("INDEX", position);
-
                 context.startActivity(intent);
             }
         });

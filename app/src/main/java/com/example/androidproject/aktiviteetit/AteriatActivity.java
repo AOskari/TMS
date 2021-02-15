@@ -48,6 +48,10 @@ public class AteriatActivity extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("mainPref",0);
         editor = pref.edit();
 
+        editor.putBoolean("muokkaus", false);
+
+        editor.commit();
+
         paivamaara = findViewById(R.id.paivamaara);
         lv = findViewById(R.id.aterialista);
 

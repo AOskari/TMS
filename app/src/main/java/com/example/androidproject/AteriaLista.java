@@ -1,6 +1,7 @@
 package com.example.androidproject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -71,6 +72,14 @@ public class AteriaLista {
         }
 
         return palautettavat;
+    }
+
+    /**
+     * @return palauttaa tämän päivän ateriat.
+     */
+    public List<Ateria> haeTulevatAteriat() {
+        Calendar kalenteri = Calendar.getInstance();
+        return haePaivamaaralla(kalenteri.get(Calendar.DAY_OF_MONTH), kalenteri.get(Calendar.MONTH), kalenteri.get(Calendar.YEAR));
     }
 
     /**

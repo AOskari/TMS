@@ -93,6 +93,7 @@ public class AteriaActivity extends AppCompatActivity {
             ateria = new Ateria("Luonnos ateria");
         } else {
             ateria = gson.fromJson(ateriaJson, Ateria.class);
+            paivitaLista();
         }
 
         /**
@@ -154,7 +155,6 @@ public class AteriaActivity extends AppCompatActivity {
         kuukausi = pref.getInt("kuukausi", 0);
         vuosi = pref.getInt("vuosi", 0);
         ((TextView)findViewById(R.id.paivays)).setText(ateria.paivamaaraString());
-        ateria.asetaAika(pref.getInt("tunnit", 0), pref.getInt("minuutit", 0));
         kellonaika.setText(ateria.aikaString());
     }
 
@@ -169,7 +169,7 @@ public class AteriaActivity extends AppCompatActivity {
             DecimalFormat df = new DecimalFormat("#.#");
             DecimalFormat df2 = new DecimalFormat("#.##");
 
-            Log.d("ateria", ateria.toString());
+           // Log.d("ateria", ateria.toString());
             initList();
 
             double prot = ateria.haeRavinto().get(1);
@@ -234,8 +234,8 @@ public class AteriaActivity extends AppCompatActivity {
     public void tallennaAteria(View v) {
 
         /**
-         *  Tuodaan esille varmistusikkuna, ja kysytään käyttäjältä tallennetaanko ateria.
-          */
+         * Tuodaan esille varmistusikkuna, ja kysytään käyttäjältä tallennetaanko ateria.
+         */
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setMessage("Tallenna" + ateria.haeNimi() +  "ateria?");
@@ -247,11 +247,17 @@ public class AteriaActivity extends AppCompatActivity {
                         String aterialistaJson = pref.getString("aterialista", "");
                         AteriaLista lista = gson.fromJson(aterialistaJson, AteriaLista.class);
 
-                        if (muokkaus) {
-                            lista.poistaAteria(getIntent().getExtras().getInt("INDEX"));
-                            muokkaus = false;
-                        }
+                        Log.d("muokkaus boolean", "" + muokkaus);
 
+                        Log.d("listan sisältö", lista.toString());
+
+                        boolean muokkaus = pref.getBoolean("muokkaus", false);
+
+                        if (muokkaus) {
+                            lista.poistaAteria(pref.getInt("indeksi", 0));
+                            editor.putBoolean("muokkaus", false);
+                        }
+                        // Bugi on jossain täällä. Välillä näyttää siltä että monistaisi valitun aterian eikä vaihda kellonaikaa.
                         ateria.asetaPaivamaara(paiva, kuukausi, vuosi);
                         lista.lisaaAteria(ateria);
                         aterialistaJson = gson.toJson(lista);
@@ -261,6 +267,7 @@ public class AteriaActivity extends AppCompatActivity {
                         ateria = new Ateria("luonnos ateria");
                         tallenna();
                         paivitaLista();
+                        finish();
                     }
                 });
 
@@ -283,11 +290,12 @@ public class AteriaActivity extends AppCompatActivity {
         TimePickerDialog aika = new TimePickerDialog(AteriaActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                editor.putInt("tunnit", hourOfDay);
+          /*      editor.putInt("tunnit", hourOfDay);
                 editor.putInt("minuutit", minute);
-                editor.commit();
+                editor.commit(); */
 
                 ateria.asetaAika(hourOfDay, minute);
+                tallenna();
                 Log.d("ateria aika", ateria.aikaString());
                 kellonaika.setText(ateria.aikaString());
             }
