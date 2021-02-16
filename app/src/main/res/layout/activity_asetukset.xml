@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EDEDF4"
+    tools:context=".aktiviteetit.Asetukset">
+
+    <TextView
+        android:id="@+id/aseta"
+        android:layout_width="408dp"
+        android:layout_height="31dp"
+        android:background="@color/primaryColor"
+        android:gravity="center"
+        android:text="@string/aseta"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tieto2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginLeft="36dp"
+        android:text="@string/tieto2"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="146dp" />
+
+    <TextView
+        android:id="@+id/kg"
+        android:layout_width="27dp"
+        android:layout_height="18dp"
+        android:text="@string/kg"
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="154dp" />
+
+    <EditText
+        android:id="@+id/paino"
+        android:layout_width="59dp"
+        android:layout_height="49dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="123dp" />
+
+    <TextView
+        android:id="@+id/tieto1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tieto1"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="97dp" />
+
+    <EditText
+        android:id="@+id/annaNimi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="75dp"
+        tools:layout_editor_absoluteY="78dp" />
+
+    <TextView
+        android:id="@+id/ohje"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ohje"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="196dp" />
+
+    <TextView
+        android:id="@+id/tieto3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tieto3"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="247dp" />
+
+    <EditText
+        android:id="@+id/pituus"
+        android:layout_width="66dp"
+        android:layout_height="26dp"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="247dp" />
+
+    <TextView
+        android:id="@+id/cm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cm"
+        tools:layout_editor_absoluteX="173dp"
+        tools:layout_editor_absoluteY="241dp" />
+
+    <TextView
+        android:id="@+id/otsikko1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/otsikko1"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="40dp" />
+
+    <TextView
+        android:id="@+id/otsikko2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/otsikko2"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="312dp" />
+
+    <Spinner
+        android:id="@+id/tavoite1"
+        android:layout_width="103dp"
+        android:layout_height="34dp"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="362dp" />
+
+    <EditText
+        android:id="@+id/editTextNumber2"
+        android:layout_width="90dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="354dp" />
+
+    <TextView
+        android:id="@+id/yksikko1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yksikko"
+        tools:layout_editor_absoluteX="255dp"
+        tools:layout_editor_absoluteY="363dp" />
+
+    <Spinner
+        android:id="@+id/tavoite2"
+        android:layout_width="102dp"
+        android:layout_height="33dp"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="415dp" />
+
+    <EditText
+        android:id="@+id/editTextNumber3"
+        android:layout_width="75dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:inputType="number"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="415dp" />
+
+    <TextView
+        android:id="@+id/yksikko2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yksikko"
+        tools:layout_editor_absoluteX="241dp"
+        tools:layout_editor_absoluteY="430dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
