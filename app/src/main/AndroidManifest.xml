@@ -12,19 +12,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".aktiviteetit.KalenteriActivity"
+        <activity android:name=".aktiviteetit.Asetukset"></activity>
+        <activity android:name=".aktiviteetit.Profiili" />
+        <activity
+            android:name=".aktiviteetit.KalenteriActivity"
             android:theme="@style/Theme.AndroidProject.PopupTheme" />
         <activity
             android:name=".aktiviteetit.TiedotActivity"
             android:theme="@style/Theme.AndroidProject.PopupTheme" />
         <activity
             android:name=".aktiviteetit.AteriaActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".aktiviteetit.AteriatActivity" />
+            android:parentActivityName=".aktiviteetit.AteriatActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".aktiviteetit.AteriatActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:parentActivityName=".aktiviteetit.MainActivity" />
+            android:parentActivityName=".aktiviteetit.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".aktiviteetit.HakuActivity"
             android:parentActivityName=".aktiviteetit.AteriaActivity"
