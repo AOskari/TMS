@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.androidproject.R;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
                             startActivity(new Intent(MainActivity.this, AteriatActivity.class));
                             break;
                         case R.id.profiili:
+                            startActivity(new Intent(MainActivity.this, Asetukset.class));
+                            Log.i("Testi", "Profiilia painettu");
                             //TODO: luo koodi, joka menee profiili-ikkunaan
                             break;
                     }
