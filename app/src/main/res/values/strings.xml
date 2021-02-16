@@ -22,4 +22,5 @@
         <item>Hiilihydraatti</item>
         <item>Proteiini</item>
     </string>
+    <string name="tallennus">Tallenna</string>
 </resources>
