@@ -20,6 +20,7 @@ import com.example.androidproject.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static com.example.androidproject.AteriaLista.haeLista;
@@ -50,7 +51,16 @@ public class AteriatActivity extends AppCompatActivity {
 
         editor.putBoolean("muokkaus", false);
 
+        Calendar kalenteri = Calendar.getInstance();
+
+        editor.putInt("paiva", kalenteri.get(Calendar.DAY_OF_MONTH));
+        editor.putInt("kuukausi", kalenteri.get(Calendar.MONTH));
+        editor.putInt("vuosi", kalenteri.get(Calendar.YEAR));
         editor.commit();
+
+        paiva = pref.getInt("paiva", 0);
+        kuukausi = pref.getInt("kuukausi", 0);
+        vuosi = pref.getInt("vuosi", 0);
 
         paivamaara = findViewById(R.id.paivamaara);
         lv = findViewById(R.id.aterialista);
@@ -93,8 +103,14 @@ public class AteriatActivity extends AppCompatActivity {
         lv.setAdapter(adapter);
     }
 
-    // Luodaan funktio, joka avaa SearchActivity aktiviteetin.
+    /**
+     * Luo uuden tyhjän aterian pysyväismuistiin ja aloittaa AteriaActivityn.
+     */
     public void luoAteria(View v) {
+        Ateria ateria = new Ateria("luonnos ateria");
+        ateriatJson = gson.toJson(ateria);
+        editor.putString("ateria", ateriatJson);
+        editor.commit();
         startActivity(new Intent(AteriatActivity.this, AteriaActivity.class));
     }
 
