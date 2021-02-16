@@ -6,21 +6,21 @@
     <string name="tieto1">Nimi:</string>
     <string name="tieto2">Paino:</string>
     <string name="kg">kg</string>
-    <string name="ohje">ohjeistus</string>
     <string name="tieto3">Pituus:</string>
     <string name="cm">cm</string>
     <string name="otsikko1">Perustiedot</string>
     <string name="otsikko2">Tavoitteet</string>
     <string name="yksikko">näytä yksikkö</string>
-    <string name="tavoite1">
+    <string-array name="tavoite1">
         <item>Kalori</item>
         <item>Hiilihydraatti</item>
         <item>Proteiini</item>
-    </string>
-    <string name="tavoite2">
+    </string-array>
+    <string-array name="tavoite2">
         <item>Kalori</item>
         <item>Hiilihydraatti</item>
         <item>Proteiini</item>
-    </string>
+    </string-array>
     <string name="tallennus">Tallenna</string>
+    <string name="ohje">Jos haluat sovelluksen laskevan BMI:n, syötä painon lisäksi pituus</string>
 </resources>
