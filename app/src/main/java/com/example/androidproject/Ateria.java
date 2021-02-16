@@ -27,10 +27,12 @@ public class Ateria {
 
     private int tunnit;
     private int minuutit;
+    private int id;
 
     public Ateria(String name) {
         raakaAineet = new ArrayList<>();
         this.name = name;
+        id = 0;
     }
 
     public void asetaPaivamaara(int paiva, int kuukausi, int vuosi) {
@@ -42,6 +44,14 @@ public class Ateria {
     public void asetaAika(int tunnit, int minuutit) {
         this.tunnit = tunnit;
         this.minuutit = minuutit;
+    }
+
+    public void asetaId(int id) {
+        this.id = id;
+    }
+
+    public int haeId() {
+        return this.id;
     }
 
     public void lisaaAine(Elintarvike tarvike) {

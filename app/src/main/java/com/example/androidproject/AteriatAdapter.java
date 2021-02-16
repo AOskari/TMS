@@ -93,10 +93,12 @@ public class AteriatAdapter extends BaseAdapter {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // Poistetaan valittu ateria, ja tallennetaan muutokset SharedPreferencesiin.
-                                aterialista.poistaAteria(position);
+                                aterialista.poistaAteria(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeId());
                                 listaJson = gson.toJson(aterialista);
                                 edit.putString("aterialista", listaJson);
                                 edit.commit();
+
+                                Log.d("aterialista", "" + aterialista.tulostaAteriat());
 
                                 // Lopuksi päivitetään AteriatActivityn ListView
                                 ((AteriatActivity)context).naytaAteriat();
@@ -119,20 +121,11 @@ public class AteriatAdapter extends BaseAdapter {
         muokkaa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // Asetetaan valittu ateria SharedPreferencesiin muokkausta varten,
                 String ateriaJson = gson.toJson(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
                 edit.putString("ateria", ateriaJson);
-
-                // Lisätään intenttiin true ja aterian indeksi, jonka jälkeen päivitetään AteriaActivityn näkymä.
-
                 edit.putBoolean("muokkaus", true);
-                edit.putInt("index", position);
-
                 edit.commit();
-
-                Intent intent = new Intent(context, AteriaActivity.class);
-                context.startActivity(intent);
+                context.startActivity(new Intent(context, AteriaActivity.class));
             }
         });
 

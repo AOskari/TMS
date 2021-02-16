@@ -148,6 +148,9 @@ public class AteriaActivity extends AppCompatActivity {
             muokkaus = false;
         }
 
+        Log.d("ateria aika", ateria.aikaString());
+        Log.d("ateria paivamaara", ateria.paivamaaraString());
+
         /**
          * Päivitetään päivämäärä ja kellonaika.
          */
@@ -169,7 +172,6 @@ public class AteriaActivity extends AppCompatActivity {
             DecimalFormat df = new DecimalFormat("#.#");
             DecimalFormat df2 = new DecimalFormat("#.##");
 
-           // Log.d("ateria", ateria.toString());
             initList();
 
             double prot = ateria.haeRavinto().get(1);
@@ -224,6 +226,7 @@ public class AteriaActivity extends AppCompatActivity {
             piiras.animateXY(2000, 2000);
             kalorit.setText(Math.round(ateria.haeRavinto().get(4)) + " kcal");
             editText.setText(ateria.haeNimi());
+            kellonaika.setText(ateria.aikaString());
         }
     }
 
@@ -254,15 +257,19 @@ public class AteriaActivity extends AppCompatActivity {
                         boolean muokkaus = pref.getBoolean("muokkaus", false);
 
                         if (muokkaus) {
-                            lista.poistaAteria(pref.getInt("indeksi", 0));
+                            lista.poistaAteria(ateria.haeId());
                             editor.putBoolean("muokkaus", false);
+                        } else {
+                            ateria.asetaId(lista.seuraavaId());
                         }
-                        // Bugi on jossain täällä. Välillä näyttää siltä että monistaisi valitun aterian eikä vaihda kellonaikaa.
+
                         ateria.asetaPaivamaara(paiva, kuukausi, vuosi);
                         lista.lisaaAteria(ateria);
                         aterialistaJson = gson.toJson(lista);
                         editor.putString("aterialista", aterialistaJson);
                         editor.commit();
+
+                        Log.d("aterialista", "" + lista.tulostaAteriat());
 
                         ateria = new Ateria("luonnos ateria");
                         tallenna();
@@ -290,14 +297,11 @@ public class AteriaActivity extends AppCompatActivity {
         TimePickerDialog aika = new TimePickerDialog(AteriaActivity.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-          /*      editor.putInt("tunnit", hourOfDay);
-                editor.putInt("minuutit", minute);
-                editor.commit(); */
-
                 ateria.asetaAika(hourOfDay, minute);
-                tallenna();
                 Log.d("ateria aika", ateria.aikaString());
                 kellonaika.setText(ateria.aikaString());
+                tallenna();
+                paivitaLista();
             }
         }, tunti, minuutti, true);
         aika.show();

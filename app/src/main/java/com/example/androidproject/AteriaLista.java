@@ -1,5 +1,10 @@
 package com.example.androidproject;
 
+import android.content.SharedPreferences;
+import android.util.Log;
+
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -12,6 +17,7 @@ import java.util.List;
 public class AteriaLista {
     private List<Ateria> lista;
     private static final AteriaLista haeLista = new AteriaLista();
+    private int id;
 
     public static AteriaLista haeLista() {
         return haeLista;
@@ -19,12 +25,12 @@ public class AteriaLista {
 
     private AteriaLista() {
         lista = new ArrayList<>();
+        id = 0;
     }
 
     public void lisaaAteria(Ateria ateria) {
         lista.add(ateria);
     }
-
 
     /**
      * Hakee AteriaListalta ateriat jotka sisältävät valitun päivämäärän, jonka jälkeen
@@ -85,7 +91,22 @@ public class AteriaLista {
     /**
      * Poistaa valitun aterian listalta.
      */
-    public void poistaAteria(int i) {
-        lista.remove(i);
+    public void poistaAteria(int id) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).haeId() == id) {
+                Log.d("poistettu", lista.get(i).toString());
+                lista.remove(i);
+                break;
+            }
+        }
+    }
+
+    public int seuraavaId(){
+        id++;
+        return id;
+    }
+
+    public List<Ateria> tulostaAteriat() {
+        return this.lista;
     }
 }
