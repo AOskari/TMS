@@ -77,6 +77,7 @@ public class HakuAdapter extends BaseAdapter {
         Button miinus = convertView.findViewById(R.id.miinus);
         ImageButton tiedotNappi = convertView.findViewById(R.id.tiedot);
         EditText editText = convertView.findViewById(R.id.maaraInput);
+        TextView ilmoitus = convertView.findViewById(R.id.haku_ilmoitus);
 
         // EditTextin inputTypeksi on asetettu numberPassword; poistetaan asteriskit seuraavalla komennolla
         editText.setTransformationMethod(null);
@@ -122,6 +123,7 @@ public class HakuAdapter extends BaseAdapter {
                             ravinto.get(7), ravinto.get(8), maara);
 
                     ateria.lisaaAine(uusiTarvike);
+                    activity.naytaIlmoitus(lista.get(position).haeNimi());
 
                     ateriaJson = gson.toJson(ateria);
                     editor.putString("ateria", ateriaJson);

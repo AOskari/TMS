@@ -7,7 +7,7 @@
     tools:context=".aktiviteetit.HakuActivity">
 
     <EditText
-        android:id="@+id/text_input"
+        android:id="@+id/elintarvike_haku"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginStart="16dp"
@@ -32,7 +32,7 @@
         android:tint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/text_input"
+        app:layout_constraintStart_toEndOf="@+id/elintarvike_haku"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/search"
         tools:ignore="VectorDrawableCompat" />
@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_input">
+        app:layout_constraintTop_toBottomOf="@+id/elintarvike_haku">
 
     </ListView>
 
@@ -64,5 +64,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/list_view" />
+
+    <TextView
+        android:id="@+id/haku_ilmoitus"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/alusta"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/secondaryColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/list_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/elintarvike_haku" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
