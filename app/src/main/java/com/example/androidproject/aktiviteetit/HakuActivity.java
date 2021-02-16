@@ -5,12 +5,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -39,6 +45,7 @@ public class HakuActivity extends AppCompatActivity {
 
     EditText input;
     ListView lv;
+    TextView ilmoitus;
 
     Gson gson = new Gson();
     SharedPreferences pref;
@@ -62,6 +69,9 @@ public class HakuActivity extends AppCompatActivity {
         latausKuvake.setVisibility(View.GONE);
         input = findViewById(R.id.elintarvike_haku);
         lv = findViewById(R.id.list_view);
+        ilmoitus = findViewById(R.id.haku_ilmoitus);
+
+        ilmoitus.setVisibility(View.GONE);
 
         // Haetaan yhteinen SharedPreferences-olio, jonka avulla talletetaan lisätyt Elintarvikkeet aterioihin.
         pref = getApplicationContext().getSharedPreferences("mainPref",0);
@@ -133,6 +143,38 @@ public class HakuActivity extends AppCompatActivity {
 
         inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    /**
+     * Näyttää ilmoituksen ja poistaa ilmoitukset näkyvistä 5 sekunnin kuluttua.
+     * @param nimi
+     */
+    public void naytaIlmoitus(String nimi) {
+        ilmoitus.setText(nimi + " lisätty ateriaan.");
+        ilmoitus.setVisibility(View.VISIBLE);
+
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator());
+        fadeIn.setDuration(300);
+
+        Animation fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setInterpolator(new DecelerateInterpolator());
+        fadeOut.setDuration(5000);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                ilmoitus.setVisibility(View.GONE);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+
+        AnimationSet animaatiot = new AnimationSet(false);
+        animaatiot.addAnimation(fadeIn);
+        animaatiot.addAnimation(fadeOut);
+        ilmoitus.setAnimation(animaatiot);
     }
 
     private void initList() {
