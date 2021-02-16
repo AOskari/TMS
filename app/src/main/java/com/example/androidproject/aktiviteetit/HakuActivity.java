@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -46,6 +47,8 @@ public class HakuActivity extends AppCompatActivity {
     Ateria ateria;
     String ateriaJson;
 
+    ProgressBar latausKuvake;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +58,8 @@ public class HakuActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         foodInfo = new ArrayList<>();
-
+        latausKuvake = findViewById(R.id.latauskuvake);
+        latausKuvake.setVisibility(View.GONE);
         input = findViewById(R.id.text_input);
         lv = findViewById(R.id.list_view);
 
@@ -65,11 +69,10 @@ public class HakuActivity extends AppCompatActivity {
 
         ateriaJson = pref.getString("ateria", "");
         ateria = gson.fromJson(ateriaJson, Ateria.class);
-
     }
 
     public void getInfo(View v) {
-
+        latausKuvake.setVisibility(v.VISIBLE);
         String url = "https://fineli.fi/fineli/api/v1/foods?q=" + input.getText().toString();
         Log.i("getInfo","getInfo called");
         Log.i("itemname",input.getText().toString());
@@ -103,7 +106,7 @@ public class HakuActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-
+                        latausKuvake.setVisibility(View.GONE);
                         initList();
                         Log.d("Iterated", foodInfo.toString());
                     }

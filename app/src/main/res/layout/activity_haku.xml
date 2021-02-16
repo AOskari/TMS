@@ -55,4 +55,14 @@
 
     </ListView>
 
+    <ProgressBar
+        android:id="@+id/latauskuvake"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/secondaryColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/list_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
