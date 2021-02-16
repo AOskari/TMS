@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">androidProject</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Lisätään kaikki käytettävät id:t tänne -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- HakuActivityn id:t -->
+    <item type="id" name="esimerkki_id" />
+    <item type="id" name="elintarvike_haku" />
 </resources>

@@ -60,7 +60,7 @@ public class HakuActivity extends AppCompatActivity {
         foodInfo = new ArrayList<>();
         latausKuvake = findViewById(R.id.latauskuvake);
         latausKuvake.setVisibility(View.GONE);
-        input = findViewById(R.id.text_input);
+        input = findViewById(R.id.elintarvike_haku);
         lv = findViewById(R.id.list_view);
 
         // Haetaan yhteinen SharedPreferences-olio, jonka avulla talletetaan lisätyt Elintarvikkeet aterioihin.
