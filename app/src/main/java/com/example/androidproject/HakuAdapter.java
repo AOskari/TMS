@@ -36,15 +36,14 @@ public class HakuAdapter extends BaseAdapter {
 
     Ateria ateria;
     String ateriaJson;
-
     HakuActivity activity;
+
 
     public HakuAdapter(Context context, List<Elintarvike> lista, SharedPreferences pref, HakuActivity activity) {
         this.context = context;
         this.lista = lista;
         this.pref = pref;
         editor = pref.edit();
-
         this.activity = activity;
         ateriaJson = pref.getString("ateria", "");
 
@@ -95,8 +94,13 @@ public class HakuAdapter extends BaseAdapter {
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && !editText.getText().toString().contains("g")) {
+                String teksti = editText.getText().toString();
+                if (!hasFocus && !teksti.contains("g")) {
+                    if (teksti.equals("")) {
+                        editText.setText("0g");
+                    } else {
                         editText.setText(editText.getText() + "g");
+                    }
                 }
             }
         });
@@ -131,29 +135,32 @@ public class HakuAdapter extends BaseAdapter {
             }
         });
 
-        // Asetetaaan onClick-metodit plus ja miinus napeille.
+        // Asetetaan onClick-metodit plus ja miinus napeille.
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (editText.getText().toString().equals("0g")) {
+                String teksti = editText.getText().toString();
+                if (teksti.equals("0g") || teksti.equals("g") ||teksti.equals("")) {
                     editText.setText("1g");
                 } else {
                     int maara = Integer.parseInt(editText.getText().toString().replaceAll("g", ""));
                     maara++;
                     editText.setText(maara + "g");
                 }
-            }
+        }
         });
 
         miinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int maara = Integer.parseInt(editText.getText().toString().replaceAll("g", ""));
-                  if (maara > 0) {
-                      maara--;
-                      editText.setText(maara + "g");
-                  }
+                String teksti = editText.getText().toString();
+                if (!teksti.equals("g") && !teksti.equals("")) {
+                    int maara = Integer.parseInt(teksti.replaceAll("g", ""));
+                    if (maara > 0) {
+                        maara--;
+                        editText.setText(maara + "g");
+                    }
+                }
             }
         });
 
