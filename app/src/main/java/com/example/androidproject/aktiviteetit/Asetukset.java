@@ -35,8 +35,8 @@ public class Asetukset extends AppCompatActivity {
         tav2 = findViewById(R.id.tav2);
         yksikko1 = findViewById(R.id.yksikko1);
         yksikko2 = findViewById(R.id.yksikko2);
-        naytaVal1();
-        naytaVal2();
+        //naytaVal1();
+        //naytaVal2();
 
     }
     private void naytaVal1() {
