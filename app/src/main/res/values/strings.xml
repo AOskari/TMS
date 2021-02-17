@@ -10,17 +10,8 @@
     <string name="cm">cm</string>
     <string name="otsikko1">Perustiedot</string>
     <string name="otsikko2">Tavoitteet</string>
-    <string name="yksikko">näytä yksikkö</string>
-    <string-array name="tavoite1">
-        <item>Kalori</item>
-        <item>Hiilihydraatti</item>
-        <item>Proteiini</item>
-    </string-array>
-    <string-array name="tavoite2">
-        <item>Kalori</item>
-        <item>Hiilihydraatti</item>
-        <item>Proteiini</item>
-    </string-array>
+    <string name="yksikko">yksikkö</string>
     <string name="tallennus">Tallenna</string>
     <string name="ohje">Jos haluat sovelluksen laskevan BMI:n, syötä painon lisäksi pituus</string>
+    <string name="ohje2">Valitse ensin tavoitetyyppi ja  anna sen jälkeen haluamasi määrä</string>
 </resources>
