@@ -159,6 +159,7 @@ public class AteriaActivity extends AppCompatActivity {
         vuosi = pref.getInt("vuosi", 0);
         ((TextView)findViewById(R.id.paivays)).setText(ateria.paivamaaraString());
         kellonaika.setText(ateria.aikaString());
+        asetaKaloriPalkki();
     }
 
     /**
@@ -168,66 +169,65 @@ public class AteriaActivity extends AppCompatActivity {
         ateriaJson = pref.getString("ateria", "");
         ateria = gson.fromJson(ateriaJson, Ateria.class);
 
-        if (ateriaJson != "") {
-            DecimalFormat df = new DecimalFormat("#.#");
-            DecimalFormat df2 = new DecimalFormat("#.##");
+        DecimalFormat df = new DecimalFormat("#.#");
+        DecimalFormat df2 = new DecimalFormat("#.##");
 
-            initList();
+        asetaKaloriPalkki();
+        initList();
 
-            double prot = ateria.haeRavinto().get(1);
-            double hh = ateria.haeRavinto().get(2);
-            double ras = ateria.haeRavinto().get(3);
+        double prot = ateria.haeRavinto().get(1);
+        double hh = ateria.haeRavinto().get(2);
+        double ras = ateria.haeRavinto().get(3);
 
-            double protPros = (prot / ateria.haeRavinto().get(0)) * 100;
-            double hhPros = (hh / ateria.haeRavinto().get(0)) * 100;
-            double rasvaPros = (ras / ateria.haeRavinto().get(0)) * 100;
+        double protPros = (prot / ateria.haeRavinto().get(0)) * 100;
+        double hhPros = (hh / ateria.haeRavinto().get(0)) * 100;
+        double rasvaPros = (ras / ateria.haeRavinto().get(0)) * 100;
 
-            if (prot == 0 && hh == 0 && ras == 0) {
-               asetaTekstit("", "", "", "", "", "", "");
-            } else {
-                asetaTekstit("Proteiini  " + df.format(protPros) + "%  " + df.format(prot) + "g",
-                        "Hiilihydraatit  " + df.format(hhPros) + "%  " + df.format(hh) + "g",
-                        "Rasva  " + df.format(rasvaPros) + "%  " + df.format(ras) + "g",
-                        df.format(ateria.haeRavinto().get(5)) + "g",
-                        df.format(ateria.haeRavinto().get(6)) + "g", df2.format(ateria.haeRavinto().get(7)) + "g",
-                        df.format(ateria.haeRavinto().get(8)) + "g");
-            }
-
-            /**
-             * Luodaan uudet tiedot ympyrädiagrammia varten.
-             */
-            ArrayList lista = new ArrayList();
-            ArrayList ravintoarvo = new ArrayList();
-            float m1 = (float) prot;
-            float m2 = (float) hh;
-            float m3 = (float) ras;
-            lista.add(new Entry(m1, 0));
-            lista.add(new Entry(m2, 1));
-            lista.add(new Entry(m3, 2));
-            PieDataSet dataSet = new PieDataSet(lista, "");
-
-            ravintoarvo.add("proteiini");
-            ravintoarvo.add("hiilihydraatti");
-            ravintoarvo.add("rasva");
-
-            PieData data = new PieData(ravintoarvo, dataSet);
-
-            /**
-             * Asetetaan uudet ravintoarvot diagrammiin, poistetaan ylimääräiset merkinnät
-             * ja asetetaan värit sekä animaatio.
-             */
-            data.setDrawValues(false);
-            piiras.setData(data);
-            piiras.setDescription("");
-            piiras.getLegend().setEnabled(false);
-            piiras.setDrawSliceText(false);
-
-            dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-            piiras.animateXY(2000, 2000);
-            kalorit.setText(Math.round(ateria.haeRavinto().get(4)) + " kcal");
-            editText.setText(ateria.haeNimi());
-            kellonaika.setText(ateria.aikaString());
+        if (prot == 0 && hh == 0 && ras == 0) {
+           asetaTekstit("", "", "", "", "", "", "");
+        } else {
+            asetaTekstit("Proteiini  " + df.format(protPros) + "%  " + df.format(prot) + "g",
+                    "Hiilihydraatit  " + df.format(hhPros) + "%  " + df.format(hh) + "g",
+                    "Rasva  " + df.format(rasvaPros) + "%  " + df.format(ras) + "g",
+                    df.format(ateria.haeRavinto().get(5)) + "g",
+                    df.format(ateria.haeRavinto().get(6)) + "g", df2.format(ateria.haeRavinto().get(7)) + "g",
+                    df.format(ateria.haeRavinto().get(8)) + "g");
         }
+
+        /**
+         * Luodaan uudet tiedot ympyrädiagrammia varten.
+         */
+        ArrayList lista = new ArrayList();
+        ArrayList ravintoarvo = new ArrayList();
+        float m1 = (float) prot;
+        float m2 = (float) hh;
+        float m3 = (float) ras;
+        lista.add(new Entry(m1, 0));
+        lista.add(new Entry(m2, 1));
+        lista.add(new Entry(m3, 2));
+        PieDataSet dataSet = new PieDataSet(lista, "");
+
+        ravintoarvo.add("proteiini");
+        ravintoarvo.add("hiilihydraatti");
+        ravintoarvo.add("rasva");
+
+        PieData data = new PieData(ravintoarvo, dataSet);
+
+        /**
+         * Asetetaan uudet ravintoarvot diagrammiin, poistetaan ylimääräiset merkinnät
+         * ja asetetaan värit sekä animaatio.
+         */
+        data.setDrawValues(false);
+        piiras.setData(data);
+        piiras.setDescription("");
+        piiras.getLegend().setEnabled(false);
+        piiras.setDrawSliceText(false);
+
+        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        piiras.animateXY(2000, 2000);
+        kalorit.setText(Math.round(ateria.haeRavinto().get(4)) + " kcal");
+        editText.setText(ateria.haeNimi());
+        kellonaika.setText(ateria.aikaString());
     }
 
     /**
@@ -317,6 +317,23 @@ public class AteriaActivity extends AppCompatActivity {
     private void initList() {
         AteriaAdapter adapter = new AteriaAdapter(this, pref);
         lv.setAdapter(adapter);
+    }
+
+    /**
+     * Asettaa tiedot kaloripalkkiin.
+     */
+    private void asetaKaloriPalkki() {
+        TextView nykyinen = findViewById(R.id.nykyinen_kalorit);
+        TextView ateriaKal = findViewById(R.id.ateria_kalorit);
+        TextView yhteensa = findViewById(R.id.yhteensa_kalorit);
+
+        String listaJson = pref.getString("aterialista", "");
+        AteriaLista lista = gson.fromJson(listaJson, AteriaLista.class);
+
+        nykyinen.setText(lista.haeKalorit(paiva, kuukausi, vuosi) + " kcal");
+        ateriaKal.setText(Math.round(ateria.haeRavinto().get(4)) + " kcal");
+        yhteensa.setText(lista.haeKalorit(paiva, kuukausi, vuosi) + Math.round(ateria.haeRavinto().get(4)) + " kcal");
+
     }
 
     /**
