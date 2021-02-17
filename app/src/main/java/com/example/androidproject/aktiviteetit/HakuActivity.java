@@ -70,7 +70,6 @@ public class HakuActivity extends AppCompatActivity {
         input = findViewById(R.id.elintarvike_haku);
         lv = findViewById(R.id.list_view);
         ilmoitus = findViewById(R.id.haku_ilmoitus);
-
         ilmoitus.setVisibility(View.GONE);
 
         // Haetaan yhteinen SharedPreferences-olio, jonka avulla talletetaan lisätyt Elintarvikkeet aterioihin.
@@ -84,9 +83,6 @@ public class HakuActivity extends AppCompatActivity {
     public void getInfo(View v) {
         latausKuvake.setVisibility(v.VISIBLE);
         String url = "https://fineli.fi/fineli/api/v1/foods?q=" + input.getText().toString();
-        Log.i("getInfo","getInfo called");
-        Log.i("itemname",input.getText().toString());
-        Log.i("url", url);
 
         requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest

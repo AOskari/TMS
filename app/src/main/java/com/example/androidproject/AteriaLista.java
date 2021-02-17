@@ -101,6 +101,16 @@ public class AteriaLista {
         }
     }
 
+    public int haeKalorit(int paiva, int kuukausi, int vuosi) {
+        List<Ateria> palautettavat = haePaivamaaralla(paiva, kuukausi, vuosi);
+        int kalorit = 0;
+
+        for (int i = 0; i < palautettavat.size(); i++) {
+            kalorit += palautettavat.get(i).haeRavinto().get(4);
+        }
+        return kalorit;
+    }
+
     public int seuraavaId(){
         id++;
         return id;
