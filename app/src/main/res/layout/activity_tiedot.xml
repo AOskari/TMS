@@ -4,31 +4,251 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaryColor"
+    android:background="@drawable/alusta"
+    android:backgroundTint="@color/lightGray"
     tools:context=".aktiviteetit.TiedotActivity">
 
     <TextView
         android:id="@+id/tiedot_nimi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:textStyle="bold"
         android:textColor="@color/textPrimaryColor"
-        app:layout_constraintBottom_toTopOf="@+id/tiedot_info"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_proteiiniteksti"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/tiedot_poistu"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:backgroundTint="#00000000"
+        android:tint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cancel"
+        tools:ignore="VectorDrawableCompat" />
+
     <TextView
-        android:id="@+id/tiedot_info"
-        android:layout_width="260dp"
+        android:id="@+id/tiedot_proteiinimaara"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/textPrimaryColor"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="right"
+        android:text="0g"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_hhmaara"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tiedot_proteiiniteksti"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_nimi" />
+
+    <TextView
+        android:id="@+id/tiedot_hhmaara"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="right"
+        android:text="0g"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_rasvamaara"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tiedot_hhteksti"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_proteiinimaara" />
+
+    <TextView
+        android:id="@+id/tiedot_rasvamaara"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="right"
+        android:text="0g"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_tyydmaara"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tiedot_rasvateksti"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_hhmaara" />
+
+    <TextView
+        android:id="@+id/tiedot_tyydmaara"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="right"
+        android:text="0g"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_sokerimaara"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tiedot_tyydteksti"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_rasvamaara" />
+
+    <TextView
+        android:id="@+id/tiedot_sokerimaara"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="right"
+        android:text="0g"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_kuitumaara"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tiedot_sokeriteksti"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_tyydmaara" />
+
+    <TextView
+        android:id="@+id/tiedot_kuitumaara"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="right"
+        android:text="0g"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_suolamaara"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tiedot_kuituteksti"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_sokerimaara" />
+
+    <TextView
+        android:id="@+id/tiedot_suolamaara"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="right"
+        android:text="0g"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tiedot_suolateksti"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_kuitumaara" />
+
+    <TextView
+        android:id="@+id/tiedot_proteiiniteksti"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Proteiini"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_hhteksti"
+        app:layout_constraintEnd_toStartOf="@+id/tiedot_proteiinimaara"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tiedot_nimi" />
+
+    <TextView
+        android:id="@+id/tiedot_hhteksti"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Hiilihydraatit"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_rasvateksti"
+        app:layout_constraintEnd_toStartOf="@+id/tiedot_hhmaara"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_proteiiniteksti" />
+
+    <TextView
+        android:id="@+id/tiedot_rasvateksti"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Rasva"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_tyydteksti"
+        app:layout_constraintEnd_toStartOf="@+id/tiedot_rasvamaara"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_hhteksti" />
+
+    <TextView
+        android:id="@+id/tiedot_tyydteksti"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Tyydyttynyt rasva"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_sokeriteksti"
+        app:layout_constraintEnd_toStartOf="@+id/tiedot_tyydmaara"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_rasvateksti" />
+
+    <TextView
+        android:id="@+id/tiedot_sokeriteksti"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Joista sokereita"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_kuituteksti"
+        app:layout_constraintEnd_toStartOf="@+id/tiedot_sokerimaara"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_tyydteksti" />
+
+    <TextView
+        android:id="@+id/tiedot_kuituteksti"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Kuitu"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tiedot_suolateksti"
+        app:layout_constraintEnd_toStartOf="@+id/tiedot_kuitumaara"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_sokeriteksti" />
+
+    <TextView
+        android:id="@+id/tiedot_suolateksti"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:text="Suola"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tiedot_suolamaara"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiedot_kuituteksti" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

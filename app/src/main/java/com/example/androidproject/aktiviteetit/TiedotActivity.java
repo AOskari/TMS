@@ -2,15 +2,25 @@ package com.example.androidproject.aktiviteetit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.androidproject.Elintarvike;
 import com.example.androidproject.R;
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
+import java.util.List;
+
+/**
+ * Luo popup-ikkunan keskelle ruutua, joka näyttää Elintarvike-olion tarkat ravintoarvot.
+ */
 public class TiedotActivity extends AppCompatActivity {
 
     Gson gson = new Gson();
@@ -19,26 +29,43 @@ public class TiedotActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiedot);
-
-        // Piilotetaan yläpalkki.
         getSupportActionBar().hide();
-
-        // Luodaan popup-ikkuna, joka ei peitä koko ruutua.
+        DecimalFormat df = new DecimalFormat("#.#");
+        /**
+         * Asetetaan popup-ikkunan koko 80% näytön leveydestä ja 40% korkeudesta.
+         * Asetetaan taustaväri läpinäkyväksi, joka tuo esille popup-ikkunan pyöristetyt reunat.
+         */
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-
-        // Asetetaan popup-ikkunan koko 60% näytön koosta.
         getWindow().setLayout((int) (width * .8), (int) (height * 0.4));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
+        /**
+         * Haetaan ja asetetaan valitun Elintarvike-olion tiedot popup-ikkunaan.
+         * Lopuksi asetetaan poistumisnapin onClick-toiminnallisuus.
+         */
         Bundle b = getIntent().getExtras();
         Elintarvike e = gson.fromJson(b.getString("TARVIKE"), Elintarvike.class);
 
-        ((TextView)findViewById(R.id.tiedot_info)).setText(e.tarkatArvot());
+        List<Double> arvot = e.haeRavintoarvot();
         ((TextView)findViewById(R.id.tiedot_nimi)).setText(e.haeNimi());
+        ((TextView)findViewById(R.id.tiedot_proteiinimaara)).setText(df.format(arvot.get(3)) + "g");
+        ((TextView)findViewById(R.id.tiedot_hhmaara)).setText(df.format(arvot.get(4)) + "g");
+        ((TextView)findViewById(R.id.tiedot_rasvamaara)).setText(df.format(arvot.get(2)) + "g");
+        ((TextView)findViewById(R.id.tiedot_tyydmaara)).setText(df.format(arvot.get(6)) + "g");
+        ((TextView)findViewById(R.id.tiedot_sokerimaara)).setText(df.format(arvot.get(7)) + "g");
+        ((TextView)findViewById(R.id.tiedot_kuitumaara)).setText(df.format(arvot.get(8)) + "g");
+        ((TextView)findViewById(R.id.tiedot_suolamaara)).setText(df.format(arvot.get(0)) + "g");
+
+
+        ImageButton poistu = findViewById(R.id.tiedot_poistu);
+        poistu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
-
-
 }

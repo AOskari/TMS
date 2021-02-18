@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -39,6 +41,7 @@ public class KalenteriActivity extends AppCompatActivity {
 
         // Asetetaan popup-ikkunan koko 60% näytön koosta.
         getWindow().setLayout((int) (width * .6), (int) (height * 0.4));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         CalendarView kalenteri = findViewById(R.id.kalenteri);
 
