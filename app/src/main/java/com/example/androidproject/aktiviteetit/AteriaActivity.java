@@ -241,7 +241,7 @@ public class AteriaActivity extends AppCompatActivity {
          */
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
-        builder.setMessage("Tallenna" + ateria.haeNimi() +  "ateria?");
+        builder.setMessage("Tallenna " + ateria.haeNimi() +  "?");
 
         builder.setPositiveButton("Tallenna",
                 new DialogInterface.OnClickListener() {
@@ -249,10 +249,6 @@ public class AteriaActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String aterialistaJson = pref.getString("aterialista", "");
                         AteriaLista lista = gson.fromJson(aterialistaJson, AteriaLista.class);
-
-                        Log.d("muokkaus boolean", "" + muokkaus);
-
-                        Log.d("listan sisältö", lista.toString());
 
                         boolean muokkaus = pref.getBoolean("muokkaus", false);
 

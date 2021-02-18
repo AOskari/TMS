@@ -18,4 +18,13 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
+    <style name="customProgressBar1">
+        <item name="colorAccent">@color/red</item>
+    </style>
+    <style name="customProgressBar2">
+        <item name="colorAccent">@color/blue</item>
+    </style>
+    <style name="customProgressBar3">
+        <item name="colorAccent">@color/green</item>
+    </style>
 </resources>

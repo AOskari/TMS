@@ -20,6 +20,7 @@ import com.example.androidproject.AteriatAdapter;
 import com.example.androidproject.R;
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -40,6 +41,10 @@ public class AteriatActivity extends AppCompatActivity {
 
     private ListView lv;
     private TextView paivamaara;
+    private TextView kalorimaara;
+    private TextView proteiiniMaara;
+    private TextView hhMaara;
+    private TextView rasvaMaara;
 
     private int paiva;
     private int kuukausi;
@@ -74,12 +79,15 @@ public class AteriatActivity extends AppCompatActivity {
         proteiiniPalkki = findViewById(R.id.proteiini_palkki);
         hhPalkki = findViewById(R.id.hh_palkki);
         rasvaPalkki = findViewById(R.id.rasva_palkki);
+        kalorimaara = findViewById(R.id.ateriat_kalorimaara);
+
+        proteiiniMaara = findViewById(R.id.proteiini_palkkiteksti);
+        hhMaara = findViewById(R.id.hh_palkkiteskti);
+        rasvaMaara = findViewById(R.id.rasva_palkkiteksti);
 
         proteiiniPalkki.setMax(100);
         hhPalkki.setMax(100);
         rasvaPalkki.setMax(100);
-
-
 
         paivamaara = findViewById(R.id.paivamaara);
         lv = findViewById(R.id.aterialista);
@@ -93,11 +101,7 @@ public class AteriatActivity extends AppCompatActivity {
             Log.d("aterialista", ateriatJson);
         }
 
-        AteriaLista lista = gson.fromJson(ateriatJson, AteriaLista.class);
-        proteiiniPalkki.setProgress(lista.haeProsentit(paiva, kuukausi, vuosi).get(0));
-        hhPalkki.setProgress(lista.haeProsentit(paiva, kuukausi, vuosi).get(1));
-        rasvaPalkki.setProgress(lista.haeProsentit(paiva, kuukausi, vuosi).get(2));
-
+       asetaRavintoarvot();
         ImageButton nappi = findViewById(R.id.paivamaaraNappi);
         nappi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +124,11 @@ public class AteriatActivity extends AppCompatActivity {
         paivamaara.setText(paiva + "/" + kuukausi + "/" + vuosi);
 
         naytaAteriat();
+        try {
+            asetaRavintoarvot();
+        } catch (Exception e) {
+            Log.d("exception", e.toString());
+        }
     }
 
     public void naytaAteriat() {
@@ -138,4 +147,23 @@ public class AteriatActivity extends AppCompatActivity {
         startActivity(new Intent(AteriatActivity.this, AteriaActivity.class));
     }
 
+    /**
+     * Asettaa päivän kalorimäärän ja ravintoaineiden ProgressBarien arvot.
+     */
+    private void asetaRavintoarvot() {
+        AteriaLista lista = gson.fromJson(ateriatJson, AteriaLista.class);
+        DecimalFormat df = new DecimalFormat("#.#");
+
+        proteiiniPalkki.setProgress(lista.haeProsentit(paiva, kuukausi, vuosi).get(0));
+        hhPalkki.setProgress(lista.haeProsentit(paiva, kuukausi, vuosi).get(1));
+        rasvaPalkki.setProgress(lista.haeProsentit(paiva, kuukausi, vuosi).get(2));
+        kalorimaara.setText(String.valueOf(lista.haeKalorit(paiva, kuukausi, vuosi)));
+
+        List<Double> arvot = lista.haeRavintoarvot(paiva, kuukausi, vuosi);
+
+        proteiiniMaara.setText("Proteiini " + " / " + df.format(arvot.get(0)) + "g");
+        hhMaara.setText("Hiilihydraatit " + " / " + df.format(arvot.get(1)) + "g");
+        rasvaMaara.setText("Rasva " + " / " + df.format(arvot.get(2)) + "g");
+
+    }
 }

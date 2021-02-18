@@ -41,71 +41,102 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-        <ProgressBar
-            android:id="@+id/proteiini_palkki"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="180dp"
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/hh_palkki"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:foregroundGravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
-            android:id="@+id/hh_palkki"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="180dp"
+            <ProgressBar
+                android:id="@+id/proteiini_palkki"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleY="5"
+                android:theme="@style/customProgressBar1" />
+
+            <TextView
+                android:id="@+id/proteiini_palkkiteksti"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Proteiini / 0g"
+                android:textColor="@color/secondaryColor"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout2"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/rasva_palkki"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/frameLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/proteiini_palkki" />
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
-        <ProgressBar
-            android:id="@+id/rasva_palkki"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="180dp"
+            <ProgressBar
+                android:id="@+id/hh_palkki"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleY="5"
+                android:theme="@style/customProgressBar2" />
+
+            <TextView
+                android:id="@+id/hh_palkkiteskti"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Hiilihydraatit / 0g"
+                android:textColor="@color/secondaryColor"
+                android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout3"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/hh_palkki" />
+            app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
 
-        <TextView
-            android:id="@+id/ateriat_proteiini"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="Proteiini"
-            app:layout_constraintBottom_toBottomOf="@+id/proteiini_palkki"
-            app:layout_constraintStart_toEndOf="@+id/proteiini_palkki"
-            app:layout_constraintTop_toTopOf="@+id/proteiini_palkki" />
+            <ProgressBar
+                android:id="@+id/rasva_palkki"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleY="5"
+                android:theme="@style/customProgressBar3" />
 
-        <TextView
-            android:id="@+id/ateriat_hiilarit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="Hiilihydraatit"
-            app:layout_constraintBottom_toBottomOf="@+id/hh_palkki"
-            app:layout_constraintStart_toEndOf="@+id/hh_palkki"
-            app:layout_constraintTop_toTopOf="@+id/hh_palkki" />
-
-        <TextView
-            android:id="@+id/ateriat_rasvat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="Rasva"
-            app:layout_constraintBottom_toBottomOf="@+id/rasva_palkki"
-            app:layout_constraintStart_toEndOf="@+id/rasva_palkki"
-            app:layout_constraintTop_toTopOf="@+id/rasva_palkki" />
+            <TextView
+                android:id="@+id/rasva_palkkiteksti"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Rasva / 0g"
+                android:textColor="@color/secondaryColor"
+                android:textStyle="bold" />
+        </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -181,6 +212,17 @@
             app:layout_constraintBottom_toBottomOf="@+id/ateriat_kalorimaara"
             app:layout_constraintStart_toEndOf="@+id/ateriat_kalorimaara"
             app:layout_constraintTop_toTopOf="@+id/ateriat_kalorimaara" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Päivän saanti"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toTopOf="@+id/ateriat_kalorimaara"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/paivamaara" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

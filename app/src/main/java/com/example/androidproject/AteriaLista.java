@@ -113,6 +113,23 @@ public class AteriaLista {
         return kalorit;
     }
 
+    public List<Double> haeRavintoarvot(int paiva, int kuukausi, int vuosi) {
+        List<Ateria> lista = haePaivamaaralla(paiva, kuukausi, vuosi);
+
+        double proteiini = 0;
+        double hh = 0;
+        double rasva = 0;
+
+        for (int i = 0; i < lista.size(); i++) {
+            proteiini += lista.get(i).haeRavinto().get(1);
+            hh += lista.get(i).haeRavinto().get(2);
+            rasva += lista.get(i).haeRavinto().get(3);
+        }
+
+        List<Double> arvot = Arrays.asList(proteiini, hh, rasva);
+        return arvot;
+    }
+
     public List<Integer> haeProsentit(int paiva, int kuukausi, int vuosi) {
         DecimalFormat df = new DecimalFormat("#.#");
         List<Ateria> lista = haePaivamaaralla(paiva, kuukausi, vuosi);
