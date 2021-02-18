@@ -28,11 +28,22 @@
 
 
 
-    <!-- activity_ateriat -->
-
+    <!-- Ravintoaineet -->
     <string name="nykyinen_kalorit">Päivä</string>
     <string name="ateria_kalorit">Ateria</string>
     <string name="yhteensa_kalorit">Yhteensä</string>
     <string name="plus">+</string>
     <string name="yhtakuin">=</string>
+    <string name="proteiini">Proteiini</string>
+    <string name="hiilihydraatti">Hiilihydraatti</string>
+    <string name="rasva">Rasva</string>
+    <string name="tyydyttynyt_rasva">Tyydyttynyt rasva</string>
+    <string name="joista_sokereita">Joista sokereita</string>
+    <string name="suola">Suola</string>
+    <string name="kuitu">Kuitu</string>
+    <string name="aloitus_gramma">0g</string>
+
+    <!-- Muut merkkijonot -->
+    <string name="poistu">Poistu</string>
+
 </resources>
