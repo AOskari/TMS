@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.applandeo.materialcalendarview.EventDay;
@@ -25,6 +26,10 @@ import java.util.List;
 
 import static com.example.androidproject.AteriaLista.haeLista;
 
+/**
+ * Luo näkymän, joka näyttää kaikki valitun päivän ateriat sekä
+ * summan niiden ravintoaineista ja kaloreista.
+ */
 public class AteriatActivity extends AppCompatActivity {
 
     private String ateriatJson;
@@ -39,6 +44,10 @@ public class AteriatActivity extends AppCompatActivity {
     private int paiva;
     private int kuukausi;
     private int vuosi;
+
+    private ProgressBar proteiiniPalkki;
+    private ProgressBar hhPalkki;
+    private ProgressBar rasvaPalkki;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +71,16 @@ public class AteriatActivity extends AppCompatActivity {
         kuukausi = pref.getInt("kuukausi", 0);
         vuosi = pref.getInt("vuosi", 0);
 
+        proteiiniPalkki = findViewById(R.id.proteiini_palkki);
+        hhPalkki = findViewById(R.id.hh_palkki);
+        rasvaPalkki = findViewById(R.id.rasva_palkki);
+
+        proteiiniPalkki.setMax(100);
+        hhPalkki.setMax(100);
+        rasvaPalkki.setMax(100);
+
+
+
         paivamaara = findViewById(R.id.paivamaara);
         lv = findViewById(R.id.aterialista);
 
@@ -73,6 +92,11 @@ public class AteriatActivity extends AppCompatActivity {
             editor.commit();
             Log.d("aterialista", ateriatJson);
         }
+
+        AteriaLista lista = gson.fromJson(ateriatJson, AteriaLista.class);
+        proteiiniPalkki.setProgress(lista.haeProsentit(paiva, kuukausi, vuosi).get(0));
+        hhPalkki.setProgress(lista.haeProsentit(paiva, kuukausi, vuosi).get(1));
+        rasvaPalkki.setProgress(lista.haeProsentit(paiva, kuukausi, vuosi).get(2));
 
         ImageButton nappi = findViewById(R.id.paivamaaraNappi);
         nappi.setOnClickListener(new View.OnClickListener() {

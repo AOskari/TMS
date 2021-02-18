@@ -27,7 +27,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ateriat_alusta2"
         android:layout_width="0dp"
-        android:layout_height="140dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -42,59 +42,37 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/proteiini_palkki"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar2"
+            app:layout_constraintBottom_toTopOf="@+id/hh_palkki"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
-            android:id="@+id/progressBar2"
+            android:id="@+id/hh_palkki"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar3"
+            app:layout_constraintBottom_toTopOf="@+id/rasva_palkki"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar" />
+            app:layout_constraintTop_toBottomOf="@+id/proteiini_palkki" />
 
         <ProgressBar
-            android:id="@+id/progressBar3"
+            android:id="@+id/rasva_palkki"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar2" />
-
-        <ProgressBar
-            android:id="@+id/progressBar4"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressBar3" />
-
-        <TextView
-            android:id="@+id/ateriat_kalorit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:text="Kalorit"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-            app:layout_constraintStart_toEndOf="@+id/progressBar"
-            app:layout_constraintTop_toTopOf="@+id/progressBar" />
+            app:layout_constraintTop_toBottomOf="@+id/hh_palkki" />
 
         <TextView
             android:id="@+id/ateriat_proteiini"
@@ -102,12 +80,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
             android:text="Proteiini"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBar2"
-            app:layout_constraintStart_toEndOf="@+id/progressBar2"
-            app:layout_constraintTop_toTopOf="@+id/progressBar2"
-            app:layout_constraintVertical_bias="0.842" />
+            app:layout_constraintBottom_toBottomOf="@+id/proteiini_palkki"
+            app:layout_constraintStart_toEndOf="@+id/proteiini_palkki"
+            app:layout_constraintTop_toTopOf="@+id/proteiini_palkki" />
 
         <TextView
             android:id="@+id/ateriat_hiilarit"
@@ -116,9 +92,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:text="Hiilihydraatit"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBar3"
-            app:layout_constraintStart_toEndOf="@+id/progressBar3"
-            app:layout_constraintTop_toTopOf="@+id/progressBar3" />
+            app:layout_constraintBottom_toBottomOf="@+id/hh_palkki"
+            app:layout_constraintStart_toEndOf="@+id/hh_palkki"
+            app:layout_constraintTop_toTopOf="@+id/hh_palkki" />
 
         <TextView
             android:id="@+id/ateriat_rasvat"
@@ -127,15 +103,15 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:text="Rasva"
-            app:layout_constraintBottom_toBottomOf="@+id/progressBar4"
-            app:layout_constraintStart_toEndOf="@+id/progressBar4"
-            app:layout_constraintTop_toTopOf="@+id/progressBar4" />
+            app:layout_constraintBottom_toBottomOf="@+id/rasva_palkki"
+            app:layout_constraintStart_toEndOf="@+id/rasva_palkki"
+            app:layout_constraintTop_toTopOf="@+id/rasva_palkki" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -182,6 +158,29 @@
             app:srcCompat="@drawable/add"
             app:tint="@color/primaryColor"
             tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/ateriat_kalorimaara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="0"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/ateriat_kcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="kcal"
+            app:layout_constraintBottom_toBottomOf="@+id/ateriat_kalorimaara"
+            app:layout_constraintStart_toEndOf="@+id/ateriat_kalorimaara"
+            app:layout_constraintTop_toTopOf="@+id/ateriat_kalorimaara" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

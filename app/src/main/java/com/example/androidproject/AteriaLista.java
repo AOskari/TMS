@@ -5,7 +5,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -109,6 +111,29 @@ public class AteriaLista {
             kalorit += palautettavat.get(i).haeRavinto().get(4);
         }
         return kalorit;
+    }
+
+    public List<Integer> haeProsentit(int paiva, int kuukausi, int vuosi) {
+        DecimalFormat df = new DecimalFormat("#.#");
+        List<Ateria> lista = haePaivamaaralla(paiva, kuukausi, vuosi);
+        double proteiini = 0;
+        double hh = 0;
+        double rasva = 0;
+
+        for (int i = 0; i < lista.size(); i++) {
+            proteiini += lista.get(i).haeRavinto().get(1);
+            hh += lista.get(i).haeRavinto().get(2);
+            rasva += lista.get(i).haeRavinto().get(3);
+        }
+
+        double yhteensa = proteiini + rasva + hh;
+
+        float proteiiniPros = (float) (proteiini / yhteensa) * 100;
+        float hhPros = (float)(hh / yhteensa) * 100;
+        float rasvaPros = (float) (rasva / yhteensa) * 100;
+
+        List<Integer> prosentit = Arrays.asList(Math.round(proteiiniPros), Math.round(hhPros), Math.round(rasvaPros));
+        return prosentit;
     }
 
     public int seuraavaId(){
