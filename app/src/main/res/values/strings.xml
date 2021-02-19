@@ -35,8 +35,8 @@
     <string name="rasva">Rasva</string>
     <string name="tyydyttynyt_rasva">Tyydyttynyt rasva</string>
     <string name="joista_sokereita">Joista sokereita</string>
-    <string name="suola">Suola</string>
-    <string name="kuitu">Kuitu</string>
+    <string name="suola">Suolaa</string>
+    <string name="kuitu">Kuituu</string>
     <string name="aloitus_gramma">0g</string>
 
     <!-- Muut merkkijonot -->
@@ -44,6 +44,10 @@
     <string name="yhtakuin">=</string>
     <string name="poistu">Poistu</string>
     <string name="haku_nappi">Haku</string>
+    <string name="ateria_nimi">Nimi...</string>
+    <string name="tallenna_ateria">Tallenna ateria</string>
+    <string name="aseta_aika">Aseta aika</string>
+    <string name="kalenteri_nappi">Näytä kalenteri</string>
     <string name="hae_elintarvikkeita">Hae elintarvikkeita...</string>
 
 </resources>

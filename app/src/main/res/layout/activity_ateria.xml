@@ -7,134 +7,6 @@
     tools:context=".aktiviteetit.AteriaActivity">
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_hae"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:onClick="hae"
-        android:src="@drawable/add"
-        app:backgroundTint="#880BA9C9"
-        app:elevation="500dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/alusta2"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/alusta"
-        android:elevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/ateria"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alusta3">
-
-        <TextView
-            android:id="@+id/suola"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:text="Suolaa"
-            app:layout_constraintBottom_toTopOf="@+id/kuitu"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tyydyttynyt_rasva" />
-
-        <TextView
-            android:id="@+id/tyydyttynyt_rasva"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:text="Tyydyttynyt rasva"
-            app:layout_constraintBottom_toTopOf="@+id/suola"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sokeri" />
-
-        <TextView
-            android:id="@+id/rasva_maara"
-            android:layout_width="126dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:gravity="right"
-            android:text="0g"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tyydyttynyt_rasva"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/suola_maara"
-            android:layout_width="126dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:gravity="right"
-            android:text="0g"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/suola"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/kuitu_maara"
-            android:layout_width="126dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:gravity="right"
-            android:text="0g"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/kuitu"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/kuitu"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:text="Kuitua"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/suola" />
-
-        <TextView
-            android:id="@+id/sokeri_maara"
-            android:layout_width="126dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:gravity="right"
-            android:text="0g"
-            android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/sokeri"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/sokeri"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:text="Josta sokereita"
-            app:layout_constraintBottom_toTopOf="@+id/tyydyttynyt_rasva"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/alusta1"
         android:layout_width="match_parent"
@@ -151,7 +23,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="lollipop">
 
         <EditText
             android:id="@+id/aterianimi"
@@ -162,7 +35,8 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:hint="Nimi..."
+            android:hint="@string/ateria_nimi"
+            android:importantForAutofill="no"
             android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/piiras"
             app:layout_constraintEnd_toStartOf="@+id/paivays"
@@ -176,7 +50,7 @@
             android:layout_height="18dp"
             android:layout_marginEnd="4dp"
             android:layout_marginRight="4dp"
-            android:gravity="right"
+            android:gravity="end"
             app:layout_constraintBottom_toBottomOf="@+id/kalenteri_nappi"
             app:layout_constraintEnd_toStartOf="@+id/kalenteri_nappi"
             app:layout_constraintHorizontal_bias="0.5"
@@ -191,6 +65,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:background="#00000000"
+            android:contentDescription="@string/kalenteri_nappi"
             android:tint="@color/primaryColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -205,6 +80,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:background="#00000000"
+            android:contentDescription="@string/tallenna_ateria"
             android:onClick="tallennaAteria"
             android:tint="@color/primaryColor"
             app:layout_constraintEnd_toStartOf="@+id/aterianimi"
@@ -294,6 +170,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:backgroundTint="#00000000"
+            android:contentDescription="@string/aseta_aika"
             android:onClick="asetaAika"
             android:tint="@color/primaryColor"
             app:layout_constraintEnd_toEndOf="parent"
@@ -307,17 +184,17 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginRight="4dp"
-            android:gravity="right"
+            android:gravity="end"
             app:layout_constraintBottom_toBottomOf="@+id/timebutton"
             app:layout_constraintEnd_toStartOf="@+id/timebutton"
             app:layout_constraintTop_toTopOf="@+id/timebutton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ListView
-        android:id="@+id/ateria"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/alusta2"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
@@ -325,14 +202,109 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/alusta"
         android:elevation="10dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ateria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alusta2">
+        app:layout_constraintTop_toBottomOf="@+id/alusta3"
+        tools:targetApi="lollipop">
 
-    </ListView>
+        <TextView
+            android:id="@+id/suola"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"
+            android:text="@string/suola"
+            app:layout_constraintBottom_toTopOf="@+id/kuitu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tyydyttynyt_rasva" />
+
+        <TextView
+            android:id="@+id/tyydyttynyt_rasva"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"
+            android:text="@string/tyydyttynyt_rasva"
+            app:layout_constraintBottom_toTopOf="@+id/suola"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sokeri" />
+
+        <TextView
+            android:id="@+id/rasva_maara"
+            android:layout_width="126dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="end"
+            android:text="@string/aloitus_gramma"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tyydyttynyt_rasva"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/suola_maara"
+            android:layout_width="126dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="end"
+            android:text="@string/aloitus_gramma"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/suola"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/kuitu_maara"
+            android:layout_width="126dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="end"
+            android:text="@string/aloitus_gramma"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/kuitu"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/kuitu"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"
+            android:text="@string/kuitu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/suola" />
+
+        <TextView
+            android:id="@+id/sokeri_maara"
+            android:layout_width="126dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="end"
+            android:text="@string/aloitus_gramma"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/sokeri"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/sokeri"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"
+            android:text="@string/joista_sokereita"
+            app:layout_constraintBottom_toTopOf="@+id/tyydyttynyt_rasva"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/alusta3"
@@ -349,7 +321,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/alusta1">
+        app:layout_constraintTop_toBottomOf="@+id/alusta1"
+        tools:targetApi="lollipop">
 
         <TextView
             android:id="@+id/textView"
@@ -443,6 +416,43 @@
             app:layout_constraintStart_toEndOf="@+id/ateria_kalorit"
             app:layout_constraintTop_toTopOf="@+id/yhteensa_kalorit" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ListView
+        android:id="@+id/ateria"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/alusta"
+        android:elevation="10dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alusta2"
+        tools:targetApi="lollipop">
+
+    </ListView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_hae"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/haku_nappi"
+        android:focusable="true"
+        android:onClick="hae"
+        android:src="@drawable/add"
+        app:backgroundTint="#880BA9C9"
+        app:elevation="500dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
