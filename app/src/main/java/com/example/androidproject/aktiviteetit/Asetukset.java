@@ -2,6 +2,8 @@ package com.example.androidproject.aktiviteetit;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,13 +20,15 @@ import com.example.androidproject.R;
 
 import java.util.ArrayList;
 import java.util.List;
-// implements OnItemSelectedListener
+
 public class Asetukset extends AppCompatActivity {
     public TextView yksikko1, yksikko2, paino, pituus, tav1, tav2;
     public Spinner tavoite1, tavoite2;
     public Button tallenna;
     public EditText nimi;
-    //String[] valinta1, valinta2;
+    public SharedPreferences asetukset;
+    public SharedPreferences.Editor tiedot;
+
 
 
     @Override
@@ -44,8 +48,14 @@ public class Asetukset extends AppCompatActivity {
         yksikko1 = findViewById(R.id.yksikko1);
         yksikko2 = findViewById(R.id.yksikko2);
 
-        //tavoite1.setOnItemSelectedListener(this);
-        //tavoite2.setOnItemSelectedListener(this);
+        asetukset = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
+
+        String kayttaja = asetukset.getString("Käyttäjä", "");
+        int annaPaino = asetukset.getInt("Paino", 0);
+        int annaPituus = asetukset.getInt("Paino", 0);
+        String naytaTav1 = asetukset.getString("Tavoite1", "");
+        String naytaTav2 = asetukset.getString("Tavoite2", "");
+
 
         List<String> valinta = new ArrayList<String>();
         valinta.add("Valinta");
@@ -57,7 +67,6 @@ public class Asetukset extends AppCompatActivity {
         val.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tavoite1.setAdapter(val);
         tavoite2.setAdapter(val);
-        //naytaYksikko();
 
         tavoite1.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -99,5 +108,21 @@ public class Asetukset extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    public void tallenna(View v){
+        String kuka = nimi.getText().toString();
+        int kg = Integer.parseInt(paino.getText().toString());
+        int cm = Integer.parseInt(pituus.getText().toString());
+        String naytaT1 = tavoite1.getSelectedItem().toString() + "," + tav1.getText()+ "," + yksikko1.getText();
+        String naytaT2 = tavoite2.getSelectedItem().toString() + "," + tav2.getText() + "," + yksikko2.getText();
+
+        tiedot = asetukset.edit();
+        tiedot.putString("Käyttäjä", kuka);
+        tiedot.putInt("Paino", kg);
+        tiedot.putInt("Pituus", cm);
+        tiedot.putString("Tavoite1", naytaT1);
+        tiedot.putString("Tavoite2", naytaT2);
+        tiedot.commit();
     }
 }
