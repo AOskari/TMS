@@ -1,3 +1,3 @@
-# Android-project
+# TMS (Tiedä Mitä Syöt)
 
-This is a school project for a Mobile app development course, mainly using Java. The project name will be determined later.
+Tämä on kouluprojekti Mobiilit Terveyssovellukset -kurssille. Projektin päätavoitteena on harjoitella olio-ohjelmointia, käyttäen Java ohjelmointikieltä ja Android studiota. 
