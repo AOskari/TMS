@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">androidProject</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">TMS</string>
     <string name="aseta">Asetukset</string>
     <string name="tieto1">Nimi:</string>
     <string name="tieto2">Paino:</string>
@@ -22,18 +20,34 @@
     <string name="nykyinen_kalorit">Päivä</string>
     <string name="ateria_kalorit">Ateria</string>
     <string name="yhteensa_kalorit">Yhteensä</string>
-    <string name="plus">+</string>
-    <string name="yhtakuin">=</string>
     <string name="proteiini">Proteiini</string>
     <string name="hiilihydraatti">Hiilihydraatti</string>
     <string name="rasva">Rasva</string>
+    <string name="kalorit">kcal</string>
     <string name="tyydyttynyt_rasva">Tyydyttynyt rasva</string>
     <string name="joista_sokereita">Joista sokereita</string>
-    <string name="suola">Suola</string>
-    <string name="kuitu">Kuitu</string>
+    <string name="suola">Suolaa</string>
+    <string name="kuitu">Kuituu</string>
     <string name="aloitus_gramma">0g</string>
+    <string name="proteiini_palkkiteksti">Proteiini / 0g</string>
+    <string name="hh_palkkiteksti">Hiilihydraatit / 0g</string>
+    <string name="rasva_palkkiteksti">Rasva / 0g</string>
+    <string name="aloitus_kalori">0</string>
 
     <!-- Muut merkkijonot -->
+    <string name="plus">+</string>
+    <string name="miinus">-</string>
+    <string name="yhtakuin">=</string>
     <string name="poistu">Poistu</string>
-
+    <string name="haku_nappi">Haku</string>
+    <string name="ateria_nimi">Nimi...</string>
+    <string name="tallenna_ateria">Tallenna ateria</string>
+    <string name="aseta_aika">Aseta aika</string>
+    <string name="kalenteri_nappi">Näytä kalenteri</string>
+    <string name="hae_elintarvikkeita">Hae elintarvikkeita...</string>
+    <string name="luo_ateria">Luo ateria</string>
+    <string name="päivän_saanti">Päivän saanti</string>
+    <string name="info">Info</string>
+    <string name="muokkaa">Muokkaa</string>
+    <string name="poista">Poista</string>
 </resources>

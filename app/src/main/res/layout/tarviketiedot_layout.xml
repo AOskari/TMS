@@ -20,14 +20,14 @@
         android:id="@+id/tarvike_tiedot"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:backgroundTint="#00000000"
+        android:background="#00000000"
+        android:contentDescription="@string/info"
         android:tint="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tiedot_poista"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/info"
-        tools:ignore="VectorDrawableCompat"
-        android:contentDescription="TODO" />
+        tools:ignore="VectorDrawableCompat" />
 
     <ImageButton
         android:id="@+id/tiedot_poista"
@@ -35,7 +35,8 @@
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:backgroundTint="#00000000"
+        android:background="#00000000"
+        android:contentDescription="@string/poista"
         android:tint="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

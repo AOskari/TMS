@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -39,11 +42,13 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case R.id.suunnittele:
                             startActivity(new Intent(MainActivity.this, AteriatActivity.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.d("Menu", "Suunnittele painettu");
                             break;
                         case R.id.profiili:
                             startActivity(new Intent(MainActivity.this, Asetukset.class));
-                            Log.i("Testi", "Profiilia painettu");
-                            //TODO: luo koodi, joka menee profiili-ikkunaan
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.i("Menu", "Profiili painettu");
                             break;
                     }
                     return false;
