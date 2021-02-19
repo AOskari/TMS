@@ -76,18 +76,7 @@ public class AteriatActivity extends AppCompatActivity {
         kuukausi = pref.getInt("kuukausi", 0);
         vuosi = pref.getInt("vuosi", 0);
 
-        proteiiniPalkki = findViewById(R.id.proteiini_palkki);
-        hhPalkki = findViewById(R.id.hh_palkki);
-        rasvaPalkki = findViewById(R.id.rasva_palkki);
-        kalorimaara = findViewById(R.id.ateriat_kalorimaara);
 
-        proteiiniMaara = findViewById(R.id.proteiini_palkkiteksti);
-        hhMaara = findViewById(R.id.hh_palkkiteskti);
-        rasvaMaara = findViewById(R.id.rasva_palkkiteksti);
-
-        proteiiniPalkki.setMax(100);
-        hhPalkki.setMax(100);
-        rasvaPalkki.setMax(100);
 
         paivamaara = findViewById(R.id.paivamaara);
         lv = findViewById(R.id.aterialista);
@@ -101,6 +90,22 @@ public class AteriatActivity extends AppCompatActivity {
             Log.d("aterialista", ateriatJson);
         }
 
+        /**
+         * Asetetaan alustavat tiedot näkymän ravintoaineiden ProgressBar:eille ja TextView:eille.
+         * Lopuksi asetetaan onClick kuuntelija päivämääränapille, joka avaa Kalenteri.
+         */
+        proteiiniPalkki = findViewById(R.id.proteiini_palkki);
+        hhPalkki = findViewById(R.id.hh_palkki);
+        rasvaPalkki = findViewById(R.id.rasva_palkki);
+        kalorimaara = findViewById(R.id.ateriat_kalorimaara);
+
+        proteiiniMaara = findViewById(R.id.proteiini_palkkiteksti);
+        hhMaara = findViewById(R.id.hh_palkkiteskti);
+        rasvaMaara = findViewById(R.id.rasva_palkkiteksti);
+        proteiiniPalkki.setMax(100);
+        hhPalkki.setMax(100);
+        rasvaPalkki.setMax(100);
+
        asetaRavintoarvot();
         ImageButton nappi = findViewById(R.id.paivamaaraNappi);
         nappi.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +117,9 @@ public class AteriatActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Asetetaan takaisin-painikkeelle fade-animaatio.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -137,6 +145,9 @@ public class AteriatActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Asettaa ateria-ListViewin sisällön.
+     */
     public void naytaAteriat() {
         AteriatAdapter adapter = new AteriatAdapter(this, pref, paiva, kuukausi, vuosi);
         lv.setAdapter(adapter);

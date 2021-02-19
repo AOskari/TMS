@@ -33,11 +33,16 @@
     <string name="proteiini">Proteiini</string>
     <string name="hiilihydraatti">Hiilihydraatti</string>
     <string name="rasva">Rasva</string>
+    <string name="kalorit">kcal</string>
     <string name="tyydyttynyt_rasva">Tyydyttynyt rasva</string>
     <string name="joista_sokereita">Joista sokereita</string>
     <string name="suola">Suolaa</string>
     <string name="kuitu">Kuituu</string>
     <string name="aloitus_gramma">0g</string>
+    <string name="proteiini_palkkiteksti">Proteiini / 0g</string>
+    <string name="hh_palkkiteksti">Hiilihydraatit / 0g</string>
+    <string name="rasva_palkkiteksti">Rasva / 0g</string>
+    <string name="aloitus_kalori">0</string>
 
     <!-- Muut merkkijonot -->
     <string name="plus">+</string>
@@ -49,5 +54,7 @@
     <string name="aseta_aika">Aseta aika</string>
     <string name="kalenteri_nappi">Näytä kalenteri</string>
     <string name="hae_elintarvikkeita">Hae elintarvikkeita...</string>
+    <string name="luo_ateria">Luo ateria</string>
+    <string name="päivän_saanti">Päivän saanti</string>
 
 </resources>
