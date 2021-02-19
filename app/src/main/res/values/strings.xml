@@ -46,6 +46,7 @@
 
     <!-- Muut merkkijonot -->
     <string name="plus">+</string>
+    <string name="miinus">-</string>
     <string name="yhtakuin">=</string>
     <string name="poistu">Poistu</string>
     <string name="haku_nappi">Haku</string>
@@ -56,5 +57,7 @@
     <string name="hae_elintarvikkeita">Hae elintarvikkeita...</string>
     <string name="luo_ateria">Luo ateria</string>
     <string name="päivän_saanti">Päivän saanti</string>
-
+    <string name="info">Info</string>
+    <string name="muokkaa">Muokkaa</string>
+    <string name="poista">Poista</string>
 </resources>

@@ -146,7 +146,7 @@ public class HakuActivity extends AppCompatActivity {
 
         /**
          * Tehdään API-kutsu ainoastaan jos hakukentässä on tekstiä.
-          */
+         */
         if (input.getText().toString().length() > 0) {
             requestQueue.add(jsonArrayRequest);
             Log.d("checking info", foodInfo.toString());

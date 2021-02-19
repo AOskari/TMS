@@ -43,6 +43,25 @@
         app:srcCompat="@drawable/search"
         tools:ignore="VectorDrawableCompat" />
 
+    <TextView
+        android:id="@+id/haku_ilmoitus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/alusta"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/secondaryColor"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/list_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/elintarvike_haku" />
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="0dp"
@@ -70,24 +89,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/list_view" />
-
-    <TextView
-        android:id="@+id/haku_ilmoitus"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:background="@drawable/alusta"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/secondaryColor"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/list_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/elintarvike_haku" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
