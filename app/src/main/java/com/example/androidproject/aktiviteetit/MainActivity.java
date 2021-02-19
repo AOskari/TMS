@@ -3,6 +3,7 @@ package com.example.androidproject.aktiviteetit;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     protected void onResume() {
 
         super.onResume();
@@ -45,13 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
         String jokuvitunhienolaskujonkateenmyöhemmin = "";
 
-        String tiedot1_lista[] = tiedot1.split(",");
+        String[] tiedot1_lista = tiedot1.split(",");
         String tiedot1_kalorit = tiedot1_lista[1];
 
         //Käyttäjän nimi.
         String nimi = sharedPreferences.getString("Käyttäjä", "");
 
-        //Varmistaminen että nimessä on aina iso alkukirjain laatikossa näytettäessä.
+        /*
+        Varmistaminen että nimessä on aina iso alkukirjain laatikossa näytettäessä,
+         vaikka käyttäjä kirjoittaisi nimensä pienellä.
+        */
         String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
 
         TextView nimitextview = findViewById(R.id.nimiteksti);
