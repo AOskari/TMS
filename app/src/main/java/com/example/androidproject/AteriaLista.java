@@ -14,10 +14,12 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- *  Singleton jota käytetään aterioiden listaamiseen ja SharedPreferencesiin tallentamiseen..
+ *  Singleton jota käytetään aterioiden listaamiseen ja SharedPreferencesiin tallentamiseen.
  */
 public class AteriaLista {
     private List<Ateria> lista;
+    private List<Ateria> syodytAteriat;
+
     private static final AteriaLista haeLista = new AteriaLista();
     private int id;
 
@@ -27,6 +29,7 @@ public class AteriaLista {
 
     private AteriaLista() {
         lista = new ArrayList<>();
+        syodytAteriat = new ArrayList<>();
         id = 0;
     }
 
@@ -37,15 +40,8 @@ public class AteriaLista {
     /**
      * Hakee AteriaListalta ateriat jotka sisältävät valitun päivämäärän, jonka jälkeen
      * järjestää listan kellonajan mukaan.
-     *
-     * @param paiva valittu päivä
-     * @param kuukausi valittu kuukausi
-     * @param vuosi valittu vuosi
-     * @return palauttaa listan.
      */
     public List<Ateria> haePaivamaaralla(int paiva, int kuukausi, int vuosi) {
-        //TODO: Luo toiminnallisuus, joka palauttaa kaikki ateriat haetulta päivämäärältä.
-
         List<Ateria> palautettavat = new ArrayList<>();
 
         for (int i = 0; i < lista.size(); i++) {
@@ -53,33 +49,23 @@ public class AteriaLista {
             if (paivamaara.contains(paiva) && paivamaara.contains(kuukausi) && paivamaara.contains(vuosi)) {
                 palautettavat.add(lista.get(i));
             }
-
-            // Ensin järjestetään ateriat tunnin perusteella,
-            Collections.sort(palautettavat, new Comparator<Ateria>() {
-                @Override
-                public int compare(Ateria o1, Ateria o2) {
-                    if (o1.haeAika().get(0) > o2.haeAika().get(0))
-                        return 1;
-                    if (o1.haeAika().get(0) < o2.haeAika().get(0))
-                        return -1;
-                    return 0;
-                }
-            });
-
-            // jonka jälkeen järjestetään minuutin perusteella.
-            Collections.sort(palautettavat, new Comparator<Ateria>() {
-                @Override
-                public int compare(Ateria o1, Ateria o2) {
-                    if (o1.haeAika().get(0) == o2.haeAika().get(0) && o1.haeAika().get(1) > o2.haeAika().get(1))
-                        return 1;
-                    if (o1.haeAika().get(0) == o2.haeAika().get(0) && o1.haeAika().get(1) < o2.haeAika().get(1))
-                        return -1;
-                    return 0;
-                }
-            });
         }
+        return jarjesta(palautettavat);
+    }
 
-        return palautettavat;
+    /**
+     * Palauttaa syödyt ateriat kellonaikajärjestyksessä ja päivämäärän perusteella.
+     */
+    public List<Ateria> haeSyodytPaivamaaralla(int paiva, int kuukausi, int vuosi) {
+        List<Ateria> palautettavat = new ArrayList<>();
+
+        for (int i = 0; i < syodytAteriat.size(); i++) {
+            List<Integer> paivamaara = syodytAteriat.get(i).haePaivamaara();
+            if (paivamaara.contains(paiva) && paivamaara.contains(kuukausi) && paivamaara.contains(vuosi)) {
+                palautettavat.add(syodytAteriat.get(i));
+            }
+        }
+        return jarjesta(palautettavat);
     }
 
     /**
@@ -103,6 +89,44 @@ public class AteriaLista {
         }
     }
 
+    /**
+     * Siirtää valitun aterian syodytAteriat-listaan.
+     * @param ateria valittu ateria.
+     */
+    public void asetaSyodyksi(Ateria ateria) {
+        for (int i = 0; i < lista.size(); i++) {
+            if (lista.get(i).haeId() == ateria.haeId()) {
+                syodytAteriat.add(ateria);
+                lista.remove(i);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Palauttaa syötyjen aterioiden ravintoarvot valitun päivämäärän perusteella.
+     */
+    public List<Double> haeSyodytRavintoarvot(int paiva, int kuukausi, int vuosi) {
+        double kalorit = 0;
+        double proteiini = 0;
+        double hh = 0;
+        double rasva = 0;
+
+        for (int i = 0; i < syodytAteriat.size(); i++) {
+            kalorit += syodytAteriat.get(i).haeRavinto().get(4);
+            proteiini += syodytAteriat.get(i).haeRavinto().get(1);
+            hh += syodytAteriat.get(i).haeRavinto().get(2);
+            rasva += syodytAteriat.get(i).haeRavinto().get(3);
+        }
+
+        List<Double> arvot = Arrays.asList(kalorit, proteiini, hh, rasva);
+        return arvot;
+    }
+
+
+    /**
+     * Palauttaa päivän aterioiden yhteiskalorimäärän valitun päivämäärän perusteella.
+     */
     public int haeKalorit(int paiva, int kuukausi, int vuosi) {
         List<Ateria> palautettavat = haePaivamaaralla(paiva, kuukausi, vuosi);
         int kalorit = 0;
@@ -113,6 +137,9 @@ public class AteriaLista {
         return kalorit;
     }
 
+    /**
+     * Palauttaa syömättömien aterioiden yhteisravintoarvot valitun päivämäärän perusteella.
+     */
     public List<Double> haeRavintoarvot(int paiva, int kuukausi, int vuosi) {
         List<Ateria> lista = haePaivamaaralla(paiva, kuukausi, vuosi);
 
@@ -130,6 +157,9 @@ public class AteriaLista {
         return arvot;
     }
 
+    /**
+     * Palauttaa proteiinin, hiilihydraattien ja rasvan määrän prosentteina valitun päivämäärän perusteella.
+     */
     public List<Integer> haeProsentit(int paiva, int kuukausi, int vuosi) {
         DecimalFormat df = new DecimalFormat("#.#");
         List<Ateria> lista = haePaivamaaralla(paiva, kuukausi, vuosi);
@@ -153,12 +183,57 @@ public class AteriaLista {
         return prosentit;
     }
 
+    /**
+     * Palauttaa seuraavan vapaan id:n.
+     */
     public int seuraavaId(){
         id++;
         return id;
     }
 
+    /**
+     * Palauttaa syömättömien aterioiden listan.
+     */
     public List<Ateria> tulostaAteriat() {
         return this.lista;
+    }
+
+
+
+    // =================================================================== //
+    // ========================= Private-metodit ========================= //
+    // =================================================================== //
+
+    /**
+     * Järjestää ja palauttaa annetun listan.
+     * @param ateria vaadittu lista.
+     * @return Palauttaa järjestetyn listan.
+     */
+    private List<Ateria> jarjesta(List<Ateria> ateria) {
+        List<Ateria> palautettavat = ateria;
+
+        Collections.sort(palautettavat, new Comparator<Ateria>() {
+            @Override
+            public int compare(Ateria o1, Ateria o2) {
+                if (o1.haeAika().get(0) > o2.haeAika().get(0))
+                    return 1;
+                if (o1.haeAika().get(0) < o2.haeAika().get(0))
+                    return -1;
+                return 0;
+            }
+        });
+
+        // jonka jälkeen järjestetään minuutin perusteella.
+        Collections.sort(palautettavat, new Comparator<Ateria>() {
+            @Override
+            public int compare(Ateria o1, Ateria o2) {
+                if (o1.haeAika().get(0) == o2.haeAika().get(0) && o1.haeAika().get(1) > o2.haeAika().get(1))
+                    return 1;
+                if (o1.haeAika().get(0) == o2.haeAika().get(0) && o1.haeAika().get(1) < o2.haeAika().get(1))
+                    return -1;
+                return 0;
+            }
+        });
+        return palautettavat;
     }
 }

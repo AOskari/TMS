@@ -36,7 +36,6 @@ public class Asetukset extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asetukset);
 
-
         tavoite1 = findViewById(R.id.tavoite1);
         tavoite2 = findViewById(R.id.tavoite2);
         tallenna = findViewById(R.id.tallennus);
