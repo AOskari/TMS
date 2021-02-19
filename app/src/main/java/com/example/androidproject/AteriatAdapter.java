@@ -135,7 +135,7 @@ public class AteriatAdapter extends BaseAdapter {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setCancelable(true);
                 builder.setMessage("Aseta syödyksi " + aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeNimi() + "?");
-                builder.setPositiveButton("Poista",
+                builder.setPositiveButton("Syöty",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
