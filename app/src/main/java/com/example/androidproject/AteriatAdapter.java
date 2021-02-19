@@ -78,6 +78,7 @@ public class AteriatAdapter extends BaseAdapter {
 
         ImageButton poista = convertView.findViewById(R.id.poista);
         ImageButton muokkaa = convertView.findViewById(R.id.muokkaa);
+        ImageButton syoty = convertView.findViewById(R.id.syoty);
 
         poista.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,9 +95,7 @@ public class AteriatAdapter extends BaseAdapter {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Poistetaan valittu ateria, ja tallennetaan muutokset SharedPreferencesiin.
                                 aterialista.poistaAteria(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeId());
-                                listaJson = gson.toJson(aterialista);
-                                edit.putString("aterialista", listaJson);
-                                edit.commit();
+                                tallennaLista();
 
                                 Log.d("aterialista", "" + aterialista.tulostaAteriat());
 
@@ -129,9 +128,44 @@ public class AteriatAdapter extends BaseAdapter {
             }
         });
 
+        syoty.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setCancelable(true);
+                builder.setMessage("Aseta syödyksi " + aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeNimi() + "?");
+                builder.setPositiveButton("Syöty",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                aterialista.asetaSyodyksi(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
+                                tallennaLista();
+                                ((AteriatActivity)context).naytaAteriat();
+                                Log.d("Asetettu syödyksi", aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi) + "");
+                            }
+                        });
+
+                builder.setNegativeButton("Peruuta", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
         aterianNimi.setText(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeNimi());
         aika.setText(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).aikaString());
 
         return convertView;
+    }
+
+    private void tallennaLista() {
+        listaJson = gson.toJson(aterialista);
+        aterialista = gson.fromJson(listaJson, AteriaLista.class);
+        edit.putString("aterialista", listaJson);
+        edit.commit();
     }
 }

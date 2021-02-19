@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/kellonaika" />
 
     <ImageButton
-        android:id="@+id/info"
+        android:id="@+id/syoty"
         android:layout_width="37dp"
         android:layout_height="37dp"
         android:layout_marginTop="16dp"
@@ -43,7 +43,7 @@
         android:tint="@color/primaryColor"
         app:layout_constraintEnd_toStartOf="@+id/muokkaa"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/info"
+        app:srcCompat="@drawable/check"
         tools:ignore="VectorDrawableCompat" />
 
     <ImageButton

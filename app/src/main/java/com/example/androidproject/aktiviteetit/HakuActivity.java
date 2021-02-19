@@ -77,6 +77,9 @@ public class HakuActivity extends AppCompatActivity {
         ateria = gson.fromJson(ateriaJson, Ateria.class);
     }
 
+    /**
+     * Asetetaan takaisin-painikkeelle fade-animaatio.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -89,6 +92,7 @@ public class HakuActivity extends AppCompatActivity {
     public void getInfo(View v) {
         /**
          * Asetetaan latausanimaatio näkyville Requestin ajaksi, ja luodaan uusi Request Volley:n avulla.
+         * ohjeet API-kutsun tekemiseen: https://developer.android.com/training/volley/simple
          */
         latausKuvake.setVisibility(v.VISIBLE);
         String url = "https://fineli.fi/fineli/api/v1/foods?q=" + input.getText().toString();
