@@ -6,23 +6,95 @@
     android:layout_height="match_parent"
     tools:context=".aktiviteetit.AteriatActivity">
 
-    <ListView
-        android:id="@+id/aterialista"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ateriat_alusta1"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/alusta"
         android:elevation="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ateriat_alusta2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ateriat_alusta2" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="lollipop">
+
+        <ImageButton
+            android:id="@+id/paivamaaraNappi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:backgroundTint="#00000000"
+            android:contentDescription="@string/kalenteri_nappi"
+            android:tint="@color/primaryColor"
+            app:layout_constraintBottom_toBottomOf="@+id/luo_ateria"
+            app:layout_constraintEnd_toStartOf="@+id/luo_ateria"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/calendar"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/paivamaara"
+            android:layout_width="98dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            app:layout_constraintBottom_toBottomOf="@+id/paivamaaraNappi"
+            app:layout_constraintEnd_toStartOf="@+id/paivamaaraNappi"
+            app:layout_constraintTop_toTopOf="@+id/paivamaaraNappi" />
+
+        <ImageView
+            android:id="@+id/luo_ateria"
+            android:layout_width="45dp"
+            android:layout_height="47dp"
+            android:contentDescription="@string/luo_ateria"
+            android:onClick="luoAteria"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/add"
+            app:tint="@color/primaryColor"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/ateriat_kalorimaara"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/aloitus_kalori"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/ateriat_kcal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/kalorit"
+            app:layout_constraintBottom_toBottomOf="@+id/ateriat_kalorimaara"
+            app:layout_constraintStart_toEndOf="@+id/ateriat_kalorimaara"
+            app:layout_constraintTop_toTopOf="@+id/ateriat_kalorimaara" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/päivän_saanti"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            app:layout_constraintBottom_toTopOf="@+id/ateriat_kalorimaara"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/paivamaara" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ateriat_alusta2"
@@ -39,7 +111,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+        app:layout_constraintTop_toBottomOf="@+id/ateriat_alusta1"
+        tools:targetApi="lollipop">
 
         <FrameLayout
             android:id="@+id/frameLayout"
@@ -69,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Proteiini / 0g"
+                android:text="@string/proteiini_palkkiteksti"
                 android:textColor="@color/secondaryColor"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -101,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Hiilihydraatit / 0g"
+                android:text="@string/hh_palkkiteksti"
                 android:textColor="@color/secondaryColor"
                 android:textStyle="bold" />
         </FrameLayout>
@@ -133,98 +206,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Rasva / 0g"
+                android:text="@string/rasva_palkkiteksti"
                 android:textColor="@color/secondaryColor"
                 android:textStyle="bold" />
         </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
+    <ListView
+        android:id="@+id/aterialista"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/alusta"
         android:elevation="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/ateriat_alusta2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/paivamaaraNappi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:backgroundTint="#00000000"
-            android:tint="@color/primaryColor"
-            app:layout_constraintBottom_toBottomOf="@+id/luo_ateria"
-            app:layout_constraintEnd_toStartOf="@+id/luo_ateria"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/calendar"
-            tools:ignore="VectorDrawableCompat" />
-
-        <TextView
-            android:id="@+id/paivamaara"
-            android:layout_width="98dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            app:layout_constraintBottom_toBottomOf="@+id/paivamaaraNappi"
-            app:layout_constraintEnd_toStartOf="@+id/paivamaaraNappi"
-            app:layout_constraintTop_toTopOf="@+id/paivamaaraNappi" />
-
-        <ImageView
-            android:id="@+id/luo_ateria"
-            android:layout_width="45dp"
-            android:layout_height="47dp"
-            android:onClick="luoAteria"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/add"
-            app:tint="@color/primaryColor"
-            tools:ignore="VectorDrawableCompat" />
-
-        <TextView
-            android:id="@+id/ateriat_kalorimaara"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="0"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/ateriat_kcal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:text="kcal"
-            app:layout_constraintBottom_toBottomOf="@+id/ateriat_kalorimaara"
-            app:layout_constraintStart_toEndOf="@+id/ateriat_kalorimaara"
-            app:layout_constraintTop_toTopOf="@+id/ateriat_kalorimaara" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Päivän saanti"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintBottom_toTopOf="@+id/ateriat_kalorimaara"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/paivamaara" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/ateriat_alusta2"
+        tools:targetApi="lollipop" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
