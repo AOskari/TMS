@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * Aktiviteetti, jonka avulla luodaan, muokataan ja tarkastellaan aterioita.
+ * Luo näkymän, jonka avulla voidaan luoda, muokata ja tarkastella aterioita.
  */
 public class AteriaActivity extends AppCompatActivity {
 
@@ -94,6 +94,7 @@ public class AteriaActivity extends AppCompatActivity {
         } else {
             ateria = gson.fromJson(ateriaJson, Ateria.class);
             paivitaLista();
+            piiras.animateXY(2000, 2000);
         }
 
         /**
@@ -129,6 +130,12 @@ public class AteriaActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     @Override
@@ -224,7 +231,6 @@ public class AteriaActivity extends AppCompatActivity {
         piiras.setDrawSliceText(false);
 
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        piiras.animateXY(2000, 2000);
         kalorit.setText(Math.round(ateria.haeRavinto().get(4)) + " kcal");
         editText.setText(ateria.haeNimi());
         kellonaika.setText(ateria.aikaString());
@@ -271,6 +277,7 @@ public class AteriaActivity extends AppCompatActivity {
                         tallenna();
                         paivitaLista();
                         finish();
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }
                 });
 
@@ -284,7 +291,7 @@ public class AteriaActivity extends AppCompatActivity {
     }
 
     /**
-     * Tuo esille olion jonka avulla voi asettaa halutun ajan.
+     * Tuo esille olion jonka avulla voi asettaa haluttu aika.
      */
     public void asetaAika(View v) {
         int tunti = kalenteri.get(Calendar.HOUR_OF_DAY);
@@ -305,6 +312,7 @@ public class AteriaActivity extends AppCompatActivity {
 
     public void hae(View v) {
         startActivity(new Intent(AteriaActivity.this, HakuActivity.class));
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     /**

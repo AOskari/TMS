@@ -113,6 +113,12 @@ public class AteriatActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         ateriatJson = pref.getString("aterialista", "");
@@ -145,6 +151,7 @@ public class AteriatActivity extends AppCompatActivity {
         editor.putString("ateria", ateriatJson);
         editor.commit();
         startActivity(new Intent(AteriatActivity.this, AteriaActivity.class));
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     /**

@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">androidProject</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">TMS</string>
     <string name="aseta">Asetukset</string>
     <string name="tieto1">Nimi:</string>
     <string name="tieto2">Paino:</string>
@@ -32,8 +30,6 @@
     <string name="nykyinen_kalorit">Päivä</string>
     <string name="ateria_kalorit">Ateria</string>
     <string name="yhteensa_kalorit">Yhteensä</string>
-    <string name="plus">+</string>
-    <string name="yhtakuin">=</string>
     <string name="proteiini">Proteiini</string>
     <string name="hiilihydraatti">Hiilihydraatti</string>
     <string name="rasva">Rasva</string>
@@ -44,6 +40,10 @@
     <string name="aloitus_gramma">0g</string>
 
     <!-- Muut merkkijonot -->
+    <string name="plus">+</string>
+    <string name="yhtakuin">=</string>
     <string name="poistu">Poistu</string>
+    <string name="haku_nappi">Haku</string>
+    <string name="hae_elintarvikkeita">Hae elintarvikkeita...</string>
 
 </resources>
