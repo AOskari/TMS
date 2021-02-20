@@ -34,9 +34,8 @@ import static com.example.androidproject.AteriaLista.haeLista;
 public class AteriatActivity extends AppCompatActivity {
 
     private String ateriatJson;
-
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     Gson gson = new Gson();
 
     private ListView lv;
@@ -82,13 +81,6 @@ public class AteriatActivity extends AppCompatActivity {
         lv = findViewById(R.id.aterialista);
 
         ateriatJson = pref.getString("aterialista", "");
-
-        if (ateriatJson.equals("")) {
-            ateriatJson = gson.toJson(haeLista());
-            editor.putString("aterialista", ateriatJson);
-            editor.commit();
-            Log.d("aterialista", ateriatJson);
-        }
 
         /**
          * Asetetaan alustavat tiedot näkymän ravintoaineiden ProgressBar:eille ja TextView:eille.

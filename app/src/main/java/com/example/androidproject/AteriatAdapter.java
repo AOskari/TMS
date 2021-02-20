@@ -140,6 +140,7 @@ public class AteriatAdapter extends BaseAdapter {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 aterialista.asetaSyodyksi(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
+                                Log.d("syöty kalorit", "" + aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(0));
                                 tallennaLista();
                                 ((AteriatActivity)context).naytaAteriat();
                                 Log.d("Asetettu syödyksi", aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi) + "");

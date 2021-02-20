@@ -107,7 +107,6 @@ public class AteriaLista {
      * Palauttaa syötyjen aterioiden ravintoarvot valitun päivämäärän perusteella.
      */
     public List<Double> haeSyodytRavintoarvot(int paiva, int kuukausi, int vuosi) {
-        DecimalFormat df = new DecimalFormat("#.##");
         double kalorit = 0;
         double proteiini = 0;
         double hh = 0;

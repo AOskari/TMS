@@ -17,57 +17,104 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.androidproject.Ateria;
+import com.example.androidproject.AteriaLista;
 import com.example.androidproject.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+
+import java.util.Calendar;
+
+import static com.example.androidproject.AteriaLista.haeLista;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
 
+    private Calendar kalenteri;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
+    private Gson gson = new Gson();
+    private AteriaLista aterialista;
+    private String aterialistaJson;
+
+    private int paiva;
+    private int kuukausi;
+    private int vuosi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Asetetaan alapalkille Listener, joka vaihtaa aktiviteettia nappien perusteella.
+        kalenteri = Calendar.getInstance();
+
+        /**
+         * Haetaan AteriaLista-singleton pysyväismuistista.
+         * Jos singletonia ei löydy, luodaan uusi instanssi ja tallennetaan se pysyväismuistiin.
+         */
+        pref = getApplicationContext().getSharedPreferences("mainPref",0);
+        editor = pref.edit();
+        aterialistaJson = pref.getString("aterialista", "");
+
+        if (aterialistaJson.equals("")) {
+            aterialistaJson = gson.toJson(haeLista());
+            editor.putString("aterialista", aterialistaJson);
+            editor.commit();
+            Log.d("aterialista", aterialistaJson);
+        }
+
+        aterialista = gson.fromJson(aterialistaJson, AteriaLista.class);
+
+        // Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
-
     }
 
     @SuppressLint("SetTextI18n")
     protected void onResume() {
-
         super.onResume();
 
-        //Päivän tähän asti syödyt kalorit verrattuna omaan tavoitteeseen.
+        paiva = kalenteri.get(Calendar.DAY_OF_MONTH);
+        kuukausi = kalenteri.get(Calendar.MONTH);
+        vuosi = kalenteri.get(Calendar.YEAR);
+        TextView kaloriTavoite = findViewById(R.id.testitext);
+
+        /**
+         * Tässä ne syödyt kalorit, käytä tätä sitten kun teet jonkun vitun hienon laskun : DDD.
+         */
+        int kalorit = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(0));
+
+        /**
+         * Haetaan pysyväismuistista käyttäjän tiedot ja tavoitteet.
+         */
         SharedPreferences sharedPreferences = getSharedPreferences("Tiedot", Context.MODE_PRIVATE);
+        String nimi = sharedPreferences.getString("Käyttäjä", "");
         String tiedot1 = sharedPreferences.getString("Tavoite1", "");
 
+        //Päivän tähän asti syödyt kalorit verrattuna omaan tavoitteeseen.
         String jokuvitunhienolaskujonkateenmyöhemmin = "";
 
-        String[] tiedot1_lista = tiedot1.split(",");
-        String tiedot1_kalorit = tiedot1_lista[1];
+        /**
+         * Asetetaan tiedot, mikäli tietoja on tallennettu asetuksissa.
+         */
+        if (!tiedot1.equals("")) {
+            String[] tiedot1_lista = tiedot1.split(",");
+            String tiedot1_kalorit = tiedot1_lista[1];
+            kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\n Kaloreita jäljellä: " + jokuvitunhienolaskujonkateenmyöhemmin);
+        }
 
-        //Käyttäjän nimi.
-        String nimi = sharedPreferences.getString("Käyttäjä", "");
-
-        /*
-        Varmistaminen että nimessä on aina iso alkukirjain laatikossa näytettäessä,
-         vaikka käyttäjä kirjoittaisi nimensä pienellä.
+        /**
+         * Asetetaan nimi, mikäli nimi on tallennettu asetuksissa.
+         * Varmistetaan että nimessä on aina iso alkukirjain laatikossa näytettäessä,
+         * vaikka käyttäjä kirjoittaisi nimensä pienellä.
         */
-        String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
-
-        TextView nimitextview = findViewById(R.id.nimiteksti);
-
-
-        nimitextview.setText("Hei, " + isoalkukirjain + "!");
-
-
-
-        TextView kaloriTavoite = findViewById(R.id.testitext);
-        kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\n Kaloreita jäljellä: " + jokuvitunhienolaskujonkateenmyöhemmin);
+        if (!nimi.equals("")) {
+            TextView nimitextview = findViewById(R.id.nimiteksti);
+            String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
+            nimitextview.setText("Hei, " + isoalkukirjain + "!");
+        }
     }
 
     // Luodaan metodi, jonka avulla muutetaan näytön tilaa riippuen mitä nappia on painettu.

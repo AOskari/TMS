@@ -29,8 +29,6 @@ public class Asetukset extends AppCompatActivity {
     public SharedPreferences asetukset;
     public SharedPreferences.Editor tiedot;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
