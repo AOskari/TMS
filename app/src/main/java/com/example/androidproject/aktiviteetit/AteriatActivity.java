@@ -158,9 +158,10 @@ public class AteriatActivity extends AppCompatActivity {
     }
 
     /**
-     * Asettaa päivän kalorimäärän ja ravintoaineiden ProgressBarien arvot.
+     * Asettaa päivän kalorimäärän ja ravintoaineiden ProgressBar:ien arvot.
      */
-    private void asetaRavintoarvot() {
+    public void asetaRavintoarvot() {
+        ateriatJson = pref.getString("aterialista", "");
         AteriaLista lista = gson.fromJson(ateriatJson, AteriaLista.class);
         DecimalFormat df = new DecimalFormat("#.#");
 
@@ -174,6 +175,5 @@ public class AteriatActivity extends AppCompatActivity {
         proteiiniMaara.setText("Proteiini " + " / " + df.format(arvot.get(0)) + "g");
         hhMaara.setText("Hiilihydraatit " + " / " + df.format(arvot.get(1)) + "g");
         rasvaMaara.setText("Rasva " + " / " + df.format(arvot.get(2)) + "g");
-
     }
 }

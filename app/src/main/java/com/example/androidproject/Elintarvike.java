@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Haetut elintarvikkeet Fineli:n avoimesta rajapinnasta tallennetaan
+ * Elintarvike-luokan instansseina.
+ */
 public class Elintarvike {
 
     private String name;
@@ -21,6 +25,9 @@ public class Elintarvike {
 
     private double maara;
 
+    /**
+     * Luokan konstruktori, joka ottaa parametreiksi nimen, kaikki elintarvikkeen ravintoarvot ja halutun määärän.
+     */
     public Elintarvike(String name, double salt, double kcal, double fat, double protein, double carb,
                        double organicAcid, double saturatedFat, double sugar, double fiber, double maara) {
 

@@ -22,13 +22,12 @@ import com.google.gson.Gson;
  */
 public class AteriatAdapter extends BaseAdapter {
 
-    Context context;
-    AteriaLista aterialista;
-    String listaJson;
-
-    SharedPreferences pref;
-    SharedPreferences.Editor edit;
-    Gson gson = new Gson();
+    private Context context;
+    private AteriaLista aterialista;
+    private String listaJson;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor edit;
+    private Gson gson = new Gson();
 
     private int paiva;
     private int kuukausi;
@@ -65,7 +64,7 @@ public class AteriatAdapter extends BaseAdapter {
     /**
      * @param position osoittaa paikkaa listalla.
      * @param convertView alkuperäinen View jota tullaan muokkaamaan.
-     * @param parent widget, johon convertView liitetään lopuksi.
+     * @param parent widget, johon convertView liitetään lopuksi. Tässä tapauksessa ListView.
      * @return palauttaa muokatun convertViewin.
      */
     @Override
@@ -80,6 +79,10 @@ public class AteriatAdapter extends BaseAdapter {
         ImageButton muokkaa = convertView.findViewById(R.id.muokkaa);
         ImageButton syoty = convertView.findViewById(R.id.syoty);
 
+        /**
+         * Asetetaan onClick-kuuntelija, joka painatessa avaa popup-ikkunan joka pyytää
+         * käyttäjältä varmistusta haluaako hän poistaa valitun aterian.
+         */
         poista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,14 +96,10 @@ public class AteriatAdapter extends BaseAdapter {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                // Poistetaan valittu ateria, ja tallennetaan muutokset SharedPreferencesiin.
                                 aterialista.poistaAteria(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeId());
                                 tallennaLista();
-
-                                Log.d("aterialista", "" + aterialista.tulostaAteriat());
-
-                                // Lopuksi päivitetään AteriatActivityn ListView
                                 ((AteriatActivity)context).naytaAteriat();
+                                Log.d("aterialista", "" + aterialista.tulostaAteriat());
                             }
                         });
 
@@ -115,7 +114,8 @@ public class AteriatAdapter extends BaseAdapter {
         });
 
         /**
-         *  Lisätään muokkaa-napille mahdollisuus muokata ateriaa.
+         *  muokkaa-nappia painatessa asetetaan pysyväismuistiin valittu ateria, jolloin
+         *  AteriaActivityä avatessa näkymään ilmestyy valittu ateria.
          */
         muokkaa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +128,11 @@ public class AteriatAdapter extends BaseAdapter {
             }
         });
 
+        /**
+         * syoty-nappia painatessa luodaan popup-ikkuna, joka kysyy käyttäjältä varmistusta
+         * haluaako hän asettaa aterian syödyksi. Tällöin Ateria siirtyy AteriaLista-luokan
+         * syotyAteriat-listaan.
+         */
         syoty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,9 +145,9 @@ public class AteriatAdapter extends BaseAdapter {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 aterialista.asetaSyodyksi(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
-                                Log.d("syöty kalorit", "" + aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(0));
                                 tallennaLista();
                                 ((AteriatActivity)context).naytaAteriat();
+                                ((AteriatActivity)context).asetaRavintoarvot();
                                 Log.d("Asetettu syödyksi", aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi) + "");
                             }
                         });
@@ -163,6 +168,15 @@ public class AteriatAdapter extends BaseAdapter {
         return convertView;
     }
 
+
+
+    // =================================================================== //
+    // ========================= Private-metodit ========================= //
+    // =================================================================== //
+
+    /**
+     * Päivittää AteriaListan pysyväismuistiin.
+     */
     private void tallennaLista() {
         listaJson = gson.toJson(aterialista);
         aterialista = gson.fromJson(listaJson, AteriaLista.class);

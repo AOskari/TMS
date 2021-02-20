@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Luokka, jolla voidaan luoda tallennettavia aterioita. Luokka sisältää listan,
+ * johon tallennetaan Elintarvike-olioita.
+ */
 public class Ateria {
 
     private List<Elintarvike> raakaAineet;
@@ -29,37 +33,54 @@ public class Ateria {
     private int minuutit;
     private int id;
 
+    /**
+     * Luokan konstruktori.
+     * @param name aterian nimi.
+     */
     public Ateria(String name) {
         raakaAineet = new ArrayList<>();
         this.name = name;
         id = 0;
     }
 
+    /**
+     * Asettaa aterialle päivämäärän vaadituilla parametreilla.
+     */
     public void asetaPaivamaara(int paiva, int kuukausi, int vuosi) {
         this.paiva = paiva;
         this.kuukausi = kuukausi;
         this.vuosi = vuosi;
     }
 
+    /**
+     * Asettaa kellonajan aterialle vaadituilla parametreilla.
+     */
     public void asetaAika(int tunnit, int minuutit) {
         this.tunnit = tunnit;
         this.minuutit = minuutit;
     }
 
+    /**
+     * Asettaa uuden tunnisteen luokalle, jotta se löydetään AteriaLista-singletonista.
+     * @param id tähän asetetaan AteriaLista-luokasta haettu seuraava id.
+     */
     public void asetaId(int id) {
         this.id = id;
     }
 
+    /**
+     * @return Palauttaa aterian id:n.
+     */
     public int haeId() {
         return this.id;
     }
 
+    /**
+     * Lisää valitun Elintarvike-olion listalle.
+     * @param tarvike Valittu Elintarvike-olio.
+     */
     public void lisaaAine(Elintarvike tarvike) {
-
-        //TODO: Mahdollisuus määrätä montako grammaa elintarviketta lisätään.
-
         raakaAineet.add(tarvike);
-
         salt += tarvike.haeRavintoarvot().get(0);
         kcal += tarvike.haeRavintoarvot().get(1);
         fat += tarvike.haeRavintoarvot().get(2);
@@ -72,6 +93,9 @@ public class Ateria {
         maara += tarvike.haeRavintoarvot().get(9);
     }
 
+    /**
+     * @return Palauttaa listana kaikki aterian sisältämät Elintarvike-oliot.
+     */
     public List<Elintarvike> haeTarvikkeet() {
         return this.raakaAineet;
     }
@@ -96,33 +120,55 @@ public class Ateria {
         raakaAineet.remove(i);
     }
 
+    /**
+     * @return Palauttaa aterian nimen.
+     */
     public String haeNimi() {
         return this.name;
     }
 
+    /**
+     * @return Palauttaa listana kaikki aterian ravintoarvot.
+     */
     public List<Double> haeRavinto() {
         List<Double> lista = Arrays.asList(this.protein + this.carb + this.fat, this.protein, this.carb, this.fat, this.kcal, this.sugar, this.saturatedFat, this.salt, this.fiber);
         return lista;
     }
 
+    /**
+     * @return Palauttaa aterian päivämäärän listana.
+     */
     public List<Integer> haePaivamaara() {
         List<Integer> paivamaara = Arrays.asList(this.paiva, this.kuukausi, this.vuosi);
         return paivamaara;
     }
 
+    /**
+     * @return Palauttaa aterian kellonajan listana.
+     */
     public List<Integer> haeAika() {
         List<Integer> aika = Arrays.asList(this.tunnit, this.minuutit);
         return aika;
     }
 
+    /**
+     * Asettaa valitun nimen aterian nimeksi.
+     * @param nimi Valittu nimi.
+     */
     public void asetaNimi(String nimi) {
         this.name = nimi;
     }
 
+    /**
+     * @return Palauttaa aterian päivämäärän merkkijonona.
+     */
     public String paivamaaraString() {
         return this.paiva + "/" + this.kuukausi + "/" + this.vuosi;
     }
 
+    /**
+     * @return Palauttaa aterian kellonajan siistinä merkkijonona.
+     */
     public String aikaString() {
 
         String tunti = "";
@@ -141,9 +187,11 @@ public class Ateria {
         return tunti + ":" + minuutti;
     }
 
+    /**
+     * @return Palauttaa aterian kellonajan, nimen ja ravintosisällön merkkijonona.
+     */
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.##");
-
         return aikaString() + "\r\n" + name + "\r\n" + "\r\n" + "Energia: " + df.format(this.kcal) +  " kcal \r\n" + "Proteiini: " +
                 df.format(this.protein) + "g \r\n" + "Hiilihydraatit: " + df.format(this.carb) +  "g \r\n" + "Joista sokeria: " + df.format(this.sugar)
                 + "g \r\n" + "Rasva: " + df.format(this.fat) + "g \r\n" + "Tyydyttynyt rasva: " + df.format(this.saturatedFat) +  "g \r\n"  + "\r\n" + "Suola: " +

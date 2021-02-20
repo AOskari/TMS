@@ -20,12 +20,14 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
+/**
+ * Adapteri, jonka avulla luodaan kustomoidut ListView rivit AteriaActivityyn.
+ */
 public class AteriaAdapter extends BaseAdapter {
 
     Context context;
     Ateria ateria;
     String ateriaJson;
-
     SharedPreferences pref;
     SharedPreferences.Editor edit;
 
@@ -43,45 +45,51 @@ public class AteriaAdapter extends BaseAdapter {
     public int getCount() {
         return ateria.haeTarvikkeet().size();
     }
-
     @Override
     public Object getItem(int position) {
         return position;
     }
-
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /**
+     * @param position osoittaa paikkaa listalla.
+     * @param convertView alkuperäinen View jota tullaan muokkaamaan.
+     * @param parent widget, johon convertView liitetään lopuksi. Tässä tapauksessa ListView.
+     * @return palauttaa muokatun convertViewin.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-        String tarvikkeenNimi = ateria.haeTarvikkeet().get(position).haeNimi();
         convertView = LayoutInflater.from(context).inflate(R.layout.tarviketiedot_layout, parent, false);
-
-        TextView nimi = convertView.findViewById(R.id.tarvike_nimi);
-        nimi.setText(tarvikkeenNimi);
 
         ImageButton tiedot = convertView.findViewById(R.id.tarvike_tiedot);
         ImageButton poista = convertView.findViewById(R.id.tiedot_poista);
+        TextView nimi = convertView.findViewById(R.id.tarvike_nimi);
+        String tarvikkeenNimi = ateria.haeTarvikkeet().get(position).haeNimi();
 
+        /**
+         * Asetetetaan TextViewiin nimi ja poista sekä tiedot napille onClick-kuuntelija.
+         * Lopuksi palautetaan muokattu convertView.
+         */
+        nimi.setText(tarvikkeenNimi);
         poista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // Tuodaan esille varmistusikkuna esille, ja kysytään käyttäjältä poistetaanko valittu elintarvike.
+                /**
+                 * Tuodaan esille popup-ikkuna, joka kysyy haluaako käyttäjä poistaa Elintarvikkeen.
+                 * Jos Poista on valittu, poistetaan Elintarvike listalta ja päivitetään lista.
+                 */
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setCancelable(true);
                 builder.setMessage("Poista " + tarvikkeenNimi + "?");
 
-                // Jos käyttäjä valitsee poista,
                 builder.setPositiveButton("Poista",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                /* Poistetaan valittu Elintarvike ja päivitetään SharedPreferences
-                                    sekä ravintoainetiedot päivitetyllä Ateria-oliolla. */
                                 ateria.poista(position);
                                 ateriaJson = gson.toJson(ateria);
                                 edit.putString("ateria", ateriaJson);
@@ -101,6 +109,9 @@ public class AteriaAdapter extends BaseAdapter {
             }
         });
 
+        /**
+         * Käynnistää TiedotActivityn, joka näyttää valitun Elintarvikkeen tiedot näytöllä.
+         */
         tiedot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
