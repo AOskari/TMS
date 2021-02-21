@@ -21,10 +21,9 @@ import java.util.List;
 
 
 /**
- * Luodaan erillinen Adapteri, jonka avulla saadaan listattua elintarvikkeiden tiedot
- * ja kaksi nappia tietojen selaamiseen ja elintarvikkeen lisäämiseen ateriaan.
+ * Adapteri, jonka avulla saadaan listattua elintarvikkeiden tiedot
+ * ja kaksi nappia tietojen selaamiseen sekä elintarvikkeen lisäämiseen ateriaan.
  */
-
 public class HakuAdapter extends BaseAdapter {
 
     Context context;
@@ -55,17 +54,21 @@ public class HakuAdapter extends BaseAdapter {
     public int getCount() {
         return lista.size();
     }
-
     @Override
     public Object getItem(int position) {
         return position;
     }
-
     @Override
     public long getItemId(int position) {
         return position;
     }
 
+    /**
+     * @param position osoittaa paikkaa listalla.
+     * @param convertView alkuperäinen View jota tullaan muokkaamaan.
+     * @param parent widget, johon convertView liitetään lopuksi. Tässä tapauksessa ListView.
+     * @return palauttaa muokatun convertViewin.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 

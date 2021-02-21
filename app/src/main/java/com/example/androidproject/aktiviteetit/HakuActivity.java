@@ -1,12 +1,15 @@
 package com.example.androidproject.aktiviteetit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -28,6 +31,7 @@ import com.example.androidproject.Ateria;
 import com.example.androidproject.Elintarvike;
 import com.example.androidproject.R;
 import com.example.androidproject.HakuAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -75,6 +79,9 @@ public class HakuActivity extends AppCompatActivity {
         editor = pref.edit();
         ateriaJson = pref.getString("ateria", "");
         ateria = gson.fromJson(ateriaJson, Ateria.class);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
     }
 
     /**
@@ -208,5 +215,30 @@ public class HakuActivity extends AppCompatActivity {
         suljeNappaimisto();
     }
 
+    private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
+            BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+                    switch (item.getItemId()) {
+
+                        case R.id.koti:
+                            startActivity(new Intent(HakuActivity.this, MainActivity.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.d("Menu", "Koti painettu");
+                            break;
+                        case R.id.suunnittele:
+                            startActivity(new Intent(HakuActivity.this, AteriatActivity.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.d("Menu", "Suunnittele painettu");
+                            break;
+                        case R.id.profiili:
+                            startActivity(new Intent(HakuActivity.this, Asetukset.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.i("Menu", "Profiili painettu");
+                            break;
+                    }
+                    return false;
+                }
+            };
 }

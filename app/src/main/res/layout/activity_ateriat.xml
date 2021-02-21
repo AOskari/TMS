@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ateriat_alusta1"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -227,12 +227,24 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/alusta"
         android:elevation="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ateriat_alusta2"
+        tools:targetApi="lollipop" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:itemBackground="@color/primaryColor"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/textPrimaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ateriat_alusta2"
-        tools:targetApi="lollipop" />
+        app:menu="@menu/alapalkki_menu" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

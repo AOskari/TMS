@@ -10,28 +10,30 @@
         android:id="@+id/elintarvike_haku"
         android:layout_width="0dp"
         android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/maara_input"
         android:hint="@string/hae_elintarvikkeita"
+        android:importantForAutofill="no"
         android:inputType="text"
-        android:paddingLeft="10dp"
         android:paddingStart="10dp"
-        android:paddingRight="0dp"
+        android:paddingLeft="10dp"
         android:paddingEnd="0dp"
+        android:paddingRight="0dp"
         app:layout_constraintBottom_toTopOf="@+id/list_view"
         app:layout_constraintEnd_toStartOf="@+id/imageButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="80dp"
         android:layout_height="42dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:background="#00000000"
         android:contentDescription="@string/haku_nappi"
         android:onClick="getInfo"
@@ -66,20 +68,18 @@
         android:id="@+id/list_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/alusta"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/elintarvike_haku">
-
-    </ListView>
+        app:layout_constraintTop_toBottomOf="@+id/elintarvike_haku"></ListView>
 
     <ProgressBar
         android:id="@+id/latauskuvake"
@@ -89,5 +89,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/list_view" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/primaryColor"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/textPrimaryColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/alapalkki_menu" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

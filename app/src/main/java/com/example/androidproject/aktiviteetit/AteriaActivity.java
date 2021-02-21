@@ -1,5 +1,6 @@
 package com.example.androidproject.aktiviteetit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,6 +28,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
@@ -130,6 +133,8 @@ public class AteriaActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
     }
 
     @Override
@@ -367,4 +372,31 @@ public class AteriaActivity extends AppCompatActivity {
         editor.putString("ateria", ateriaJson);
         editor.commit();
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
+            BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                    switch (item.getItemId()) {
+
+                        case R.id.koti:
+                            startActivity(new Intent(AteriaActivity.this, MainActivity.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.d("Menu", "Koti painettu");
+                            break;
+                        case R.id.suunnittele:
+                            startActivity(new Intent(AteriaActivity.this, AteriatActivity.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.d("Menu", "Suunnittele painettu");
+                            break;
+                        case R.id.profiili:
+                            startActivity(new Intent(AteriaActivity.this, Asetukset.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.i("Menu", "Profiili painettu");
+                            break;
+                    }
+                    return false;
+                }
+            };
 }

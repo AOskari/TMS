@@ -22,7 +22,6 @@ public class Elintarvike {
     private double saturatedFat;
     private double sugar;
     private double fiber;
-
     private double maara;
 
     /**
@@ -46,28 +45,26 @@ public class Elintarvike {
         this.fiber = fiber * maaraKerroin;
     }
 
-    public String tarkatArvot() {
-        DecimalFormat df = new DecimalFormat("#.#");
-
-        return "Ravintosisältö / " + df.format(this.maara) + "g \r\n" + "Energia: " + df.format(this.kcal) +  " kcal \r\n" + "Proteiini: " +
-                df.format(this.protein) + "g" + "\r\n" + "Hiilihydraatit: " + df.format(this.carb)  + "g" + "\r\n" + "Joista sokeria: " + df.format(this.sugar)  + "g" +
-                "\r\n" + "Rasva: " + df.format(this.fat)  + "g"  +
-                "\r\n" + "Tyydyttynyt rasva: " + df.format(this.saturatedFat)  + "g"  + "\r\n" + "Kuitua: " + df.format(this.fiber)  + "g"  + "\r\n" +
-                "Suolaa: " + df.format(this.salt)  + "g";
-    }
-
+    /**
+     * @return Palauttaa listan kaikista ravintoarvoista.
+     */
     public List<Double> haeRavintoarvot() {
         List<Double> lista = Arrays.asList(this.salt, this.kcal, this.fat, this.protein, this.carb, this.organicAcid, this.saturatedFat, this.sugar, this.fiber, this.maara);
         return lista;
     }
 
+    /**
+     * @return Palauttaa nimen.
+     */
     public String haeNimi() {
         return this.name;
     }
 
+    /**
+     * @return Palauttaa Elintarvikkeen tiedot.
+     */
     public String toString() {
         DecimalFormat df = new DecimalFormat("#.#");
-
         return "Ravintosisältö / " + df.format(this.maara) + "g \r\n" + "Energia: " + df.format(this.kcal) +  " kcal \r\n" + "Proteiini: " +
                 df.format(this.protein) + "g" + "\r\n" + "Hiilihydraatit: " + df.format(this.carb)  + "g" + "\r\n" + "Rasva: " + df.format(this.fat)  + "g";
     }
