@@ -137,6 +137,18 @@ public class AteriaLista {
         return kalorit;
     }
 
+    public int haeKaloritIlman(int id, int paiva, int kuukausi, int vuosi) {
+        List<Ateria> palautettavat = haePaivamaaralla(paiva, kuukausi, vuosi);
+        int kalorit = 0;
+
+        for (int i = 0; i < palautettavat.size(); i++) {
+            if (palautettavat.get(i).haeId() != id) {
+                kalorit += palautettavat.get(i).haeRavinto().get(4);
+            }
+        }
+        return kalorit;
+    }
+
     /**
      * Palauttaa syömättömien aterioiden yhteisravintoarvot valitun päivämäärän perusteella.
      */

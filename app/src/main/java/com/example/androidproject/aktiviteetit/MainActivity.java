@@ -118,7 +118,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Luodaan metodi, jonka avulla muutetaan näytön tilaa riippuen mitä nappia on painettu.
+    /**
+     * Alapalkin toiminnallisuus, aloittaa valitun aktiviteetin.
+     * Tutoriaali alapalkin luomiseen: https://www.youtube.com/watch?v=fODp1hZxfng
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override

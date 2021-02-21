@@ -65,6 +65,7 @@ public class AteriaActivity extends AppCompatActivity {
     private int vuosi;
     private boolean muokkaus;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,19 +148,9 @@ public class AteriaActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        paivitaLista();
+        muokkaus = pref.getBoolean("muokkaus", false);
         editText.setText(ateria.haeNimi());
-
-        /**
-         * Tarkastetaan onko käyttäjä muokkaustilassa.
-         */
-        try{
-            Bundle b = getIntent().getExtras();
-            muokkaus = b.getBoolean("EXTRA");
-        } catch(Exception e) {
-            Log.d("Exception", e.toString());
-            muokkaus = false;
-        }
+        paivitaLista();
 
         Log.d("ateria aika", ateria.aikaString());
         Log.d("ateria paivamaara", ateria.paivamaaraString());
@@ -229,7 +220,7 @@ public class AteriaActivity extends AppCompatActivity {
 
         /**
          * Asetetaan uudet ravintoarvot diagrammiin, poistetaan ylimääräiset merkinnät
-         * ja asetetaan värit sekä animaatio.
+         * ja asetetaan värit.
          */
         data.setDrawValues(false);
         piiras.setData(data);
@@ -263,7 +254,7 @@ public class AteriaActivity extends AppCompatActivity {
                         String aterialistaJson = pref.getString("aterialista", "");
                         AteriaLista lista = gson.fromJson(aterialistaJson, AteriaLista.class);
 
-                        boolean muokkaus = pref.getBoolean("muokkaus", false);
+                        muokkaus = pref.getBoolean("muokkaus", false);
 
                         if (muokkaus) {
                             lista.poistaAteria(ateria.haeId());
@@ -347,10 +338,17 @@ public class AteriaActivity extends AppCompatActivity {
         String listaJson = pref.getString("aterialista", "");
         AteriaLista lista = gson.fromJson(listaJson, AteriaLista.class);
 
-        nykyinen.setText(lista.haeKalorit(paiva, kuukausi, vuosi) + " kcal");
-        ateriaKal.setText(Math.round(ateria.haeRavinto().get(4)) + " kcal");
-        yhteensa.setText(lista.haeKalorit(paiva, kuukausi, vuosi) + Math.round(ateria.haeRavinto().get(4)) + " kcal");
+        int kalorit = 0;
 
+        if (muokkaus) {
+            kalorit = lista.haeKaloritIlman(ateria.haeId(), paiva, kuukausi, vuosi);
+        } else {
+            kalorit = lista.haeKalorit(paiva, kuukausi, vuosi);
+        }
+
+        nykyinen.setText(Math.round(kalorit) + " kcal");
+        ateriaKal.setText(Math.round(ateria.haeRavinto().get(4)) + " kcal");
+        yhteensa.setText(Math.round(kalorit + (ateria.haeRavinto().get(4))) + " kcal");
     }
 
     /**
@@ -375,6 +373,9 @@ public class AteriaActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    /**
+     * Alapalkin toiminnallisuus, aloittaa valitun aktiviteetin.
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override

@@ -175,7 +175,7 @@
             android:tint="@color/primaryColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kalenteri_nappi"
-            app:srcCompat="@drawable/time"
+            app:srcCompat="@drawable/kellonaika"
             tools:ignore="VectorDrawableCompat" />
 
         <TextView

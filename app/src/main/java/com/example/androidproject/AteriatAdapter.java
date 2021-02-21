@@ -125,6 +125,7 @@ public class AteriatAdapter extends BaseAdapter {
                 edit.putBoolean("muokkaus", true);
                 edit.commit();
                 context.startActivity(new Intent(context, AteriaActivity.class));
+                ((AteriatActivity)context).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
 
