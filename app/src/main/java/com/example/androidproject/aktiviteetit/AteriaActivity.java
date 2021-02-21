@@ -135,6 +135,7 @@ public class AteriaActivity extends AppCompatActivity {
         });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
+        bottomNavigationView.getMenu().findItem(R.id.suunnittele).setChecked(true);
     }
 
     @Override
@@ -169,6 +170,7 @@ public class AteriaActivity extends AppCompatActivity {
         paiva = pref.getInt("paiva", 0);
         kuukausi = pref.getInt("kuukausi", 0);
         vuosi = pref.getInt("vuosi", 0);
+        ateria.asetaPaivamaara(paiva, kuukausi, vuosi);
         ((TextView)findViewById(R.id.paivays)).setText(ateria.paivamaaraString());
         kellonaika.setText(ateria.aikaString());
         asetaKaloriPalkki();
@@ -384,16 +386,19 @@ public class AteriaActivity extends AppCompatActivity {
                             startActivity(new Intent(AteriaActivity.this, MainActivity.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.d("Menu", "Koti painettu");
+                            finish();
                             break;
                         case R.id.suunnittele:
                             startActivity(new Intent(AteriaActivity.this, AteriatActivity.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.d("Menu", "Suunnittele painettu");
+                            finish();
                             break;
                         case R.id.profiili:
                             startActivity(new Intent(AteriaActivity.this, Asetukset.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.i("Menu", "Profiili painettu");
+                            finish();
                             break;
                     }
                     return false;

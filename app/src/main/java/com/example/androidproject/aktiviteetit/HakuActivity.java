@@ -82,6 +82,7 @@ public class HakuActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
+        bottomNavigationView.getMenu().findItem(R.id.suunnittele).setChecked(true);
     }
 
     /**
@@ -226,16 +227,19 @@ public class HakuActivity extends AppCompatActivity {
                             startActivity(new Intent(HakuActivity.this, MainActivity.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.d("Menu", "Koti painettu");
+                            finish();
                             break;
                         case R.id.suunnittele:
                             startActivity(new Intent(HakuActivity.this, AteriatActivity.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.d("Menu", "Suunnittele painettu");
+                            finish();
                             break;
                         case R.id.profiili:
                             startActivity(new Intent(HakuActivity.this, Asetukset.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.i("Menu", "Profiili painettu");
+                            finish();
                             break;
                     }
                     return false;

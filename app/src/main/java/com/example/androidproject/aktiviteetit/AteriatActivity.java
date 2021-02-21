@@ -60,7 +60,6 @@ public class AteriatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ateriat);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         pref = getApplicationContext().getSharedPreferences("mainPref",0);
         editor = pref.edit();
@@ -111,6 +110,7 @@ public class AteriatActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
+        bottomNavigationView.getMenu().findItem(R.id.suunnittele).setChecked(true);
     }
 
     /**
@@ -192,19 +192,22 @@ public class AteriatActivity extends AppCompatActivity {
                             startActivity(new Intent(AteriatActivity.this, MainActivity.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.d("Menu", "Koti painettu");
-                            break;
+                            finish();
+                            return true;
                         case R.id.suunnittele:
                             startActivity(new Intent(AteriatActivity.this, AteriatActivity.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                            Log.d("Menu", "Suunnittele painettu");
-                            break;
+                            Log.d("Menu", "Ateriat painettu");
+                            finish();
+                            return true;
                         case R.id.profiili:
                             startActivity(new Intent(AteriatActivity.this, Asetukset.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.i("Menu", "Profiili painettu");
-                            break;
+                            finish();
+                            return true;
                     }
-                    return false;
+                    return true;
                 }
             };
 }

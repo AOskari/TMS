@@ -9,13 +9,11 @@
     <item
         android:id="@+id/koti"
         android:title="Koti"
-        android:iconTintMode="src_atop"
-        android:iconTint="@color/green"
-        android:icon="@drawable/paasivu_vihrea"/>
+        android:icon="@drawable/paasivu_valkoinen"/>
 
     <item
         android:id="@+id/suunnittele"
-        android:title="Suunnittele"
+        android:title="Ateriat"
         android:icon="@drawable/ruoka_valkoinen"/>
 
 </menu>

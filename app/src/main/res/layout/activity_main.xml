@@ -10,13 +10,15 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="false"
         app:backgroundTint="@color/primaryColor"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/textPrimaryColor"
+        app:itemIconTint="@drawable/menu_valittu"
+        app:itemTextColor="@drawable/menu_valittu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/alapalkki_menu" />
 
     <ProgressBar

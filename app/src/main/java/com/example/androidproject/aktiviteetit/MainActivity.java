@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         // Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
+        bottomNavigationView.getMenu().findItem(R.id.koti).setChecked(true);
     }
 
     @SuppressLint("SetTextI18n")
@@ -121,22 +122,27 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                public boolean onNavigationItemSelected(MenuItem item) {
 
                     switch (item.getItemId()) {
 
                         case R.id.koti:
-                            //TODO: luo koodi, joka menee takaisin koti-ikkunaan
+                            startActivity(new Intent(MainActivity.this, MainActivity.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.d("Menu", "Koti painettu");
+                            finish();
                             break;
                         case R.id.suunnittele:
                             startActivity(new Intent(MainActivity.this, AteriatActivity.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.d("Menu", "Suunnittele painettu");
+                            finish();
                             break;
                         case R.id.profiili:
                             startActivity(new Intent(MainActivity.this, Asetukset.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                            Log.i("Menu", "Profiili painettu");
+                            Log.d("Menu", "Profiili painettu");
+                            finish();
                             break;
                     }
                     return false;
