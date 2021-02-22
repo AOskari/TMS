@@ -313,8 +313,7 @@ public class AteriaActivity extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
-
-
+    
     // =================================================================== //
     // ========================= Private-metodit ========================= //
     // =================================================================== //
