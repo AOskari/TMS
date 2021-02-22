@@ -12,7 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".aktiviteetit.Asetukset"></activity>
+        <activity android:name=".aktiviteetit.Asetukset">
+            android:parentActivityName=".aktiviteetit.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".aktiviteetit.MainActivity" />
+        </activity>
         <activity android:name=".aktiviteetit.Profiili" />
         <activity
             android:name=".aktiviteetit.KalenteriActivity"
