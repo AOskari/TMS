@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             String tiedot1_kalorit = tiedot1_lista[1];
            int kaloritYht = Integer.parseInt(tiedot1_kalorit);
 
-            int prosentit = (kalorit) / (kaloritYht) * 100;
+            int prosentit = (kalorit / kaloritYht) * 100;
 
 
             int jaljella = kaloritYht - kalorit;
