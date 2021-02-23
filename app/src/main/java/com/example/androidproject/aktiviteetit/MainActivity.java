@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
          */
         int kalorit = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(0));
 
+        //int prosentit = kalorit / tiedot1_kalorit;
+
         /**
          * Haetaan pysyväismuistista käyttäjän tiedot ja tavoitteet.
          */
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         String tiedot1 = sharedPreferences.getString("Tavoite1", "");
 
         //Päivän tähän asti syödyt kalorit verrattuna omaan tavoitteeseen.
-        String jokuvitunhienolaskujonkateenmyöhemmin = "";
+       // String jokuvitunhienolaskujonkateenmyöhemmin = "";
 
         /**
          * Asetetaan tiedot, mikäli tietoja on tallennettu asetuksissa.
@@ -103,7 +105,17 @@ public class MainActivity extends AppCompatActivity {
         if (!tiedot1.equals("")) {
             String[] tiedot1_lista = tiedot1.split(",");
             String tiedot1_kalorit = tiedot1_lista[1];
-            kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\n Kaloreita jäljellä: " + jokuvitunhienolaskujonkateenmyöhemmin);
+           int kaloritYht = Integer.parseInt(tiedot1_kalorit);
+
+            int prosentit = (kalorit) / (kaloritYht) * 100;
+
+
+            int jaljella = kaloritYht - kalorit;
+            kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\n Kaloreita jäljellä: " + jaljella + " kcal" );
+
+            TextView prossat = findViewById(R.id.prossat);
+            prossat.setText(Integer.toString(prosentit) + " %");
+
         }
 
         /**
