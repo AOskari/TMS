@@ -15,6 +15,7 @@ import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.androidproject.Ateria;
@@ -107,14 +108,29 @@ public class MainActivity extends AppCompatActivity {
             String tiedot1_kalorit = tiedot1_lista[1];
            int kaloritYht = Integer.parseInt(tiedot1_kalorit);
 
-            int prosentit = (kalorit / kaloritYht) * 100;
+            /**
+             *     Muutetaan intit doubleiksi laskua varten.
+             */
 
+            double k = kalorit;
+            double kY = kaloritYht;
+            double prosentit = k / kY * 100;
+            int prosentitI = (int) Math.round(prosentit);
+
+            //Muutetaan vastaus Stringiksi ja pyöristetään se.
+            String prosentitS = Double.toString(prosentitI);
 
             int jaljella = kaloritYht - kalorit;
-            kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\n Kaloreita jäljellä: " + jaljella + " kcal" );
+            kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\n Kaloreita jäljellä: " + jaljella + " kcal" + kalorit / kaloritYht );
 
+            //Näytetään prosentit.
             TextView prossat = findViewById(R.id.prossat);
-            prossat.setText(Integer.toString(prosentit) + " %");
+            prossat.setText(prosentitS + " %");
+
+            //Prosenttipalkki.
+            ProgressBar simpleProgressBar=(ProgressBar)findViewById(R.id.progressBar); // initiate the progress bar
+            //int progressValue=simpleProgressBar.getProgress();
+            simpleProgressBar.setProgress(prosentitI);
 
         }
 
