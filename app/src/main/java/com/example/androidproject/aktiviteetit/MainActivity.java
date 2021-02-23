@@ -13,6 +13,7 @@ import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -120,9 +121,19 @@ public class MainActivity extends AppCompatActivity {
             //Muutetaan vastaus Stringiksi ja pyöristetään se.
             String prosentitS = Double.toString(prosentitI);
 
+            //Jäljellä olevat kalorit.
             int jaljella = kaloritYht - kalorit;
-            kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\n Kaloreita jäljellä: " + jaljella + " kcal" + kalorit / kaloritYht );
 
+            //Tekstin tasaus keskelle.
+            kaloriTavoite.setGravity(Gravity.CENTER);
+
+
+            kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\nKaloreita jäljellä: " + jaljella + " kcal");
+
+            if(prosentitI > 100) {
+                //Kertoo että ylitit päivän kaloritavoitteen.
+                kaloriTavoite.setText("Tavoite päivässä: " + tiedot1_kalorit + " kcal" + "\nKaloreita jäljellä: " + jaljella + " kcal \nYlitit päivän kaloritavoitteen.");
+            }
             //Näytetään prosentit.
             TextView prossat = findViewById(R.id.prossat);
             prossat.setText(prosentitS + " %");
@@ -132,6 +143,9 @@ public class MainActivity extends AppCompatActivity {
             //int progressValue=simpleProgressBar.getProgress();
             simpleProgressBar.setProgress(prosentitI);
 
+            //Lisätiedot, proteiini, hiilarit, rasva
+            TextView lisatiedot = findViewById(R.id.lisatiedot);
+            lisatiedot.setText("koodiakoodiakoodia...");
         }
 
         /**
