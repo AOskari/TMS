@@ -202,7 +202,7 @@ public class AteriatActivity extends AppCompatActivity {
                             finish();
                             return true;
                         case R.id.profiili:
-                            startActivity(new Intent(AteriatActivity.this, Asetukset.class));
+                            startActivity(new Intent(AteriatActivity.this, Profiili.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.i("Menu", "Profiili painettu");
                             finish();

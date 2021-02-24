@@ -395,7 +395,7 @@ public class AteriaActivity extends AppCompatActivity {
                             finish();
                             break;
                         case R.id.profiili:
-                            startActivity(new Intent(AteriaActivity.this, Asetukset.class));
+                            startActivity(new Intent(AteriaActivity.this, Profiili.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.i("Menu", "Profiili painettu");
                             finish();

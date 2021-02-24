@@ -236,7 +236,7 @@ public class HakuActivity extends AppCompatActivity {
                             finish();
                             break;
                         case R.id.profiili:
-                            startActivity(new Intent(HakuActivity.this, Asetukset.class));
+                            startActivity(new Intent(HakuActivity.this, Profiili.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.i("Menu", "Profiili painettu");
                             finish();

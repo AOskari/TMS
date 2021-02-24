@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private Gson gson = new Gson();
     private AteriaLista aterialista;
     private String aterialistaJson;
+    private TextView prossat;
 
     private int paiva;
     private int kuukausi;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         pref = getApplicationContext().getSharedPreferences("mainPref",0);
         editor = pref.edit();
         aterialistaJson = pref.getString("aterialista", "");
+        prossat = findViewById(R.id.prossat);
 
         if (aterialistaJson.equals("")) {
             aterialistaJson = gson.toJson(haeLista());
@@ -104,9 +106,10 @@ public class MainActivity extends AppCompatActivity {
          * Asetetaan tiedot, mikäli tietoja on tallennettu asetuksissa.
          */
         if (!tiedot1.equals("")) {
-            String[] tiedot1_lista = tiedot1.split(",");
+            String[] tiedot1_lista = tiedot1.split(" ");
             String tiedot1_kalorit = tiedot1_lista[1];
-           int kaloritYht = Integer.parseInt(tiedot1_kalorit);
+            float saatuTieto = Float.parseFloat(tiedot1_kalorit);
+            int kaloritYht = (int) Math.round(saatuTieto);
 
             /**
              *     Muutetaan intit doubleiksi laskua varten.
@@ -121,16 +124,21 @@ public class MainActivity extends AppCompatActivity {
             String prosentitS = Double.toString(prosentitI);
 
             int jaljella = kaloritYht - kalorit;
-            kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\n Kaloreita jäljellä: " + jaljella + " kcal" + kalorit / kaloritYht );
+            if (saatuTieto != 0.0f) {
+                kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\n Kaloreita jäljellä: " + jaljella + " kcal" + kalorit / kaloritYht);
 
-            //Näytetään prosentit.
-            TextView prossat = findViewById(R.id.prossat);
-            prossat.setText(prosentitS + " %");
+                //Näytetään prosentit.
+                //TextView prossat = findViewById(R.id.prossat);
+                prossat.setText(prosentitS + " %");
 
-            //Prosenttipalkki.
-            ProgressBar simpleProgressBar=(ProgressBar)findViewById(R.id.progressBar); // initiate the progress bar
-            //int progressValue=simpleProgressBar.getProgress();
-            simpleProgressBar.setProgress(prosentitI);
+                //Prosenttipalkki.
+                ProgressBar simpleProgressBar = (ProgressBar) findViewById(R.id.progressBar); // initiate the progress bar
+                //int progressValue=simpleProgressBar.getProgress();
+                simpleProgressBar.setProgress(prosentitI);
+            } else {
+                kaloriTavoite.setText("Tavoitteita ei ole asetettu");
+                prossat.setText("");
+            }
 
         }
 
@@ -170,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                             finish();
                             break;
                         case R.id.profiili:
-                            startActivity(new Intent(MainActivity.this, Asetukset.class));
+                            startActivity(new Intent(MainActivity.this, Profiili.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.d("Menu", "Profiili painettu");
                             finish();
