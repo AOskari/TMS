@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
             chart.setData(data);
             chart.setDescription("");
             chart.getLegend().setEnabled(false);
-            chart.setDrawSliceText(false);
+            chart.setDrawSliceText(true);
 
        //     GradientDrawable dataSet;
             dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
