@@ -107,56 +107,68 @@ public class MainActivity extends AppCompatActivity {
          * Asetetaan tiedot, mikäli tietoja on tallennettu asetuksissa.
          */
         if (!tiedot1.equals("")) {
-            String[] tiedot1_lista = tiedot1.split(",");
+            String[] tiedot1_lista = tiedot1.split(" ");
             String tiedot1_kalorit = tiedot1_lista[1];
-            int kaloritYht = Integer.parseInt(tiedot1_kalorit);
+            float saatuTieto1 = Float.parseFloat(tiedot1_kalorit);
+            int kaloritYht = (int)Math.round(saatuTieto1);
+            TextView prossat = findViewById(R.id.prossat);
 
             /**
              *     Muutetaan intit doubleiksi laskua varten.
              */
+            if (saatuTieto1 != 0.0f) {
+                double k = kalorit;
+                double kY = kaloritYht;
+                double prosentit = k / kY * 100;
+                int prosentitI = (int) Math.round(prosentit);
+                //  double prosentitD = Math.round(prosentit);
 
-            double k = kalorit;
-            double kY = kaloritYht;
-            double prosentit = k / kY * 100;
-            int prosentitI = (int) Math.round(prosentit);
-            //  double prosentitD = Math.round(prosentit);
+                //Muutetaan vastaus Stringiksi ja pyöristetään se.
+                String prosentitS = Integer.toString(prosentitI);
 
-            //Muutetaan vastaus Stringiksi ja pyöristetään se.
-            String prosentitS = Integer.toString(prosentitI);
+                //Jäljellä olevat kalorit.
+                int jaljella = kaloritYht - kalorit;
 
-            //Jäljellä olevat kalorit.
-            int jaljella = kaloritYht - kalorit;
-
-            //Tekstin tasaus keskelle.
-            kaloriTavoite.setGravity(Gravity.CENTER);
+                //Tekstin tasaus keskelle.
+                kaloriTavoite.setGravity(Gravity.CENTER);
 
 
-            kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\nKaloreita jäljellä: " + jaljella + " kcal");
+                kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\nKaloreita jäljellä: " + jaljella + " kcal");
 
-            if (prosentitI > 100) {
-                //Kertoo että ylitit päivän kaloritavoitteen.
-                kaloriTavoite.setText("Tavoite päivässä: " + tiedot1_kalorit + " kcal" + "\nKaloreita jäljellä: " + jaljella + " kcal \nYlitit päivän kaloritavoitteen.");
+                if (prosentitI > 100) {
+                    //Kertoo että ylitit päivän kaloritavoitteen.
+                    kaloriTavoite.setText("Tavoite päivässä: " + tiedot1_kalorit + " kcal" + "\nKaloreita jäljellä: " + jaljella + " kcal \nYlitit päivän kaloritavoitteen.");
+                }
+                //Näytetään prosentit.
+                //TextView prossat = findViewById(R.id.prossat);
+                prossat.setText(prosentitS + " %");
+
+                //Prosenttipalkki.
+                ProgressBar simpleProgressBar = (ProgressBar) findViewById(R.id.progressBar); // initiate the progress bar
+                simpleProgressBar.setProgress(prosentitI);
+            } else {
+                kaloriTavoite.setText("");
+                prossat.setText("");
             }
-            //Näytetään prosentit.
-            TextView prossat = findViewById(R.id.prossat);
-            prossat.setText(prosentitS + " %");
-
-            //Prosenttipalkki.
-            ProgressBar simpleProgressBar = (ProgressBar) findViewById(R.id.progressBar); // initiate the progress bar
-            simpleProgressBar.setProgress(prosentitI);
 
         }
 
         //Toisen itseasetetun tavoitteen näyttäminen.
         if (!tiedot2.equals("")) {
-            String[] tiedot2_lista = tiedot2.split(",");
+            String[] tiedot2_lista = tiedot2.split(" ");
             String tiedot2_2 = tiedot2_lista[1];
             String tiedot2_1 = tiedot2_lista[0];
-
-            //Lisätiedot, proteiini, hiilarit, rasva
+            float saatuTieto2 = Float.parseFloat(tiedot2_2);
             TextView lisatiedot = findViewById(R.id.lisatiedot);
-            lisatiedot.setGravity(Gravity.CENTER);
-            lisatiedot.setText("Oma tavoite, \n" + tiedot2_1 + ": " + tiedot2_2 + " g/vrk");
+
+            if (saatuTieto2 != 0.0f) {
+                //Lisätiedot, proteiini, hiilarit, rasva
+                //TextView lisatiedot = findViewById(R.id.lisatiedot);
+                lisatiedot.setGravity(Gravity.CENTER);
+                lisatiedot.setText("Oma tavoite, \n" + tiedot2_1 + ": " + tiedot2_2 + " g/vrk");
+            } else {
+                lisatiedot.setText("");
+            }
         }
         /**
          * Asetetaan nimi, mikäli nimi on tallennettu asetuksissa.
@@ -194,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                             finish();
                             break;
                         case R.id.profiili:
-                            startActivity(new Intent(MainActivity.this, Asetukset.class));
+                            startActivity(new Intent(MainActivity.this, Profiili.class));
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             Log.d("Menu", "Profiili painettu");
                             finish();
