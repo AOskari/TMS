@@ -8,7 +8,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.Transition;
@@ -24,14 +23,9 @@ import com.example.androidproject.Ateria;
 import com.example.androidproject.AteriaLista;
 import com.example.androidproject.R;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import static com.example.androidproject.AteriaLista.haeLista;
@@ -150,42 +144,6 @@ public class MainActivity extends AppCompatActivity {
             //Prosenttipalkki.
             ProgressBar simpleProgressBar = (ProgressBar) findViewById(R.id.progressBar); // initiate the progress bar
             simpleProgressBar.setProgress(prosentitI);
-
-            PieChart chart = (PieChart) findViewById(R.id.progressBar2);
-            chart.animateXY(2000, 2000);
-
-          //  PieData data = new PieData();
-            ArrayList lista = new ArrayList();
-            ArrayList kaloritL = new ArrayList();
-            float kS = (float) kalorit;
-            float kYht = (float) kaloritYht;
-       //     float m3 = (float) ras;
-            lista.add(new Entry(kS, 0));
-            lista.add(new Entry(kYht, 1));
-        //    lista.add(new Entry(m3, 2));
-            PieDataSet dataSet = new PieDataSet(lista, "");
-
-            kaloritL.add("Syödyt kalorit");
-            kaloritL.add("Kalorit yhteensä");
-        //    kaloritL.add("rasva");
-
-            PieData data = new PieData(kaloritL, dataSet);
-
-
-            /**
-             * Asetetaan uudet ravintoarvot diagrammiin, poistetaan ylimääräiset merkinnät
-             * ja asetetaan värit.
-             */
-
-            data.setDrawValues(false);
-            chart.setData(data);
-            chart.setDescription("");
-            chart.getLegend().setEnabled(false);
-            chart.setDrawSliceText(true);
-
-       //     GradientDrawable dataSet;
-            dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-
 
         }
 
