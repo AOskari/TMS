@@ -23,7 +23,7 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
@@ -34,6 +34,42 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <ProgressBar
+
+        android:id="@+id/circularProgressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="198dp"
+        android:layout_height="217dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="50"
+        android:progressDrawable="@drawable/circle2"
+        android:secondaryProgress="100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        tools:ignore="MissingConstraints" />
+
+    <ProgressBar
+
+        android:id="@+id/circularProgressbar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="199dp"
+        android:layout_height="215dp"
+        android:layout_centerInParent="true"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="50"
+        android:progressDrawable="@drawable/circle2"
+        android:secondaryProgress="100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/circularProgressbar"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -75,11 +111,11 @@
         android:id="@+id/prossat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/circularProgressbar"
+        app:layout_constraintEnd_toEndOf="@+id/circularProgressbar"
+        app:layout_constraintStart_toStartOf="@+id/circularProgressbar"
+        app:layout_constraintTop_toTopOf="@+id/circularProgressbar" />
 
     <TextView
         android:id="@+id/lisatiedot"
@@ -109,48 +145,17 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnknownId">
+        tools:ignore="UnknownId" />
 
-        <!-- ProgressBar that represents a total of 100% -->
-        <ProgressBar
-            android:id="@+id/background_progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="100"
-            android:progressDrawable="@drawable/stats_full"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- ProgressBar that represents a chart slice, where "android:progress" is the % value of the slice -->
-        <ProgressBar
-            android:id="@+id/stats_progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="75"
-            android:progressDrawable="@drawable/stats_progress" />
-
-        <!-- The text that goes in a center of the chart -->
-        <TextView
-            android:id="@+id/number_of_calories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1500/2000"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/protskuTeksti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/circularProgressbar2"
+        app:layout_constraintEnd_toEndOf="@+id/circularProgressbar2"
+        app:layout_constraintStart_toStartOf="@+id/circularProgressbar2"
+        app:layout_constraintTop_toTopOf="@+id/circularProgressbar2" />
     <!-- Doughnut chart ends here -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

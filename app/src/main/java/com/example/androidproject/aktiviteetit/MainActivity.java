@@ -8,6 +8,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.Transition;
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     private int kuukausi;
     private int vuosi;
 
+    ProgressBar mProgress;
+    ProgressBar mProgress2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +58,25 @@ public class MainActivity extends AppCompatActivity {
 
         kalenteri = Calendar.getInstance();
 
+        //Ympyrä progressbar
+        Resources res = getResources();
+        Drawable drawable = res.getDrawable(R.drawable.circle2);
+        Drawable drawable2 = res.getDrawable(R.drawable.circle2);
+
+        mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
+
+        //mProgress = tavoite 1, mProgress tavoite 2.
+        mProgress2 = (ProgressBar) findViewById(R.id.circularProgressbar2);
+
+        mProgress.setProgress(0);   // Main Progress
+        mProgress.setSecondaryProgress(100); // Secondary Progress
+        mProgress.setMax(100); // Maximum Progress
+        mProgress.setProgressDrawable(drawable);
+
+        mProgress2.setProgress(0);   // Main Progress
+        mProgress2.setSecondaryProgress(100); // Secondary Progress
+        mProgress2.setMax(100); // Maximum Progress
+        mProgress2.setProgressDrawable(drawable2);
         /**
          * Haetaan AteriaLista-singleton pysyväismuistista.
          * Jos singletonia ei löydy, luodaan uusi instanssi ja tallennetaan se pysyväismuistiin.
@@ -89,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
          * Tässä ne syödyt kalorit, käytä tätä sitten kun teet jonkun vitun hienon laskun : DDD.
          */
         int kalorit = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(0));
-
+        int syodytProtskut = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(1));
         //int prosentit = kalorit / tiedot1_kalorit;
 
         /**
@@ -110,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             String[] tiedot1_lista = tiedot1.split(" ");
             String tiedot1_kalorit = tiedot1_lista[1];
             float saatuTieto1 = Float.parseFloat(tiedot1_kalorit);
-            int kaloritYht = (int)Math.round(saatuTieto1);
+            int kaloritYht = (int) Math.round(saatuTieto1);
             TextView prossat = findViewById(R.id.prossat);
 
             /**
@@ -146,6 +170,10 @@ public class MainActivity extends AppCompatActivity {
                 //Prosenttipalkki.
                 ProgressBar simpleProgressBar = (ProgressBar) findViewById(R.id.progressBar); // initiate the progress bar
                 simpleProgressBar.setProgress(prosentitI);
+
+                //Prosenttipalkki ympyrä
+                mProgress.setProgress(prosentitI);   // Main Progress
+
             } else {
                 kaloriTavoite.setText("");
                 prossat.setText("");
@@ -158,6 +186,17 @@ public class MainActivity extends AppCompatActivity {
             String[] tiedot2_lista = tiedot2.split(" ");
             String tiedot2_2 = tiedot2_lista[1];
             String tiedot2_1 = tiedot2_lista[0];
+
+           // int proteiiniTavoite = (int) Integer.parseInt(tiedot2_2);
+            String proteiinit = (tiedot2_2.substring(0, tiedot2_2.length() - 2));
+            int proteiinitInt = Integer.parseInt(proteiinit);
+
+          int proteiiniProsentit = syodytProtskut / proteiinitInt * 100;
+
+            mProgress2.setProgress(proteiiniProsentit);   // Main Progress
+            TextView proteiiniTeksti = findViewById(R.id.protskuTeksti);
+            proteiiniTeksti.setText(proteiiniProsentit + " %");
+
             float saatuTieto2 = Float.parseFloat(tiedot2_2);
             TextView lisatiedot = findViewById(R.id.lisatiedot);
 
