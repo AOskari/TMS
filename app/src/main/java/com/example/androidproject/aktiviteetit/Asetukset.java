@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.example.androidproject.R;
@@ -31,8 +30,8 @@ public class Asetukset extends AppCompatActivity {
     public EditText nimi;
     public SharedPreferences asetukset;
     public SharedPreferences.Editor tiedot;
-    private String kuka, naytaT1, naytaT2;
-    private int kg, cm;
+    private String kuka, naytaT1, naytaT2, tyyppi1, tyyppi2;
+    private float kg, cm, m1, m2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +50,10 @@ public class Asetukset extends AppCompatActivity {
         yksikko2 = findViewById(R.id.yksikko2);
 
         asetukset = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
+        /*// Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
+        //bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);*/
 
         List<String> valinta = new ArrayList<String>();
         valinta.add("Valinta");
@@ -74,9 +77,12 @@ public class Asetukset extends AppCompatActivity {
                 } else if (nimi1.equals("Kalorit")) {
                     tav1.setText("");
                     yksikko1.setText("kcal/vrk");
+                } else if (nimi1.equals("Proteiini")){
+                    tav1.setText("");
+                    yksikko1.setText("g/kg/vrk");
                 } else {
                     tav1.setText("");
-                    yksikko1.setText("g/vrk");
+                    yksikko2.setText("g/vrk");
                 }
             }
             @Override
@@ -87,6 +93,7 @@ public class Asetukset extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String nimi2 = tavoite2.getSelectedItem().toString();
+                int pos2 = tavoite2.getSelectedItemPosition();
 
                 if (nimi2.equals("Valinta")) {
                     tav2.setText("");
@@ -94,6 +101,9 @@ public class Asetukset extends AppCompatActivity {
                 } else if (nimi2.equals("Kalorit")) {
                     tav2.setText("");
                     yksikko2.setText("kcal/vrk");
+                } else if (nimi2.equals("Proteiini")){
+                    tav2.setText("");
+                    yksikko2.setText("g/kg/vrk");
                 } else {
                     tav2.setText("");
                     yksikko2.setText("g/vrk");
@@ -112,21 +122,26 @@ public class Asetukset extends AppCompatActivity {
         kuka = asetukset.getString("Käyttäjä", "");
         Log.d("Testi", kuka);
         nimi.setText(kuka);
-        kg = asetukset.getInt("Paino", 0);
-        Log.d("Testi", Integer.toString(kg));
+        kg = asetukset.getFloat("Paino", 0.0f);
+        Log.d("Testi", Float.toString(kg));
         paino.setText(String.valueOf(kg));
-        cm = asetukset.getInt("Pituus", 0);
-        Log.d("Testi", Integer.toString(cm));
+        cm = asetukset.getFloat("Pituus", 0.0f);
+        Log.d("Testi", Float.toString(cm));
         pituus.setText(String.valueOf(cm));
     }
 
     public void tallenna(View v) {
-        int tyhja = 0;
+        float tyhja = 0.0f;
         String kayttaja; // = nimi.getText().toString();
-        int annaPaino; // = Integer.parseInt(paino.getText().toString());
-        int annaPituus; // = Integer.parseInt(pituus.getText().toString());
-        String naytaT1 = tavoite1.getSelectedItem().toString() + "," + tav1.getText() + "," + yksikko1.getText();
-        String naytaT2 = tavoite2.getSelectedItem().toString() + "," + tav2.getText() + "," + yksikko2.getText();
+        float annaPaino; // = Integer.parseInt(paino.getText().toString());
+        float annaPituus; // = Integer.parseInt(pituus.getText().toString());
+        float maara1; //= Float.parseFloat(tav1.getText().toString());
+        float maara2; //= Float.parseFloat(tav2.getText().toString());
+        //String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
+        //String naytaT2 = tavoite2.getSelectedItem().toString() + " " + tav2.getText() + " " + yksikko2.getText();
+        String tavoitetyyppi1 = tavoite1.getSelectedItem().toString();
+        String tavoitetyyppi2 = tavoite2.getSelectedItem().toString();
+
 
         tiedot = asetukset.edit();
         if (nimi.getText().toString().length() > 0) {
@@ -134,21 +149,66 @@ public class Asetukset extends AppCompatActivity {
         } else {
             kayttaja = "";
         }
-        if (paino.getText().toString().length() > 0) {
-            annaPaino = Integer.parseInt(paino.getText().toString());
+        if (kg != 0.0f) {
+            annaPaino = Float.parseFloat(paino.getText().toString());
         } else {
             annaPaino = tyhja;
         }
         if (pituus.getText().length() > 0){
-            annaPituus = Integer.parseInt(pituus.getText().toString());
+            annaPituus = Float.parseFloat(pituus.getText().toString());
         } else {
             annaPituus = tyhja;
         }
+        if (tav1.getText().length() > 0){
+            maara1 = Float.parseFloat(tav1.getText().toString());
+        } else {
+            maara1 = tyhja;
+        }
+        if (tav2.getText().length() > 0){
+            maara2 = Float.parseFloat(tav2.getText().toString());
+        } else {
+            maara2 = tyhja;
+        }
+        String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
+        String naytaT2 = tavoite2.getSelectedItem().toString() + " " + maara2 + " " + yksikko2.getText();
+        tiedot.putString("Tavoitetyyppi1", tavoitetyyppi1);
+        tiedot.putString("Tavoitetyyppi2", tavoitetyyppi2);
+        tiedot.putFloat("Tavoitemäärä1", maara1);
+        tiedot.putFloat("Tavoitemäärä2", maara2);
         tiedot.putString("Käyttäjä", kayttaja);
-        tiedot.putInt("Paino", annaPaino);
-        tiedot.putInt("Pituus", annaPituus);
+        tiedot.putFloat("Paino", annaPaino);
+        tiedot.putFloat("Pituus", annaPituus);
         tiedot.putString("Tavoite1", naytaT1);
         tiedot.putString("Tavoite2", naytaT2);
         tiedot.commit();
     }
+ /*   private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
+            BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(MenuItem item) {
+
+                    switch (item.getItemId()) {
+
+                        case R.id.koti:
+                            startActivity(new Intent(Asetukset.this, MainActivity.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.d("Menu", "Koti painettu");
+                            finish();
+                            break;
+                        case R.id.suunnittele:
+                            startActivity(new Intent(Asetukset.this, AteriatActivity.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.d("Menu", "Suunnittele painettu");
+                            finish();
+                            break;
+                        case R.id.profiili:
+                            startActivity(new Intent(Asetukset.this, Profiili.class));
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            Log.d("Menu", "Profiili painettu");
+                            finish();
+                            break;
+                    }
+                    return false;
+                }
+            };*/
 }
