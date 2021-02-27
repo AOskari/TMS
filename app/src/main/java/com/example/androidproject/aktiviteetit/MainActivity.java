@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Ympyrä progressbar
         Resources res = getResources();
-        Drawable drawable = res.getDrawable(R.drawable.circle2);
-        Drawable drawable2 = res.getDrawable(R.drawable.circle2);
+        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = res.getDrawable(R.drawable.circle2);
+        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable2 = res.getDrawable(R.drawable.circle2);
 
         mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
 
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         if (aterialistaJson.equals("")) {
             aterialistaJson = gson.toJson(haeLista());
             editor.putString("aterialista", aterialistaJson);
-            editor.commit();
+            editor.apply(); //vaihoin commitista applyhyn
             Log.d("aterialista", aterialistaJson);
         }
 
@@ -109,12 +109,8 @@ public class MainActivity extends AppCompatActivity {
         vuosi = kalenteri.get(Calendar.YEAR);
         TextView kaloriTavoite = findViewById(R.id.testitext);
 
-        /**
-         * Tässä ne syödyt kalorit, käytä tätä sitten kun teet jonkun vitun hienon laskun : DDD.
-         */
         int kalorit = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(0));
         int syodytProtskut = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(1));
-        //int prosentit = kalorit / tiedot1_kalorit;
 
         /**
          * Haetaan pysyväismuistista käyttäjän tiedot ja tavoitteet.
@@ -124,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
         String tiedot1 = sharedPreferences.getString("Tavoite1", "");
         String tiedot2 = sharedPreferences.getString("Tavoite2", "");
 
-        //Päivän tähän asti syödyt kalorit verrattuna omaan tavoitteeseen.
-        // String jokuvitunhienolaskujonkateenmyöhemmin = "";
 
         /**
          * Asetetaan tiedot, mikäli tietoja on tallennettu asetuksissa.
@@ -159,17 +153,13 @@ public class MainActivity extends AppCompatActivity {
 
                 kaloriTavoite.setText("Tavoite: " + tiedot1_kalorit + " kcal" + "\n Jäljellä: " + jaljella + " kcal");
 
-                if (prosentitI > 100) {
+                //käytän ehkä vielä.
+                //if (prosentitI > 100) {
                     //Kertoo että ylitit päivän kaloritavoitteen.
-                   // kaloriTavoite.setText("Tavoite: " + tiedot1_kalorit + " kcal" + "\n jäljellä: " + jaljella + " kcal");
-                }
+                    // kaloriTavoite.setText("Tavoite: " + tiedot1_kalorit + " kcal" + "\n jäljellä: " + jaljella + " kcal");
+             //   }
                 //Näytetään prosentit.
-                //TextView prossat = findViewById(R.id.prossat);
                 prossat.setText(prosentitS + " %");
-
-                //Prosenttipalkki.
-           //     ProgressBar simpleProgressBar = (ProgressBar) findViewById(R.id.progressBar); // initiate the progress bar
-          //      simpleProgressBar.setProgress(prosentitI);
 
                 //Prosenttipalkki ympyrä
                 mProgress.setProgress(prosentitI);   // Main Progress
@@ -187,11 +177,11 @@ public class MainActivity extends AppCompatActivity {
             String tiedot2_2 = tiedot2_lista[1];
             String tiedot2_1 = tiedot2_lista[0];
 
-           // int proteiiniTavoite = (int) Integer.parseInt(tiedot2_2);
+            // int proteiiniTavoite = (int) Integer.parseInt(tiedot2_2);
             String proteiinit = (tiedot2_2.substring(0, tiedot2_2.length() - 2));
             int proteiinitInt = Integer.parseInt(proteiinit);
 
-          int proteiiniProsentit = syodytProtskut / proteiinitInt * 100;
+            int proteiiniProsentit = syodytProtskut / proteiinitInt * 100;
 
             mProgress2.setProgress(proteiiniProsentit);   // Main Progress
             TextView proteiiniTeksti = findViewById(R.id.protskuTeksti);
@@ -202,9 +192,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (saatuTieto2 != 0.0f) {
                 //Lisätiedot, proteiini, hiilarit, rasva
-                //TextView lisatiedot = findViewById(R.id.lisatiedot);
                 lisatiedot.setGravity(Gravity.CENTER);
-                lisatiedot.setText("Tavoite: " +  proteiinitInt + "g/vrk \n Jäljellä: " + tiedot2_2 + " g/vrk");
+                lisatiedot.setText("Tavoite: " + proteiinitInt + "g/vrk \n Jäljellä: " + tiedot2_2 + " g/vrk");
             } else {
                 lisatiedot.setText("");
             }
