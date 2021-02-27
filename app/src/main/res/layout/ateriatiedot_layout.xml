@@ -108,7 +108,7 @@
         android:layout_height="wrap_content"
         android:background="#00000000"
         android:contentDescription="@string/info"
-        android:tint="@color/green"
+        android:tint="@color/valittu"
         app:layout_constraintBottom_toTopOf="@+id/aterianNimi"
         app:layout_constraintEnd_toStartOf="@+id/ateriat_kopioi"
         app:layout_constraintTop_toTopOf="parent"
