@@ -42,7 +42,7 @@ public class AteriaInfoActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-        getWindow().setLayout((int) (width * .8), (int) (height * 0.6));
+        getWindow().setLayout((int) (width * .8), (int) (height * 0.4));
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         Bundle b = getIntent().getExtras();
@@ -86,6 +86,8 @@ public class AteriaInfoActivity extends AppCompatActivity {
          * Asetetaan uudet ravintoarvot diagrammiin, poistetaan ylimääräiset merkinnät
          * ja asetetaan värit.
          */
+
+        //TODO: Prot, rasva ja hh prosenttimäärä. Tekstien tummennus.
         data.setDrawValues(false);
         piiras.setData(data);
         piiras.setDescription("");
@@ -99,10 +101,21 @@ public class AteriaInfoActivity extends AppCompatActivity {
         TextView rasvaTxt = findViewById(R.id.ateriainfo_rasva);
         TextView kaloriTxt = findViewById(R.id.ateriainfo_kalorit);
 
+        TextView tyydytTxt = findViewById(R.id.ateriainfo_tyydmaara);
+        TextView sokeriTxt = findViewById(R.id.ateriainfo_sokerimaara);
+        TextView kuituTxt = findViewById(R.id.ateriainfo_kuitumaara);
+        TextView suolaTxt = findViewById(R.id.ateriainfo_suolamaara);
+
         protTxt.setText("Proteiini " + df.format(prot) + "g");
         hhTxt.setText("Hiilihydraatit " + df.format(hh) + "g");
         rasvaTxt.setText("Rasva " + df.format(rasva) + "g");
         kaloriTxt.setText(Math.round(kalorit) + " kcal");
+
+        tyydytTxt.setText(df.format(tyydyt) + " g");
+        sokeriTxt.setText(df.format(sokeri) + " g");
+        kuituTxt.setText(df.format(kuitu) + " g");
+        suolaTxt.setText(df.format(suola) + " g");
+
         ImageButton poistu = findViewById(R.id.ateriainfo_poistu);
         poistu.setOnClickListener(new View.OnClickListener() {
             @Override
