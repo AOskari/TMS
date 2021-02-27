@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         mProgress2.setSecondaryProgress(100); // Secondary Progress
         mProgress2.setMax(100); // Maximum Progress
         mProgress2.setProgressDrawable(drawable2);
+
         /**
          * Haetaan AteriaLista-singleton pysyväismuistista.
          * Jos singletonia ei löydy, tallennetaan se pysyväismuistiin.
@@ -215,10 +216,15 @@ public class MainActivity extends AppCompatActivity {
          * Varmistetaan että nimessä on aina iso alkukirjain laatikossa näytettäessä,
          * vaikka käyttäjä kirjoittaisi nimensä pienellä.
          */
+        TextView nimitextview = findViewById(R.id.nimiteksti);
+
         if (!nimi.equals("")) {
-            TextView nimitextview = findViewById(R.id.nimiteksti);
+
             String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
             nimitextview.setText("Hei, " + isoalkukirjain + "!");
+        }
+        else {
+            nimitextview.setText("Hei!");
         }
     }
 
