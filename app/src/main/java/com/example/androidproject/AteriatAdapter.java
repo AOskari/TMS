@@ -14,7 +14,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.androidproject.aktiviteetit.AteriaActivity;
+import com.example.androidproject.aktiviteetit.AteriaInfoActivity;
 import com.example.androidproject.aktiviteetit.AteriatActivity;
+import com.example.androidproject.aktiviteetit.TiedotActivity;
 import com.google.gson.Gson;
 
 /**
@@ -75,10 +77,13 @@ public class AteriatAdapter extends BaseAdapter {
         TextView aterianNimi = convertView.findViewById(R.id.aterianNimi);
         TextView aika = convertView.findViewById(R.id.kellonaika);
 
+        Ateria ateria = aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position);
+
         ImageButton poista = convertView.findViewById(R.id.poista);
         ImageButton muokkaa = convertView.findViewById(R.id.muokkaa);
         ImageButton syoty = convertView.findViewById(R.id.syoty);
         ImageButton kopioi = convertView.findViewById(R.id.ateriat_kopioi);
+        ImageButton tiedot = convertView.findViewById(R.id.ateriat_info);
 
         /**
          * Asetetaan onClick-kuuntelija, joka painatessa avaa popup-ikkunan joka pyytää
@@ -91,13 +96,13 @@ public class AteriatAdapter extends BaseAdapter {
                 // Luodaan varmistusikkuna, joka kysyy käyttäjältä haluaako poistaa aterian.
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setCancelable(true);
-                builder.setMessage("Poista " + aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeNimi() + "?");
+                builder.setMessage("Poista " + ateria.haeNimi() + "?");
 
                 builder.setPositiveButton("Poista",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                aterialista.poistaAteria(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeId());
+                                aterialista.poistaAteria(ateria.haeId());
                                 tallennaLista();
                                 ((AteriatActivity)context).naytaAteriat();
                                 Log.d("aterialista", "" + aterialista.tulostaAteriat());
@@ -125,13 +130,13 @@ public class AteriatAdapter extends BaseAdapter {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setCancelable(true);
-                builder.setMessage("Muokkaa " + aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeNimi() + "?");
+                builder.setMessage("Muokkaa " + ateria.haeNimi() + "?");
 
                 builder.setPositiveButton("Muokkaa",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String ateriaJson = gson.toJson(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
+                                String ateriaJson = gson.toJson(ateria);
                                 edit.putString("ateria", ateriaJson);
                                 edit.putBoolean("muokkaus", true);
                                 edit.commit();
@@ -160,13 +165,13 @@ public class AteriatAdapter extends BaseAdapter {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setCancelable(true);
-                builder.setMessage("Kopioi " + aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeNimi() + "?");
+                builder.setMessage("Kopioi " + ateria.haeNimi() + "?");
 
                 builder.setPositiveButton("Kopioi",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String ateriaJson = gson.toJson(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
+                                String ateriaJson = gson.toJson(ateria);
                                 edit.putString("ateria", ateriaJson);
                                 edit.commit();
                                 context.startActivity(new Intent(context, AteriaActivity.class));
@@ -195,12 +200,12 @@ public class AteriatAdapter extends BaseAdapter {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setCancelable(true);
-                builder.setMessage("Aseta syödyksi " + aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeNimi() + "?");
+                builder.setMessage("Aseta syödyksi " + ateria.haeNimi() + "?");
                 builder.setPositiveButton("Syöty",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                aterialista.asetaSyodyksi(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
+                                aterialista.asetaSyodyksi(ateria);
                                 tallennaLista();
                                 ((AteriatActivity)context).naytaAteriat();
                                 ((AteriatActivity)context).asetaRavintoarvot();
@@ -215,6 +220,16 @@ public class AteriatAdapter extends BaseAdapter {
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        });
+
+        tiedot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent nextActivity = new Intent(v.getContext(), AteriaInfoActivity.class);
+                String ateriaJson = gson.toJson(ateria);
+                nextActivity.putExtra("TIEDOT_ATERIA", ateriaJson);
+                v.getContext().startActivity(nextActivity);
             }
         });
 

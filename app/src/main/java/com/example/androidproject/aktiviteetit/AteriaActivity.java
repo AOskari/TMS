@@ -72,7 +72,7 @@ public class AteriaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ateria);
 
         kalenteri = Calendar.getInstance();
-        piiras = findViewById(R.id.piiras);
+        piiras = findViewById(R.id.ateria_tiedot_piiras);
         kalorit = findViewById(R.id.kalorit);
         proteiini = findViewById(R.id.proteiini);
         hiilihydraatti = findViewById(R.id.hiilihydraatti);
