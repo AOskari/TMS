@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.view.View.OnClickListener;
 
 import com.example.androidproject.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -33,7 +34,7 @@ public class Asetukset extends AppCompatActivity {
     public SharedPreferences.Editor tiedot;
     private String kuka, naytaT1, naytaT2, tyyppi1, tyyppi2;
     private float kg, cm, m1, m2;
-    private List<Float> paTrendi = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +58,6 @@ public class Asetukset extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
         //bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);*/
 
-        for (int i = 0; i < paTrendi.size(); i++) {
-            Log.d("Listan tarkistus", paTrendi.toString());
-        }
 
         String[] valinta = getResources().getStringArray(R.array.valinta);
 
@@ -113,7 +111,6 @@ public class Asetukset extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                tav2.setHint("Valitse ensin tyyppi");
             }
         });
         /*tallenna.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +132,7 @@ public class Asetukset extends AppCompatActivity {
         nimi.setText(kuka);
         kg = asetukset.getFloat("Paino", 0.0f);
         Log.d("Testi", Float.toString(kg));
-        paino.setText(Float.toString(kg));
+        paino.setText(String.valueOf(kg));
         cm = asetukset.getFloat("Pituus", 0.0f);
         Log.d("Testi", Float.toString(cm));
         pituus.setText(String.valueOf(cm));
@@ -143,18 +140,18 @@ public class Asetukset extends AppCompatActivity {
 
     public void tallenna(View v) {
         float tyhja = 0.0f;
-        String kayttaja; // = nimi.getText().toString();
-        float annaPaino; // = Integer.parseInt(paino.getText().toString());
-        float annaPituus; // = Integer.parseInt(pituus.getText().toString());
-        float maara1; //= Float.parseFloat(tav1.getText().toString());
-        float maara2; //= Float.parseFloat(tav2.getText().toString());
+        String kayttaja = nimi.getText().toString();
+        float annaPaino = Float.parseFloat(paino.getText().toString());
+        float annaPituus = Float.parseFloat(pituus.getText().toString());
+        float maara1 = Float.parseFloat(tav1.getText().toString());
+        float maara2 = Float.parseFloat(tav2.getText().toString());
         //String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
         //String naytaT2 = tavoite2.getSelectedItem().toString() + " " + tav2.getText() + " " + yksikko2.getText();
         String tavoitetyyppi1 = tavoite1.getSelectedItem().toString();
         String tavoitetyyppi2 = tavoite2.getSelectedItem().toString();
 
         tiedot = asetukset.edit();
-        if (nimi.getText().toString().length() > 0) {
+       /* if (nimi.getText().toString().length() > 0) {
             kayttaja = nimi.getText().toString();
         } else {
             kayttaja = "";
@@ -164,7 +161,7 @@ public class Asetukset extends AppCompatActivity {
         } else {
             annaPaino = tyhja;
         }
-        if (pituus.getText().length() > 0){
+        if (cm != 0.0f){
             annaPituus = Float.parseFloat(pituus.getText().toString());
         } else {
             annaPituus = tyhja;
@@ -178,9 +175,9 @@ public class Asetukset extends AppCompatActivity {
             maara2 = Float.parseFloat(tav2.getText().toString());
         } else {
             maara2 = tyhja;
-        }
+        }*/
 
-        paTrendi.add(annaPaino);
+
         String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
         String naytaT2 = tavoite2.getSelectedItem().toString() + " " + maara2 + " " + yksikko2.getText();
         tiedot.putString("Tavoitetyyppi1", tavoitetyyppi1);

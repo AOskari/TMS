@@ -47,7 +47,7 @@ public class Profiili extends AppCompatActivity {
 
     }
 
-        private void haeTiedot(){
+    private void haeTiedot(){
         tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         paino = tiedot.getFloat("Paino", 0.0f);
         nimi = tiedot.getString("Käyttäjä", "");
