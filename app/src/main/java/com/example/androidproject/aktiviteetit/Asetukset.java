@@ -136,32 +136,34 @@ public class Asetukset extends AppCompatActivity {
         cm = asetukset.getFloat("Pituus", 0.0f);
         Log.d("Testi", Float.toString(cm));
         pituus.setText(String.valueOf(cm));
+        m1 = asetukset.getFloat("Tavoitemäärä1", 0.0f);
+        m2 = asetukset.getFloat("Tavoitemäärä2", 0.0f);
     }
 
     public void tallenna(View v) {
         float tyhja = 0.0f;
         String kayttaja = nimi.getText().toString();
-        float annaPaino = Float.parseFloat(paino.getText().toString());
-        float annaPituus = Float.parseFloat(pituus.getText().toString());
-        float maara1 = Float.parseFloat(tav1.getText().toString());
-        float maara2 = Float.parseFloat(tav2.getText().toString());
+        float annaPaino; // = Float.parseFloat(paino.getText().toString());
+        float annaPituus; // = Float.parseFloat(pituus.getText().toString());
+        float maara1; // = Float.parseFloat(tav1.getText().toString());
+        float maara2; // = Float.parseFloat(tav2.getText().toString());
         //String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
         //String naytaT2 = tavoite2.getSelectedItem().toString() + " " + tav2.getText() + " " + yksikko2.getText();
         String tavoitetyyppi1 = tavoite1.getSelectedItem().toString();
         String tavoitetyyppi2 = tavoite2.getSelectedItem().toString();
 
         tiedot = asetukset.edit();
-       /* if (nimi.getText().toString().length() > 0) {
+        if (nimi.getText().toString().length() > 0) {
             kayttaja = nimi.getText().toString();
         } else {
             kayttaja = "";
         }
-        if (kg != 0.0f) {
+        if (paino.getText().length() > 0) {
             annaPaino = Float.parseFloat(paino.getText().toString());
         } else {
             annaPaino = tyhja;
         }
-        if (cm != 0.0f){
+        if (pituus.getText().length() > 0){
             annaPituus = Float.parseFloat(pituus.getText().toString());
         } else {
             annaPituus = tyhja;
@@ -175,7 +177,7 @@ public class Asetukset extends AppCompatActivity {
             maara2 = Float.parseFloat(tav2.getText().toString());
         } else {
             maara2 = tyhja;
-        }*/
+        }
 
 
         String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
