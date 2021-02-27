@@ -120,11 +120,6 @@ public class Asetukset extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                tallenna();
-                //paTrendi.add(Float.parseFloat(paino.getText().toString()));
-                for (int i = 0; i < paTrendi.size(); i++) {
-                    Log.d("Listan tarkistus", paTrendi.toString() );
-                }
             }
         });
 
@@ -140,13 +135,13 @@ public class Asetukset extends AppCompatActivity {
         nimi.setText(kuka);
         kg = asetukset.getFloat("Paino", 0.0f);
         Log.d("Testi", Float.toString(kg));
-        paino.setText(String.valueOf(kg));
+        paino.setText(Float.toString(kg));
         cm = asetukset.getFloat("Pituus", 0.0f);
         Log.d("Testi", Float.toString(cm));
         pituus.setText(String.valueOf(cm));
     }
 
-    public void tallenna() {
+    public void tallenna(View v) {
         float tyhja = 0.0f;
         String kayttaja; // = nimi.getText().toString();
         float annaPaino; // = Integer.parseInt(paino.getText().toString());
