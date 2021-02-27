@@ -28,6 +28,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import static com.example.androidproject.AteriaLista.haeLista;
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         TextView kaloriTavoite = findViewById(R.id.testitext);
 
         int kalorit = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(0));
-        int syodytProtskut = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(1));
+        double syodytProtskut = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(1);
 
         /**
          * Haetaan pysyväismuistista käyttäjän tiedot ja tavoitteet.
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         String nimi = sharedPreferences.getString("Käyttäjä", "");
         String tiedot1 = sharedPreferences.getString("Tavoite1", "");
         String tiedot2 = sharedPreferences.getString("Tavoite2", "");
+
 
 
         /**
@@ -173,15 +175,20 @@ public class MainActivity extends AppCompatActivity {
 
         //Toisen itseasetetun tavoitteen näyttäminen.
         if (!tiedot2.equals("")) {
+            /**
+             * Olio joka pyöristää numerot kahteen desimaaliin ja muuntaa numeron Stringiksi.
+             */
+            DecimalFormat df = new DecimalFormat("#.##");
+
             String[] tiedot2_lista = tiedot2.split(" ");
             String tiedot2_2 = tiedot2_lista[1];
             String tiedot2_1 = tiedot2_lista[0];
 
             // int proteiiniTavoite = (int) Integer.parseInt(tiedot2_2);
             String proteiinit = (tiedot2_2.substring(0, tiedot2_2.length() - 2));
-            int proteiinitInt = Integer.parseInt(proteiinit);
 
-            int proteiiniProsentit = syodytProtskut / proteiinitInt * 100;
+            double proteiinitDouble = Double.parseDouble(proteiinit);
+            int proteiiniProsentit = (int) Math.round(syodytProtskut / proteiinitDouble * 100);
 
             mProgress2.setProgress(proteiiniProsentit);   // Main Progress
             TextView proteiiniTeksti = findViewById(R.id.protskuTeksti);
@@ -190,10 +197,15 @@ public class MainActivity extends AppCompatActivity {
             float saatuTieto2 = Float.parseFloat(tiedot2_2);
             TextView lisatiedot = findViewById(R.id.lisatiedot);
 
+            double jaljella = proteiinitDouble - syodytProtskut;
+            if (jaljella <= 0) {
+                jaljella = 0;
+            }
+
             if (saatuTieto2 != 0.0f) {
                 //Lisätiedot, proteiini, hiilarit, rasva
                 lisatiedot.setGravity(Gravity.CENTER);
-                lisatiedot.setText("Tavoite: " + proteiinitInt + "g/vrk \n Jäljellä: " + tiedot2_2 + " g/vrk");
+                lisatiedot.setText("Tavoite: " + proteiinitDouble + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
             } else {
                 lisatiedot.setText("");
             }
