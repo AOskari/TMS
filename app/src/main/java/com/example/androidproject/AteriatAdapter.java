@@ -78,6 +78,7 @@ public class AteriatAdapter extends BaseAdapter {
         ImageButton poista = convertView.findViewById(R.id.poista);
         ImageButton muokkaa = convertView.findViewById(R.id.muokkaa);
         ImageButton syoty = convertView.findViewById(R.id.syoty);
+        ImageButton kopioi = convertView.findViewById(R.id.ateriat_kopioi);
 
         /**
          * Asetetaan onClick-kuuntelija, joka painatessa avaa popup-ikkunan joka pyytää
@@ -116,16 +117,70 @@ public class AteriatAdapter extends BaseAdapter {
         /**
          *  muokkaa-nappia painatessa asetetaan pysyväismuistiin valittu ateria, jolloin
          *  AteriaActivityä avatessa näkymään ilmestyy valittu ateria.
+         *  Luodaan varmistusikkuna, joka kysyy käyttäjältä haluaako hän muokata valittua ateriaa.
          */
         muokkaa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ateriaJson = gson.toJson(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
-                edit.putString("ateria", ateriaJson);
-                edit.putBoolean("muokkaus", true);
-                edit.commit();
-                context.startActivity(new Intent(context, AteriaActivity.class));
-                ((AteriatActivity)context).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setCancelable(true);
+                builder.setMessage("Muokkaa " + aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeNimi() + "?");
+
+                builder.setPositiveButton("Muokkaa",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String ateriaJson = gson.toJson(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
+                                edit.putString("ateria", ateriaJson);
+                                edit.putBoolean("muokkaus", true);
+                                edit.commit();
+                                context.startActivity(new Intent(context, AteriaActivity.class));
+                                ((AteriatActivity)context).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            }
+                        });
+                builder.setNegativeButton("Peruuta", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
+        /**
+         * Sama ominaisuus kuin muokkaa-napissa, mutta ilman muokkaustilaa. Mahdollistaa aterian kopioinnin
+         * ja uuden aterian luomisen.
+         * Luodaan varmistusikkuna, jossa kysytään käyttäjältä haluaako hän kopioida valitun aterian.
+         */
+        kopioi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setCancelable(true);
+                builder.setMessage("Kopioi " + aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position).haeNimi() + "?");
+
+                builder.setPositiveButton("Kopioi",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String ateriaJson = gson.toJson(aterialista.haePaivamaaralla(paiva, kuukausi, vuosi).get(position));
+                                edit.putString("ateria", ateriaJson);
+                                edit.commit();
+                                context.startActivity(new Intent(context, AteriaActivity.class));
+                                ((AteriatActivity)context).overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            }
+                        });
+                builder.setNegativeButton("Peruuta", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
             }
         });
 
