@@ -116,12 +116,12 @@ public class Asetukset extends AppCompatActivity {
                 tav2.setHint("Valitse ensin tyyppi");
             }
         });
-        tallenna.setOnClickListener(new View.OnClickListener() {
+        /*tallenna.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
+        });*/
 
 
     }
