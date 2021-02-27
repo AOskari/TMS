@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         mProgress2.setProgressDrawable(drawable2);
         /**
          * Haetaan AteriaLista-singleton pysyväismuistista.
-         * Jos singletonia ei löydy, luodaan uusi instanssi ja tallennetaan se pysyväismuistiin.
+         * Jos singletonia ei löydy, tallennetaan se pysyväismuistiin.
          */
         pref = getApplicationContext().getSharedPreferences("mainPref", 0);
         editor = pref.edit();

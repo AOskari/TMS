@@ -126,7 +126,7 @@ public class HakuAdapter extends BaseAdapter {
                             ravinto.get(7), ravinto.get(8), maara);
 
                     ateria.lisaaAine(uusiTarvike);
-                    activity.naytaIlmoitus(lista.get(position).haeNimi());
+                    activity.naytaIlmoitus(lista.get(position).haeNimi(), false);
 
                     ateriaJson = gson.toJson(ateria);
                     editor.putString("ateria", ateriaJson);
@@ -136,6 +136,8 @@ public class HakuAdapter extends BaseAdapter {
                     // Lopuksi tyhjennetään tekstikenttä ja piilotetaan näppäimistö.
                     editText.setText("0g");
                     activity.suljeNappaimisto();
+                } else if (editText.getText().toString().equals("0g") ||editText.getText().toString().equals("g")) {
+                    activity.naytaIlmoitus(lista.get(position).haeNimi(), true);
                 }
             }
         });

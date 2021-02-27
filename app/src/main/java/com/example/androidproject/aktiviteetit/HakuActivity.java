@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -129,7 +130,6 @@ public class HakuActivity extends AppCompatActivity {
                                 JSONObject names = obj.getJSONObject("name");
                                 String name = names.getString("fi");
 
-                                Log.d("looping", obj.toString() + " " + i);
                                 Elintarvike elintarvike = new Elintarvike(name, obj.getDouble("salt") / 1000, obj.getDouble("energyKcal"), obj.getDouble("fat"),
                                         obj.getDouble("protein"), obj.getDouble("carbohydrate"),
                                         obj.getDouble("organicAcids"), obj.getDouble("saturatedFat"), obj.getDouble("sugar"),
@@ -178,9 +178,16 @@ public class HakuActivity extends AppCompatActivity {
     /**
      * Näyttää ilmoituksen ja poistaa ilmoitukset näkyvistä 5 sekunnin kuluttua animoituna.
      */
-    public void naytaIlmoitus(String nimi) {
-        ilmoitus.setText(nimi + " lisätty ateriaan.");
+    public void naytaIlmoitus(String nimi, boolean error) {
         ilmoitus.setVisibility(View.VISIBLE);
+
+        if (error) {
+            ilmoitus.setBackgroundResource(R.drawable.error_alusta);
+            ilmoitus.setText("Syötä haluttu määrä.");
+        } else {
+            ilmoitus.setBackgroundResource(R.drawable.vihrea_alusta);
+            ilmoitus.setText(nimi + " lisätty ateriaan.");
+        }
 
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator());
