@@ -157,19 +157,19 @@ public class MainActivity extends AppCompatActivity {
                 kaloriTavoite.setGravity(Gravity.CENTER);
 
 
-                kaloriTavoite.setText("Tavoite päivässä :" + tiedot1_kalorit + " kcal" + "\nKaloreita jäljellä: " + jaljella + " kcal");
+                kaloriTavoite.setText("Tavoite: " + tiedot1_kalorit + " kcal" + "\n Jäljellä: " + jaljella + " kcal");
 
                 if (prosentitI > 100) {
                     //Kertoo että ylitit päivän kaloritavoitteen.
-                    kaloriTavoite.setText("Tavoite päivässä: " + tiedot1_kalorit + " kcal" + "\nKaloreita jäljellä: " + jaljella + " kcal \nYlitit päivän kaloritavoitteen.");
+                   // kaloriTavoite.setText("Tavoite: " + tiedot1_kalorit + " kcal" + "\n jäljellä: " + jaljella + " kcal");
                 }
                 //Näytetään prosentit.
                 //TextView prossat = findViewById(R.id.prossat);
                 prossat.setText(prosentitS + " %");
 
                 //Prosenttipalkki.
-                ProgressBar simpleProgressBar = (ProgressBar) findViewById(R.id.progressBar); // initiate the progress bar
-                simpleProgressBar.setProgress(prosentitI);
+           //     ProgressBar simpleProgressBar = (ProgressBar) findViewById(R.id.progressBar); // initiate the progress bar
+          //      simpleProgressBar.setProgress(prosentitI);
 
                 //Prosenttipalkki ympyrä
                 mProgress.setProgress(prosentitI);   // Main Progress
@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
                 //Lisätiedot, proteiini, hiilarit, rasva
                 //TextView lisatiedot = findViewById(R.id.lisatiedot);
                 lisatiedot.setGravity(Gravity.CENTER);
-                lisatiedot.setText("Oma tavoite, \n" + tiedot2_1 + ": " + tiedot2_2 + " g/vrk");
+                lisatiedot.setText("Tavoite: " +  proteiinitInt + "g/vrk \n Jäljellä: " + tiedot2_2 + " g/vrk");
             } else {
                 lisatiedot.setText("");
             }
