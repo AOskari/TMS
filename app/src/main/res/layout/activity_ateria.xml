@@ -448,7 +448,7 @@
         android:focusable="true"
         android:onClick="hae"
         android:src="@drawable/add"
-        app:backgroundTint="#880BA9C9"
+        app:backgroundTint="#9976EE00"
         app:elevation="500dp"
         app:layout_constraintBottom_toBottomOf="@+id/ateria"
         app:layout_constraintEnd_toEndOf="parent"
