@@ -37,7 +37,6 @@ public class HakuAdapter extends BaseAdapter {
     String ateriaJson;
     HakuActivity activity;
 
-
     public HakuAdapter(Context context, List<Elintarvike> lista, SharedPreferences pref, HakuActivity activity) {
         this.context = context;
         this.lista = lista;
