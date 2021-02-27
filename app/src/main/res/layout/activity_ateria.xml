@@ -38,7 +38,7 @@
             android:hint="@string/ateria_nimi"
             android:importantForAutofill="no"
             android:inputType="text"
-            app:layout_constraintBottom_toTopOf="@+id/piiras"
+            app:layout_constraintBottom_toTopOf="@+id/ateria_tiedot_piiras"
             app:layout_constraintEnd_toStartOf="@+id/paivays"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/create"
@@ -98,11 +98,11 @@
             android:layout_marginRight="8dp"
             android:textColor="#cc5500"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/piiras"
+            app:layout_constraintBottom_toBottomOf="@+id/ateria_tiedot_piiras"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/piiras"
-            app:layout_constraintTop_toTopOf="@+id/piiras"
+            app:layout_constraintStart_toEndOf="@+id/ateria_tiedot_piiras"
+            app:layout_constraintTop_toTopOf="@+id/ateria_tiedot_piiras"
             tools:ignore="VectorDrawableCompat" />
 
         <TextView
@@ -115,7 +115,7 @@
             android:textColor="#ffc04d"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/piiras"
+            app:layout_constraintStart_toEndOf="@+id/ateria_tiedot_piiras"
             app:layout_constraintTop_toBottomOf="@+id/hiilihydraatti"
             tools:ignore="VectorDrawableCompat" />
 
@@ -130,7 +130,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/hiilihydraatti"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/piiras"
+            app:layout_constraintStart_toEndOf="@+id/ateria_tiedot_piiras"
             tools:ignore="VectorDrawableCompat" />
 
         <TextView
@@ -140,13 +140,13 @@
             android:elevation="30dp"
             android:text=""
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/piiras"
-            app:layout_constraintEnd_toEndOf="@+id/piiras"
-            app:layout_constraintStart_toStartOf="@+id/piiras"
-            app:layout_constraintTop_toTopOf="@+id/piiras" />
+            app:layout_constraintBottom_toBottomOf="@+id/ateria_tiedot_piiras"
+            app:layout_constraintEnd_toEndOf="@+id/ateria_tiedot_piiras"
+            app:layout_constraintStart_toStartOf="@+id/ateria_tiedot_piiras"
+            app:layout_constraintTop_toTopOf="@+id/ateria_tiedot_piiras" />
 
         <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/piiras"
+            android:id="@+id/ateria_tiedot_piiras"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="4dp"

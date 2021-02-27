@@ -43,8 +43,6 @@ public class Profiili extends AppCompatActivity {
 
         haeTiedot();
 
-
-
     }
 
     private void haeTiedot(){
