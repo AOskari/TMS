@@ -12,7 +12,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.androidproject.R;
+import com.github.mikephil.charting.charts.LineChart;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Profiili extends AppCompatActivity {
     private TextView pronimi, propaino, proBMI, asetetut, tavoite1, tavoite2;
@@ -20,6 +24,9 @@ public class Profiili extends AppCompatActivity {
     private float paino, pituus;
     private double bmi;
     private String nimi, tiedot1, tiedot2;
+    LineChart historia;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +39,15 @@ public class Profiili extends AppCompatActivity {
         asetetut = findViewById(R.id.tavoitteet);
         tavoite1 = findViewById(R.id.eka);
         tavoite2 = findViewById(R.id.toka);
+        historia = findViewById(R.id.historia);
 
+        haeTiedot();
+
+
+
+    }
+
+        private void haeTiedot(){
         tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         paino = tiedot.getFloat("Paino", 0.0f);
         nimi = tiedot.getString("Käyttäjä", "");
@@ -75,10 +90,10 @@ public class Profiili extends AppCompatActivity {
     }
 
     public double laskeBmi(){
-        //tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
-        paino = tiedot.getFloat("Paino", 0.0f);
-        pituus = tiedot.getFloat("Pituus", 0.0f)/100;
-        bmi = paino/(pituus*pituus);
+            //paino = tiedot.getFloat("Paino", 0.0f);
+            pituus = tiedot.getFloat("Pituus", 0.0f) / 100;
+            bmi = paino / (pituus * pituus);
+
         return bmi;
     }
     /**

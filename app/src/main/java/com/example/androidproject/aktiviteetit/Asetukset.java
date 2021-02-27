@@ -3,6 +3,7 @@ package com.example.androidproject.aktiviteetit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ public class Asetukset extends AppCompatActivity {
     public SharedPreferences.Editor tiedot;
     private String kuka, naytaT1, naytaT2, tyyppi1, tyyppi2;
     private float kg, cm, m1, m2;
+    private List<Float> paTrendi = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +57,11 @@ public class Asetukset extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
         //bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);*/
 
-        List<String> valinta = new ArrayList<String>();
-        valinta.add("Valinta");
-        valinta.add("Kalorit");
-        valinta.add("Hiilihydraatti");
-        valinta.add("Proteiini");
+        for (int i = 0; i < paTrendi.size(); i++) {
+            Log.d("Listan tarkistus", paTrendi.toString());
+        }
+
+        String[] valinta = getResources().getStringArray(R.array.valinta);
 
         ArrayAdapter<String> val = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, valinta);
         val.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -111,8 +113,22 @@ public class Asetukset extends AppCompatActivity {
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                tav2.setHint("Valitse ensin tyyppi");
             }
         });
+        tallenna.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                tallenna();
+                //paTrendi.add(Float.parseFloat(paino.getText().toString()));
+                for (int i = 0; i < paTrendi.size(); i++) {
+                    Log.d("Listan tarkistus", paTrendi.toString() );
+                }
+            }
+        });
+
+
     }
 
     @Override
@@ -130,7 +146,7 @@ public class Asetukset extends AppCompatActivity {
         pituus.setText(String.valueOf(cm));
     }
 
-    public void tallenna(View v) {
+    public void tallenna() {
         float tyhja = 0.0f;
         String kayttaja; // = nimi.getText().toString();
         float annaPaino; // = Integer.parseInt(paino.getText().toString());
@@ -141,7 +157,6 @@ public class Asetukset extends AppCompatActivity {
         //String naytaT2 = tavoite2.getSelectedItem().toString() + " " + tav2.getText() + " " + yksikko2.getText();
         String tavoitetyyppi1 = tavoite1.getSelectedItem().toString();
         String tavoitetyyppi2 = tavoite2.getSelectedItem().toString();
-
 
         tiedot = asetukset.edit();
         if (nimi.getText().toString().length() > 0) {
@@ -169,6 +184,8 @@ public class Asetukset extends AppCompatActivity {
         } else {
             maara2 = tyhja;
         }
+
+        paTrendi.add(annaPaino);
         String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
         String naytaT2 = tavoite2.getSelectedItem().toString() + " " + maara2 + " " + yksikko2.getText();
         tiedot.putString("Tavoitetyyppi1", tavoitetyyppi1);
