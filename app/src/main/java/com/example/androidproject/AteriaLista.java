@@ -112,11 +112,13 @@ public class AteriaLista {
         double hh = 0;
         double rasva = 0;
 
-        for (int i = 0; i < syodytAteriat.size(); i++) {
-            kalorit += syodytAteriat.get(i).haeRavinto().get(4);
-            proteiini += syodytAteriat.get(i).haeRavinto().get(1);
-            hh += syodytAteriat.get(i).haeRavinto().get(2);
-            rasva += syodytAteriat.get(i).haeRavinto().get(3);
+        List<Ateria> palautettavat = haeSyodytPaivamaaralla(paiva, kuukausi, vuosi);
+
+        for (int i = 0; i < palautettavat.size(); i++) {
+            kalorit += palautettavat.get(i).haeRavinto().get(4);
+            proteiini += palautettavat.get(i).haeRavinto().get(1);
+            hh += palautettavat.get(i).haeRavinto().get(2);
+            rasva += palautettavat.get(i).haeRavinto().get(3);
         }
 
         List<Double> arvot = Arrays.asList(kalorit, proteiini, hh, rasva);
@@ -137,6 +139,9 @@ public class AteriaLista {
         return kalorit;
     }
 
+    /**
+     * Palauttaa aterioiden yhteiskalorimäärän ilman valittua ateriaa.
+     */
     public int haeKaloritIlman(int id, int paiva, int kuukausi, int vuosi) {
         List<Ateria> palautettavat = haePaivamaaralla(paiva, kuukausi, vuosi);
         int kalorit = 0;

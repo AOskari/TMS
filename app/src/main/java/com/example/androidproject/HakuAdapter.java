@@ -26,15 +26,15 @@ import java.util.List;
  */
 public class HakuAdapter extends BaseAdapter {
 
-    Context context;
-    List<Elintarvike> lista;
-    Gson gson = new Gson();
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
+    private Context context;
+    private List<Elintarvike> lista;
+    private Gson gson = new Gson();
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
-    Ateria ateria;
-    String ateriaJson;
-    HakuActivity activity;
+    private Ateria ateria;
+    private String ateriaJson;
+    private HakuActivity activity;
 
     /**
      * Adapterin konstruktori.

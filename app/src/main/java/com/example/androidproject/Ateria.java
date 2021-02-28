@@ -12,8 +12,8 @@ import java.util.List;
 public class Ateria {
 
     private List<Elintarvike> raakaAineet;
-
     private String name;
+
     private double salt;
     private double kcal;
     private double fat;
@@ -28,7 +28,6 @@ public class Ateria {
     private int paiva;
     private int kuukausi;
     private int vuosi;
-
     private int tunnit;
     private int minuutit;
     private int id;
