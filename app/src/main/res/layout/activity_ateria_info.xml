@@ -13,185 +13,265 @@
         android:layout_height="40dp"
         android:background="#00000000"
         android:contentDescription="@string/poistu"
+        android:elevation="20dp"
         android:tint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ateriainfo_hh"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/cancel"
-        tools:ignore="VectorDrawableCompat" />
+        tools:ignore="VectorDrawableCompat"
+        tools:targetApi="lollipop" />
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/ateria_tiedot_piiras"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ateriainfo_alusta1"
         android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/ateriainfo_tyyd"
-        app:layout_constraintEnd_toStartOf="@+id/ateriainfo_hh"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </com.github.mikephil.charting.charts.PieChart>
-
-    <TextView
-        android:id="@+id/ateriainfo_prot"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#891C1F"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ateriainfo_hh"
-        app:layout_constraintEnd_toEndOf="@+id/ateriainfo_hh"
-        app:layout_constraintStart_toEndOf="@+id/ateria_tiedot_piiras"
-        app:layout_constraintTop_toTopOf="@+id/ateria_tiedot_piiras" />
-
-    <TextView
-        android:id="@+id/ateriainfo_hh"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#cc5500"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ateriainfo_rasva"
-        app:layout_constraintEnd_toStartOf="@+id/ateriainfo_poistu"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ateria_tiedot_piiras"
-        app:layout_constraintTop_toBottomOf="@+id/ateriainfo_prot" />
-
-    <TextView
-        android:id="@+id/ateriainfo_rasva"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="#ffc04d"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/ateria_tiedot_piiras"
-        app:layout_constraintEnd_toEndOf="@+id/ateriainfo_hh"
-        app:layout_constraintStart_toEndOf="@+id/ateria_tiedot_piiras"
-        app:layout_constraintTop_toBottomOf="@+id/ateriainfo_hh" />
-
-    <TextView
-        android:id="@+id/ateriainfo_kalorit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/ateria_tiedot_piiras"
-        app:layout_constraintEnd_toEndOf="@+id/ateria_tiedot_piiras"
-        app:layout_constraintStart_toStartOf="@+id/ateria_tiedot_piiras"
-        app:layout_constraintTop_toTopOf="@+id/ateria_tiedot_piiras" />
-
-    <TextView
-        android:id="@+id/ateriainfo_tyyd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:gravity="left"
-        android:text="@string/tyydyttynyt_rasva"
-        app:layout_constraintBottom_toTopOf="@+id/ateriainfo_sokeri"
-        app:layout_constraintEnd_toStartOf="@+id/ateriainfo_tyydmaara"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ateria_tiedot_piiras" />
-
-    <TextView
-        android:id="@+id/ateriainfo_tyydmaara"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:gravity="right"
-        android:text="@string/aloitus_gramma"
-        app:layout_constraintBottom_toTopOf="@+id/ateriainfo_sokerimaara"
+        android:background="@drawable/alusta"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/ateriainfo_alusta2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ateriainfo_tyyd"
-        app:layout_constraintTop_toBottomOf="@+id/ateria_tiedot_piiras" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="lollipop">
 
-    <TextView
-        android:id="@+id/ateriainfo_sokeri"
+        <TextView
+            android:id="@+id/ateriainfo_kalorit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="20dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ateria_tiedot_piiras"
+            app:layout_constraintEnd_toEndOf="@+id/ateria_tiedot_piiras"
+            app:layout_constraintStart_toStartOf="@+id/ateria_tiedot_piiras"
+            app:layout_constraintTop_toTopOf="@+id/ateria_tiedot_piiras" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/ateria_tiedot_piiras"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.github.mikephil.charting.charts.PieChart>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ateriainfo_alusta2"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:gravity="left"
-        android:text="@string/joista_sokereita"
-        app:layout_constraintBottom_toTopOf="@+id/ateriainfo_kuitu"
-        app:layout_constraintEnd_toStartOf="@+id/ateriainfo_sokerimaara"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ateriainfo_tyyd" />
-
-    <TextView
-        android:id="@+id/ateriainfo_sokerimaara"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="right"
-        android:text="@string/aloitus_gramma"
-        app:layout_constraintBottom_toTopOf="@+id/ateriainfo_kuitumaara"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ateriainfo_sokeri"
-        app:layout_constraintTop_toBottomOf="@+id/ateriainfo_tyydmaara" />
-
-    <TextView
-        android:id="@+id/ateriainfo_kuitu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:gravity="left"
-        android:text="@string/kuitu"
-        app:layout_constraintBottom_toTopOf="@+id/ateriainfo_suola"
-        app:layout_constraintEnd_toStartOf="@+id/ateriainfo_kuitumaara"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ateriainfo_sokeri" />
-
-    <TextView
-        android:id="@+id/ateriainfo_kuitumaara"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:gravity="right"
-        android:text="@string/aloitus_gramma"
-        app:layout_constraintBottom_toTopOf="@+id/ateriainfo_suolamaara"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ateriainfo_kuitu"
-        app:layout_constraintTop_toBottomOf="@+id/ateriainfo_sokerimaara" />
-
-    <TextView
-        android:id="@+id/ateriainfo_suola"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="left"
-        android:text="@string/suola"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ateriainfo_suolamaara"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ateriainfo_kuitu" />
-
-    <TextView
-        android:id="@+id/ateriainfo_suolamaara"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:gravity="right"
-        android:text="@string/aloitus_gramma"
+        android:background="@drawable/alusta"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/ateriainfo_suola"
-        app:layout_constraintTop_toBottomOf="@+id/ateriainfo_kuitumaara" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ateriainfo_alusta1"
+        tools:targetApi="lollipop">
+
+        <TextView
+            android:id="@+id/ateriainfo_prot"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/aloitus_gramma"
+            android:gravity="end"
+            android:textColor="#891C1F"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_hh"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ateriainfo_rasva"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:text="@string/aloitus_gramma"
+            android:textColor="#ffc04d"
+            android:gravity="end"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_tyydmaara"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_sokerimaara" />
+
+        <TextView
+            android:id="@+id/ateriainfo_hh"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="end"
+            android:text="@string/aloitus_gramma"
+            android:textColor="#cc5500"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_sokerimaara"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_prot" />
+
+        <TextView
+            android:id="@+id/ateriainfo_tyyd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="start"
+            android:text="@string/tyydyttynyt_rasva"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_suola"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_rasvateksti" />
+
+        <TextView
+            android:id="@+id/ateriainfo_kuitumaara"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="end"
+            android:text="@string/aloitus_gramma"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_suolamaara" />
+
+        <TextView
+            android:id="@+id/ateriainfo_kuitu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="start"
+            android:text="@string/kuitu"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_suola" />
+
+        <TextView
+            android:id="@+id/ateriainfo_sokerimaara"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="end"
+            android:text="@string/aloitus_gramma"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_rasva"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_hh" />
+
+        <TextView
+            android:id="@+id/ateriainfo_suolamaara"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="start"
+            android:text="@string/aloitus_gramma"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_kuitumaara"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_tyydmaara" />
+
+        <TextView
+            android:id="@+id/ateriainfo_suola"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="end"
+            android:text="@string/suola"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_kuitu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_tyyd" />
+
+        <TextView
+            android:id="@+id/ateriainfo_sokeri"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="start"
+            android:text="@string/joista_sokereita"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_rasvateksti"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_hhteksti" />
+
+        <TextView
+            android:id="@+id/ateriainfo_tyydmaara"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="end"
+            android:text="@string/aloitus_gramma"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_suolamaara"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_rasva" />
+
+        <TextView
+            android:id="@+id/ateriainfo_protteksti"
+            android:textColor="#891C1F"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/proteiini"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_hhteksti"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ateriainfo_hhteksti"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textColor="#cc5500"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/hiilihydraatti"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_sokeri"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_protteksti" />
+
+        <TextView
+            android:id="@+id/ateriainfo_rasvateksti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="#ffc04d"
+            android:textStyle="bold"
+            android:layout_marginLeft="8dp"
+            android:text="@string/rasva"
+            app:layout_constraintBottom_toTopOf="@+id/ateriainfo_tyyd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ateriainfo_sokeri" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

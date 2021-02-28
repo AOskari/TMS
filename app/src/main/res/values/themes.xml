@@ -24,11 +24,14 @@
         <item name="colorAccent">@color/blue</item>
     </style>
     <style name="customProgressBar3">
-        <item name="colorAccent">@color/green</item>
+        <item name="colorAccent">@color/valittu</item>
     </style>
     <style name="valittuMenuItem">
         <item name="icon">@drawable/paasivu_vihrea</item>
         <item name="iconTint">@color/green</item>
+    </style>
+    <style name="latausAnimaatio">
+        <item name="colorAccent">@color/valittu</item>
     </style>
 
 

@@ -88,6 +88,7 @@ public class AteriaActivity extends AppCompatActivity {
         editor = pref.edit();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        piiras.setNoDataText("");
         ateriaJson = pref.getString("ateria", "");
 
         /**

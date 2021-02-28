@@ -103,6 +103,7 @@ public class HakuActivity extends AppCompatActivity {
          * Asetetaan latausanimaatio näkyville Requestin ajaksi, ja luodaan uusi Request Volley:n avulla.
          * ohjeet API-kutsun tekemiseen: https://developer.android.com/training/volley/simple
          */
+        ilmoitus.setVisibility(View.INVISIBLE);
         latausKuvake.setVisibility(v.VISIBLE);
         String url = "https://fineli.fi/fineli/api/v1/foods?q=" + input.getText().toString();
         requestQueue = Volley.newRequestQueue(this);
@@ -142,6 +143,12 @@ public class HakuActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
+
+                        if (response.length() <= 0) {
+                            ilmoitus.setVisibility(View.VISIBLE);
+                            ilmoitus.setBackgroundResource(R.drawable.error_alusta);
+                            ilmoitus.setText("Tarkenna hakua.");
+                        }
                         /**
                          * Lopuksi poistetaan latausanimaatio näkyvistä ja luodaan sisältö ListView:ille.
                          */
@@ -162,6 +169,11 @@ public class HakuActivity extends AppCompatActivity {
         if (input.getText().toString().length() > 0) {
             requestQueue.add(jsonArrayRequest);
             Log.d("checking info", foodInfo.toString());
+        } else {
+            latausKuvake.setVisibility(View.GONE);
+            ilmoitus.setVisibility(View.VISIBLE);
+            ilmoitus.setBackgroundResource(R.drawable.error_alusta);
+            ilmoitus.setText("Tarkenna hakua.");
         }
     }
 

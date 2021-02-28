@@ -42,15 +42,13 @@ public class AteriaInfoActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-        getWindow().setLayout((int) (width * .8), (int) (height * 0.4));
+        getWindow().setLayout((int) (width * .8), (int) (height * 0.6));
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         Bundle b = getIntent().getExtras();
         Ateria a = gson.fromJson(b.getString("TIEDOT_ATERIA"), Ateria.class);
 
         PieChart piiras = findViewById(R.id.ateria_tiedot_piiras);
-
-
 
         /**
          * Luodaan uudet tiedot ympyrädiagrammia varten.
@@ -87,7 +85,6 @@ public class AteriaInfoActivity extends AppCompatActivity {
          * ja asetetaan värit.
          */
 
-        //TODO: Prot, rasva ja hh prosenttimäärä. Tekstien tummennus.
         data.setDrawValues(false);
         piiras.setData(data);
         piiras.setDescription("");
@@ -106,9 +103,9 @@ public class AteriaInfoActivity extends AppCompatActivity {
         TextView kuituTxt = findViewById(R.id.ateriainfo_kuitumaara);
         TextView suolaTxt = findViewById(R.id.ateriainfo_suolamaara);
 
-        protTxt.setText("Proteiini " + df.format(prot) + "g");
-        hhTxt.setText("Hiilihydraatit " + df.format(hh) + "g");
-        rasvaTxt.setText("Rasva " + df.format(rasva) + "g");
+        protTxt.setText(df.format(prot) + "g");
+        hhTxt.setText(df.format(hh) + "g");
+        rasvaTxt.setText(df.format(rasva) + "g");
         kaloriTxt.setText(Math.round(kalorit) + " kcal");
 
         tyydytTxt.setText(df.format(tyydyt) + " g");
