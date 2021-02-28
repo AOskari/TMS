@@ -24,4 +24,5 @@
     <color name="colorPrimaryDark">#2196F3</color>
     <color name="colorAccent">#3F51B5</color>
     <color name="colorPrimary">#4CAF50</color>
+    <color name="crimson">#DC143C</color>
 </resources>

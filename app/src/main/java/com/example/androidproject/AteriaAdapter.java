@@ -30,9 +30,13 @@ public class AteriaAdapter extends BaseAdapter {
     String ateriaJson;
     SharedPreferences pref;
     SharedPreferences.Editor edit;
-
     Gson gson = new Gson();
 
+    /**
+     * Adapterin konstruktori.
+     * @param context viittaus nykyiseen Context-olioon.
+     * @param pref valittu SharedPreferences.
+     */
     public AteriaAdapter(Context context, SharedPreferences pref) {
         this.context = context;
         this.pref = pref;

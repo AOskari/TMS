@@ -32,7 +32,7 @@
             android:layout_marginRight="8dp"
             android:backgroundTint="#00000000"
             android:contentDescription="@string/kalenteri_nappi"
-            android:tint="@color/primaryColor"
+            android:tint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="@+id/luo_ateria"
             app:layout_constraintEnd_toStartOf="@+id/luo_ateria"
             app:layout_constraintTop_toTopOf="parent"
@@ -59,7 +59,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/add"
-            app:tint="@color/primaryColor"
+            app:tint="@color/valittu"
             tools:ignore="VectorDrawableCompat" />
 
         <TextView

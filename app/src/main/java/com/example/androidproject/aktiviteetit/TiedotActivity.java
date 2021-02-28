@@ -50,7 +50,7 @@ public class TiedotActivity extends AppCompatActivity {
         Elintarvike e = gson.fromJson(b.getString("TARVIKE"), Elintarvike.class);
 
         List<Double> arvot = e.haeRavintoarvot();
-        ((TextView)findViewById(R.id.tiedot_nimi)).setText(e.haeNimi() + " / 100g");
+        ((TextView)findViewById(R.id.tiedot_nimi)).setText(e.haeNimi() + " / " + df.format(arvot.get(9)) + "g");
         ((TextView)findViewById(R.id.tiedot_kalorit)).setText(df.format(arvot.get(1)) + " kcal");
         ((TextView)findViewById(R.id.tiedot_proteiinimaara)).setText(df.format(arvot.get(3)) + "g");
         ((TextView)findViewById(R.id.tiedot_hhmaara)).setText(df.format(arvot.get(4)) + "g");

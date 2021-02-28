@@ -28,7 +28,6 @@ public class HakuAdapter extends BaseAdapter {
 
     Context context;
     List<Elintarvike> lista;
-
     Gson gson = new Gson();
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -37,6 +36,13 @@ public class HakuAdapter extends BaseAdapter {
     String ateriaJson;
     HakuActivity activity;
 
+    /**
+     * Adapterin konstruktori.
+     * @param context viittaus nykyiseen Context-olioon.
+     * @param lista Lista API:sta haetuista Elintarvike-olioista.
+     * @param pref valittu SharedPreferences, jossa sijaitsee muokkauksessa oleva ateria.
+     * @param activity alkuperäinen aktiviteetti, tässä tapauksessa viittaus HakuActivityyn.
+     */
     public HakuAdapter(Context context, List<Elintarvike> lista, SharedPreferences pref, HakuActivity activity) {
         this.context = context;
         this.lista = lista;
@@ -81,10 +87,12 @@ public class HakuAdapter extends BaseAdapter {
         EditText editText = convertView.findViewById(R.id.maaraInput);
         TextView ilmoitus = convertView.findViewById(R.id.haku_ilmoitus);
 
-        // EditTextin inputTypeksi on asetettu numberPassword; poistetaan asteriskit seuraavalla komennolla
+        /**
+         * EditTextin inputTypeksi on asetettu numberPassword, tämän takia teksti näkyy tähtinä. Poistetaan tähdet.
+         * Tämän jälkeen tyhjennetään tekstikenttä sitä klikattaessa.
+         * Kun käyttäjä ei enää muokkaa tekstiä, lisätään "g" numeron perään.
+         */
         editText.setTransformationMethod(null);
-
-        // Tyhjennetään tekstikenttä sitä klikattaessa
         editText.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -92,8 +100,6 @@ public class HakuAdapter extends BaseAdapter {
                 return false;
             }
         });
-
-        // Lopuksi lisätään "g" numeron perään.
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -110,16 +116,19 @@ public class HakuAdapter extends BaseAdapter {
 
         nimi.setText(lista.get(position).haeNimi());
 
+        /**
+         * lisaa-napin toiminnan edellytyksenä on, että käyttäjä on asettanut halutun grammamäärän.
+         * Kun haluttu summa on annettu, elintarvike lisätään olemassa olevaan ateria-olioon, jonka jälkeen
+         * ateria tallennetaan uudestaan pysyväismuistiin.
+         */
         lisaa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                // Reagoidaan klikkaukseen vain, jos tekstikenttä sisältää merkkejä.
                 if (!editText.getText().toString().equals("0g")) {
                     Double maara = Double.parseDouble(editText.getText().toString().replaceAll("g", ""));
                     List<Double> ravinto = lista.get(position).haeRavintoarvot();
 
-                    // Luodaan uusi Elintarvike-olio, joka sisältää valitun grammamäärän.
                     Elintarvike uusiTarvike = new Elintarvike(lista.get(position).haeNimi(), ravinto.get(0), ravinto.get(1),
                             ravinto.get(2), ravinto.get(3), ravinto.get(4), ravinto.get(5), ravinto.get(6),
                             ravinto.get(7), ravinto.get(8), maara);
@@ -132,7 +141,6 @@ public class HakuAdapter extends BaseAdapter {
                     editor.commit();
                     Log.d("Päivitetty", "lisätty " + lista.get(position).haeNimi() + " ateriaan.");
 
-                    // Lopuksi tyhjennetään tekstikenttä ja piilotetaan näppäimistö.
                     editText.setText("0g");
                     activity.suljeNappaimisto();
                 } else if (editText.getText().toString().equals("0g") ||editText.getText().toString().equals("g")) {
@@ -141,7 +149,9 @@ public class HakuAdapter extends BaseAdapter {
             }
         });
 
-        // Asetetaan onClick-metodit plus ja miinus napeille.
+        /**
+         * plus-nappi lisää valitun summan määrää yhdellä grammalla.
+         */
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,6 +166,9 @@ public class HakuAdapter extends BaseAdapter {
         }
         });
 
+        /**
+         * minus-nappi vähentää valitun summan määrää yhdellä grammalla. Ei mene alle 0g.
+         */
         miinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,6 +183,9 @@ public class HakuAdapter extends BaseAdapter {
             }
         });
 
+        /**
+         * Tuo esille popup-ikkunan, joka näyttää elintarvikkeen ravintotiedot.
+         */
         tiedotNappi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

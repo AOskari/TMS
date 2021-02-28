@@ -82,7 +82,7 @@
             android:background="#00000000"
             android:contentDescription="@string/tallenna_ateria"
             android:onClick="tallennaAteria"
-            android:tint="@color/primaryColor"
+            android:tint="@color/colorAccent"
             app:layout_constraintEnd_toStartOf="@+id/aterianimi"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"

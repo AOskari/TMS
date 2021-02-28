@@ -35,6 +35,14 @@ public class AteriatAdapter extends BaseAdapter {
     private int kuukausi;
     private int vuosi;
 
+    /**
+     * Adapterin konstruktori.
+     * @param context viittaus nykyiseen Context-olioon.
+     * @param pref valittu SharedPreferences.
+     * @param paiva valittu päivä.
+     * @param kuukausi valittu kuukausi.
+     * @param vuosi valittu vuosi.
+     */
     public AteriatAdapter(Context context, SharedPreferences pref, int paiva, int kuukausi, int vuosi) {
         this.context = context;
         this.pref = pref;
