@@ -11,19 +11,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.androidproject.Paino;
 import com.example.androidproject.R;
+import com.example.androidproject.Trendi;
 import com.github.mikephil.charting.charts.LineChart;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Profiili extends AppCompatActivity {
     private TextView pronimi, propaino, proBMI, asetetut, tavoite1, tavoite2;
     public SharedPreferences tiedot;
+    public SharedPreferences trendit;
     private float paino, pituus;
     private double bmi;
     private String nimi, tiedot1, tiedot2;
+    private Asetukset lista;
+    public ArrayList<Paino> paTrendi;
     LineChart historia;
 
 
@@ -41,9 +49,15 @@ public class Profiili extends AppCompatActivity {
         tavoite2 = findViewById(R.id.toka);
         historia = findViewById(R.id.historia);
 
+        trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
+        paTrendi = new ArrayList<>();
+
         haeTiedot();
+        //lista.listaHae();
+
 
     }
+
 
     private void haeTiedot(){
         tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
@@ -72,7 +86,10 @@ public class Profiili extends AppCompatActivity {
         } else {
             tavoite2.setText("Tavoite 2: " + tiedot.getString("Tavoite2", ""));
         }
-
+        for (int i = 0; i < paTrendi.size(); i++) {
+            String nayta = paTrendi.get(i).toString();
+            Log.d("Lista:"+i, "löytyi " + nayta);
+        }
 
 
         /*BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

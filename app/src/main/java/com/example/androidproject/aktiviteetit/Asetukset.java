@@ -19,10 +19,16 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.view.View.OnClickListener;
 
+import com.example.androidproject.Paino;
 import com.example.androidproject.R;
+import com.example.androidproject.Trendi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Asetukset extends AppCompatActivity {
@@ -31,10 +37,13 @@ public class Asetukset extends AppCompatActivity {
     public Button tallenna;
     public EditText nimi;
     public SharedPreferences asetukset;
+    public SharedPreferences trendit;
     public SharedPreferences.Editor tiedot;
+    public SharedPreferences.Editor tallListat;
     private String kuka, naytaT1, naytaT2, tyyppi1, tyyppi2;
     private float kg, cm, m1, m2;
-
+    public ArrayList<Paino> paTrendi; // = new ArrayList<>();
+    Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +60,13 @@ public class Asetukset extends AppCompatActivity {
         tav2 = findViewById(R.id.tav2);
         yksikko1 = findViewById(R.id.yksikko1);
         yksikko2 = findViewById(R.id.yksikko2);
+        paTrendi = new ArrayList<>();
+
 
         asetukset = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
+        trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
+        tallListat = trendit.edit();
+        //Gson gson = new Gson();
         /*// Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
@@ -60,6 +74,19 @@ public class Asetukset extends AppCompatActivity {
 
 
         String[] valinta = getResources().getStringArray(R.array.valinta);
+
+        tallenna.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                paTrendi.add(new Paino(Float.parseFloat(paino.getText().toString())));
+                listaTall();
+                tallenna();
+
+                for (int i=0; i<paTrendi.size(); i++){
+                    Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
+                }
+            }
+        });
 
         ArrayAdapter<String> val = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, valinta);
         val.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -113,13 +140,7 @@ public class Asetukset extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        /*tallenna.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });*/
-
+        Log.d("Listan koko ", String.valueOf(paTrendi.size()));
 
     }
 
@@ -139,8 +160,24 @@ public class Asetukset extends AppCompatActivity {
         m1 = asetukset.getFloat("Tavoitemäärä1", 0.0f);
         m2 = asetukset.getFloat("Tavoitemäärä2", 0.0f);
     }
+    public void listaTall(){
+        String json = gson.toJson(paTrendi);
+        tallListat.putString("Trendit", json);
+        tallListat.commit();
+    }
+    public void listaHae(){
+        trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = trendit.getString("Paino", null);
+        Type type = new TypeToken<ArrayList<Paino>>() {}.getType();
+        paTrendi = gson.fromJson(json, type);
 
-    public void tallenna(View v) {
+        if (paTrendi == null){
+            paTrendi = new ArrayList<>();
+        }
+    }
+
+    public void tallenna() {
         float tyhja = 0.0f;
         String kayttaja = nimi.getText().toString();
         float annaPaino; // = Float.parseFloat(paino.getText().toString());
@@ -180,6 +217,7 @@ public class Asetukset extends AppCompatActivity {
         }
 
 
+
         String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
         String naytaT2 = tavoite2.getSelectedItem().toString() + " " + maara2 + " " + yksikko2.getText();
         tiedot.putString("Tavoitetyyppi1", tavoitetyyppi1);
@@ -192,6 +230,9 @@ public class Asetukset extends AppCompatActivity {
         tiedot.putString("Tavoite1", naytaT1);
         tiedot.putString("Tavoite2", naytaT2);
         tiedot.commit();
+
+
+
     }
  /*   private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
