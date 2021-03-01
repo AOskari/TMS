@@ -27,11 +27,13 @@ public class Profiili extends AppCompatActivity {
     private TextView pronimi, propaino, proBMI, asetetut, tavoite1, tavoite2;
     public SharedPreferences tiedot;
     public SharedPreferences trendit;
+    public SharedPreferences.Editor tallListat;
     private float paino, pituus;
     private double bmi;
     private String nimi, tiedot1, tiedot2;
-    private Asetukset lista;
+
     public ArrayList<Paino> paTrendi;
+    Gson gson = new Gson();
     LineChart historia;
 
 
@@ -49,18 +51,36 @@ public class Profiili extends AppCompatActivity {
         tavoite2 = findViewById(R.id.toka);
         historia = findViewById(R.id.historia);
 
+        tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
-        paTrendi = new ArrayList<>();
+        tallListat = trendit.edit();
+        listaHae();
 
         haeTiedot();
-        //lista.listaHae();
-
+        Log.d("Listan koko ", String.valueOf(paTrendi.size()));
+        for (int i=0; i<paTrendi.size(); i++){
+            Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
+        }
 
     }
+    /*public void lisaaPainoListaan(){
+        paTrendi.add(new Paino(tiedot.getFloat("Paino", 0.0f)));
+    }*/
 
+    public void listaHae(){
+        trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
+        //Gson gson = new Gson();
+        String json = trendit.getString("Paino", null);
+        Type type = new TypeToken<ArrayList<Paino>>() {}.getType();
+        paTrendi = gson.fromJson(json, type);
+
+        if (paTrendi == null){
+            paTrendi = new ArrayList<>();
+        }
+    }
 
     private void haeTiedot(){
-        tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
+
         paino = tiedot.getFloat("Paino", 0.0f);
         nimi = tiedot.getString("Käyttäjä", "");
         tiedot1 = tiedot.getString("Tavoite1", "");
@@ -86,10 +106,10 @@ public class Profiili extends AppCompatActivity {
         } else {
             tavoite2.setText("Tavoite 2: " + tiedot.getString("Tavoite2", ""));
         }
-        for (int i = 0; i < paTrendi.size(); i++) {
+        /*for (int i = 0; i < paTrendi.size(); i++) {
             String nayta = paTrendi.get(i).toString();
             Log.d("Lista:"+i, "löytyi " + nayta);
-        }
+        }*/
 
 
         /*BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);

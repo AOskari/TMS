@@ -40,10 +40,12 @@ public class Asetukset extends AppCompatActivity {
     public SharedPreferences trendit;
     public SharedPreferences.Editor tiedot;
     public SharedPreferences.Editor tallListat;
+    //public Profiili lista;
+    public ArrayList<Paino> paTrendi;
+    Gson gson = new Gson();
     private String kuka, naytaT1, naytaT2, tyyppi1, tyyppi2;
     private float kg, cm, m1, m2;
-    public ArrayList<Paino> paTrendi; // = new ArrayList<>();
-    Gson gson = new Gson();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +62,14 @@ public class Asetukset extends AppCompatActivity {
         tav2 = findViewById(R.id.tav2);
         yksikko1 = findViewById(R.id.yksikko1);
         yksikko2 = findViewById(R.id.yksikko2);
-        paTrendi = new ArrayList<>();
-
 
         asetukset = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         tallListat = trendit.edit();
-        //Gson gson = new Gson();
+        listaHae();
+
+
+
         /*// Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
@@ -81,10 +84,6 @@ public class Asetukset extends AppCompatActivity {
                 paTrendi.add(new Paino(Float.parseFloat(paino.getText().toString())));
                 listaTall();
                 tallenna();
-
-                for (int i=0; i<paTrendi.size(); i++){
-                    Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
-                }
             }
         });
 
@@ -140,8 +139,6 @@ public class Asetukset extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        Log.d("Listan koko ", String.valueOf(paTrendi.size()));
-
     }
 
     @Override
@@ -161,9 +158,14 @@ public class Asetukset extends AppCompatActivity {
         m2 = asetukset.getFloat("Tavoitemäärä2", 0.0f);
     }
     public void listaTall(){
+        trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         String json = gson.toJson(paTrendi);
-        tallListat.putString("Trendit", json);
+        tallListat.putString("Paino", json);
         tallListat.commit();
+        Log.d("Listan koko ", String.valueOf(paTrendi.size()));
+        for (int i=0; i<paTrendi.size(); i++){
+            Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
+        }
     }
     public void listaHae(){
         trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
@@ -215,8 +217,6 @@ public class Asetukset extends AppCompatActivity {
         } else {
             maara2 = tyhja;
         }
-
-
 
         String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
         String naytaT2 = tavoite2.getSelectedItem().toString() + " " + maara2 + " " + yksikko2.getText();
