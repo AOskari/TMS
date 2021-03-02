@@ -77,15 +77,11 @@ public class Profiili extends AppCompatActivity {
         sarja1 = new PointsGraphSeries<>(data());
         historia.addSeries(sarja1);
 
-
-
         haeTiedot();
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
         for (int i=0; i<paTrendi.size(); i++){
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
         }
-
-
     }
 
     public DataPoint[] data(){
@@ -171,7 +167,7 @@ public class Profiili extends AppCompatActivity {
     public void annaLisatiedot(View v){
         float tieto = Float.parseFloat(bmi.getText().toString());
         Toast toast = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 100, -250);
+        toast.setGravity(Gravity.CENTER, 150, -250);
 
         //toast.getView().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#34495E")));
         if (tieto < 18.5){
