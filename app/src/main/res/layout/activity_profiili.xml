@@ -20,7 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.113"
-        tools:srcCompat="@drawable/ic_baseline_settings_24" />
+        app:srcCompat="@drawable/ic_baseline_settings_24"
+        tools:ignore="VectorDrawableCompat" />
 
     <TextView
         android:id="@+id/proNimi"
