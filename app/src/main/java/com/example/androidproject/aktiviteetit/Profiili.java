@@ -1,28 +1,23 @@
 package com.example.androidproject.aktiviteetit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidproject.Paino;
 import com.example.androidproject.R;
-import com.example.androidproject.Trendi;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,16 +27,15 @@ import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Profiili extends AppCompatActivity {
-    private TextView pronimi, propaino, proBMI, asetetut, tavoite1, tavoite2;
+    private TextView pronimi, propaino, bmi, asetetut, tavoite1, tavoite2;
     public SharedPreferences tiedot;
     public SharedPreferences trendit;
     public SharedPreferences.Editor tallListat;
     private float paino, pituus;
-    private double bmi;
-    private String nimi, tiedot1, tiedot2;
+    //private double bmi;
+    private String nimi, tiedot1, tiedot2, BMI;
 
     public ArrayList<Paino> paTrendi;
     public static ArrayList<String> x_aks; //=new ArrayList<String>();
@@ -62,7 +56,7 @@ public class Profiili extends AppCompatActivity {
 
         pronimi = findViewById(R.id.proNimi);
         propaino = findViewById(R.id.proPaino);
-        proBMI = findViewById(R.id.proBMI);
+        bmi = findViewById(R.id.bmi);
         asetetut = findViewById(R.id.tavoitteet);
         tavoite1 = findViewById(R.id.eka);
         tavoite2 = findViewById(R.id.toka);
@@ -126,8 +120,9 @@ public class Profiili extends AppCompatActivity {
         propaino.setText(String.valueOf(paino) + " kg");
         Log.d("Pituus", String.valueOf(pituus));
         Log.d("Paino", String.valueOf(paino));
-        String pyoBmi = String.format("%.2f", laskeBmi());
-        proBMI.setText("BMI: " + pyoBmi);
+        //String pyoBmi = String.format("%.2f", laskeBmi());
+        bmi.setText(laskeBmi());
+        setReuna();
         asetetut.setText("Asettamasi tavoitteet:");
         String[] tav1 = tiedot1.split(" ");
         String tyyppi1 = tav1[0];
@@ -161,12 +156,58 @@ public class Profiili extends AppCompatActivity {
         }
     }
 
-    public double laskeBmi(){
-            //paino = tiedot.getFloat("Paino", 0.0f);
+    public String laskeBmi(){
+            paino = tiedot.getFloat("Paino", 0.0f);
             pituus = tiedot.getFloat("Pituus", 0.0f) / 100;
-            bmi = paino / (pituus * pituus);
+            String pyoBmi = String.format("%.2f", paino / (pituus * pituus));
+            if (paino == 0.0f || pituus == 0.0f){
+                BMI = "Tietoa ei löydy";
+            } else {
+                BMI = pyoBmi;
+            }
+            return BMI;
+    }
 
-        return bmi;
+    public void annaLisatiedot(View v){
+        float tieto = Float.parseFloat(bmi.getText().toString());
+        Toast toast = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 100, -250);
+
+        //toast.getView().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#34495E")));
+        if (tieto < 18.5){
+            toast.setText("Alipaino");
+            toast.show();
+        } else if (tieto >= 18.5 && tieto < 25.0){
+            toast.setText("Normaali paino");
+            toast.show();
+        } else if (tieto > 25.0 && tieto <= 30.0){
+            toast.setText("Lievä ylipaino");
+            toast.show();
+        } else if (tieto > 30.0 && tieto <= 35.0){
+            toast.setText("Merkittävä lihavuus");
+            toast.show();
+        } else if (tieto > 35.0 && tieto <= 40.0){
+            toast.setText("Vaikea lihavuus");
+            toast.show();
+        } else if (tieto > 40.0){
+            toast.setText("Sairaalloinen lihavuus");
+            toast.show();
+        }
+    }
+
+    public void setReuna(){
+        float tieto = Float.parseFloat(bmi.getText().toString());
+        if (tieto >= 18.5 && tieto < 25.0){
+            bmi.setBackgroundResource(R.drawable.border1);
+        } else if (tieto > 25.0 && tieto <= 30.0){
+            bmi.setBackgroundResource(R.drawable.border2);
+        } else if (tieto > 30.0 && tieto <= 35.0){
+            bmi.setBackgroundResource(R.drawable.border3);
+        } else if (tieto > 35.0 && tieto <= 40.0){
+            bmi.setBackgroundResource(R.drawable.border4);
+        } else if (tieto > 40.0){
+            bmi.setBackgroundResource(R.drawable.border5);
+        }
     }
     /**
      * Alapalkin toiminnallisuus, aloittaa valitun aktiviteetin.
