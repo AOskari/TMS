@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
     // create an action bar button
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // R.menu.mymenu is a reference to an xml file named mymenu.xml which should be inside your res/menu directory.
-        // If you don't have res/menu, just create a directory named "menu" inside res
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.mybutton) {
-            // do something here
             Intent activity2Intent = new Intent(getApplicationContext(), TietoaMeista.class);
             startActivity(activity2Intent);
         }
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         kalenteri = Calendar.getInstance();
 
         //Ympyrä progressbar
@@ -137,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
 
         int kalorit = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(0));
         double syodytProtskut = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(1);
+        double syodytHiilarit = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(2);
+        double syodytRasvat = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(3);
 
         /**
          * Haetaan pysyväismuistista käyttäjän tiedot ja tavoitteet.
@@ -150,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Asetetaan tiedot, mikäli tietoja on tallennettu asetuksissa.
          */
+
         if (!tiedot1.equals("")) {
             String[] tiedot1_lista = tiedot1.split(" ");
             String tiedot1_kalorit = tiedot1_lista[1];
@@ -165,29 +165,39 @@ public class MainActivity extends AppCompatActivity {
                 double kY = kaloritYht;
                 double prosentit = k / kY * 100;
                 int prosentitI = (int) Math.round(prosentit);
-                //  double prosentitD = Math.round(prosentit);
-
-                //Muutetaan vastaus Stringiksi ja pyöristetään se.
+                /**
+                 * Muutetaan vastaus Stringiksi ja pyöristetään se.
+                 */
                 String prosentitS = Integer.toString(prosentitI);
 
-                //Jäljellä olevat kalorit.
+                /**
+                 * Jäljellä olevat kalorit.
+                 */
                 int jaljella = kaloritYht - kalorit;
 
-                //Tekstin tasaus keskelle.
+                /**
+                 * Tekstin tasaus keskelle.
+                 */
                 kaloriTavoite.setGravity(Gravity.CENTER);
-
-
                 kaloriTavoite.setText("Tavoite: " + tiedot1_kalorit + " kcal" + "\n Jäljellä: " + jaljella + " kcal");
 
-                //käytän ehkä vielä.
-                //if (prosentitI > 100) {
-                //Kertoo että ylitit päivän kaloritavoitteen.
-                // kaloriTavoite.setText("Tavoite: " + tiedot1_kalorit + " kcal" + "\n jäljellä: " + jaljella + " kcal");
-                //   }
-                //Näytetään prosentit.
+                /**
+                 * Ilmoittaa jos ylittää päivän tavoitteen.
+                 */
+                if (prosentitI > 100) {
+                    //Kertoo että ylitit päivän kaloritavoitteen.
+                    TextView ylitys = findViewById(R.id.ylitys);
+                    ylitys.setText("Päivän tavoite 1 ylitetty.");
+                }
+
+                /**
+                 * Näytetään prosentit.
+                 */
                 prossat.setText(prosentitS + " %");
 
-                //Prosenttipalkki ympyrä
+                /**
+                 * Prosenttien asettaminen palkkiin.
+                 */
                 mProgress.setProgress(prosentitI);   // Main Progress
 
             } else {
@@ -208,45 +218,105 @@ public class MainActivity extends AppCompatActivity {
             String tiedot2_2 = tiedot2_lista[1];
             String tiedot2_1 = tiedot2_lista[0];
 
-            // int proteiiniTavoite = (int) Integer.parseInt(tiedot2_2);
             String proteiinit = (tiedot2_2.substring(0, tiedot2_2.length() - 2));
 
+            //Ei ole pelkät proteiinit, vaan paremminkin tavoite2.
             double proteiinitDouble = Double.parseDouble(proteiinit);
-            int proteiiniProsentit = (int) Math.round(syodytProtskut / proteiinitDouble * 100);
+            //Pikaliimateippiviritelmä.
+            double tavoite2Double = proteiinitDouble;
 
-            mProgress2.setProgress(proteiiniProsentit);   // Main Progress
-            TextView proteiiniTeksti = findViewById(R.id.protskuTeksti);
-            proteiiniTeksti.setText(proteiiniProsentit + " %");
+            /**
+             * Prosenttien ja tekstien asettaminen valitun tavoitteen mukaan. (tavoite 2)
+             */
+            if (tiedot2.equals("proteiini")) {
 
-            float saatuTieto2 = Float.parseFloat(tiedot2_2);
-            TextView lisatiedot = findViewById(R.id.lisatiedot);
 
-            double jaljella = proteiinitDouble - syodytProtskut;
-            if (jaljella <= 0) {
-                jaljella = 0;
+                int proteiiniProsentit = (int) Math.round(syodytProtskut / proteiinitDouble * 100);
+
+                mProgress2.setProgress(proteiiniProsentit);   // Main Progress
+                TextView proteiiniTeksti = findViewById(R.id.protskuTeksti);
+                proteiiniTeksti.setText(proteiiniProsentit + " %");
+
+                float saatuTieto2 = Float.parseFloat(tiedot2_2);
+                TextView lisatiedot = findViewById(R.id.lisatiedot);
+
+                double jaljella = proteiinitDouble - syodytProtskut;
+                if (jaljella <= 0) {
+                    jaljella = 0;
+                }
+
+                if (saatuTieto2 != 0.0f) {
+                    /**
+                     *   Lisätiedot, proteiini, hiilarit, rasva
+                     */
+                    lisatiedot.setGravity(Gravity.CENTER);
+                    lisatiedot.setText("Tavoite: " + proteiinitDouble + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
+                } else {
+                    lisatiedot.setText("");
+                }
+            } else if (tiedot2.equals("hiilihydraatit")) {
+                //tee jotain
+                //  double syodytHiilarit = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(2);
+
+                int hiilariProsentit = (int) Math.round(syodytHiilarit / tavoite2Double * 100);
+
+                mProgress2.setProgress(hiilariProsentit);   // Main Progress
+                TextView hiilariteksti = findViewById(R.id.protskuTeksti);
+                hiilariteksti.setText(hiilariProsentit + " %");
+
+                float saatuTieto2 = Float.parseFloat(tiedot2_2);
+                TextView lisatiedot = findViewById(R.id.lisatiedot);
+
+                double jaljella = proteiinitDouble - syodytHiilarit;
+                if (jaljella <= 0) {
+                    jaljella = 0;
+                }
+
+                if (saatuTieto2 != 0.0f) {
+                    /**
+                     *   Lisätiedot, proteiini, hiilarit, rasva
+                     */
+                    lisatiedot.setGravity(Gravity.CENTER);
+                    lisatiedot.setText("Tavoite: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
+
+                }
+            } else if (tiedot2.equals("rasva")) {
+                int rasvaprosentit = (int) Math.round(syodytRasvat / tavoite2Double * 100);
+
+                mProgress2.setProgress(rasvaprosentit);   // Main Progress
+                TextView rasvaTeksti = findViewById(R.id.protskuTeksti);
+                rasvaTeksti.setText(rasvaprosentit + " %");
+
+                float saatuTieto2 = Float.parseFloat(tiedot2_2);
+                TextView lisatiedot = findViewById(R.id.lisatiedot);
+
+                double jaljella2 = tavoite2Double - syodytRasvat;
+                if (jaljella2 <= 0) {
+                    jaljella2 = 0;
+                }
+
+                if (saatuTieto2 != 0.0f) {
+                    /**
+                     *   Lisätiedot, proteiini, hiilarit, rasva
+                     */
+                    lisatiedot.setGravity(Gravity.CENTER);
+                    lisatiedot.setText("Tavoite: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella2) + " g/vrk");
+                }
             }
+            /**
+             * Asetetaan nimi, mikäli nimi on tallennettu asetuksissa.
+             * Varmistetaan että nimessä on aina iso alkukirjain laatikossa näytettäessä,
+             * vaikka käyttäjä kirjoittaisi nimensä pienellä.
+             */
+            TextView nimitextview = findViewById(R.id.nimiteksti);
 
-            if (saatuTieto2 != 0.0f) {
-                //Lisätiedot, proteiini, hiilarit, rasva
-                lisatiedot.setGravity(Gravity.CENTER);
-                lisatiedot.setText("Tavoite: " + proteiinitDouble + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
+            if (!nimi.equals("")) {
+
+                String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
+                nimitextview.setText("Hei, " + isoalkukirjain + "!");
             } else {
-                lisatiedot.setText("");
+                nimitextview.setText("Hei!");
             }
-        }
-        /**
-         * Asetetaan nimi, mikäli nimi on tallennettu asetuksissa.
-         * Varmistetaan että nimessä on aina iso alkukirjain laatikossa näytettäessä,
-         * vaikka käyttäjä kirjoittaisi nimensä pienellä.
-         */
-        TextView nimitextview = findViewById(R.id.nimiteksti);
-
-        if (!nimi.equals("")) {
-
-            String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
-            nimitextview.setText("Hei, " + isoalkukirjain + "!");
-        } else {
-            nimitextview.setText("Hei!");
         }
     }
 

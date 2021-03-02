@@ -12,6 +12,11 @@ public class TietoaMeista extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tietoa_meista);
+        /**
+         * Yläpalkin takaisinpäin nuolen ja nimen laittaminen.
+         */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Tietoa meistä");
+
     }
 }

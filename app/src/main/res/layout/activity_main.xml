@@ -142,6 +142,15 @@
         app:layout_constraintEnd_toEndOf="@+id/circularProgressbar2"
         app:layout_constraintStart_toStartOf="@+id/circularProgressbar2"
         app:layout_constraintTop_toTopOf="@+id/circularProgressbar2" />
+
+    <TextView
+        android:id="@+id/ylitys"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
     <!-- Doughnut chart ends here -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
