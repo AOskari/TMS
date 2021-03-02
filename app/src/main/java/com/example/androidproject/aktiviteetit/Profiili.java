@@ -84,19 +84,6 @@ public class Profiili extends AppCompatActivity {
         historia.addSeries(sarja1);
 
 
-        /*for (int i = 0; i < paTrendi.size(); i++) {
-            float value = Float.parseFloat(paTrendi.get(i).toString())
-            kuvaaja1.add(new Entry(value, i));
-        }
-        LineDataSet painoKayra = new LineDataSet(kuvaaja1,"");
-        painoKayra.setColors(ColorTemplate.JOYFUL_COLORS);
-        painoKayra.setFillAlpha(110);
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(painoKayra);
-        naytaData = new LineData(dataSets, getString(R.string.tieto2));
-        historia.setData(naytaData);
-        historia.setVisibleXRangeMaximum(10);
-        historia.invalidate();*/
 
         haeTiedot();
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
@@ -118,37 +105,8 @@ public class Profiili extends AppCompatActivity {
     }
 
 
-
-
-    /*private LineData getData(float range) {
-
-        ArrayList<Entry> values = new ArrayList<>();
-
-        for (int i = 0; i < paTrendi.size(); i++) {
-            float val = (float) Float.parseFloat(paTrendi.get(i).toString());
-            values.add(new Entry(val, i));
-        }
-
-        // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(values, "DataSet 1");
-        // set1.setFillAlpha(110);
-        // set1.setFillColor(Color.RED);
-
-        set1.setLineWidth(1.75f);
-        set1.setCircleRadius(5f);
-        //set1.setCircleHoleRadius(2.5f);
-        set1.setColor(Color.WHITE);
-        set1.setCircleColor(Color.WHITE);
-        set1.setHighLightColor(Color.WHITE);
-        set1.setDrawValues(false);
-
-        // create a data object with the data sets
-        return new LineData(set1);
-    }*/
-
     public void listaHae(){
         trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
-        //Gson gson = new Gson();
         String json = trendit.getString("Paino", null);
         Type type = new TypeToken<ArrayList<Paino>>() {}.getType();
         paTrendi = gson.fromJson(json, type);
