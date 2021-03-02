@@ -16,6 +16,7 @@ import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -53,19 +54,33 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar mProgress;
     ProgressBar mProgress2;
 
+    // create an action bar button
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // R.menu.mymenu is a reference to an xml file named mymenu.xml which should be inside your res/menu directory.
+        // If you don't have res/menu, just create a directory named "menu" inside res
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle button activities
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.mybutton) {
+            // do something here
+            Intent activity2Intent = new Intent(getApplicationContext(), TietoaMeista.class);
+            startActivity(activity2Intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Button buttonOne = findViewById(R.id.buttonOne);
-        buttonOne.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-              //  System.out.println("Button Clicked");
-                Intent activity2Intent = new Intent(getApplicationContext(), TietoaMeista.class);
-                startActivity(activity2Intent);
-            }
-        });
+        
         kalenteri = Calendar.getInstance();
 
         //Ympyrä progressbar

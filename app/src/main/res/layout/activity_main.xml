@@ -144,15 +144,4 @@
         app:layout_constraintTop_toTopOf="@+id/circularProgressbar2" />
     <!-- Doughnut chart ends here -->
 
-    <Button
-        android:id="@+id/buttonOne"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Click Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="8dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
