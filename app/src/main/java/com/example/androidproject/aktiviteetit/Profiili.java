@@ -34,19 +34,15 @@ public class Profiili extends AppCompatActivity {
     public SharedPreferences trendit;
     public SharedPreferences.Editor tallListat;
     private float paino, pituus;
-    private String nimi, tiedot1, tiedot2, BMI;
-    public Paino paivays;
+    private String nimi, tiedot1, tiedot2;
+    private double BMI;
+    //public Paino paivays;
     public ArrayList<Paino> paTrendi;
-    public static ArrayList<String> x_aks; //=new ArrayList<String>();
-    public static ArrayList<String> y_aks; //=new ArrayList<String>();
+    public static ArrayList<String> x_aks;
+    public static ArrayList<String> y_aks;
     Gson gson = new Gson();
     GraphView historia;
     PointsGraphSeries<DataPoint> sarja1;
-    //LineChart historia;
-    //LineData naytaData;
-    //List<Entry> kuvaaja1 = new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +58,24 @@ public class Profiili extends AppCompatActivity {
         pvm = findViewById(R.id.pvm);
         historia = findViewById(R.id.historia);
 
-
         tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         tallListat = trendit.edit();
+
         listaHae();
         haeTiedot();
         setReuna();
+
+        x_aks=new ArrayList<String>();
+        y_aks=new ArrayList<String>();
+        for (int i=0; i<paTrendi.size(); i++){
+            x_aks.add(String.valueOf(i));
+            y_aks.add(String.valueOf(paTrendi.get(i)));
+        }
+        Log.d("Listan koko ", String.valueOf(paTrendi.size()));
+        sarja1 = new PointsGraphSeries<>(data());
+        historia.addSeries(sarja1);
+        //teeKuvaaja();
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
         for (int i=0; i<paTrendi.size(); i++){
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
@@ -86,8 +93,7 @@ public class Profiili extends AppCompatActivity {
     }
 
     public void teeKuvaaja(){
-        x_aks=new ArrayList<String>();
-        y_aks=new ArrayList<String>();
+
         for (int i=0; i<paTrendi.size(); i++){
             x_aks.add(String.valueOf(i));
             y_aks.add(String.valueOf(paTrendi.get(i)));
@@ -119,8 +125,8 @@ public class Profiili extends AppCompatActivity {
         Log.d("Pituus", String.valueOf(pituus));
         Log.d("Paino", String.valueOf(paino));
         //String pyoBmi = String.format("%.2f", laskeBmi());
-        bmi.setText(laskeBmi());
-        teeKuvaaja();
+        bmi.setText(String.valueOf(laskeBmi()));
+
         asetetut.setText("Asettamasi tavoitteet:");
         String[] tav1 = tiedot1.split(" ");
         String tyyppi1 = tav1[0];
@@ -154,14 +160,14 @@ public class Profiili extends AppCompatActivity {
         }
     }
 
-    public String laskeBmi(){
+    public double laskeBmi(){
             paino = tiedot.getFloat("Paino", 0.0f);
             pituus = tiedot.getFloat("Pituus", 0.0f) / 100;
-            String pyoBmi = String.format("%.2f", paino / (pituus * pituus));
+            //String pyoBmi = String.format("%.2f", paino / (pituus * pituus));
             if (paino == 0.0f || pituus == 0.0f){
-                BMI = "Tietoa ei löydy";
+                BMI = 0.0;
             } else {
-                BMI = pyoBmi;
+                BMI = Double.parseDouble(String.format("%.2f", paino / (pituus * pituus)));
             }
             return BMI;
     }

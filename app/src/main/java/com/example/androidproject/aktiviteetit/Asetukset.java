@@ -119,7 +119,6 @@ public class Asetukset extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String nimi2 = tavoite2.getSelectedItem().toString();
-                int pos2 = tavoite2.getSelectedItemPosition();
 
                 if (nimi2.equals("Valinta")) {
                     tav2.setText("");
@@ -190,7 +189,7 @@ public class Asetukset extends AppCompatActivity {
         //String naytaT2 = tavoite2.getSelectedItem().toString() + " " + tav2.getText() + " " + yksikko2.getText();
         String tavoitetyyppi1 = tavoite1.getSelectedItem().toString();
         String tavoitetyyppi2 = tavoite2.getSelectedItem().toString();
-        pvm.haePainonPaivamaara();
+        //pvm.haePainonPaivamaara();
 
         tiedot = asetukset.edit();
         if (nimi.getText().toString().length() > 0) {
