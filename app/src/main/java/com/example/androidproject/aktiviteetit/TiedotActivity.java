@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -20,6 +19,7 @@ import java.util.List;
 
 /**
  * Luo popup-ikkunan keskelle ruutua, joka näyttää Elintarvike-olion tarkat ravintoarvot.
+ * popup-tutoriaali: https://www.youtube.com/watch?v=fn5OlqQuOCk
  */
 public class TiedotActivity extends AppCompatActivity {
 

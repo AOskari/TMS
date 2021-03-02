@@ -37,6 +37,7 @@ import java.util.Calendar;
 
 /**
  * Luo näkymän, jonka avulla voidaan luoda, muokata ja tarkastella aterioita.
+ * ympyrädiagrammin tutoriaali: https://www.youtube.com/watch?v=mWJB1NLFJGg
  */
 public class AteriaActivity extends AppCompatActivity {
 
