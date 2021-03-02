@@ -29,14 +29,13 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class Profiili extends AppCompatActivity {
-    private TextView pronimi, propaino, bmi, asetetut, tavoite1, tavoite2;
+    private TextView pronimi, propaino, bmi, asetetut, tavoite1, tavoite2, pvm;
     public SharedPreferences tiedot;
     public SharedPreferences trendit;
     public SharedPreferences.Editor tallListat;
     private float paino, pituus;
-    //private double bmi;
     private String nimi, tiedot1, tiedot2, BMI;
-
+    public Paino paivays;
     public ArrayList<Paino> paTrendi;
     public static ArrayList<String> x_aks; //=new ArrayList<String>();
     public static ArrayList<String> y_aks; //=new ArrayList<String>();
@@ -60,24 +59,16 @@ public class Profiili extends AppCompatActivity {
         asetetut = findViewById(R.id.tavoitteet);
         tavoite1 = findViewById(R.id.eka);
         tavoite2 = findViewById(R.id.toka);
+        pvm = findViewById(R.id.pvm);
         historia = findViewById(R.id.historia);
 
-        x_aks=new ArrayList<String>();
-        y_aks=new ArrayList<String>();
+
         tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         tallListat = trendit.edit();
         listaHae();
-
-        for (int i=0; i<paTrendi.size(); i++){
-            x_aks.add(String.valueOf(i));
-            y_aks.add(String.valueOf(paTrendi.get(i)));
-            Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
-        }
-        sarja1 = new PointsGraphSeries<>(data());
-        historia.addSeries(sarja1);
-
         haeTiedot();
+        setReuna();
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
         for (int i=0; i<paTrendi.size(); i++){
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
@@ -94,6 +85,17 @@ public class Profiili extends AppCompatActivity {
         return painoArvot;
     }
 
+    public void teeKuvaaja(){
+        x_aks=new ArrayList<String>();
+        y_aks=new ArrayList<String>();
+        for (int i=0; i<paTrendi.size(); i++){
+            x_aks.add(String.valueOf(i));
+            y_aks.add(String.valueOf(paTrendi.get(i)));
+        }
+        Log.d("Listan koko ", String.valueOf(paTrendi.size()));
+        sarja1 = new PointsGraphSeries<>(data());
+        historia.addSeries(sarja1);
+    }
 
     public void listaHae(){
         trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
@@ -107,18 +109,18 @@ public class Profiili extends AppCompatActivity {
     }
 
     private void haeTiedot(){
-
         paino = tiedot.getFloat("Paino", 0.0f);
         nimi = tiedot.getString("Käyttäjä", "");
         tiedot1 = tiedot.getString("Tavoite1", "");
         tiedot2 = tiedot.getString("Tavoite2", "");
         pronimi.setText(nimi);
         propaino.setText(String.valueOf(paino) + " kg");
+        //pvm.setText(paivays.haePainonPaivamaara().toString());
         Log.d("Pituus", String.valueOf(pituus));
         Log.d("Paino", String.valueOf(paino));
         //String pyoBmi = String.format("%.2f", laskeBmi());
         bmi.setText(laskeBmi());
-        setReuna();
+        teeKuvaaja();
         asetetut.setText("Asettamasi tavoitteet:");
         String[] tav1 = tiedot1.split(" ");
         String tyyppi1 = tav1[0];

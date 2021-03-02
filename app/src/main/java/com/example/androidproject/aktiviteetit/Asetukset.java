@@ -40,7 +40,7 @@ public class Asetukset extends AppCompatActivity {
     public SharedPreferences trendit;
     public SharedPreferences.Editor tiedot;
     public SharedPreferences.Editor tallListat;
-    //public Profiili lista;
+    public Paino pvm;
     public ArrayList<Paino> paTrendi;
     Gson gson = new Gson();
     private String kuka, naytaT1, naytaT2, tyyppi1, tyyppi2;
@@ -190,6 +190,7 @@ public class Asetukset extends AppCompatActivity {
         //String naytaT2 = tavoite2.getSelectedItem().toString() + " " + tav2.getText() + " " + yksikko2.getText();
         String tavoitetyyppi1 = tavoite1.getSelectedItem().toString();
         String tavoitetyyppi2 = tavoite2.getSelectedItem().toString();
+        pvm.haePainonPaivamaara();
 
         tiedot = asetukset.edit();
         if (nimi.getText().toString().length() > 0) {
