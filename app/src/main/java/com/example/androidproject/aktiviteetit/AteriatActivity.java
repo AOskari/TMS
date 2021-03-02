@@ -132,7 +132,7 @@ public class AteriatActivity extends AppCompatActivity {
         kuukausi = pref.getInt("kuukausi", 0);
         vuosi = pref.getInt("vuosi", 0);
 
-        paivamaara.setText(paiva + "/" + kuukausi + "/" + vuosi);
+        paivamaara.setText(paiva + "/" + (kuukausi + 1) + "/" + vuosi);
 
         naytaAteriat();
         try {

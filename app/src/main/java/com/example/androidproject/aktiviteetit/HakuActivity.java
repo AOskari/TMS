@@ -123,7 +123,7 @@ public class HakuActivity extends AppCompatActivity {
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 /**
-                                 * Fineli:n avoin rajapinta tarjoaa suuren määrän dataa yhdestä Elintarvikkeesta,
+                                 * Fineli:n avoin rajapinta tarjoaa suuren määrän dataa yhdestä elintarvikkeesta,
                                  * tästä syystä seuraavat 3 riviä koodia valikoi halutun datan ja tallentaa datan Elintarvike-olioon.
                                  * Tämän jälkeen olio tallennetaan listaan.
                                  */
