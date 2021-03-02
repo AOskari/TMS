@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar mProgress;
     ProgressBar mProgress2;
 
+    Drawable drawable3;
+
     /**
      * Ylä palkkiin namin luominen.
      * @param menu
@@ -97,9 +99,13 @@ public class MainActivity extends AppCompatActivity {
         @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = res.getDrawable(R.drawable.circle2);
         @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable2 = res.getDrawable(R.drawable.circle2);
 
+        /**
+         * Vaihtaa ympyrän punaiseksi tavoitteen epäonnistuessa.
+         */
+        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable3 = res.getDrawable(R.drawable.circle3);
         mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
 
-        //mProgress = tavoite 1, mProgress tavoite 2.
+        //mProgress = tavoite 1, mProgress2 = tavoite 2.
         mProgress2 = (ProgressBar) findViewById(R.id.circularProgressbar2);
 
         mProgress.setProgress(0);   // Main Progress
@@ -211,6 +217,12 @@ public class MainActivity extends AppCompatActivity {
                     //Kertoo että ylitit päivän kaloritavoitteen.
                     TextView ylitys = findViewById(R.id.ylitys);
                     ylitys.setText("Päivän tavoite 1 ylitetty.");
+
+                    /**
+                     * Vaihtaa ympyrän punaiseksi tavoitteen epäonnistuessa.
+                     */
+                    mProgress2.setProgressDrawable(drawable3);
+
                 }
 
                 /**
@@ -297,6 +309,8 @@ public class MainActivity extends AppCompatActivity {
                     //Kertoo että ylitit päivän kaloritavoitteen.
                     TextView ylitys2 = findViewById(R.id.ylitys2);
                     ylitys2.setText("Päivän tavoite 2 ylitetty.");
+                    mProgress.setProgressDrawable(drawable3);
+
                 }
             } else if (tiedot2_1.equals("Hiilihydraatti")) {
                 //tee jotain
