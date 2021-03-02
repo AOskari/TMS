@@ -46,6 +46,8 @@
         android:layout_width="199dp"
         android:layout_height="215dp"
         android:layout_centerInParent="true"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
         android:indeterminate="false"
         android:max="100"
         android:progress="50"
@@ -66,13 +68,12 @@
 
     <TextView
         android:id="@+id/testitext"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
         android:layout_marginTop="36dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/circularProgressbar2"
+        app:layout_constraintStart_toStartOf="@+id/circularProgressbar"
         app:layout_constraintTop_toBottomOf="@+id/circularProgressbar" />
 
     <TextView
@@ -106,13 +107,12 @@
 
     <TextView
         android:id="@+id/lisatiedot"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/circularProgressbar2"
+        app:layout_constraintStart_toEndOf="@+id/circularProgressbar"
         app:layout_constraintTop_toBottomOf="@+id/circularProgressbar2" />
 
     <!-- Doughnut chart starts here -->
@@ -143,5 +143,16 @@
         app:layout_constraintStart_toStartOf="@+id/circularProgressbar2"
         app:layout_constraintTop_toTopOf="@+id/circularProgressbar2" />
     <!-- Doughnut chart ends here -->
+
+    <Button
+        android:id="@+id/buttonOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Click Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

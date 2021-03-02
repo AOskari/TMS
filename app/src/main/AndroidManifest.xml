@@ -12,8 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".aktiviteetit.AteriaInfoActivity"
-            android:theme="@style/Theme.AndroidProject.PopupTheme" />/>
+        <activity android:name=".aktiviteetit.TietoaMeista"></activity>
+        <activity
+            android:name=".aktiviteetit.AteriaInfoActivity"
+            android:theme="@style/Theme.AndroidProject.PopupTheme" />
         <activity android:name=".aktiviteetit.Asetukset">
             android:parentActivityName=".aktiviteetit.Profiili">
             <meta-data
