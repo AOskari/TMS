@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -225,6 +223,11 @@ public class HakuActivity extends AppCompatActivity {
         animaatiot.addAnimation(fadeOut);
         ilmoitus.setAnimation(animaatiot);
     }
+
+
+    // =================================================================== //
+    // ========================= Private-metodit ========================= //
+    // =================================================================== //
 
     /**
      * Luo ja päivittää ListView:in sisällön sekä sulkee näppäimistön.

@@ -2,25 +2,19 @@ package com.example.androidproject.aktiviteetit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.TextView;
-
 import com.example.androidproject.R;
-import com.google.gson.Gson;
+
 
 /**
  * Luo popup-ikkunan, joka näyttää kalenterin.
  * Päivämäärän voi asettaa painamalla kalenterissa päivämäärää.
+ * tutoriaali: https://www.youtube.com/watch?v=WNBE_3ZizaA
  */
 public class KalenteriActivity extends AppCompatActivity {
 
@@ -44,7 +38,7 @@ public class KalenteriActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-        getWindow().setLayout((int) (width * .6), (int) (height * 0.4));
+        getWindow().setLayout((int) (width * .6), (int) (height * 0.5));
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         /**
@@ -65,3 +59,5 @@ public class KalenteriActivity extends AppCompatActivity {
 
     }
 }
+
+//

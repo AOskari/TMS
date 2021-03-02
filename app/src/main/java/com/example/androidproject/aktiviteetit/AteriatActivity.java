@@ -9,13 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.applandeo.materialcalendarview.EventDay;
 import com.example.androidproject.Ateria;
 import com.example.androidproject.AteriaLista;
 import com.example.androidproject.AteriatAdapter;
@@ -24,11 +22,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import static com.example.androidproject.AteriaLista.haeLista;
 
 /**
  * Luo näkymän, joka näyttää kaikki valitun päivän ateriat sekä
@@ -39,7 +34,7 @@ public class AteriatActivity extends AppCompatActivity {
     private String ateriatJson;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    Gson gson = new Gson();
+    private Gson gson = new Gson();
 
     private ListView lv;
     private TextView paivamaara;
@@ -181,6 +176,11 @@ public class AteriatActivity extends AppCompatActivity {
         hhMaara.setText("Hiilihydraatit " + " / " + df.format(arvot.get(1)) + "g");
         rasvaMaara.setText("Rasva " + " / " + df.format(arvot.get(2)) + "g");
     }
+
+
+    // =================================================================== //
+    // ========================= Private-metodit ========================= //
+    // =================================================================== //
 
     private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {

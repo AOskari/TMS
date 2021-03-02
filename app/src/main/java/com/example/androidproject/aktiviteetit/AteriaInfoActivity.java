@@ -35,7 +35,7 @@ public class AteriaInfoActivity extends AppCompatActivity {
         DecimalFormat df = new DecimalFormat("#.#");
 
         /**
-         * Asetetaan popup-ikkunan koko 80% näytön leveydestä ja 40% korkeudesta.
+         * Asetetaan popup-ikkunan koko 80% näytön leveydestä ja 60% korkeudesta.
          * Asetetaan taustaväri läpinäkyväksi, joka tuo esille popup-ikkunan pyöristetyt reunat.
          */
         DisplayMetrics metrics = new DisplayMetrics();
