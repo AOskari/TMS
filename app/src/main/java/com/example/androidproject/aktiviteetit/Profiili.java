@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -15,9 +16,19 @@ import com.example.androidproject.Paino;
 import com.example.androidproject.R;
 import com.example.androidproject.Trendi;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -33,8 +44,14 @@ public class Profiili extends AppCompatActivity {
     private String nimi, tiedot1, tiedot2;
 
     public ArrayList<Paino> paTrendi;
+    public static ArrayList<String> x_aks; //=new ArrayList<String>();
+    public static ArrayList<String> y_aks; //=new ArrayList<String>();
     Gson gson = new Gson();
-    LineChart historia;
+    GraphView historia;
+    PointsGraphSeries<DataPoint> sarja1;
+    //LineChart historia;
+    //LineData naytaData;
+    //List<Entry> kuvaaja1 = new ArrayList<>();
 
 
 
@@ -51,10 +68,35 @@ public class Profiili extends AppCompatActivity {
         tavoite2 = findViewById(R.id.toka);
         historia = findViewById(R.id.historia);
 
+        x_aks=new ArrayList<String>();
+        y_aks=new ArrayList<String>();
         tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         tallListat = trendit.edit();
         listaHae();
+
+        for (int i=0; i<paTrendi.size(); i++){
+            x_aks.add(String.valueOf(i));
+            y_aks.add(String.valueOf(paTrendi.get(i)));
+            Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
+        }
+        sarja1 = new PointsGraphSeries<>(data());
+        historia.addSeries(sarja1);
+
+
+        /*for (int i = 0; i < paTrendi.size(); i++) {
+            float value = Float.parseFloat(paTrendi.get(i).toString())
+            kuvaaja1.add(new Entry(value, i));
+        }
+        LineDataSet painoKayra = new LineDataSet(kuvaaja1,"");
+        painoKayra.setColors(ColorTemplate.JOYFUL_COLORS);
+        painoKayra.setFillAlpha(110);
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.add(painoKayra);
+        naytaData = new LineData(dataSets, getString(R.string.tieto2));
+        historia.setData(naytaData);
+        historia.setVisibleXRangeMaximum(10);
+        historia.invalidate();*/
 
         haeTiedot();
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
@@ -62,9 +104,46 @@ public class Profiili extends AppCompatActivity {
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
         }
 
+
     }
-    /*public void lisaaPainoListaan(){
-        paTrendi.add(new Paino(tiedot.getFloat("Paino", 0.0f)));
+
+    public DataPoint[] data(){
+        int arvoja = x_aks.size();
+        DataPoint[] painoArvot = new DataPoint[arvoja];
+        for (int i = 0; i < arvoja; i++){
+            DataPoint v = new DataPoint(Double.parseDouble(x_aks.get(i)), Double.parseDouble(y_aks.get(i)));
+            painoArvot[i] = v;
+        }
+        return painoArvot;
+    }
+
+
+
+
+    /*private LineData getData(float range) {
+
+        ArrayList<Entry> values = new ArrayList<>();
+
+        for (int i = 0; i < paTrendi.size(); i++) {
+            float val = (float) Float.parseFloat(paTrendi.get(i).toString());
+            values.add(new Entry(val, i));
+        }
+
+        // create a dataset and give it a type
+        LineDataSet set1 = new LineDataSet(values, "DataSet 1");
+        // set1.setFillAlpha(110);
+        // set1.setFillColor(Color.RED);
+
+        set1.setLineWidth(1.75f);
+        set1.setCircleRadius(5f);
+        //set1.setCircleHoleRadius(2.5f);
+        set1.setColor(Color.WHITE);
+        set1.setCircleColor(Color.WHITE);
+        set1.setHighLightColor(Color.WHITE);
+        set1.setDrawValues(false);
+
+        // create a data object with the data sets
+        return new LineData(set1);
     }*/
 
     public void listaHae(){
