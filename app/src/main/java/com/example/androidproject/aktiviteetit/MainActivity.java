@@ -88,8 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
         kalenteri = Calendar.getInstance();
 
-        /**Ympyrä progressbar
-         *
+
+
+        /**
+         * Ympyrä progressbar
          */
         Resources res = getResources();
         @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = res.getDrawable(R.drawable.circle2);
@@ -200,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
                  * Tekstin tasaus keskelle.
                  */
                 kaloriTavoite.setGravity(Gravity.CENTER);
-                kaloriTavoite.setText("Tavoite: " + tiedot1_kalorit + " kcal" + "\n Jäljellä: " + jaljella + " kcal");
+                kaloriTavoite.setText("Tavoite 1: " + tiedot1_kalorit + " kcal" + "\n Jäljellä: " + jaljella + " kcal");
 
                 /**
                  * Ilmoittaa jos ylittää päivän tavoitteen.
@@ -257,8 +259,13 @@ public class MainActivity extends AppCompatActivity {
              */
             if (tiedot2_1.equals("Proteiini") || tiedot2_1.equals("proteiini")) {
 
+                /**
+                 * Käyttäjän painon hakeminen.
+                 */
+                SharedPreferences tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
+                float paino = tiedot.getFloat("Paino", 0.0f);
 
-                int proteiiniProsentit = (int) Math.round(syodytProtskut / proteiinitDouble * 100);
+                int proteiiniProsentit = (int) Math.round(syodytProtskut / (proteiinitDouble * paino) * 100);
 
                 mProgress2.setProgress(proteiiniProsentit);   // Main Progress
                 TextView proteiiniTeksti = findViewById(R.id.protskuTeksti);
@@ -267,8 +274,11 @@ public class MainActivity extends AppCompatActivity {
                 float saatuTieto2 = Float.parseFloat(tiedot2_2);
                 TextView lisatiedot = findViewById(R.id.lisatiedot);
 
+                double proteiiniPainonKanssa = proteiinitDouble * paino;
+                //Esim. tavoite oli 5g per kg. Nyt näemme kokonaistavoitteen.
+                //esim. paino 80kg, 5g * 80kg.
 
-                double jaljella = proteiinitDouble - syodytProtskut;
+                double jaljella = proteiiniPainonKanssa - syodytProtskut;
                 if (jaljella <= 0) {
                     jaljella = 0;
                 }
@@ -278,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
                      *   Lisätiedot, proteiini, hiilarit, rasva
                      */
                     lisatiedot.setGravity(Gravity.CENTER);
-                    lisatiedot.setText("Tavoite: " + proteiinitDouble + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
+                    lisatiedot.setText("Tavoite 2: " + proteiinitDouble + "g/kg/vrk \n Jäljellä (yht.): " + df.format(jaljella) + " g \n Tämän hetkinen g/kg: " + df.format(syodytProtskut / paino));
                 } else {
                     lisatiedot.setText("");
                 }
@@ -297,6 +307,7 @@ public class MainActivity extends AppCompatActivity {
                 mProgress2.setProgress(hiilariProsentit);   // Main Progress
                 TextView hiilariteksti = findViewById(R.id.protskuTeksti);
                 hiilariteksti.setText(hiilariProsentit + " %");
+
 
                 float saatuTieto2 = Float.parseFloat(tiedot2_2);
                 TextView lisatiedot = findViewById(R.id.lisatiedot);
