@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -57,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button buttonOne = findViewById(R.id.buttonOne);
+        buttonOne.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+              //  System.out.println("Button Clicked");
+                Intent activity2Intent = new Intent(getApplicationContext(), TietoaMeista.class);
+                startActivity(activity2Intent);
+            }
+        });
         kalenteri = Calendar.getInstance();
 
         //Ympyrä progressbar
@@ -123,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
         String tiedot2 = sharedPreferences.getString("Tavoite2", "");
 
 
-
         /**
          * Asetetaan tiedot, mikäli tietoja on tallennettu asetuksissa.
          */
@@ -158,9 +166,9 @@ public class MainActivity extends AppCompatActivity {
 
                 //käytän ehkä vielä.
                 //if (prosentitI > 100) {
-                    //Kertoo että ylitit päivän kaloritavoitteen.
-                    // kaloriTavoite.setText("Tavoite: " + tiedot1_kalorit + " kcal" + "\n jäljellä: " + jaljella + " kcal");
-             //   }
+                //Kertoo että ylitit päivän kaloritavoitteen.
+                // kaloriTavoite.setText("Tavoite: " + tiedot1_kalorit + " kcal" + "\n jäljellä: " + jaljella + " kcal");
+                //   }
                 //Näytetään prosentit.
                 prossat.setText(prosentitS + " %");
 
@@ -222,8 +230,7 @@ public class MainActivity extends AppCompatActivity {
 
             String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
             nimitextview.setText("Hei, " + isoalkukirjain + "!");
-        }
-        else {
+        } else {
             nimitextview.setText("Hei!");
         }
     }
