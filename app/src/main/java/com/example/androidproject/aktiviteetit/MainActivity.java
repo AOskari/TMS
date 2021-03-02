@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
             /**
              * Prosenttien ja tekstien asettaminen valitun tavoitteen mukaan. (tavoite 2)
              */
-            if (tiedot2.equals("proteiini")) {
+            if (tiedot2.equals("Proteiini") || tiedot2.equals("proteiini")) {
 
 
                 int proteiiniProsentit = (int) Math.round(syodytProtskut / proteiinitDouble * 100);
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     lisatiedot.setText("");
                 }
-            } else if (tiedot2.equals("hiilihydraatit")) {
+            } else if (tiedot2.equals("Hiilihydraatit") || tiedot2.equals("hiilihydraatit")) {
                 //tee jotain
                 //  double syodytHiilarit = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(2);
 
@@ -279,28 +279,6 @@ public class MainActivity extends AppCompatActivity {
                     lisatiedot.setGravity(Gravity.CENTER);
                     lisatiedot.setText("Tavoite: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
 
-                }
-            } else if (tiedot2.equals("rasva")) {
-                int rasvaprosentit = (int) Math.round(syodytRasvat / tavoite2Double * 100);
-
-                mProgress2.setProgress(rasvaprosentit);   // Main Progress
-                TextView rasvaTeksti = findViewById(R.id.protskuTeksti);
-                rasvaTeksti.setText(rasvaprosentit + " %");
-
-                float saatuTieto2 = Float.parseFloat(tiedot2_2);
-                TextView lisatiedot = findViewById(R.id.lisatiedot);
-
-                double jaljella2 = tavoite2Double - syodytRasvat;
-                if (jaljella2 <= 0) {
-                    jaljella2 = 0;
-                }
-
-                if (saatuTieto2 != 0.0f) {
-                    /**
-                     *   Lisätiedot, proteiini, hiilarit, rasva
-                     */
-                    lisatiedot.setGravity(Gravity.CENTER);
-                    lisatiedot.setText("Tavoite: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella2) + " g/vrk");
                 }
             }
             /**
