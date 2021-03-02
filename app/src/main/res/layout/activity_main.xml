@@ -84,6 +84,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginBottom="180dp"
         android:text="Hei!"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -160,6 +161,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ylitys" />
+
+    <TextView
+        android:id="@+id/tavoite1nimi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/circularProgressbar2"
+        app:layout_constraintStart_toStartOf="@+id/circularProgressbar"
+        app:layout_constraintTop_toTopOf="@+id/circularProgressbar" />
+
+    <TextView
+        android:id="@+id/tavoite2nimi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/circularProgressbar2"
+        app:layout_constraintStart_toEndOf="@+id/circularProgressbar"
+        app:layout_constraintTop_toTopOf="@+id/guideline2" />
     <!-- Doughnut chart ends here -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

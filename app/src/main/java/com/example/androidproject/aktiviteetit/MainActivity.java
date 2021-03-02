@@ -54,14 +54,22 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar mProgress;
     ProgressBar mProgress2;
 
-    // create an action bar button
+    /**
+     * Ylä palkkiin namin luominen.
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    // handle button activities
+    /**
+     * Yläpalkin napin toiminnallisuus
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -80,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
 
         kalenteri = Calendar.getInstance();
 
-        //Ympyrä progressbar
+        /**Ympyrä progressbar
+         *
+         */
         Resources res = getResources();
         @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = res.getDrawable(R.drawable.circle2);
         @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable2 = res.getDrawable(R.drawable.circle2);
@@ -117,7 +127,9 @@ public class MainActivity extends AppCompatActivity {
 
         aterialista = gson.fromJson(aterialistaJson, AteriaLista.class);
 
-        // Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
+        /** Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
+         *
+         */
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
         bottomNavigationView.getMenu().findItem(R.id.koti).setChecked(true);
@@ -135,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         int kalorit = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(0));
         double syodytProtskut = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(1);
         double syodytHiilarit = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(2);
-        double syodytRasvat = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(3);
+        //double syodytRasvat = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(3);
 
         /**
          * Haetaan pysyväismuistista käyttäjän tiedot ja tavoitteet.
@@ -157,6 +169,14 @@ public class MainActivity extends AppCompatActivity {
             float saatuTieto1 = Float.parseFloat(tiedot1_kalorit);
             int kaloritYht = (int) Math.round(saatuTieto1);
             TextView prossat = findViewById(R.id.prossat);
+            /**
+             * Otsikot progressbarien yläpuolelle selkeydeksi.
+             */
+            TextView tavoite1Nimi = findViewById(R.id.tavoite1nimi);
+            tavoite1Nimi.setText(tavoite1_nimi);
+
+
+
 
             /**
              *     Muutetaan intit doubleiksi laskua varten.
@@ -219,6 +239,11 @@ public class MainActivity extends AppCompatActivity {
             String tiedot2_2 = tiedot2_lista[1];
             String tiedot2_1 = tiedot2_lista[0];
             String tavoite2_nimi = tiedot2_lista[0];
+            /**
+             * Otsikot progressbarien yläpuolelle selkeydeksi.
+             */
+            TextView tavoite2Nimi = findViewById(R.id.tavoite2nimi);
+            tavoite2Nimi.setText(tavoite2_nimi);
 
             String proteiinit = (tiedot2_2.substring(0, tiedot2_2.length() - 2));
 
@@ -241,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
 
                 float saatuTieto2 = Float.parseFloat(tiedot2_2);
                 TextView lisatiedot = findViewById(R.id.lisatiedot);
+
 
                 double jaljella = proteiinitDouble - syodytProtskut;
                 if (jaljella <= 0) {
