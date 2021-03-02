@@ -162,7 +162,7 @@ public class Ateria {
      * @return Palauttaa aterian päivämäärän merkkijonona.
      */
     public String paivamaaraString() {
-        return this.paiva + "/" + this.kuukausi + "/" + this.vuosi;
+        return this.paiva + "/" + (this.kuukausi + 1) + "/" + this.vuosi;
     }
 
     /**
