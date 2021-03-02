@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         if (!tiedot1.equals("")) {
             String[] tiedot1_lista = tiedot1.split(" ");
             String tiedot1_kalorit = tiedot1_lista[1];
+            String tavoite1_nimi = tiedot1_lista[0];
             float saatuTieto1 = Float.parseFloat(tiedot1_kalorit);
             int kaloritYht = (int) Math.round(saatuTieto1);
             TextView prossat = findViewById(R.id.prossat);
@@ -217,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
             String[] tiedot2_lista = tiedot2.split(" ");
             String tiedot2_2 = tiedot2_lista[1];
             String tiedot2_1 = tiedot2_lista[0];
+            String tavoite2_nimi = tiedot2_lista[0];
 
             String proteiinit = (tiedot2_2.substring(0, tiedot2_2.length() - 2));
 
@@ -228,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             /**
              * Prosenttien ja tekstien asettaminen valitun tavoitteen mukaan. (tavoite 2)
              */
-            if (tiedot2.equals("proteiini")) {
+            if (tiedot2_1.equals("Proteiini") || tiedot2_1.equals("proteiini")) {
 
 
                 int proteiiniProsentit = (int) Math.round(syodytProtskut / proteiinitDouble * 100);
@@ -254,7 +256,13 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     lisatiedot.setText("");
                 }
-            } else if (tiedot2.equals("hiilihydraatit")) {
+
+                if (proteiiniProsentit > 100) {
+                    //Kertoo että ylitit päivän kaloritavoitteen.
+                    TextView ylitys2 = findViewById(R.id.ylitys2);
+                    ylitys2.setText("Päivän tavoite 2 ylitetty.");
+                }
+            } else if (tiedot2_1.equals("Hiilihydraatti")) {
                 //tee jotain
                 //  double syodytHiilarit = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(2);
 
@@ -280,27 +288,14 @@ public class MainActivity extends AppCompatActivity {
                     lisatiedot.setText("Tavoite: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
 
                 }
-            } else if (tiedot2.equals("rasva")) {
-                int rasvaprosentit = (int) Math.round(syodytRasvat / tavoite2Double * 100);
 
-                mProgress2.setProgress(rasvaprosentit);   // Main Progress
-                TextView rasvaTeksti = findViewById(R.id.protskuTeksti);
-                rasvaTeksti.setText(rasvaprosentit + " %");
-
-                float saatuTieto2 = Float.parseFloat(tiedot2_2);
-                TextView lisatiedot = findViewById(R.id.lisatiedot);
-
-                double jaljella2 = tavoite2Double - syodytRasvat;
-                if (jaljella2 <= 0) {
-                    jaljella2 = 0;
-                }
-
-                if (saatuTieto2 != 0.0f) {
-                    /**
-                     *   Lisätiedot, proteiini, hiilarit, rasva
-                     */
-                    lisatiedot.setGravity(Gravity.CENTER);
-                    lisatiedot.setText("Tavoite: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella2) + " g/vrk");
+                /**
+                 * Ilmoittaa jos ylittää päivän tavoitteen.
+                 */
+                if (hiilariProsentit > 100) {
+                    //Kertoo että ylitit päivän kaloritavoitteen.
+                    TextView ylitys2 = findViewById(R.id.ylitys2);
+                    ylitys2.setText("Päivän tavoite 2 ylitetty.");
                 }
             }
             /**
