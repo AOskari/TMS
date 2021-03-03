@@ -44,6 +44,9 @@ public class Asetukset extends AppCompatActivity {
     private Calendar kalenteri;
     public ArrayList<Paino> paTrendi;
 
+    private String trendiJson;
+    private Trendi trendi;
+
     private String kuka, naytaT1, naytaT2, tyyppi1, tyyppi2;
     private float kg, cm, m1, m2;
     Gson gson = new Gson();
@@ -69,7 +72,8 @@ public class Asetukset extends AppCompatActivity {
         tallListat = trendit.edit();
         listaHae();
 
-
+        trendiJson = trendit.getString("Trendi", "");
+        trendi = gson.fromJson(trendiJson, Trendi.class);
 
         /*// Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -82,7 +86,9 @@ public class Asetukset extends AppCompatActivity {
         tallenna.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                paTrendi.add(new Paino(Float.parseFloat(paino.getText().toString())));
+           //   paTrendi.add(new Paino(Float.parseFloat(paino.getText().toString())));
+                trendi.addPaino(new Paino(Float.parseFloat(paino.getText().toString())));
+                tallennaTrendi();
                 listaTall();
                 tallenna();
             }
@@ -185,7 +191,8 @@ public class Asetukset extends AppCompatActivity {
         vuosi = String.valueOf(kalenteri.get(Calendar.YEAR));
         return paiva + "/" + kuukausi + "/" + vuosi;
     }
-        public void tallenna() {
+
+    public void tallenna() {
         float tyhja = 0.0f;
         String kayttaja, pvm; //= nimi.getText().toString();
         float annaPaino; // = Float.parseFloat(paino.getText().toString());
@@ -238,9 +245,12 @@ public class Asetukset extends AppCompatActivity {
         tiedot.putString("Tavoite2", naytaT2);
         tiedot.putString("Päiväys", pvm);
         tiedot.commit();
+    }
 
-
-
+    private void tallennaTrendi() {
+        trendiJson = gson.toJson(trendi);
+        tallListat.putString("Trendi", trendiJson);
+        tallListat.commit();
     }
  /*   private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {

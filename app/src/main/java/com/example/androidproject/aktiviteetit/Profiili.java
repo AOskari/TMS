@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.androidproject.Paino;
 import com.example.androidproject.R;
+import com.example.androidproject.Trendi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,6 +32,9 @@ import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
+
+import static com.example.androidproject.Trendi.getInstance;
 
 public class Profiili extends AppCompatActivity {
     private TextView pronimi, propaino, bmi, asetetut, tavoite1, tavoite2, pvm;
@@ -40,8 +44,9 @@ public class Profiili extends AppCompatActivity {
     private float paino, pituus;
     private String nimi, tiedot1, tiedot2, paiva;
     private float BMI;
-
-    public ArrayList<Paino> paTrendi;
+    private  String trendiJson;
+    private Trendi trendi;
+    public List<Paino> paTrendi;
     public static ArrayList<String> x_aks;
     public static ArrayList<String> y_aks;
     DecimalFormat dec;
@@ -67,10 +72,20 @@ public class Profiili extends AppCompatActivity {
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         tallListat = trendit.edit();
 
+        /**
+         * Haetaan Trendi-singleton, jos sitä ei löydy, tallennetaan se SharedPreferencesiin.
+         */
+        trendiJson = trendit.getString("Trendi", "");
+        if (trendiJson.equals("")) {
+            trendiJson = gson.toJson(getInstance());
+            tallListat.putString("Trendi", trendiJson);
+            tallListat.commit();
+        }
+        trendi = gson.fromJson(trendiJson, Trendi.class);
+
         listaHae();
         haeTiedot();
         setReuna();
-
         //x_aks=new ArrayList<String>();
         //y_aks=new ArrayList<String>();
 
@@ -118,14 +133,15 @@ public class Profiili extends AppCompatActivity {
     }
 
     public void listaHae(){
-        trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
-        String json = trendit.getString("Paino", null);
-        Type type = new TypeToken<ArrayList<Paino>>() {}.getType();
-        paTrendi = gson.fromJson(json, type);
+       // trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
+       // String json = trendit.getString("Paino", null);
+       // Type type = new TypeToken<ArrayList<Paino>>() {}.getType();
 
-        if (paTrendi == null){
+        paTrendi = trendi.getPaino();
+
+   /*     if (paTrendi == null){
             paTrendi = new ArrayList<>();
-        }
+        } */
     }
 
     private void haeTiedot(){
