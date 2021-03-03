@@ -31,7 +31,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 import static com.example.androidproject.AteriaLista.haeLista;
 
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
 
         /**
          * Ympyrä progressbar
+         * Lähde: https://stackoverflow.com/questions/12776587/android-circular-determinate-progressbar
          */
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.circle2);
@@ -364,6 +367,31 @@ public class MainActivity extends AppCompatActivity {
                 nimitextview.setText("Hei!");
             }
         }
+        ArrayList<String> listOfRandomQuotes;
+
+        listOfRandomQuotes = new ArrayList<String>();
+        listOfRandomQuotes.add("The last three or four reps is what makes the muscle grow. This area of pain divides a champion from someone who is not a champion. -  Arnold Schwarzenegger");
+        listOfRandomQuotes.add("You must be the change you wish to see in the world.");
+        listOfRandomQuotes.add("I have decided to stick with love. Hate is too great a burden to bear.");
+        listOfRandomQuotes.add("By failing to prepare, you are preparing to fail.");
+        listOfRandomQuotes.add("Success usually comes to those who are too busy to be looking for it.");
+        listOfRandomQuotes.add("If you think lifting is dangerous, try being weak. Being weak is dangerous. - Bret Contreras");
+        listOfRandomQuotes.add("The clock is ticking. Are you becoming the person you want to be? - Greg Plitt");
+        listOfRandomQuotes.add("Whether you think you can, or you think you can’t, you’re right. - Henry Ford");
+        listOfRandomQuotes.add("You must expect great things of yourself before you can do them. - Michael Jordan");
+        listOfRandomQuotes.add("‘All our dreams can come true if we have the courage to pursue them. - Walt Disney");
+
+        Random randomGenerator = new Random();
+        int index = randomGenerator.nextInt(listOfRandomQuotes.size());
+        String string = listOfRandomQuotes.get(index);
+
+        /**
+         * Inspiroiva vaihtuva lainaus, joka motivoi jatkamaan omien tavoitteiden seuraamista.
+         */
+        TextView quoteTeksti = findViewById(R.id.quoteTeksti);
+        quoteTeksti.setGravity(Gravity.CENTER);
+        quoteTeksti.setText(string);
+
     }
 
     /**
