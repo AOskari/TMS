@@ -29,6 +29,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 public class Asetukset extends AppCompatActivity {
@@ -40,12 +41,12 @@ public class Asetukset extends AppCompatActivity {
     public SharedPreferences trendit;
     public SharedPreferences.Editor tiedot;
     public SharedPreferences.Editor tallListat;
-    public Paino pvm;
+    private Calendar kalenteri;
     public ArrayList<Paino> paTrendi;
-    Gson gson = new Gson();
+
     private String kuka, naytaT1, naytaT2, tyyppi1, tyyppi2;
     private float kg, cm, m1, m2;
-
+    Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class Asetukset extends AppCompatActivity {
         tav2 = findViewById(R.id.tav2);
         yksikko1 = findViewById(R.id.yksikko1);
         yksikko2 = findViewById(R.id.yksikko2);
-
+        kalenteri = Calendar.getInstance();
         asetukset = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         tallListat = trendit.edit();
@@ -177,10 +178,16 @@ public class Asetukset extends AppCompatActivity {
             paTrendi = new ArrayList<>();
         }
     }
-
-    public void tallenna() {
+    private String haePaiva() {
+        String paiva, kuukausi, vuosi;
+        paiva = String.valueOf(kalenteri.get(Calendar.DAY_OF_MONTH));
+        kuukausi = String.valueOf(kalenteri.get(Calendar.MONTH)+1);
+        vuosi = String.valueOf(kalenteri.get(Calendar.YEAR));
+        return paiva + "/" + kuukausi + "/" + vuosi;
+    }
+        public void tallenna() {
         float tyhja = 0.0f;
-        String kayttaja = nimi.getText().toString();
+        String kayttaja, pvm; //= nimi.getText().toString();
         float annaPaino; // = Float.parseFloat(paino.getText().toString());
         float annaPituus; // = Float.parseFloat(pituus.getText().toString());
         float maara1; // = Float.parseFloat(tav1.getText().toString());
@@ -189,7 +196,7 @@ public class Asetukset extends AppCompatActivity {
         //String naytaT2 = tavoite2.getSelectedItem().toString() + " " + tav2.getText() + " " + yksikko2.getText();
         String tavoitetyyppi1 = tavoite1.getSelectedItem().toString();
         String tavoitetyyppi2 = tavoite2.getSelectedItem().toString();
-        //pvm.haePainonPaivamaara();
+        pvm = haePaiva();
 
         tiedot = asetukset.edit();
         if (nimi.getText().toString().length() > 0) {
@@ -229,6 +236,7 @@ public class Asetukset extends AppCompatActivity {
         tiedot.putFloat("Pituus", annaPituus);
         tiedot.putString("Tavoite1", naytaT1);
         tiedot.putString("Tavoite2", naytaT2);
+        tiedot.putString("Päiväys", pvm);
         tiedot.commit();
 
 

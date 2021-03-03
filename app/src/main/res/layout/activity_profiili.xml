@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EDEDF4"
     tools:context=".aktiviteetit.Profiili">
 
     <ImageButton
@@ -16,10 +17,10 @@
         android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintHorizontal_bias="0.903"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.113"
+        app:layout_constraintVertical_bias="0.067"
         app:srcCompat="@drawable/ic_baseline_settings_24"
         tools:ignore="VectorDrawableCompat" />
 
@@ -27,25 +28,30 @@
         android:id="@+id/proNimi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:text="@string/tieto1"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096" />
+        app:layout_constraintVertical_bias="0.083" />
 
     <TextView
         android:id="@+id/tavoitteet"
         android:layout_width="225dp"
         android:layout_height="17dp"
         android:text="@string/ohje"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.397" />
+        app:layout_constraintVertical_bias="0.32" />
 
     <TextView
         android:id="@+id/proPaino"
@@ -57,7 +63,7 @@
         app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.188" />
+        app:layout_constraintVertical_bias="0.161" />
 
     <TextView
         android:id="@+id/otsikko"
@@ -69,39 +75,41 @@
         app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.292" />
+        app:layout_constraintVertical_bias="0.247" />
 
     <TextView
         android:id="@+id/eka"
-        android:layout_width="231dp"
-        android:layout_height="27dp"
+        android:layout_width="355dp"
+        android:layout_height="30dp"
         android:text="@string/tieto1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.244"
+        app:layout_constraintHorizontal_bias="0.785"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.457" />
+        app:layout_constraintVertical_bias="0.383" />
 
     <TextView
         android:id="@+id/toka"
-        android:layout_width="202dp"
-        android:layout_height="24dp"
+        android:layout_width="355dp"
+        android:layout_height="30dp"
         android:text="@string/tieto1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.21"
+        app:layout_constraintHorizontal_bias="0.785"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.524" />
+        app:layout_constraintVertical_bias="0.427" />
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/historia"
-        android:layout_width="390dp"
-        android:layout_height="300dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="396dp"
+        android:layout_height="269dp"
+        android:layout_marginBottom="36dp"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -113,10 +121,10 @@
         android:text="@string/tieto1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.224"
+        app:layout_constraintHorizontal_bias="0.208"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.292" />
+        app:layout_constraintVertical_bias="0.241" />
 
     <TextView
         android:id="@+id/pvm"
@@ -128,13 +136,13 @@
         app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.188" />
+        app:layout_constraintVertical_bias="0.161" />
 
     <ImageButton
         android:id="@+id/kerro"
         android:layout_width="23dp"
         android:layout_height="23dp"
-        android:background="#FFFFFF"
+        android:background="#EDEDF4"
         android:contentDescription="lisätietoja"
         android:onClick="annaLisatiedot"
         android:tint="@color/primaryColor"
@@ -143,8 +151,8 @@
         app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.288"
+        app:layout_constraintVertical_bias="0.242"
         app:srcCompat="@drawable/ic_baseline_help_24"
-        tools:ignore= "VectorDrawableCompat" />
+        tools:ignore="VectorDrawableCompat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.androidproject.aktiviteetit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -23,7 +24,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.PointsGraphSeries;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -34,15 +36,15 @@ public class Profiili extends AppCompatActivity {
     public SharedPreferences trendit;
     public SharedPreferences.Editor tallListat;
     private float paino, pituus;
-    private String nimi, tiedot1, tiedot2;
+    private String nimi, tiedot1, tiedot2, paiva;
     private double BMI;
-    //public Paino paivays;
+
     public ArrayList<Paino> paTrendi;
     public static ArrayList<String> x_aks;
     public static ArrayList<String> y_aks;
     Gson gson = new Gson();
     GraphView historia;
-    PointsGraphSeries<DataPoint> sarja1;
+    LineGraphSeries<DataPoint> sarja1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,20 +68,24 @@ public class Profiili extends AppCompatActivity {
         haeTiedot();
         setReuna();
 
-        x_aks=new ArrayList<String>();
-        y_aks=new ArrayList<String>();
-        for (int i=0; i<paTrendi.size(); i++){
-            x_aks.add(String.valueOf(i));
-            y_aks.add(String.valueOf(paTrendi.get(i)));
-        }
+        //x_aks=new ArrayList<String>();
+        //y_aks=new ArrayList<String>();
+
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
-        sarja1 = new PointsGraphSeries<>(data());
-        historia.addSeries(sarja1);
-        //teeKuvaaja();
+
+        teeKuvaaja();
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
         for (int i=0; i<paTrendi.size(); i++){
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
         }
+        /*BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
+        bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);*/
+    }
+    protected void onResume(){
+        super.onResume();
+        teeKuvaaja();
+        historia.onDataChanged(true, true);
     }
 
     public DataPoint[] data(){
@@ -93,13 +99,18 @@ public class Profiili extends AppCompatActivity {
     }
 
     public void teeKuvaaja(){
-
+        x_aks=new ArrayList<String>();
+        y_aks=new ArrayList<String>();
         for (int i=0; i<paTrendi.size(); i++){
             x_aks.add(String.valueOf(i));
             y_aks.add(String.valueOf(paTrendi.get(i)));
         }
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
-        sarja1 = new PointsGraphSeries<>(data());
+        sarja1 = new LineGraphSeries<>(data());
+        sarja1.setTitle("Paino");
+        sarja1.setDrawDataPoints(true);
+        sarja1.setDataPointsRadius(10f);
+        historia.getLegendRenderer().setVisible(true);
         historia.addSeries(sarja1);
     }
 
@@ -119,14 +130,15 @@ public class Profiili extends AppCompatActivity {
         nimi = tiedot.getString("Käyttäjä", "");
         tiedot1 = tiedot.getString("Tavoite1", "");
         tiedot2 = tiedot.getString("Tavoite2", "");
+        paiva = "(" + tiedot.getString("Päiväys", "") + ")";
         pronimi.setText(nimi);
         propaino.setText(String.valueOf(paino) + " kg");
-        //pvm.setText(paivays.haePainonPaivamaara().toString());
+
         Log.d("Pituus", String.valueOf(pituus));
         Log.d("Paino", String.valueOf(paino));
-        //String pyoBmi = String.format("%.2f", laskeBmi());
-        bmi.setText(String.valueOf(laskeBmi()));
 
+        bmi.setText(String.valueOf(laskeBmi()));
+        pvm.setText(paiva);
         asetetut.setText("Asettamasi tavoitteet:");
         String[] tav1 = tiedot1.split(" ");
         String tyyppi1 = tav1[0];
@@ -148,9 +160,7 @@ public class Profiili extends AppCompatActivity {
         }*/
 
 
-        /*BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
-        bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);*/
+
     }
     public void siirry(View v) {
         if (v == findViewById(R.id.siirryAsetuksiin)) {
@@ -175,7 +185,7 @@ public class Profiili extends AppCompatActivity {
     public void annaLisatiedot(View v){
         float tieto = Float.parseFloat(bmi.getText().toString());
         Toast toast = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 150, -250);
+        toast.setGravity(Gravity.CENTER, 150, -320);
 
         //toast.getView().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#34495E")));
         if (tieto < 18.5){
@@ -220,7 +230,7 @@ public class Profiili extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
-                public boolean onNavigationItemSelected(MenuItem item) {
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                     switch (item.getItemId()) {
 
