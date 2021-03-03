@@ -42,7 +42,7 @@ public class Asetukset extends AppCompatActivity {
     public SharedPreferences.Editor tiedot;
     public SharedPreferences.Editor tallListat;
     private Calendar kalenteri;
-    public ArrayList<Paino> paTrendi;
+    public List<Paino> paTrendi;
 
     private String trendiJson;
     private Trendi trendi;
@@ -70,10 +70,11 @@ public class Asetukset extends AppCompatActivity {
         asetukset = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         tallListat = trendit.edit();
-        listaHae();
 
         trendiJson = trendit.getString("Trendi", "");
         trendi = gson.fromJson(trendiJson, Trendi.class);
+
+        listaHae();
 
         /*// Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -174,15 +175,15 @@ public class Asetukset extends AppCompatActivity {
         }
     }
     public void listaHae(){
-        trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
-        Gson gson = new Gson();
-        String json = trendit.getString("Paino", null);
-        Type type = new TypeToken<ArrayList<Paino>>() {}.getType();
-        paTrendi = gson.fromJson(json, type);
+    //    trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
+      //  Gson gson = new Gson();
+      //  String json = trendit.getString("Paino", null);
+       // Type type = new TypeToken<ArrayList<Paino>>() {}.getType();
+        paTrendi = trendi.getPaino();
 
-        if (paTrendi == null){
+    /*    if (paTrendi == null){
             paTrendi = new ArrayList<>();
-        }
+        } */
     }
     private String haePaiva() {
         String paiva, kuukausi, vuosi;
