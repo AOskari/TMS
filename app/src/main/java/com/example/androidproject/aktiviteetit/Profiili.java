@@ -187,7 +187,7 @@ public class Profiili extends AppCompatActivity {
     }
 
     public void annaLisatiedot(View v){
-        float tieto = Float.parseFloat(bmi.getText().toString());
+        float tieto = laskeBmi();
         Toast toast = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 150, -320);
 
@@ -217,7 +217,9 @@ public class Profiili extends AppCompatActivity {
     }
 
     public void setReuna(){
-        float tieto = Float.parseFloat(bmi.getText().toString());
+
+        float tieto = laskeBmi();
+
         if (tieto >= 18.5 && tieto < 25.0){
             bmi.setBackgroundResource(R.drawable.border1);
         } else if (tieto > 25.0 && tieto <= 30.0){
