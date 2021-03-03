@@ -339,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
                      *   Lisätiedot, proteiini, hiilarit, rasva
                      */
                     lisatiedot.setGravity(Gravity.CENTER);
-                    lisatiedot.setText("Tavoite: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
+                    lisatiedot.setText("Tavoite 2: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
 
                 }
 
@@ -387,6 +387,8 @@ public class MainActivity extends AppCompatActivity {
 
         /**
          * Inspiroiva vaihtuva lainaus, joka motivoi jatkamaan omien tavoitteiden seuraamista.
+         * https://www.lifefitness.com.au/20-fitness-motivation-quotes/
+         * https://stackoverflow.com/questions/5034370/retrieving-a-random-item-from-arraylist
          */
         TextView quoteTeksti = findViewById(R.id.quoteTeksti);
         quoteTeksti.setGravity(Gravity.CENTER);
