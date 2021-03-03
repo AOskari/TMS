@@ -81,9 +81,9 @@ public class Profiili extends AppCompatActivity {
         for (int i=0; i<paTrendi.size(); i++){
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
         }
-        /*BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
-        bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);*/
+        bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);
     }
     protected void onResume(){
         super.onResume();

@@ -31,7 +31,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 import static com.example.androidproject.AteriaLista.haeLista;
 
@@ -94,19 +96,20 @@ public class MainActivity extends AppCompatActivity {
 
         /**
          * Ympyrä progressbar
+         * Lähde: https://stackoverflow.com/questions/12776587/android-circular-determinate-progressbar
          */
         Resources res = getResources();
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = res.getDrawable(R.drawable.circle2);
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable2 = res.getDrawable(R.drawable.circle2);
+        Drawable drawable = res.getDrawable(R.drawable.circle2);
+        Drawable drawable2 = res.getDrawable(R.drawable.circle2);
 
         /**
          * Vaihtaa ympyrän punaiseksi tavoitteen epäonnistuessa.
          */
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable3 = res.getDrawable(R.drawable.circle3);
-        mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
+        drawable3 = res.getDrawable(R.drawable.circle3);
+        mProgress = findViewById(R.id.circularProgressbar);
 
         //mProgress = tavoite 1, mProgress2 = tavoite 2.
-        mProgress2 = (ProgressBar) findViewById(R.id.circularProgressbar2);
+        mProgress2 = findViewById(R.id.circularProgressbar2);
 
         mProgress.setProgress(0);   // Main Progress
         mProgress.setSecondaryProgress(100); // Secondary Progress
@@ -221,9 +224,9 @@ public class MainActivity extends AppCompatActivity {
                     /**
                      * Vaihtaa ympyrän punaiseksi tavoitteen epäonnistuessa.
                      */
-                    mProgress2.setProgressDrawable(drawable3);
-
+                    mProgress.setProgressDrawable(drawable3);
                 }
+
 
                 /**
                  * Näytetään prosentit.
@@ -309,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
                     //Kertoo että ylitit päivän kaloritavoitteen.
                     TextView ylitys2 = findViewById(R.id.ylitys2);
                     ylitys2.setText("Päivän tavoite 2 ylitetty.");
-                    mProgress.setProgressDrawable(drawable3);
+                    mProgress2.setProgressDrawable(drawable3);
 
                 }
             } else if (tiedot2_1.equals("Hiilihydraatti")) {
@@ -336,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
                      *   Lisätiedot, proteiini, hiilarit, rasva
                      */
                     lisatiedot.setGravity(Gravity.CENTER);
-                    lisatiedot.setText("Tavoite: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
+                    lisatiedot.setText("Tavoite 2: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
 
                 }
 
@@ -364,6 +367,33 @@ public class MainActivity extends AppCompatActivity {
                 nimitextview.setText("Hei!");
             }
         }
+        ArrayList<String> listOfRandomQuotes;
+
+        listOfRandomQuotes = new ArrayList<String>();
+        listOfRandomQuotes.add("The last three or four reps is what makes the muscle grow. This area of pain divides a champion from someone who is not a champion. -  Arnold Schwarzenegger");
+        listOfRandomQuotes.add("You must be the change you wish to see in the world.");
+        listOfRandomQuotes.add("I have decided to stick with love. Hate is too great a burden to bear.");
+        listOfRandomQuotes.add("By failing to prepare, you are preparing to fail.");
+        listOfRandomQuotes.add("Success usually comes to those who are too busy to be looking for it.");
+        listOfRandomQuotes.add("If you think lifting is dangerous, try being weak. Being weak is dangerous. - Bret Contreras");
+        listOfRandomQuotes.add("The clock is ticking. Are you becoming the person you want to be? - Greg Plitt");
+        listOfRandomQuotes.add("Whether you think you can, or you think you can’t, you’re right. - Henry Ford");
+        listOfRandomQuotes.add("You must expect great things of yourself before you can do them. - Michael Jordan");
+        listOfRandomQuotes.add("‘All our dreams can come true if we have the courage to pursue them. - Walt Disney");
+
+        Random randomGenerator = new Random();
+        int index = randomGenerator.nextInt(listOfRandomQuotes.size());
+        String string = listOfRandomQuotes.get(index);
+
+        /**
+         * Inspiroiva vaihtuva lainaus, joka motivoi jatkamaan omien tavoitteiden seuraamista.
+         * https://www.lifefitness.com.au/20-fitness-motivation-quotes/
+         * https://stackoverflow.com/questions/5034370/retrieving-a-random-item-from-arraylist
+         */
+        TextView quoteTeksti = findViewById(R.id.quoteTeksti);
+        quoteTeksti.setGravity(Gravity.CENTER);
+        quoteTeksti.setText(string);
+
     }
 
     /**
