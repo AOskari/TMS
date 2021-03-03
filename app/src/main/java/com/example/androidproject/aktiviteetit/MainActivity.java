@@ -96,17 +96,17 @@ public class MainActivity extends AppCompatActivity {
          * Ympyrä progressbar
          */
         Resources res = getResources();
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable = res.getDrawable(R.drawable.circle2);
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable2 = res.getDrawable(R.drawable.circle2);
+        Drawable drawable = res.getDrawable(R.drawable.circle2);
+        Drawable drawable2 = res.getDrawable(R.drawable.circle2);
 
         /**
          * Vaihtaa ympyrän punaiseksi tavoitteen epäonnistuessa.
          */
-        @SuppressLint("UseCompatLoadingForDrawables") Drawable drawable3 = res.getDrawable(R.drawable.circle3);
-        mProgress = (ProgressBar) findViewById(R.id.circularProgressbar);
+        drawable3 = res.getDrawable(R.drawable.circle3);
+        mProgress = findViewById(R.id.circularProgressbar);
 
         //mProgress = tavoite 1, mProgress2 = tavoite 2.
-        mProgress2 = (ProgressBar) findViewById(R.id.circularProgressbar2);
+        mProgress2 = findViewById(R.id.circularProgressbar2);
 
         mProgress.setProgress(0);   // Main Progress
         mProgress.setSecondaryProgress(100); // Secondary Progress
