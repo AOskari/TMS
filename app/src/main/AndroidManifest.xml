@@ -15,14 +15,17 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".aktiviteetit.TietoaMeista">
             android:parentActivityName=".aktiviteetit.MainActivity"
+            android:screenOrientation="portrait"
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".aktiviteetit.TietoaMeista" />
         </activity>
         <activity
             android:name=".aktiviteetit.AteriaInfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AndroidProject.PopupTheme" />
-        <activity android:name=".aktiviteetit.Asetukset">
+        <activity android:name=".aktiviteetit.Asetukset"
+            android:screenOrientation="portrait" >
             android:parentActivityName=".aktiviteetit.Profiili">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -30,27 +33,33 @@
         </activity>
         <activity
             android:name=".aktiviteetit.Profiili"
+            android:screenOrientation="portrait"
             android:parentActivityName=".aktiviteetit.MainActivity" />
         <activity
             android:name=".aktiviteetit.KalenteriActivity"
             android:theme="@style/Theme.AndroidProject.PopupTheme" />
         <activity
             android:name=".aktiviteetit.TiedotActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AndroidProject.PopupTheme" />
         <activity
             android:name=".aktiviteetit.AteriaActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".aktiviteetit.AteriatActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".aktiviteetit.AteriatActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".aktiviteetit.MainActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".aktiviteetit.HakuActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".aktiviteetit.AteriaActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".aktiviteetit.MainActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -224,9 +224,9 @@ public class MainActivity extends AppCompatActivity {
                     /**
                      * Vaihtaa ympyrän punaiseksi tavoitteen epäonnistuessa.
                      */
-                    mProgress2.setProgressDrawable(drawable3);
-
+                    mProgress.setProgressDrawable(drawable3);
                 }
+
 
                 /**
                  * Näytetään prosentit.
@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
                     //Kertoo että ylitit päivän kaloritavoitteen.
                     TextView ylitys2 = findViewById(R.id.ylitys2);
                     ylitys2.setText("Päivän tavoite 2 ylitetty.");
-                    mProgress.setProgressDrawable(drawable3);
+                    mProgress2.setProgressDrawable(drawable3);
 
                 }
             } else if (tiedot2_1.equals("Hiilihydraatti")) {
