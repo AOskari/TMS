@@ -103,14 +103,20 @@
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/historia"
-        android:layout_width="396dp"
-        android:layout_height="269dp"
-        android:layout_marginBottom="36dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toka" />
 
     <TextView
         android:id="@+id/bmi"
@@ -154,5 +160,19 @@
         app:layout_constraintVertical_bias="0.242"
         app:srcCompat="@drawable/ic_baseline_help_24"
         tools:ignore="VectorDrawableCompat" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/primaryColor"
+        app:itemIconTint="@drawable/menu_valittu"
+        app:itemTextColor="@drawable/menu_valittu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/alapalkki_menu" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
