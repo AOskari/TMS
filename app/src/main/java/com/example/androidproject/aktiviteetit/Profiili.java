@@ -28,6 +28,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class Profiili extends AppCompatActivity {
@@ -37,11 +39,12 @@ public class Profiili extends AppCompatActivity {
     public SharedPreferences.Editor tallListat;
     private float paino, pituus;
     private String nimi, tiedot1, tiedot2, paiva;
-    private double BMI;
+    private float BMI;
 
     public ArrayList<Paino> paTrendi;
     public static ArrayList<String> x_aks;
     public static ArrayList<String> y_aks;
+    DecimalFormat dec;
     Gson gson = new Gson();
     GraphView historia;
     LineGraphSeries<DataPoint> sarja1;
@@ -59,7 +62,7 @@ public class Profiili extends AppCompatActivity {
         tavoite2 = findViewById(R.id.toka);
         pvm = findViewById(R.id.pvm);
         historia = findViewById(R.id.historia);
-
+        dec = new DecimalFormat("0.00");
         tiedot = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         tallListat = trendit.edit();
@@ -84,7 +87,7 @@ public class Profiili extends AppCompatActivity {
     }
     protected void onResume(){
         super.onResume();
-        teeKuvaaja();
+        //teeKuvaaja();
         historia.onDataChanged(true, true);
     }
 
@@ -137,7 +140,7 @@ public class Profiili extends AppCompatActivity {
         Log.d("Pituus", String.valueOf(pituus));
         Log.d("Paino", String.valueOf(paino));
 
-        bmi.setText(String.valueOf(laskeBmi()));
+        bmi.setText(dec.format(laskeBmi()));
         pvm.setText(paiva);
         asetetut.setText("Asettamasi tavoitteet:");
         String[] tav1 = tiedot1.split(" ");
@@ -170,14 +173,15 @@ public class Profiili extends AppCompatActivity {
         }
     }
 
-    public double laskeBmi(){
-            paino = tiedot.getFloat("Paino", 0.0f);
-            pituus = tiedot.getFloat("Pituus", 0.0f) / 100;
-            //String pyoBmi = String.format("%.2f", paino / (pituus * pituus));
+    public float laskeBmi(){
+        paino = tiedot.getFloat("Paino", 0.0f);
+        pituus = tiedot.getFloat("Pituus", 0.0f) / 100;
+        //DecimalFormat dec = new DecimalFormat("0.00");
+        float lasku = paino / (pituus*pituus);
             if (paino == 0.0f || pituus == 0.0f){
-                BMI = 0.0;
+                BMI = 0.0f;
             } else {
-                BMI = Double.parseDouble(String.format("%.2f", paino / (pituus * pituus)));
+                BMI = lasku; // Double.parseDouble(String.format("%.2f", paino / (pituus * pituus)));
             }
             return BMI;
     }
@@ -188,7 +192,7 @@ public class Profiili extends AppCompatActivity {
         toast.setGravity(Gravity.CENTER, 150, -320);
 
         //toast.getView().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#34495E")));
-        if (tieto < 18.5){
+        if (tieto > 0.0 && tieto < 18.5){
             toast.setText("Alipaino");
             toast.show();
         } else if (tieto >= 18.5 && tieto < 25.0){
@@ -205,6 +209,9 @@ public class Profiili extends AppCompatActivity {
             toast.show();
         } else if (tieto > 40.0){
             toast.setText("Sairaalloinen lihavuus");
+            toast.show();
+        } else if (tieto == 0.0){
+            toast.setText("Pituutta tai painoa ei ole asetettu");
             toast.show();
         }
     }
