@@ -33,23 +33,23 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Asetukset extends AppCompatActivity {
-    public TextView yksikko1, yksikko2, paino, pituus, tav1, tav2;
-    public Spinner tavoite1, tavoite2;
-    public Button tallenna;
-    public EditText nimi;
-    public SharedPreferences asetukset;
-    public SharedPreferences trendit;
-    public SharedPreferences.Editor tiedot;
-    public SharedPreferences.Editor tallListat;
+    private TextView yksikko1, yksikko2, paino, pituus, tav1, tav2;
+    private Spinner tavoite1, tavoite2;
+    private Button tallenna;
+    private EditText nimi;
+    private SharedPreferences asetukset;
+    private SharedPreferences trendit;
+    private SharedPreferences.Editor tiedot;
+    private SharedPreferences.Editor tallListat;
     private Calendar kalenteri;
-    public List<Paino> paTrendi;
+    private List<Paino> paTrendi;
 
     private String trendiJson;
     private Trendi trendi;
 
     private String kuka, naytaT1, naytaT2, tyyppi1, tyyppi2;
     private float kg, cm, m1, m2;
-    Gson gson = new Gson();
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +76,10 @@ public class Asetukset extends AppCompatActivity {
 
         listaHae();
 
-        /*// Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
+        // Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
-        //bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);*/
+        bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);
 
 
         String[] valinta = getResources().getStringArray(R.array.valinta);
@@ -253,33 +253,39 @@ public class Asetukset extends AppCompatActivity {
         tallListat.putString("Trendi", trendiJson);
         tallListat.commit();
     }
- /*   private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
-            BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(MenuItem item) {
 
-                    switch (item.getItemId()) {
 
-                        case R.id.koti:
-                            startActivity(new Intent(Asetukset.this, MainActivity.class));
-                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                            Log.d("Menu", "Koti painettu");
-                            finish();
-                            break;
-                        case R.id.suunnittele:
-                            startActivity(new Intent(Asetukset.this, AteriatActivity.class));
-                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                            Log.d("Menu", "Suunnittele painettu");
-                            finish();
-                            break;
-                        case R.id.profiili:
-                            startActivity(new Intent(Asetukset.this, Profiili.class));
-                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                            Log.d("Menu", "Profiili painettu");
-                            finish();
-                            break;
+    /**
+     * Alapalkin toiminnallisuus, aloittaa valitun aktiviteetin.
+     * Tutoriaali alapalkin luomiseen: https://www.youtube.com/watch?v=fODp1hZxfng
+     */
+      private BottomNavigationView.OnNavigationItemSelectedListener alaPalkkiMethod = new
+                BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem item) {
+
+                        switch (item.getItemId()) {
+
+                            case R.id.koti:
+                                startActivity(new Intent(Asetukset.this, MainActivity.class));
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                Log.d("Menu", "Koti painettu");
+                                finish();
+                                break;
+                            case R.id.suunnittele:
+                                startActivity(new Intent(Asetukset.this, AteriatActivity.class));
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                Log.d("Menu", "Suunnittele painettu");
+                                finish();
+                                break;
+                            case R.id.profiili:
+                                startActivity(new Intent(Asetukset.this, Profiili.class));
+                                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                                Log.d("Menu", "Profiili painettu");
+                                finish();
+                                break;
+                        }
+                        return false;
                     }
-                    return false;
-                }
-            };*/
+                };
 }
