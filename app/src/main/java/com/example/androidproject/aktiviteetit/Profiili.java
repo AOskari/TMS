@@ -72,15 +72,7 @@ public class Profiili extends AppCompatActivity {
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         tallListat = trendit.edit();
 
-        /**
-         * Haetaan Trendi-singleton, jos sitä ei löydy, tallennetaan se SharedPreferencesiin.
-         */
         trendiJson = trendit.getString("Trendi", "");
-        if (trendiJson.equals("")) {
-            trendiJson = gson.toJson(getInstance());
-            tallListat.putString("Trendi", trendiJson);
-            tallListat.commit();
-        }
         trendi = gson.fromJson(trendiJson, Trendi.class);
 
         listaHae();

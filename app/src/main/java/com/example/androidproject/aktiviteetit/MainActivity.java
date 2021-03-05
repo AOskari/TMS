@@ -38,6 +38,7 @@ import java.util.Calendar;
 import java.util.Random;
 
 import static com.example.androidproject.AteriaLista.haeLista;
+import static com.example.androidproject.Trendi.getInstance;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,9 +48,12 @@ public class MainActivity extends AppCompatActivity {
     private Calendar kalenteri;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
+    private SharedPreferences trendit;
+    private SharedPreferences.Editor tallListat;
     private Gson gson = new Gson();
     private AteriaLista aterialista;
     private String aterialistaJson;
+    private String trendiJson;
 
     private int paiva;
     private int kuukausi;
@@ -124,6 +128,9 @@ public class MainActivity extends AppCompatActivity {
         mProgress2.setMax(100); // Maximum Progress
         mProgress2.setProgressDrawable(drawable2);
 
+        trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
+        tallListat = trendit.edit();
+
         /**
          * Haetaan AteriaLista-singleton pysyväismuistista.
          * Jos singletonia ei löydy, tallennetaan se pysyväismuistiin.
@@ -137,6 +144,16 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("aterialista", aterialistaJson);
             editor.apply(); //vaihoin commitista applyhyn
             Log.d("aterialista", aterialistaJson);
+        }
+
+        /**
+         * Haetaan Trendi-singleton, jos sitä ei löydy, tallennetaan se SharedPreferencesiin.
+         */
+        trendiJson = trendit.getString("Trendi", "");
+        if (trendiJson.equals("")) {
+            trendiJson = gson.toJson(getInstance());
+            tallListat.putString("Trendi", trendiJson);
+            tallListat.commit();
         }
 
         aterialista = gson.fromJson(aterialistaJson, AteriaLista.class);
@@ -468,6 +485,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickUusiKayttajaBtn(View view) {
-      //  startActivity(new Intent(MainActivity.this, Asetukset.class));
+        startActivity(new Intent(MainActivity.this, Asetukset.class));
     }
 }
