@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
         kalenteri = Calendar.getInstance();
 
-
         /**
          * Ympyrä progressbar
          * Lähde: https://stackoverflow.com/questions/12776587/android-circular-determinate-progressbar
@@ -486,5 +485,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickUusiKayttajaBtn(View view) {
         startActivity(new Intent(MainActivity.this, Asetukset.class));
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
     }
 }
