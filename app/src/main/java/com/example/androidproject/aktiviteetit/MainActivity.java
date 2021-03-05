@@ -421,6 +421,12 @@ public class MainActivity extends AppCompatActivity {
             protskuTeksti.setVisibility(View.GONE);
             quoteTeksti.setVisibility(View.GONE);
 
+
+        }
+        else {
+            //Sama logiikka mutta toistepäin. Halutaan näkyvän vain uusille/ilman tietoja oleville käyttäjille.
+            Button uK = findViewById(R.id.uusiKayttajaBtn);
+            uK.setVisibility(View.GONE);
         }
 
     }
@@ -460,9 +466,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-    //Button uK = findViewById(R.id.uusiKayttajaBtn);
 
     public void onClickUusiKayttajaBtn(View view) {
-        startActivity(new Intent(MainActivity.this, Asetukset.class));
+      //  startActivity(new Intent(MainActivity.this, Asetukset.class));
     }
 }
