@@ -55,13 +55,10 @@ public class MainActivity extends AppCompatActivity {
 
     ProgressBar mProgress;
     ProgressBar mProgress2;
-
     Drawable drawable3;
 
     /**
      * Ylä palkkiin namin luominen.
-     * @param menu
-     * @return
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Yläpalkin napin toiminnallisuus
-     * @param item
-     * @return
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -81,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.mybutton) {
             Intent activity2Intent = new Intent(getApplicationContext(), TietoaMeista.class);
             startActivity(activity2Intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -148,6 +148,24 @@ public class Asetukset extends AppCompatActivity {
         });
     }
 
+    /**
+     * Asetetaan takaisin-napeille fade-animaatio.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
     @Override
     protected void onResume(){
         super.onResume();
@@ -164,6 +182,7 @@ public class Asetukset extends AppCompatActivity {
         m1 = asetukset.getFloat("Tavoitemäärä1", 0.0f);
         m2 = asetukset.getFloat("Tavoitemäärä2", 0.0f);
     }
+
     public void listaTall(){
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         String json = gson.toJson(paTrendi);
@@ -174,16 +193,9 @@ public class Asetukset extends AppCompatActivity {
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
         }
     }
-    public void listaHae(){
-    //    trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
-      //  Gson gson = new Gson();
-      //  String json = trendit.getString("Paino", null);
-       // Type type = new TypeToken<ArrayList<Paino>>() {}.getType();
-        paTrendi = trendi.getPaino();
 
-    /*    if (paTrendi == null){
-            paTrendi = new ArrayList<>();
-        } */
+    public void listaHae(){
+        paTrendi = trendi.getPaino();
     }
     private String haePaiva() {
         String paiva, kuukausi, vuosi;

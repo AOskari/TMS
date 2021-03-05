@@ -121,7 +121,7 @@ public class AteriaActivity extends AppCompatActivity {
             });
 
         /**
-         *  Tallennetaan aterian nimi joka kerta, kun syöttökenttää muokataan.
+         *  Tallennetaan aterian nimi joka kerta kun syöttökenttää muokataan.
          */
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -141,15 +141,33 @@ public class AteriaActivity extends AppCompatActivity {
         bottomNavigationView.getMenu().findItem(R.id.suunnittele).setChecked(true);
     }
 
+    /**
+     * Asetetaan takaisin-napeille fade-animaatio.
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            return true;
+        }
+        return false;
+    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
+
+        /**
+         * Tarkastetaan onko käyttäjä muokkaustilassa ja
+         * päivitetään lista.
+         */
         muokkaus = pref.getBoolean("muokkaus", false);
         editText.setText(ateria.haeNimi());
         paivitaLista();
