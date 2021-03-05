@@ -43,13 +43,12 @@ public class Asetukset extends AppCompatActivity {
     private SharedPreferences.Editor tallListat;
     private Calendar kalenteri;
     private List<Paino> paTrendi;
-
-    private String trendiJson;
     private Trendi trendi;
-
-    private String kuka, naytaT1, naytaT2, tyyppi1, tyyppi2;
-    private float kg, cm, m1, m2;
     private Gson gson = new Gson();
+
+    private String trendiJson, kuka;
+    private float kg, cm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,8 +160,6 @@ public class Asetukset extends AppCompatActivity {
         cm = asetukset.getFloat("Pituus", 0.0f);
         Log.d("Testi", Float.toString(cm));
         pituus.setText(String.valueOf(cm));
-        m1 = asetukset.getFloat("Tavoitemäärä1", 0.0f);
-        m2 = asetukset.getFloat("Tavoitemäärä2", 0.0f);
     }
     public void listaTall(){
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
@@ -195,15 +192,11 @@ public class Asetukset extends AppCompatActivity {
 
     public void tallenna() {
         float tyhja = 0.0f;
-        String kayttaja, pvm; //= nimi.getText().toString();
-        float annaPaino; // = Float.parseFloat(paino.getText().toString());
-        float annaPituus; // = Float.parseFloat(pituus.getText().toString());
-        float maara1; // = Float.parseFloat(tav1.getText().toString());
-        float maara2; // = Float.parseFloat(tav2.getText().toString());
-        //String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
-        //String naytaT2 = tavoite2.getSelectedItem().toString() + " " + tav2.getText() + " " + yksikko2.getText();
-        String tavoitetyyppi1 = tavoite1.getSelectedItem().toString();
-        String tavoitetyyppi2 = tavoite2.getSelectedItem().toString();
+        String kayttaja, pvm;
+        float annaPaino;
+        float annaPituus;
+        float maara1;
+        float maara2;
         pvm = haePaiva();
 
         tiedot = asetukset.edit();
@@ -235,15 +228,18 @@ public class Asetukset extends AppCompatActivity {
 
         String naytaT1 = tavoite1.getSelectedItem().toString() + " " + maara1 + " " + yksikko1.getText();
         String naytaT2 = tavoite2.getSelectedItem().toString() + " " + maara2 + " " + yksikko2.getText();
-        tiedot.putString("Tavoitetyyppi1", tavoitetyyppi1);
-        tiedot.putString("Tavoitetyyppi2", tavoitetyyppi2);
+
         tiedot.putFloat("Tavoitemäärä1", maara1);
         tiedot.putFloat("Tavoitemäärä2", maara2);
         tiedot.putString("Käyttäjä", kayttaja);
         tiedot.putFloat("Paino", annaPaino);
         tiedot.putFloat("Pituus", annaPituus);
-        tiedot.putString("Tavoite1", naytaT1);
-        tiedot.putString("Tavoite2", naytaT2);
+        if (maara1 != 0.0f) {
+            tiedot.putString("Tavoite1", naytaT1);
+        }
+        if (maara2 != 0.0f) {
+            tiedot.putString("Tavoite2", naytaT2);
+        }
         tiedot.putString("Päiväys", pvm);
         tiedot.commit();
     }

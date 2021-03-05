@@ -89,14 +89,7 @@ public class Profiili extends AppCompatActivity {
         listaHae();
         haeTiedot();
         setReuna();
-        //x_aks=new ArrayList<String>();
-        //y_aks=new ArrayList<String>();
 
-
-
-        Log.d("Listan koko ", String.valueOf(paTrendi.size()));
-
-        //teeKuvaaja();
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
         for (int i=0; i<paTrendi.size(); i++){
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
@@ -107,9 +100,9 @@ public class Profiili extends AppCompatActivity {
     }
     protected void onResume(){
         super.onResume();
+        haeTiedot();
         teeKuvaaja();
         historia.onDataChanged(true, true);
-
     }
 
     public DataPoint[] data(){
@@ -136,7 +129,6 @@ public class Profiili extends AppCompatActivity {
             //Log.d("Näytä array ", x_nimi[i]);
         }
 
-        //String[] x_arvo = new String[x_aks.size()];
         for (int i = 0; i < paTrendi.size(); i++){
             String paiva = paTrendi.get(i).paivamaaraString();
             x_nimi[i] = paiva;
@@ -147,15 +139,10 @@ public class Profiili extends AppCompatActivity {
             x_label.setHorizontalLabels(x_nimi);
             historia.getGridLabelRenderer().setLabelFormatter(x_label);
             historia.getGridLabelRenderer().setHorizontalLabelsAngle(150);
-        } /*else {
-            StaticLabelsFormatter x_label = new StaticLabelsFormatter(historia);
-            x_label.setHorizontalLabels("");
-            historia.getGridLabelRenderer().setLabelFormatter("");
-            historia.getGridLabelRenderer().setHorizontalLabelsAngle(100);
-        }*/
+        }
 
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
-        //Log.d("Listan koko ", String.valueOf(x_aks.size()));
+
         sarja1 = new LineGraphSeries<>(data());
         sarja1.setTitle("Paino");
         sarja1.setDrawDataPoints(true);
@@ -163,10 +150,13 @@ public class Profiili extends AppCompatActivity {
         historia.getViewport().setMinX(0);
         historia.getViewport().setMaxX(paTrendi.size());
         historia.getViewport().setXAxisBoundsManual(true);
+        historia.getViewport().setScalable(true);
+        historia.getViewport().setScrollable(true);
 
         historia.getLegendRenderer().setVisible(true);
         historia.getGridLabelRenderer().setNumHorizontalLabels(paTrendi.size());
         historia.getGridLabelRenderer().setHorizontalLabelsAngle(100);
+        historia.getGridLabelRenderer().setHumanRounding(false);
 
         historia.addSeries(sarja1);
 
@@ -174,7 +164,7 @@ public class Profiili extends AppCompatActivity {
             @Override
             public String formatLabel(double value, boolean isValueX) {
                 if (isValueX) {
-                    return x_nimi[(int) value];
+                    return String.valueOf(x_nimi[(int) value]);
                 } else {
                     return super.formatLabel(value, isValueX);
                 }
@@ -200,6 +190,7 @@ public class Profiili extends AppCompatActivity {
         tiedot1 = tiedot.getString("Tavoite1", "");
         tiedot2 = tiedot.getString("Tavoite2", "");
         paiva = "(" + tiedot.getString("Päiväys", "") + ")";
+
         pronimi.setText(nimi);
         propaino.setText(String.valueOf(paino) + " kg");
 
@@ -217,12 +208,12 @@ public class Profiili extends AppCompatActivity {
         if (tyyppi1.equals("Valinta")){
             tavoite1.setText("");
         } else {
-            tavoite1.setText("Tavoite 1: " + tiedot.getString("Tavoite1", ""));
+            tavoite1.setText("Tavoite 1: " + tiedot1);
         }
         if (tyyppi2.equals("Valinta")){
             tavoite2.setText("");
         } else {
-            tavoite2.setText("Tavoite 2: " + tiedot.getString("Tavoite2", ""));
+            tavoite2.setText("Tavoite 2: " + tiedot2);
         }
         /*for (int i = 0; i < paTrendi.size(); i++) {
             String nayta = paTrendi.get(i).toString();
