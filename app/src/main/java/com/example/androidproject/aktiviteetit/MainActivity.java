@@ -30,6 +30,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Ylä palkkiin namin luominen.
+     *
      * @param menu
      * @return
      */
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Yläpalkin napin toiminnallisuus
+     *
      * @param item
      * @return
      */
@@ -91,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         kalenteri = Calendar.getInstance();
-
 
 
         /**
@@ -185,8 +187,6 @@ public class MainActivity extends AppCompatActivity {
              */
             TextView tavoite1Nimi = findViewById(R.id.tavoite1nimi);
             tavoite1Nimi.setText(tavoite1_nimi);
-
-
 
 
             /**
@@ -394,7 +394,35 @@ public class MainActivity extends AppCompatActivity {
         quoteTeksti.setGravity(Gravity.CENTER);
         quoteTeksti.setText(string);
 
+
+        /**
+         * Näyttää käyttäjälle kehotteen täyttää omat tiedot, mikäli niitä ei ole.
+         * https://stackoverflow.com/questions/6962030/how-to-check-if-sharedpreferences-file-exists-or-not
+         */
+        File tiedosto = new File(getApplicationContext().getApplicationInfo().dataDir + "/shared_prefs/Tiedot.xml");
+
+        if ((tiedot1.equals("") && tiedot2.equals("")) || (tiedot1.equals(null)
+                && tiedot2.equals(null)) || (!tiedosto.exists())) {
+            TextView uusiKayttaja = findViewById(R.id.tvUusiKayttaja);
+            uusiKayttaja.setText("Aloittaaksesi sovelluksen käytön käy syöttämässä tietosi Profiili-näkymässä.");
+
+            /**
+             * Muiden laatikoiden piilotus
+             *https://stackoverflow.com/questions/10403020/how-to-hide-elements-in-graphical-layout/17657597
+             */
+            mProgress2.setVisibility(View.GONE);
+            mProgress.setVisibility(View.GONE);
+            TextView prossat = findViewById(R.id.prossat);
+            TextView protskuTeksti = findViewById(R.id.protskuTeksti);
+            TextView hei = findViewById(R.id.nimiteksti);
+            hei.setText("Tervetuloa!");
+            prossat.setVisibility(View.GONE);
+            protskuTeksti.setVisibility(View.GONE);
+
+        }
+
     }
+
 
     /**
      * Alapalkin toiminnallisuus, aloittaa valitun aktiviteetin.
