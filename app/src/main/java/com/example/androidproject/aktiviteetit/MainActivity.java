@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -404,10 +405,10 @@ public class MainActivity extends AppCompatActivity {
         if ((tiedot1.equals("") && tiedot2.equals("")) || (tiedot1.equals(null)
                 && tiedot2.equals(null)) || (!tiedosto.exists())) {
             TextView uusiKayttaja = findViewById(R.id.tvUusiKayttaja);
-            uusiKayttaja.setText("Aloittaaksesi sovelluksen käytön käy syöttämässä tietosi Profiili-näkymässä.");
+            uusiKayttaja.setText("Aloittaaksesi sovelluksen käytön käy syöttämässä tietosi asetuksissa.");
 
             /**
-             * Muiden laatikoiden piilotus
+             * Muiden laatikoiden, tekstien jne piilotus
              *https://stackoverflow.com/questions/10403020/how-to-hide-elements-in-graphical-layout/17657597
              */
             mProgress2.setVisibility(View.GONE);
@@ -418,6 +419,7 @@ public class MainActivity extends AppCompatActivity {
             hei.setText("Tervetuloa!");
             prossat.setVisibility(View.GONE);
             protskuTeksti.setVisibility(View.GONE);
+            quoteTeksti.setVisibility(View.GONE);
 
         }
 
@@ -458,5 +460,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
+    //Button uK = findViewById(R.id.uusiKayttajaBtn);
 
+    public void onClickUusiKayttajaBtn(View view) {
+        startActivity(new Intent(MainActivity.this, Asetukset.class));
+    }
 }
