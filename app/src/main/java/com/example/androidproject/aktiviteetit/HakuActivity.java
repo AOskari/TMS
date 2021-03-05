@@ -85,17 +85,8 @@ public class HakuActivity extends AppCompatActivity {
     }
 
     /**
-     * Asetetaan takaisin-napeille fade-animaatio.
+     * Asetetaan takaisin-painikkeelle fade-animaatio.
      */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            return true;
-        }
-        return false;
-    }
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -22,6 +22,9 @@ import com.google.gson.Gson;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * Popup-näkymä, jossa näkyy valitun aterian ravintoarvot.
+ */
 public class AteriaInfoActivity extends AppCompatActivity {
 
     private Gson gson = new Gson();
