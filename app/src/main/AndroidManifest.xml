@@ -33,8 +33,9 @@
         </activity>
         <activity
             android:name=".aktiviteetit.Profiili"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".aktiviteetit.MainActivity" />
+            android:screenOrientation="portrait" />
+           <!-- kommentoin takaisinpäin nuolen pois,
+           android:parentActivityName=".aktiviteetit.MainActivity" />-->
         <activity
             android:name=".aktiviteetit.KalenteriActivity"
             android:theme="@style/Theme.AndroidProject.PopupTheme" />
