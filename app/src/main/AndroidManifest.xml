@@ -13,9 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".aktiviteetit.TietoaMeista">
+        <activity android:name=".aktiviteetit.TietoaMeista"
             android:parentActivityName=".aktiviteetit.MainActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".aktiviteetit.TietoaMeista" />
@@ -25,7 +25,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AndroidProject.PopupTheme" />
         <activity android:name=".aktiviteetit.Asetukset"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
             android:parentActivityName=".aktiviteetit.Profiili">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

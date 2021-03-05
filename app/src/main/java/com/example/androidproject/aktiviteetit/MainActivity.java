@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,12 +31,14 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
 import static com.example.androidproject.AteriaLista.haeLista;
+import static com.example.androidproject.Trendi.getInstance;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -45,9 +48,12 @@ public class MainActivity extends AppCompatActivity {
     private Calendar kalenteri;
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
+    private SharedPreferences trendit;
+    private SharedPreferences.Editor tallListat;
     private Gson gson = new Gson();
     private AteriaLista aterialista;
     private String aterialistaJson;
+    private String trendiJson;
 
     private int paiva;
     private int kuukausi;
@@ -60,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Ylä palkkiin namin luominen.
+     *
      * @param menu
      * @return
      */
@@ -71,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Yläpalkin napin toiminnallisuus
+     *
      * @param item
      * @return
      */
@@ -91,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         kalenteri = Calendar.getInstance();
-
-
 
         /**
          * Ympyrä progressbar
@@ -121,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
         mProgress2.setMax(100); // Maximum Progress
         mProgress2.setProgressDrawable(drawable2);
 
+        trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
+        tallListat = trendit.edit();
+
         /**
          * Haetaan AteriaLista-singleton pysyväismuistista.
          * Jos singletonia ei löydy, tallennetaan se pysyväismuistiin.
@@ -134,6 +143,16 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("aterialista", aterialistaJson);
             editor.apply(); //vaihoin commitista applyhyn
             Log.d("aterialista", aterialistaJson);
+        }
+
+        /**
+         * Haetaan Trendi-singleton, jos sitä ei löydy, tallennetaan se SharedPreferencesiin.
+         */
+        trendiJson = trendit.getString("Trendi", "");
+        if (trendiJson.equals("")) {
+            trendiJson = gson.toJson(getInstance());
+            tallListat.putString("Trendi", trendiJson);
+            tallListat.commit();
         }
 
         aterialista = gson.fromJson(aterialistaJson, AteriaLista.class);
@@ -185,8 +204,6 @@ public class MainActivity extends AppCompatActivity {
              */
             TextView tavoite1Nimi = findViewById(R.id.tavoite1nimi);
             tavoite1Nimi.setText(tavoite1_nimi);
-
-
 
 
             /**
@@ -394,7 +411,42 @@ public class MainActivity extends AppCompatActivity {
         quoteTeksti.setGravity(Gravity.CENTER);
         quoteTeksti.setText(string);
 
+
+        /**
+         * Näyttää käyttäjälle kehotteen täyttää omat tiedot, mikäli niitä ei ole.
+         * https://stackoverflow.com/questions/6962030/how-to-check-if-sharedpreferences-file-exists-or-not
+         */
+        File tiedosto = new File(getApplicationContext().getApplicationInfo().dataDir + "/shared_prefs/Tiedot.xml");
+
+        if ((tiedot1.equals("") && tiedot2.equals("")) || (tiedot1.equals(null)
+                && tiedot2.equals(null)) || (!tiedosto.exists())) {
+            TextView uusiKayttaja = findViewById(R.id.tvUusiKayttaja);
+            uusiKayttaja.setText("Aloittaaksesi sovelluksen käytön käy syöttämässä tietosi asetuksissa.");
+
+            /**
+             * Muiden laatikoiden, tekstien jne piilotus
+             *https://stackoverflow.com/questions/10403020/how-to-hide-elements-in-graphical-layout/17657597
+             */
+            mProgress2.setVisibility(View.GONE);
+            mProgress.setVisibility(View.GONE);
+            TextView prossat = findViewById(R.id.prossat);
+            TextView protskuTeksti = findViewById(R.id.protskuTeksti);
+            TextView hei = findViewById(R.id.nimiteksti);
+            hei.setText("Tervetuloa!");
+            prossat.setVisibility(View.GONE);
+            protskuTeksti.setVisibility(View.GONE);
+            quoteTeksti.setVisibility(View.GONE);
+
+
+        }
+        else {
+            //Sama logiikka mutta toistepäin. Halutaan näkyvän vain uusille/ilman tietoja oleville käyttäjille.
+            Button uK = findViewById(R.id.uusiKayttajaBtn);
+            uK.setVisibility(View.GONE);
+        }
+
     }
+
 
     /**
      * Alapalkin toiminnallisuus, aloittaa valitun aktiviteetin.
@@ -431,4 +483,9 @@ public class MainActivity extends AppCompatActivity {
             };
 
 
+    public void onClickUusiKayttajaBtn(View view) {
+        startActivity(new Intent(MainActivity.this, Asetukset.class));
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
+    }
 }

@@ -72,6 +72,7 @@ public class Asetukset extends AppCompatActivity {
 
         trendiJson = trendit.getString("Trendi", "");
         trendi = gson.fromJson(trendiJson, Trendi.class);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         listaHae();
 
