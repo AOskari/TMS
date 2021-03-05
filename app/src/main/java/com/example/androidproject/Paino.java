@@ -18,7 +18,7 @@ public class Paino {
 
         Calendar kalenteri = Calendar.getInstance();
         paiva = kalenteri.get(Calendar.DAY_OF_MONTH);
-        kuukausi = kalenteri.get(Calendar.MONTH);
+        kuukausi = kalenteri.get(Calendar.MONTH)+1;
         vuosi = kalenteri.get(Calendar.YEAR);
 
         this.tunnit = kalenteri.get(Calendar.HOUR_OF_DAY);

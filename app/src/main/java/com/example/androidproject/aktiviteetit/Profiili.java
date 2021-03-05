@@ -23,7 +23,10 @@ import com.example.androidproject.Trendi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -89,9 +92,11 @@ public class Profiili extends AppCompatActivity {
         //x_aks=new ArrayList<String>();
         //y_aks=new ArrayList<String>();
 
+
+
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
 
-        teeKuvaaja();
+        //teeKuvaaja();
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
         for (int i=0; i<paTrendi.size(); i++){
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
@@ -102,34 +107,79 @@ public class Profiili extends AppCompatActivity {
     }
     protected void onResume(){
         super.onResume();
-        //teeKuvaaja();
+        teeKuvaaja();
         historia.onDataChanged(true, true);
+
     }
 
     public DataPoint[] data(){
-        int arvoja = x_aks.size();
-        DataPoint[] painoArvot = new DataPoint[arvoja];
-        for (int i = 0; i < arvoja; i++){
-            DataPoint v = new DataPoint(Double.parseDouble(x_aks.get(i)), Double.parseDouble(y_aks.get(i)));
-            painoArvot[i] = v;
-        }
-        return painoArvot;
+        DataPoint[] painoArvot = new DataPoint[paTrendi.size()];
+            for (int i = 0; i < paTrendi.size(); i++) {
+                //DataPoint v = new DataPoint(paTrendi.get(i).paivamaaraString(), paTrendi.get(i));
+                DataPoint v = new DataPoint(i, Double.parseDouble(y_aks.get(i)));
+                painoArvot[i] = v;
+            }
+            return painoArvot;
     }
 
     public void teeKuvaaja(){
-        x_aks=new ArrayList<String>();
-        y_aks=new ArrayList<String>();
+        //x_aks=new ArrayList<>();
+        y_aks=new ArrayList<>();
+        String[] x_nimi = new String[paTrendi.size()];
+
         for (int i=0; i<paTrendi.size(); i++){
-            x_aks.add(String.valueOf(i));
+            //String paiva = paTrendi.get(i).paivamaaraString();
+            //x_nimi[i] = paiva;
+            //x_aks.add(String.valueOf(i));
             y_aks.add(String.valueOf(paTrendi.get(i)));
+            Log.d("Näytä arraylist: ",  y_aks.get(i));
+            //Log.d("Näytä array ", x_nimi[i]);
         }
+
+        //String[] x_arvo = new String[x_aks.size()];
+        for (int i = 0; i < paTrendi.size(); i++){
+            String paiva = paTrendi.get(i).paivamaaraString();
+            x_nimi[i] = paiva;
+            Log.d("Näytä array ", x_nimi[i]);
+        }
+        if (paTrendi.size() >= 2) {
+            StaticLabelsFormatter x_label = new StaticLabelsFormatter(historia);
+            x_label.setHorizontalLabels(x_nimi);
+            historia.getGridLabelRenderer().setLabelFormatter(x_label);
+            historia.getGridLabelRenderer().setHorizontalLabelsAngle(150);
+        } /*else {
+            StaticLabelsFormatter x_label = new StaticLabelsFormatter(historia);
+            x_label.setHorizontalLabels("");
+            historia.getGridLabelRenderer().setLabelFormatter("");
+            historia.getGridLabelRenderer().setHorizontalLabelsAngle(100);
+        }*/
+
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
+        //Log.d("Listan koko ", String.valueOf(x_aks.size()));
         sarja1 = new LineGraphSeries<>(data());
         sarja1.setTitle("Paino");
         sarja1.setDrawDataPoints(true);
         sarja1.setDataPointsRadius(10f);
+        historia.getViewport().setMinX(0);
+        historia.getViewport().setMaxX(paTrendi.size());
+        historia.getViewport().setXAxisBoundsManual(true);
+
         historia.getLegendRenderer().setVisible(true);
+        historia.getGridLabelRenderer().setNumHorizontalLabels(paTrendi.size());
+        historia.getGridLabelRenderer().setHorizontalLabelsAngle(100);
+
         historia.addSeries(sarja1);
+
+        /*historia.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if (isValueX) {
+                    return x_nimi[(int) value];
+                } else {
+                    return super.formatLabel(value, isValueX);
+                }
+            }
+        });*/
     }
 
     public void listaHae(){
@@ -157,6 +207,7 @@ public class Profiili extends AppCompatActivity {
         Log.d("Paino", String.valueOf(paino));
 
         bmi.setText(dec.format(laskeBmi()));
+        Log.d("Nayta bmi", bmi.getText().toString());
         pvm.setText(paiva);
         asetetut.setText("Asettamasi tavoitteet:");
         String[] tav1 = tiedot1.split(" ");
