@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.example.androidproject.Paino;
 import com.example.androidproject.R;
@@ -92,6 +93,7 @@ public class Asetukset extends AppCompatActivity {
                 tallennaTrendi();
                 listaTall();
                 tallenna();
+                Toast.makeText(getBaseContext(), "Tiedot tallennettu", Toast.LENGTH_LONG).show();
             }
         });
 
