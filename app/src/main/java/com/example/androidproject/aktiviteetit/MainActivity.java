@@ -225,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
                      * Vaihtaa ympyrän punaiseksi tavoitteen epäonnistuessa.
                      */
                     mProgress.setProgressDrawable(drawable3);
+                    kaloriTavoite.setText("Tavoite 1: " + tiedot1_kalorit + " kcal" + "\n Liikaa: " + jaljella + " kcal");
                 }
 
 
@@ -313,6 +314,7 @@ public class MainActivity extends AppCompatActivity {
                     TextView ylitys2 = findViewById(R.id.ylitys2);
                     ylitys2.setText("Päivän tavoite 2 ylitetty.");
                     mProgress2.setProgressDrawable(drawable3);
+                    kaloriTavoite.setText("Tavoite 1: " + proteiinitDouble + " kcal" + "\n Jäljellä: " + jaljella + " kcal");
 
                 }
             } else if (tiedot2_1.equals("Hiilihydraatti")) {
@@ -339,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
                      *   Lisätiedot, proteiini, hiilarit, rasva
                      */
                     lisatiedot.setGravity(Gravity.CENTER);
-                    lisatiedot.setText("Tavoite 2: " + tavoite2Double + "g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
+                    lisatiedot.setText("Tavoite 2: " + tavoite2Double + " g/vrk \n Jäljellä: " + df.format(jaljella) + " g/vrk");
 
                 }
 
