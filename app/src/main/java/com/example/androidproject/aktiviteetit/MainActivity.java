@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
      * Yläpalkin napin toiminnallisuus
      *
      * @param item
+     * Yläpalkin info-nappi
      * @return
      */
     @Override
@@ -120,8 +121,10 @@ public class MainActivity extends AppCompatActivity {
         drawable3 = res.getDrawable(R.drawable.circle3);
         mProgress = findViewById(R.id.circularProgressbar);
 
-        //mProgress = tavoite 1, mProgress2 = tavoite 2.
-        mProgress2 = findViewById(R.id.circularProgressbar2);
+        /**
+         * Asetetaan ympyröiden tiedot.
+         */
+        mProgress2 = findViewById(R.id.circularProgressbar2); //mProgress = tavoite 1, mProgress2 = tavoite 2.
 
         mProgress.setProgress(0);   // Main Progress
         mProgress.setSecondaryProgress(100); // Secondary Progress
@@ -147,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         if (aterialistaJson.equals("")) {
             aterialistaJson = gson.toJson(haeLista());
             editor.putString("aterialista", aterialistaJson);
-            editor.apply(); //vaihoin commitista applyhyn
+            editor.apply(); //vaihdoin commitista applyhyn
             Log.d("aterialista", aterialistaJson);
         }
 

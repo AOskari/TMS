@@ -7,6 +7,9 @@ import android.view.MenuItem;
 
 import com.example.androidproject.R;
 
+/**
+ * Kaikki koodi tietoa meistä- aktiviteettia varten.
+ */
 public class TietoaMeista extends AppCompatActivity {
 
     @Override
