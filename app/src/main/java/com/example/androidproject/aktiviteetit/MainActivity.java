@@ -45,6 +45,9 @@ import static com.example.androidproject.Trendi.getInstance;
  */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Luodaan muuttujia, joita tullaan tarvitsemaan.
+     */
     private BottomNavigationView bottomNavigationView;
 
     private Calendar kalenteri;
