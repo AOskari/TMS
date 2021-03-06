@@ -40,7 +40,9 @@ import java.util.Random;
 import static com.example.androidproject.AteriaLista.haeLista;
 import static com.example.androidproject.Trendi.getInstance;
 
-
+/**
+ * Pääaktiviteetti, kaikki koodi koskee sovelluksen koti/päänäkymää.
+ */
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     Drawable drawable3;
 
     /**
-     * Ylä palkkiin namin luominen.
+     * Ylä palkkiin napin luominen.
      *
      * @param menu
      * @return
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,10 +168,13 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.getMenu().findItem(R.id.koti).setChecked(true);
     }
 
-    @SuppressLint("SetTextI18n")
+    @Override
     protected void onResume() {
         super.onResume();
 
+        /**
+         * Haetaan tietoja etusivun laskuja tavoitteita varten.
+         */
         paiva = kalenteri.get(Calendar.DAY_OF_MONTH);
         kuukausi = kalenteri.get(Calendar.MONTH);
         vuosi = kalenteri.get(Calendar.YEAR);
@@ -262,7 +268,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        //Toisen itseasetetun tavoitteen näyttäminen.
+        /**
+         * Toisen itseasetetun tavoitteen näyttäminen.
+         */
         if (!tiedot2.equals("")) {
             /**
              * Olio joka pyöristää numerot kahteen desimaaliin ja muuntaa numeron Stringiksi.
@@ -378,12 +386,18 @@ public class MainActivity extends AppCompatActivity {
 
             if (!nimi.equals("")) {
 
+                /**
+                 * Lisätään nimeen iso alkukirjain, jos käyttäjä itse ei ole pistänyt.
+                 */
                 String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
                 nimitextview.setText("Hei, " + isoalkukirjain + "!");
             } else {
                 nimitextview.setText("Hei!");
             }
         }
+        /**
+         * Lista etusivun alalaidan sitaatteja varten.
+         */
         ArrayList<String> listOfRandomQuotes;
 
         listOfRandomQuotes = new ArrayList<String>();
@@ -413,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         /**
-         * Näyttää käyttäjälle kehotteen täyttää omat tiedot, mikäli niitä ei ole.
+         * Näyttää käyttäjälle kehotteen täyttää omat tiedot, mikäli niitä ei ole ja napin mistä ne pääsee täyttämään asetuksiin.
          * https://stackoverflow.com/questions/6962030/how-to-check-if-sharedpreferences-file-exists-or-not
          */
         File tiedosto = new File(getApplicationContext().getApplicationInfo().dataDir + "/shared_prefs/Tiedot.xml");
@@ -438,10 +452,11 @@ public class MainActivity extends AppCompatActivity {
             quoteTeksti.setVisibility(View.GONE);
 
 
-        }
-        else {
-            //Sama logiikka mutta toistepäin. Halutaan näkyvän vain uusille/ilman tietoja oleville käyttäjille.
-            Button uK = findViewById(R.id.uusiKayttajaBtn);
+        } else {
+            /**
+             *     Sama logiikka mutta toistepäin. Halutaan näkyvän vain uusille/ilman tietoja oleville käyttäjille.
+             */
+             Button uK = findViewById(R.id.uusiKayttajaBtn);
             uK.setVisibility(View.GONE);
         }
 
@@ -483,6 +498,11 @@ public class MainActivity extends AppCompatActivity {
             };
 
 
+    /**
+     * Etusivun asetuksiin napin onClick, nappi vie asetuksiin täyttämään tiedot.
+     * Näkyy vain sovelluksen käyttäjälle, joka ei ole vielä täyttänyt tietojaan.
+     * @param view
+     */
     public void onClickUusiKayttajaBtn(View view) {
         startActivity(new Intent(MainActivity.this, Asetukset.class));
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
