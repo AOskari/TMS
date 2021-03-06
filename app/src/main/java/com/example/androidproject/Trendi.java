@@ -5,18 +5,28 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Singleton-luokka, jonka avulla paino-olioita voidaan lisätä listaan ja hakea olioita sisältävä lista
+ */
 public class Trendi {
 
     private static final Trendi trendit = new Trendi();
-    private List<Paino> paino; // = new ArrayList<>();
-    private List<Double> kal; // = new ArrayList<>();
-    private List<Double> prot; // = new ArrayList<>();
-    private List<Double> hh; // = new ArrayList<>();
+    private List<Paino> paino;
+    private List<Double> kal;
+    private List<Double> prot;
+    private List<Double> hh;
 
+    /**
+     * Metodi, jolla päästään käsiksi singletonin sisältämiin metodeihin
+     * @return
+     */
     public static Trendi getInstance(){
         return trendit;
     }
 
+    /**
+     * Konstruktori, jossa alustetaan hauissa tarvittavat listat
+     */
     private Trendi() {
         paino = new ArrayList<>();
         kal = new ArrayList<>();
@@ -24,6 +34,10 @@ public class Trendi {
         hh = new ArrayList<>();
     }
 
+    /**
+     * Metodi, jolla saadaan haettua paino-olioihin tallennetut arvot
+     * @return palauttaa listan paino-olioista
+     */
     public List<Paino>getPaino(){
         return this.paino;
     }
@@ -37,11 +51,14 @@ public class Trendi {
         return hh;
     }
 
+    /**
+     * Metodi, jolla saadaan lisättyä paino listaan
+     * @param kg asetukset-aktiviteetissa annettu arvo
+     */
     public void addPaino(Paino kg){
         this.paino.add(kg);
         jarjestaPainot();
     }
-
 
     /**
      * Järjestää Paino-listan päivämäärän mukaan.

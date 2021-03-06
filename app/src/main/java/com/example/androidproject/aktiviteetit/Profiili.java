@@ -2,13 +2,9 @@ package com.example.androidproject.aktiviteetit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,23 +18,20 @@ import com.example.androidproject.R;
 import com.example.androidproject.Trendi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
-
-import java.lang.reflect.Type;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.androidproject.Trendi.getInstance;
 
+/**
+ * Profiili-aktiviteettia käytetään näyttämään osa tallennetuista tiedoista ja näyttämään trendinäkymä (GraphView)
+ */
 public class Profiili extends AppCompatActivity {
     private TextView pronimi, propaino, bmi, asetetut, tavoite1, tavoite2, pvm;
     public SharedPreferences tiedot;
@@ -50,8 +43,8 @@ public class Profiili extends AppCompatActivity {
     private  String trendiJson;
     private Trendi trendi;
     public List<Paino> paTrendi;
-    public static ArrayList<String> x_aks;
-    public static ArrayList<String> y_aks;
+    private ArrayList<String> y_aks;
+    private ArrayList<String> x_aks;
     DecimalFormat dec;
     Gson gson = new Gson();
     GraphView historia;
@@ -105,48 +98,55 @@ public class Profiili extends AppCompatActivity {
         historia.onDataChanged(true, true);
     }
 
-    public DataPoint[] data(){
-        DataPoint[] painoArvot = new DataPoint[paTrendi.size()];
-            for (int i = 0; i < paTrendi.size(); i++) {
-                //DataPoint v = new DataPoint(paTrendi.get(i).paivamaaraString(), paTrendi.get(i));
-                DataPoint v = new DataPoint(i, Double.parseDouble(y_aks.get(i)));
-                painoArvot[i] = v;
-            }
-            return painoArvot;
+    /**
+     * Metodissa haetaan paino-olioiden lista Trendi-Singletonista
+     */
+    public void listaHae(){
+       paTrendi = trendi.getPaino();
     }
 
+    /**
+     * Metodissa tehdään kuvaaja datapisteiden perusteella. Tehdään y-akselia varten normaali arraylist listaHae-metodissa haetusta listasta.
+     * Listan läpikäynnissä y-akselille lisätään indeksissä oleva arvo ja x-akselille lisätään indeksissä oleva painon tallennuksen yhteydessä
+     * tallennettu päivämäärä. GraphView:n käyttö: https://www.bragitoff.com/2017/04/add-data-graphview-arrays-solved-android-studio/ ja näkymän
+     * optimointi/konfigurointi: https://www.javatips.net/api/GraphView-master/src/main/java/com/jjoe64/graphview/GridLabelRenderer.java. Viimeksi
+     * mainitussa kerrottu kaikki GraphView:n käyttöön liittyvät metodit.
+     */
     public void teeKuvaaja(){
-        //x_aks=new ArrayList<>();
-        y_aks=new ArrayList<>();
-        String[] x_nimi = new String[paTrendi.size()];
+        x_aks = new ArrayList<>();
+        y_aks = new ArrayList<>();
 
         for (int i=0; i<paTrendi.size(); i++){
-            //String paiva = paTrendi.get(i).paivamaaraString();
-            //x_nimi[i] = paiva;
-            //x_aks.add(String.valueOf(i));
+            x_aks.add(paTrendi.get(i).paivamaaraString());
             y_aks.add(String.valueOf(paTrendi.get(i)));
-            Log.d("Näytä arraylist: ",  y_aks.get(i));
-            //Log.d("Näytä array ", x_nimi[i]);
+            Log.d("Näytä arraylist ",  y_aks.get(i));
         }
-
-        for (int i = 0; i < paTrendi.size(); i++){
-            String paiva = paTrendi.get(i).paivamaaraString();
-            x_nimi[i] = paiva;
-            Log.d("Näytä array ", x_nimi[i]);
-        }
-        if (paTrendi.size() >= 2) {
+        /**
+         * X-akselin numeroarvot korvataan päivämäärillä. StaticLabelsFormatter pystyy hyödyntämään vain taulukoita, joten muunnetaan
+         * x_aks-arraylist x_nimi-arrayksi. Pitkien merkkijonojen vuoksi niitä kallistetaan näytössä, jotta mahtuvat
+         * paremmin (setHorizontalLabelsAngle().
+         */
+        String[] x_nimi = new String[x_aks.size()];
+        x_nimi = x_aks.toArray(x_nimi);
+        /**
+         * StaticLabelsFormatter pystyy näyttämään muokatut arvot vain jos niitä on taulukossa vähintään kaksi, joten ehdollistetaan
+         * niiden näyttäminen alkuperäisen listan pituuteen.
+         */
+        if (paTrendi.size() > 1) {
             StaticLabelsFormatter x_label = new StaticLabelsFormatter(historia);
             x_label.setHorizontalLabels(x_nimi);
             historia.getGridLabelRenderer().setLabelFormatter(x_label);
             historia.getGridLabelRenderer().setHorizontalLabelsAngle(150);
         }
-
         Log.d("Listan koko ", String.valueOf(paTrendi.size()));
-
+        /**
+         * Luodaan uusi LineGraphSeries-olio, jolle annetaan parametriksi datapisteet hakeva metodi
+         */
         sarja1 = new LineGraphSeries<>(data());
         sarja1.setTitle("Paino");
         sarja1.setDrawDataPoints(true);
         sarja1.setDataPointsRadius(10f);
+
         historia.getViewport().setMinX(0);
         historia.getViewport().setMaxX(paTrendi.size());
         historia.getViewport().setXAxisBoundsManual(true);
@@ -154,36 +154,32 @@ public class Profiili extends AppCompatActivity {
         historia.getViewport().setScrollable(true);
 
         historia.getLegendRenderer().setVisible(true);
+
         historia.getGridLabelRenderer().setNumHorizontalLabels(paTrendi.size());
         historia.getGridLabelRenderer().setHorizontalLabelsAngle(100);
         historia.getGridLabelRenderer().setHumanRounding(false);
+        historia.getGridLabelRenderer().setPadding(50);
 
         historia.addSeries(sarja1);
-
-        /*historia.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
-            @Override
-            public String formatLabel(double value, boolean isValueX) {
-                if (isValueX) {
-                    return String.valueOf(x_nimi[(int) value]);
-                } else {
-                    return super.formatLabel(value, isValueX);
-                }
-            }
-        });*/
     }
 
-    public void listaHae(){
-       // trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
-       // String json = trendit.getString("Paino", null);
-       // Type type = new TypeToken<ArrayList<Paino>>() {}.getType();
-
-        paTrendi = trendi.getPaino();
-
-   /*     if (paTrendi == null){
-            paTrendi = new ArrayList<>();
-        } */
+    /**
+     * Luodaan taulukko, johon tallennetaan kuvaajan tarvitsemat x ja y muuttujat. Muuttujia varten käydään läpi teeKuvaaja-metodissa tehty
+     * y_aks-lista, x-muuttujaksi tulee indeksinumero ja y-muuttujaksi indeksissä oleva arvo
+     * @return palauttaa datapisteen (x,y)-muodossa
+     */
+    public DataPoint[] data(){
+        DataPoint[] painoArvot = new DataPoint[paTrendi.size()];
+        for (int i = 0; i < paTrendi.size(); i++) {
+            DataPoint v = new DataPoint(i, Double.parseDouble(y_aks.get(i)));
+            painoArvot[i] = v;
+        }
+        return painoArvot;
     }
 
+    /**
+     * Haetaan SharedPreferencesistä halutut tiedot ja asetetaan ne profiili-aktiviteetin näkymän kenttiin
+     */
     private void haeTiedot(){
         paino = tiedot.getFloat("Paino", 0.0f);
         nimi = tiedot.getString("Käyttäjä", "");
@@ -193,63 +189,77 @@ public class Profiili extends AppCompatActivity {
 
         pronimi.setText(nimi);
         propaino.setText(String.valueOf(paino) + " kg");
-
-        Log.d("Pituus", String.valueOf(pituus));
-        Log.d("Paino", String.valueOf(paino));
-
         bmi.setText(dec.format(laskeBmi()));
         Log.d("Nayta bmi", bmi.getText().toString());
         pvm.setText(paiva);
         asetetut.setText("Asettamasi tavoitteet:");
-        String[] tav1 = tiedot1.split(" ");
-        String tyyppi1 = tav1[0];
-        String[] tav2 = tiedot2.split(" ");
-        String tyyppi2 = tav2[0];
-        if (tyyppi1.equals("Valinta")){
+        /**
+         * Tarkistetaan mitä on tallennettu tavoitteiksi ja asetetaan sen mukaan oikea teksti. Jos tavoitteita ei ole, kentät jäävät tyhjiksi
+         */
+        if (tiedot1 == ""){
             tavoite1.setText("");
         } else {
             tavoite1.setText("Tavoite 1: " + tiedot1);
         }
-        if (tyyppi2.equals("Valinta")){
+        if (tiedot2 == ""){
             tavoite2.setText("");
         } else {
             tavoite2.setText("Tavoite 2: " + tiedot2);
         }
-        /*for (int i = 0; i < paTrendi.size(); i++) {
-            String nayta = paTrendi.get(i).toString();
-            Log.d("Lista:"+i, "löytyi " + nayta);
-        }*/
-
-
-
     }
-    public void siirry(View v) {
+
+    /**
+     * Tarkistetaan mitä nappia näkymässä on painettu, ratas vie asetukset-aktiviteettiin ja rastit poistavat tavoitteet
+     * näkymästä ja tallentavat tavoitteet oletusarvoisiksi SharedPreferencesiin
+     * @param v parametrilla tarkistetaan painettu nappi
+     */
+    public void katsoNapit(View v) {
+        SharedPreferences.Editor muokkaa = tiedot.edit();
         if (v == findViewById(R.id.siirryAsetuksiin)) {
             Log.d("Siirry", "Mene asetuksiin");
             startActivity(new Intent(Profiili.this, Asetukset.class));
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        } else if (v== findViewById(R.id.poista1)) {
+            muokkaa.putString("Tavoite1", "");
+            muokkaa.commit();
+            tavoite1.setText("");
+        } else if (v== findViewById(R.id.poista2)) {
+            muokkaa.putString("Tavoite2", "");
+            muokkaa.commit();
+            tavoite2.setText("");
         }
     }
 
+    /**
+     * Metodi, jolla lasketaan bmi tallennetusta pituudesta ja painosta
+     * @return palautetaan desimaaliarvo, joka myöhemmin arvoa käytettäessä pyöristeään tarvittaessa DecimalFormat-luokan avulla
+     * kahden desimaalin tarkkuuteen
+     */
     public float laskeBmi(){
         paino = tiedot.getFloat("Paino", 0.0f);
         pituus = tiedot.getFloat("Pituus", 0.0f) / 100;
-        //DecimalFormat dec = new DecimalFormat("0.00");
         float lasku = paino / (pituus*pituus);
             if (paino == 0.0f || pituus == 0.0f){
                 BMI = 0.0f;
             } else {
-                BMI = lasku; // Double.parseDouble(String.format("%.2f", paino / (pituus * pituus)));
+                BMI = lasku;
             }
             return BMI;
     }
 
+    /**
+     * Näkymässä infonappi, josta painamalla saa lisätietoa, mitä kyseinen arvo (bmi) tarkoittaa. Tieto annetaan toasteina.
+     * @param v
+     */
     public void annaLisatiedot(View v){
         float tieto = laskeBmi();
         Toast toast = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 150, -320);
 
         //toast.getView().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#34495E")));
+        /**
+         * Tarkistetaan millä alueella kentän arvo on ja asetetaan sen mukaan oikea toast-teksti
+         */
         if (tieto > 0.0 && tieto < 18.5){
             toast.setText("Alipaino");
             toast.show();
@@ -274,10 +284,14 @@ public class Profiili extends AppCompatActivity {
         }
     }
 
+    /**
+     * Asetetaan kentän arvon mukaan vaihtuva kehysväri
+     */
     public void setReuna(){
-
         float tieto = laskeBmi();
-
+        /**
+         * Tarkistetaan millä alueella arvo on ja asetetaan sen mukaan kehysväri
+          */
         if (tieto >= 18.5 && tieto < 25.0){
             bmi.setBackgroundResource(R.drawable.border1);
         } else if (tieto > 25.0 && tieto <= 30.0){

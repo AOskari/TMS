@@ -3,7 +3,6 @@ package com.example.androidproject.aktiviteetit;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,20 +18,17 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
-
 import com.example.androidproject.Paino;
 import com.example.androidproject.R;
 import com.example.androidproject.Trendi;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Asetukset-aktiviteetissa käyttäjä syöttää haluamansa tiedot ja ne tallennetaan SharedPrefences-kansioon
+ */
 public class Asetukset extends AppCompatActivity {
     private TextView yksikko1, yksikko2, paino, pituus, tav1, tav2;
     private Spinner tavoite1, tavoite2;
@@ -77,36 +73,34 @@ public class Asetukset extends AppCompatActivity {
 
         listaHae();
 
-        // Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
+        /** Asetetaan alapalkille kuuntelija, joka vaihtaa aktiviteettia nappien perusteella.
+         *
+         */
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
         bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);
 
-
+        /**
+         * Haetaan resursseista Spinner-valikon vaihtoehdot.
+         * Spinnerin käyttö: https://www.tutorialspoint.com/android/android_spinner_control.htm
+         */
         String[] valinta = getResources().getStringArray(R.array.valinta);
 
-        tallenna.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-           //   paTrendi.add(new Paino(Float.parseFloat(paino.getText().toString())));
-                trendi.addPaino(new Paino(Float.parseFloat(paino.getText().toString())));
-                tallennaTrendi();
-                listaTall();
-                tallenna();
-                Toast.makeText(getBaseContext(), "Tiedot tallennettu", Toast.LENGTH_LONG).show();
-            }
-        });
-
+        /**
+         * Asetetaan spinnereille adapteri vaihtoehtojen näyttämistä varten
+         */
         ArrayAdapter<String> val = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, valinta);
         val.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tavoite1.setAdapter(val);
         tavoite2.setAdapter(val);
-
+        /**
+         * Tarkistetaan molempien spinnereiden osalta mikä vaihtoehdoista on valittuna ja asetetaan sen mukaan oikea
+         * mittayksikkö yksikkö-kenttään
+         */
         tavoite1.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String nimi1 = tavoite1.getSelectedItem().toString();
-
                 if (nimi1.equals("Valinta")) {
                     tav1.setText("");
                     yksikko1.setText("");
@@ -148,43 +142,67 @@ public class Asetukset extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+        /**
+         * Asetetaan Tallenna-napille kuuntelija ja napin painalluksella tallennetaan asetetut arvot eri metodeilla.
+         * Käyttäjälle annetaan toastilla vahvistusviesti tietojen tallentumisesta
+         */
+        tallenna.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                trendi.addPaino(new Paino(Float.parseFloat(paino.getText().toString())));
+                tallennaTrendi();
+                listaTall();
+                tallenna();
+                Toast.makeText(getBaseContext(), "Tiedot tallennettu", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
     protected void onResume(){
         super.onResume();
+        haeTiedot();
+    }
+
+    /**
+     * Haetaan viimeksi tallennetut arvot SharedPreferencesistä ja esiasetetaan ne kenttien arvoiksi
+     */
+    private void haeTiedot(){
         asetukset = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         kuka = asetukset.getString("Käyttäjä", "");
-        Log.d("Testi", kuka);
+        //Log.d("Testi", kuka);
         nimi.setText(kuka);
         kg = asetukset.getFloat("Paino", 0.0f);
-        Log.d("Testi", Float.toString(kg));
+        //Log.d("Testi", Float.toString(kg));
         paino.setText(String.valueOf(kg));
         cm = asetukset.getFloat("Pituus", 0.0f);
-        Log.d("Testi", Float.toString(cm));
+        //Log.d("Testi", Float.toString(cm));
         pituus.setText(String.valueOf(cm));
     }
-    public void listaTall(){
+    /**
+     * Tallennetaan Shared Preferenceihin paino-kenttään asetettu arvo listaan
+     */
+    private void listaTall(){
         trendit = getSharedPreferences("Trendit", Activity.MODE_PRIVATE);
         String json = gson.toJson(paTrendi);
         tallListat.putString("Paino", json);
         tallListat.commit();
-        Log.d("Listan koko ", String.valueOf(paTrendi.size()));
+        /*Log.d("Listan koko ", String.valueOf(paTrendi.size()));
         for (int i=0; i<paTrendi.size(); i++){
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
-        }
+        }*/
     }
-    public void listaHae(){
-    //    trendit = getSharedPreferences("Trendit", MODE_PRIVATE);
-      //  Gson gson = new Gson();
-      //  String json = trendit.getString("Paino", null);
-       // Type type = new TypeToken<ArrayList<Paino>>() {}.getType();
-        paTrendi = trendi.getPaino();
 
-    /*    if (paTrendi == null){
-            paTrendi = new ArrayList<>();
-        } */
+    /**
+     * Haetaan tallennettu paino-lista Trendi-Singletonista
+     */
+    private void listaHae() {
+        paTrendi = trendi.getPaino();
     }
+    /**
+     * Haetaan Kalenteri-luokan avulla tämänhetkinen päivämäärä
+     * @return palauttaa päivämämäärän joka tallennetaan tallenna-metodissa SharedPreferenceihin
+     */
     private String haePaiva() {
         String paiva, kuukausi, vuosi;
         paiva = String.valueOf(kalenteri.get(Calendar.DAY_OF_MONTH));
@@ -192,8 +210,11 @@ public class Asetukset extends AppCompatActivity {
         vuosi = String.valueOf(kalenteri.get(Calendar.YEAR));
         return paiva + "/" + kuukausi + "/" + vuosi;
     }
-
-    public void tallenna() {
+    /**
+     * Varsinainen tallennusmetodi, kerätään eri kenttiin asetetut arvot ja tallennetaan ne SharedPreferencesiin, päivämäärä
+     * haetaan haePäivä-metodin avulla
+     */
+    private void tallenna() {
         float tyhja = 0.0f;
         String kayttaja, pvm;
         float annaPaino;
@@ -201,8 +222,11 @@ public class Asetukset extends AppCompatActivity {
         float maara1;
         float maara2;
         pvm = haePaiva();
-
         tiedot = asetukset.edit();
+
+        /**
+         * Tarkistetaan kenttien arvot ja jos kenttä jätetty tyhjäksi, niin annetaan sille oletusarvo
+         */
         if (nimi.getText().toString().length() > 0) {
             kayttaja = nimi.getText().toString();
         } else {
@@ -237,12 +261,17 @@ public class Asetukset extends AppCompatActivity {
         tiedot.putString("Käyttäjä", kayttaja);
         tiedot.putFloat("Paino", annaPaino);
         tiedot.putFloat("Pituus", annaPituus);
+        /**
+         * Tarkistetaan onko tavoitekentät jätetty tyhjäksi ts asetettu oletusarvo. Jos luku on muu kuin oletusarvo, tieto tallennetaan, tyhjää
+         * kenttää ei tallenneta. Näin tavoitteita ei tarvitse joka kerta päivittää, jos käyttäjä haluaa niiden pysyvän ennallaan.
+         */
         if (maara1 != 0.0f) {
             tiedot.putString("Tavoite1", naytaT1);
         }
         if (maara2 != 0.0f) {
             tiedot.putString("Tavoite2", naytaT2);
         }
+
         tiedot.putString("Päiväys", pvm);
         tiedot.commit();
     }
@@ -252,8 +281,6 @@ public class Asetukset extends AppCompatActivity {
         tallListat.putString("Trendi", trendiJson);
         tallListat.commit();
     }
-
-
     /**
      * Alapalkin toiminnallisuus, aloittaa valitun aktiviteetin.
      * Tutoriaali alapalkin luomiseen: https://www.youtube.com/watch?v=fODp1hZxfng
