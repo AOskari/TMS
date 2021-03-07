@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.androidproject.Ateria;
 import com.example.androidproject.AteriaLista;
@@ -33,6 +34,7 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
@@ -105,6 +107,46 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         kalenteri = Calendar.getInstance();
+
+
+        /**
+         * Etusivulle päivämäärän asettaminen ja Streak counter joka näyttää monta päivää putkeen on käyttänyt sovellusta.
+         * Päivämäärä: https://stackoverflow.com/questions/12934661/android-get-current-date-and-show-it-in-textview
+         * Streakcounter: https://stackoverflow.com/questions/45254071/android-checking-if-app-has-been-opened-multiple-days-in-a-row/4525415         *
+         */
+        SharedPreferences sharedPreferences = getSharedPreferences("prefavain", Context.MODE_PRIVATE);
+        Calendar c = Calendar.getInstance();
+
+        int thisDay = c.get(Calendar.DAY_OF_YEAR); // GET THE CURRENT DAY OF THE YEAR
+
+        int lastDay = sharedPreferences.getInt("pvmstreak", 0); //If we don't have a saved value, use 0.
+
+        int counterOfConsecutiveDays = sharedPreferences.getInt("counteri", 0); //If we don't have a saved value, use 0.
+
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+
+        if (lastDay == thisDay - 1) {
+            // CONSECUTIVE DAYS
+            counterOfConsecutiveDays = counterOfConsecutiveDays + 1;
+
+            edit.putInt("pvmstreak", thisDay);
+
+            edit.putInt("counteri", counterOfConsecutiveDays).commit();
+        } else {
+
+            edit.putInt("pvmstreak", thisDay);
+
+            edit.putInt("counteri", 1).commit();
+        }
+
+        int striikki = counterOfConsecutiveDays;
+
+        long date = System.currentTimeMillis();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = sdf.format(date);
+
+        TextView pvmTeksti = findViewById(R.id.pvmTeksti);
+        pvmTeksti.setText(dateString + "\n\n🏆" + striikki);
 
         /**
          * Ympyrä progressbar
@@ -195,12 +237,17 @@ public class MainActivity extends AppCompatActivity {
          */
         SharedPreferences sharedPreferences = getSharedPreferences("Tiedot", Context.MODE_PRIVATE);
         String nimi = sharedPreferences.getString("Käyttäjä", "");
+        String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
         String tiedot1 = sharedPreferences.getString("Tavoite1", "");
         String tiedot2 = sharedPreferences.getString("Tavoite2", "");
 
 
         /**
          * Asetetaan tiedot, mikäli tietoja on tallennettu asetuksissa.
+         */
+
+        /**
+         * Tavoitteen 1 asettaminen. Tavoite 1 toimii tavoitteen 2 koodien pohjalta, koska tavoite 1 tuki alkuun vain kaloreita, nyt kaikkia.
          */
 
         if (!tiedot1.equals("")) {
@@ -310,9 +357,9 @@ public class MainActivity extends AppCompatActivity {
                     ylitys2.setText("Päivän tavoite 1 ylitetty.");
                 }
             } else if (tiedot1_1.equals("Kalorit")) {
-            //    String[] tiedot1_lista = tiedot1.split(" ");
+                //    String[] tiedot1_lista = tiedot1.split(" ");
                 String tiedot1_kalorit = tiedot1_lista[1];
-          //      String tavoite1_nimi = tiedot1_lista[0];
+                //      String tavoite1_nimi = tiedot1_lista[0];
                 float saatuTieto1 = Float.parseFloat(tiedot1_kalorit);
                 int kaloritYht = (int) Math.round(saatuTieto1);
                 TextView prossat = findViewById(R.id.prossat);
@@ -560,23 +607,23 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+        /**
+         * Asetetaan nimi, mikäli nimi on tallennettu asetuksissa.
+         * Varmistetaan että nimessä on aina iso alkukirjain laatikossa näytettäessä,
+         * vaikka käyttäjä kirjoittaisi nimensä pienellä.
+         */
+        TextView nimitextview = findViewById(R.id.nimiteksti);
+
+        if (!nimi.equals("")) {
+
             /**
-             * Asetetaan nimi, mikäli nimi on tallennettu asetuksissa.
-             * Varmistetaan että nimessä on aina iso alkukirjain laatikossa näytettäessä,
-             * vaikka käyttäjä kirjoittaisi nimensä pienellä.
+             * Lisätään nimeen iso alkukirjain, jos käyttäjä itse ei ole pistänyt.
              */
-            TextView nimitextview = findViewById(R.id.nimiteksti);
 
-            if (!nimi.equals("")) {
-
-                /**
-                 * Lisätään nimeen iso alkukirjain, jos käyttäjä itse ei ole pistänyt.
-                 */
-                String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
-                nimitextview.setText("Hei, " + isoalkukirjain + "!");
-            } else {
-                nimitextview.setText("Hei!");
-            }
+            nimitextview.setText("Hei, " + isoalkukirjain + "!");
+        } else {
+            nimitextview.setText("Hei!");
+        }
 
         /**
          * Lista etusivun alalaidan sitaatteja varten.
@@ -691,5 +738,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, Asetukset.class));
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
+    }
+
+    /**
+     * Jos käyttäjä klikkaa päivämäärää ja streakkia, laukaisee toastin.
+     * @param view
+     */
+
+    public void onClickStreakki(View view) {
+        
+        Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta. Hyvä!", Toast.LENGTH_SHORT).show();
     }
 }
