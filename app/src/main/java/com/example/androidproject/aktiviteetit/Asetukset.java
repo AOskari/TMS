@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +27,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Asetukset-aktiviteetissa käyttäjä syöttää haluamansa tiedot ja ne tallennetaan SharedPrefences-kansioon
@@ -57,9 +61,13 @@ public class Asetukset extends AppCompatActivity {
         tallenna = findViewById(R.id.tallennus);
         nimi = findViewById(R.id.annaNimi);
         paino = findViewById(R.id.paino);
+        paino.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(4,3)});
         pituus = findViewById(R.id.pituus);
+        pituus.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(4,2)});
         tav1 = findViewById(R.id.tav1);
+        tav1.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5,2)});
         tav2 = findViewById(R.id.tav2);
+        tav2.setFilters(new InputFilter[]{new DecimalDigitsInputFilter(5,2)});
         yksikko1 = findViewById(R.id.yksikko1);
         yksikko2 = findViewById(R.id.yksikko2);
         kalenteri = Calendar.getInstance();
@@ -110,9 +118,9 @@ public class Asetukset extends AppCompatActivity {
                 } else if (nimi1.equals("Proteiini")){
                     tav1.setText("");
                     yksikko1.setText("g/kg/vrk");
-                } else {
+                } else if (nimi1.equals("Hiilihydraatti")){
                     tav1.setText("");
-                    yksikko2.setText("g/vrk");
+                    yksikko1.setText("g/vrk");
                 }
             }
             @Override
@@ -133,7 +141,7 @@ public class Asetukset extends AppCompatActivity {
                 } else if (nimi2.equals("Proteiini")){
                     tav2.setText("");
                     yksikko2.setText("g/kg/vrk");
-                } else {
+                } else if (nimi2.equals("Hiilihydraatti")){
                     tav2.setText("");
                     yksikko2.setText("g/vrk");
                 }
@@ -170,13 +178,10 @@ public class Asetukset extends AppCompatActivity {
     private void haeTiedot(){
         asetukset = getSharedPreferences("Tiedot", Activity.MODE_PRIVATE);
         kuka = asetukset.getString("Käyttäjä", "");
-        //Log.d("Testi", kuka);
         nimi.setText(kuka);
         kg = asetukset.getFloat("Paino", 0.0f);
-        //Log.d("Testi", Float.toString(kg));
         paino.setText(String.valueOf(kg));
         cm = asetukset.getFloat("Pituus", 0.0f);
-        //Log.d("Testi", Float.toString(cm));
         pituus.setText(String.valueOf(cm));
     }
     /**
@@ -212,7 +217,7 @@ public class Asetukset extends AppCompatActivity {
     }
     /**
      * Varsinainen tallennusmetodi, kerätään eri kenttiin asetetut arvot ja tallennetaan ne SharedPreferencesiin, päivämäärä
-     * haetaan haePäivä-metodin avulla
+     * haetaan haePäivä()-metodin avulla
      */
     private void tallenna() {
         float tyhja = 0.0f;
@@ -280,6 +285,34 @@ public class Asetukset extends AppCompatActivity {
         trendiJson = gson.toJson(trendi);
         tallListat.putString("Trendi", trendiJson);
         tallListat.commit();
+    }
+
+    /**
+     * Luokka, jonka avulla syötettävien desimaalilukujen ulkoasua voidaan säätää ts. kuinka monta numeroa voidaan syöttää ennen
+     * erotinpistettä ja kuinka monta sen jälkeen. Maksimimerkkimäärä määritetään jokaisen kentän osalta onCreate()-metodissa.
+     * Tutoriaali: https://www.tutorialspoint.com/how-to-limit-decimal-places-in-android-edittext ja
+     * https://stackoverflow.com/questions/5357455/limit-decimal-places-in-android-edittext
+     */
+    class DecimalDigitsInputFilter implements InputFilter {
+        private final Pattern muoto;
+        DecimalDigitsInputFilter(int digitsBeforeZero, int digitsAfterZero) {
+            muoto = Pattern.compile("[0-9]{0," + (digitsBeforeZero - 1) + "}+((\\.[0-9]{0," + (digitsAfterZero - 1) + "})?)||(\\.)?");
+        }
+        @Override public CharSequence filter(CharSequence source, int sourceStart, int sourceEnd, Spanned destination, int destinationStart, int destinationEnd)
+        {
+            String newString = destination.toString().substring(0, destinationStart) + destination.toString().substring(destinationEnd, destination.toString().length());
+            newString = newString.substring(0, destinationStart) + source.toString() + newString.substring(destinationStart, newString.length());
+
+            /**
+             * Tarkistetaan onko annettu syöte kelvollinen
+             */
+            Matcher matcher = muoto.matcher(newString);
+            if(matcher.matches())
+            {
+                return null;
+            }
+            return "";
+        }
     }
     /**
      * Alapalkin toiminnallisuus, aloittaa valitun aktiviteetin.
