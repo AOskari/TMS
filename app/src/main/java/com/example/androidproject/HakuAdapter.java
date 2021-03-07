@@ -167,7 +167,7 @@ public class HakuAdapter extends BaseAdapter {
         });
 
         /**
-         * minus-nappi vähentää valitun summan määrää yhdellä grammalla. Ei mene alle 0g.
+         * miinus-nappi vähentää valitun summan määrää yhdellä grammalla. Ei mene alle 0g.
          */
         miinus.setOnClickListener(new View.OnClickListener() {
             @Override

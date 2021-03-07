@@ -158,7 +158,7 @@ public class Profiili extends AppCompatActivity {
         historia.getGridLabelRenderer().setNumHorizontalLabels(paTrendi.size());
         historia.getGridLabelRenderer().setHorizontalLabelsAngle(100);
         historia.getGridLabelRenderer().setHumanRounding(false);
-        historia.getGridLabelRenderer().setPadding(50);
+        historia.getGridLabelRenderer().setPadding(15);
 
         historia.addSeries(sarja1);
     }
@@ -292,7 +292,7 @@ public class Profiili extends AppCompatActivity {
         /**
          * Tarkistetaan millä alueella arvo on ja asetetaan sen mukaan kehysväri
           */
-        if (tieto >= 18.5 && tieto < 25.0){
+        if (tieto >= 18.5 && tieto <= 25.0){
             bmi.setBackgroundResource(R.drawable.border1);
         } else if (tieto > 25.0 && tieto <= 30.0){
             bmi.setBackgroundResource(R.drawable.border2);

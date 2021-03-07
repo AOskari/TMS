@@ -7,148 +7,6 @@
     android:background="#EDEDF4"
     tools:context=".aktiviteetit.Profiili">
 
-    <ImageButton
-        android:id="@+id/siirryAsetuksiin"
-        android:layout_width="57dp"
-        android:layout_height="50dp"
-        android:background="@color/primaryColor"
-        android:contentDescription="@string/siirryAsetuksiin"
-        android:onClick="katsoNapit"
-        android:tint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.903"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067"
-        app:srcCompat="@drawable/ic_baseline_settings_24"
-        tools:ignore="VectorDrawableCompat" />
-
-    <TextView
-        android:id="@+id/proNimi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:gravity="center|start"
-        android:text="@string/tieto1"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.035"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
-
-    <TextView
-        android:id="@+id/tavoitteet"
-        android:layout_width="225dp"
-        android:layout_height="17dp"
-        android:gravity="center|start"
-        android:text="@string/ohje"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.236"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32" />
-
-    <TextView
-        android:id="@+id/proPaino"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="start|center_vertical"
-        android:paddingLeft="3dp"
-        android:text="@string/kg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.111"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161" />
-
-    <TextView
-        android:id="@+id/otsikko"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:gravity="center|start"
-        android:text="@string/bmi"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246" />
-
-    <TextView
-        android:id="@+id/eka"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:text="@string/tieto1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.396"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.378" />
-
-    <TextView
-        android:id="@+id/toka"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:text="@string/tieto1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.396"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.442" />
-
-    <TextView
-        android:id="@+id/bmi"
-        android:layout_width="50dp"
-        android:layout_height="25dp"
-        android:background="#00000000"
-        android:gravity="center"
-        android:text="@string/tieto1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.238"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246" />
-
-    <TextView
-        android:id="@+id/pvm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tieto1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.306"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161" />
-
-    <ImageButton
-        android:id="@+id/kerro"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:background="#EDEDF4"
-        android:contentDescription="lisätietoja"
-        android:onClick="annaLisatiedot"
-        android:tint="@color/primaryColor"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.383"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246"
-        app:srcCompat="@drawable/ic_baseline_help_24"
-        tools:ignore="VectorDrawableCompat" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
@@ -165,61 +23,234 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/kuvaaja"
         android:layout_width="0dp"
-        android:layout_height="254dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="70dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/alusta"
         android:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profiili_alusta2">
 
         <com.jjoe64.graphview.GraphView
             android:id="@+id/historia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/alusta"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ImageButton
-        android:id="@+id/poista1"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="196dp"
-        android:background="#EDEDF4"
-        android:onClick="katsoNapit"
-        android:tint="@color/primaryColor"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profiili_alusta1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/alusta"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/profiili_alusta2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
-        app:layout_constraintStart_toEndOf="@+id/eka"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cancel"
-        tools:ignore="VectorDrawableCompat" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageButton
-        android:id="@+id/poista2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="244dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:background="#EDEDF4"
-        android:onClick="katsoNapit"
-        android:tint="@color/primaryColor"
+        <TextView
+            android:id="@+id/bmi"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="#00000000"
+            android:gravity="center"
+            android:elevation="20dp"
+            android:textColor="@color/black"
+            android:text="@string/tieto1"
+            app:layout_constraintBaseline_toBaselineOf="@+id/otsikko"
+            app:layout_constraintStart_toEndOf="@+id/otsikko" />
+
+        <ImageButton
+            android:id="@+id/siirryAsetuksiin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#00000000"
+            android:contentDescription="@string/siirryAsetuksiin"
+            android:onClick="katsoNapit"
+            android:tint="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/asetukset_nappi"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/pvm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:text="@string/tieto1"
+            android:textColor="@color/black"
+            app:layout_constraintBaseline_toBaselineOf="@+id/proPaino"
+            app:layout_constraintStart_toEndOf="@+id/proPaino" />
+
+        <TextView
+            android:id="@+id/proPaino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start|center_vertical"
+            android:paddingLeft="3dp"
+            android:text="@string/kg"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/otsikko"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/proNimi" />
+
+        <TextView
+            android:id="@+id/otsikko"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center|start"
+            android:text="@string/bmi"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/proPaino" />
+
+        <TextView
+            android:id="@+id/proNimi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center|start"
+            android:text="@string/tieto1"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/proPaino"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profiili_alusta2"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/alusta"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/kuvaaja"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/cancel"
-        tools:ignore="VectorDrawableCompat" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profiili_alusta1">
+
+        <ImageButton
+            android:id="@+id/poista2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="#00EDEDF4"
+            android:contentDescription="@string/poista"
+            android:onClick="katsoNapit"
+            android:tint="@color/red"
+            app:layout_constraintBottom_toBottomOf="@+id/toka"
+            app:layout_constraintEnd_toEndOf="@+id/poista1"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/poista1"
+            app:layout_constraintTop_toTopOf="@+id/toka"
+            app:srcCompat="@drawable/cancel"
+            tools:ignore="VectorDrawableCompat" />
+
+        <ImageButton
+            android:id="@+id/poista1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#00EDEDF4"
+            android:contentDescription="@string/poista"
+            android:onClick="katsoNapit"
+            android:tint="@color/red"
+            app:layout_constraintBottom_toBottomOf="@+id/eka"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/eka"
+            app:srcCompat="@drawable/cancel"
+            tools:ignore="VectorDrawableCompat" />
+
+        <TextView
+            android:id="@+id/toka"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/tieto1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/poista2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eka" />
+
+        <TextView
+            android:id="@+id/tavoitteet"
+            android:layout_width="225dp"
+            android:layout_height="17dp"
+            android:gravity="center|start"
+            android:text="@string/ohje"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/eka"
+            app:layout_constraintStart_toStartOf="@+id/eka"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/eka"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="@string/tieto1"
+            app:layout_constraintBottom_toTopOf="@+id/toka"
+            app:layout_constraintEnd_toStartOf="@+id/poista1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tavoitteet" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
