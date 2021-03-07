@@ -27,14 +27,18 @@
         <activity android:name=".aktiviteetit.Asetukset"
             android:screenOrientation="portrait"
             android:parentActivityName=".aktiviteetit.Profiili">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".aktiviteetit.Profiili" />
         </activity>
         <activity
             android:name=".aktiviteetit.Profiili"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".aktiviteetit.MainActivity" />
+            android:parentActivityName=".aktiviteetit.MainActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".aktiviteetit.KalenteriActivity"
             android:theme="@style/Theme.AndroidProject.PopupTheme" />
