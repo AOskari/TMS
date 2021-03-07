@@ -35,30 +35,31 @@ import static com.example.androidproject.Trendi.getInstance;
  * Profiili-aktiviteettia käytetään näyttämään osa tallennetuista tiedoista ja näyttämään trendinäkymä (GraphView)
  */
 public class Profiili extends AppCompatActivity {
+
     private TextView pronimi, propaino, bmi, asetetut, tavoite1, tavoite2, pvm;
-    public SharedPreferences tiedot;
-    public SharedPreferences trendit;
-    public SharedPreferences.Editor tallListat;
-    private float paino, pituus;
-    private String nimi, tiedot1, tiedot2, paiva;
-    private float BMI;
-    private  String trendiJson;
-
-
+    private SharedPreferences tiedot;
+    private SharedPreferences trendit;
+    private SharedPreferences.Editor tallListat;
     private Trendi trendi;
 
-    public List<Paino> paTrendi;
+    private List<Paino> paTrendi;
     private ArrayList<String> y_aks;
     private ArrayList<String> x_aks;
-    DecimalFormat dec;
-    Gson gson = new Gson();
-    GraphView historia;
-    LineGraphSeries<DataPoint> sarja1;
+    private DecimalFormat dec;
+    private Gson gson = new Gson();
+    private GraphView historia;
+    private LineGraphSeries<DataPoint> sarja1;
+
+    private float paino, pituus;
+    private float BMI;
+    private  String trendiJson;
+    private String nimi, tiedot1, tiedot2, paiva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profiili);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         pronimi = findViewById(R.id.proNimi);
         propaino = findViewById(R.id.proPaino);
@@ -84,15 +85,10 @@ public class Profiili extends AppCompatActivity {
         }
         trendi = gson.fromJson(trendiJson, Trendi.class);
 
-
         listaHae();
         haeTiedot();
         setReuna();
 
-        /*Log.d("Listan koko ", String.valueOf(paTrendi.size()));
-        for (int i=0; i<paTrendi.size(); i++){
-            Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
-        }*/
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
         bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);

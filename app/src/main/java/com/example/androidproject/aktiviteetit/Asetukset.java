@@ -166,6 +166,15 @@ public class Asetukset extends AppCompatActivity {
         });
     }
 
+    /**
+     * Asetetaan fade-animaatio takaisin-painikkeelle.
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
     @Override
     protected void onResume(){
         super.onResume();

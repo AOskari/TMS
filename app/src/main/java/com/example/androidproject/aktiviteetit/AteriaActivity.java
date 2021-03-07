@@ -141,10 +141,22 @@ public class AteriaActivity extends AppCompatActivity {
         bottomNavigationView.getMenu().findItem(R.id.suunnittele).setChecked(true);
     }
 
+    /**
+     * Takaisin-napeille fade-animaatio.
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            return true;
+        }
+        return false;
     }
 
     @Override

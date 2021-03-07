@@ -104,9 +104,6 @@ public class Ateria {
      */
     public void poista(int i) {
 
-        /* Vähennetään poistettavan elintarvikkeen ravintoarvot
-         kokonaisuudesta, jonka jälkeen poistetaan Elintarvike. */
-
         this.salt = Math.max(this.salt - (raakaAineet.get(i).haeRavintoarvot().get(0)), 0);
         this.kcal = Math.max(this.kcal - (raakaAineet.get(i).haeRavintoarvot().get(1)), 0);
         this.fat = Math.max(this.fat - (raakaAineet.get(i).haeRavintoarvot().get(2)), 0);

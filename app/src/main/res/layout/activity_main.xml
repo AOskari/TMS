@@ -24,7 +24,7 @@
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="0dp"
-        android:layout_height="380dp"
+        android:layout_height="340dp"
         android:layout_marginStart="6dp"
         android:layout_marginLeft="6dp"
         android:layout_marginEnd="6dp"
@@ -210,12 +210,12 @@
 
     <TextView
         android:id="@+id/quoteTeksti"
-        android:layout_width="369dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="37dp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
@@ -240,12 +240,12 @@
         android:id="@+id/uusiKayttajaBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="99dp"
+        android:layout_marginBottom="16dp"
         android:onClick="onClickUusiKayttajaBtn"
         android:text="Asetuksiin"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUusiKayttaja" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/pvmTeksti"

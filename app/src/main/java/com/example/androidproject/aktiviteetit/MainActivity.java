@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.Editor tallListat;
     private Gson gson = new Gson();
     private AteriaLista aterialista;
+    private ProgressBar mProgress;
+    private ProgressBar mProgress2;
+    private Drawable drawable3;
+
     private String aterialistaJson;
     private String trendiJson;
 
@@ -66,16 +70,8 @@ public class MainActivity extends AppCompatActivity {
     private int kuukausi;
     private int vuosi;
 
-    ProgressBar mProgress;
-    ProgressBar mProgress2;
-
-    Drawable drawable3;
-
     /**
      * Ylä palkkiin napin luominen.
-     *
-     * @param menu
-     * @return
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,9 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Yläpalkin napin toiminnallisuus
-     *
      * @param item Yläpalkin info-nappi
-     * @return
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -96,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.mybutton) {
             Intent activity2Intent = new Intent(getApplicationContext(), TietoaMeista.class);
             startActivity(activity2Intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -108,38 +103,29 @@ public class MainActivity extends AppCompatActivity {
 
         kalenteri = Calendar.getInstance();
 
-
         /**
          * Etusivulle päivämäärän asettaminen ja Streak counter joka näyttää monta päivää putkeen on käyttänyt sovellusta.
          * Päivämäärä: https://stackoverflow.com/questions/12934661/android-get-current-date-and-show-it-in-textview
          * Streakcounter: https://stackoverflow.com/questions/45254071/android-checking-if-app-has-been-opened-multiple-days-in-a-row/4525415         *
          */
         SharedPreferences sharedPreferences = getSharedPreferences("prefavain", Context.MODE_PRIVATE);
-        Calendar c = Calendar.getInstance();
-
-        int thisDay = c.get(Calendar.DAY_OF_YEAR); // GET THE CURRENT DAY OF THE YEAR
-
-        int lastDay = sharedPreferences.getInt("pvmstreak", 0); //If we don't have a saved value, use 0.
-
-        int counterOfConsecutiveDays = sharedPreferences.getInt("counteri", 0); //If we don't have a saved value, use 0.
-
         SharedPreferences.Editor edit = sharedPreferences.edit();
+        Calendar kalenteri = Calendar.getInstance();
 
-        if (lastDay == thisDay - 1) {
-            // CONSECUTIVE DAYS
-            counterOfConsecutiveDays = counterOfConsecutiveDays + 1;
+        int tamaPaiva = kalenteri.get(Calendar.DAY_OF_YEAR);
+        int viimeisin = sharedPreferences.getInt("pvmstreak", 0);
+        int perakkaisetPaivat = sharedPreferences.getInt("counteri", 0);
 
-            edit.putInt("pvmstreak", thisDay);
-
-            edit.putInt("counteri", counterOfConsecutiveDays).commit();
+        if (viimeisin == tamaPaiva - 1) {
+            perakkaisetPaivat = perakkaisetPaivat + 1;
+            edit.putInt("pvmstreak", tamaPaiva);
+            edit.putInt("counteri", perakkaisetPaivat).commit();
         } else {
-
-            edit.putInt("pvmstreak", thisDay);
-
+            edit.putInt("pvmstreak", tamaPaiva);
             edit.putInt("counteri", 1).commit();
         }
 
-        int striikki = counterOfConsecutiveDays;
+        int striikki = perakkaisetPaivat;
 
         long date = System.currentTimeMillis();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
