@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidproject.AteriaLista;
 import com.example.androidproject.Paino;
 import com.example.androidproject.R;
 import com.example.androidproject.Trendi;
@@ -27,6 +28,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.androidproject.AteriaLista.haeLista;
 import static com.example.androidproject.Trendi.getInstance;
 
 /**
@@ -41,7 +43,10 @@ public class Profiili extends AppCompatActivity {
     private String nimi, tiedot1, tiedot2, paiva;
     private float BMI;
     private  String trendiJson;
+
+
     private Trendi trendi;
+
     public List<Paino> paTrendi;
     private ArrayList<String> y_aks;
     private ArrayList<String> x_aks;
@@ -79,14 +84,15 @@ public class Profiili extends AppCompatActivity {
         }
         trendi = gson.fromJson(trendiJson, Trendi.class);
 
+
         listaHae();
         haeTiedot();
         setReuna();
 
-        Log.d("Listan koko ", String.valueOf(paTrendi.size()));
+        /*Log.d("Listan koko ", String.valueOf(paTrendi.size()));
         for (int i=0; i<paTrendi.size(); i++){
             Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
-        }
+        }*/
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(alaPalkkiMethod);
         bottomNavigationView.getMenu().findItem(R.id.profiili).setChecked(true);
@@ -177,6 +183,7 @@ public class Profiili extends AppCompatActivity {
         return painoArvot;
     }
 
+
     /**
      * Haetaan SharedPreferencesistä halutut tiedot ja asetetaan ne profiili-aktiviteetin näkymän kenttiin
      */
@@ -248,13 +255,13 @@ public class Profiili extends AppCompatActivity {
     }
 
     /**
-     * Näkymässä infonappi, josta painamalla saa lisätietoa, mitä kyseinen arvo (bmi) tarkoittaa. Tieto annetaan toasteina.
+     * Näkymässä infonappi, josta painamalla saa lisätietoa, mitä kyseinen arvo (bmi) tarkoittaa. Tieto annetaan toastina.
      * @param v
      */
     public void annaLisatiedot(View v){
         float tieto = laskeBmi();
         Toast toast = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 150, -320);
+        toast.setGravity(Gravity.TOP|Gravity.END, 100, 350);
 
         //toast.getView().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#34495E")));
         /**
@@ -285,7 +292,7 @@ public class Profiili extends AppCompatActivity {
     }
 
     /**
-     * Asetetaan kentän arvon mukaan vaihtuva kehysväri
+     * Asetetaan kentän arvon mukaan vaihtuva kehysväri (https://www.viralandroid.com/2015/10/android-button-and-textview-border-color.html)
      */
     public void setReuna(){
         float tieto = laskeBmi();
