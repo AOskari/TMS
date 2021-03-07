@@ -237,7 +237,6 @@ public class MainActivity extends AppCompatActivity {
          */
         SharedPreferences sharedPreferences = getSharedPreferences("Tiedot", Context.MODE_PRIVATE);
         String nimi = sharedPreferences.getString("Käyttäjä", "");
-        String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
         String tiedot1 = sharedPreferences.getString("Tavoite1", "");
         String tiedot2 = sharedPreferences.getString("Tavoite2", "");
 
@@ -620,6 +619,7 @@ public class MainActivity extends AppCompatActivity {
              * Lisätään nimeen iso alkukirjain, jos käyttäjä itse ei ole pistänyt.
              */
 
+            String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
             nimitextview.setText("Hei, " + isoalkukirjain + "!");
         } else {
             nimitextview.setText("Hei!");
