@@ -256,7 +256,7 @@ public class Profiili extends AppCompatActivity {
 
         //tuomio.setView(nayta);
         tuomio.setGravity(Gravity.TOP|Gravity.END, 150, 620);
-
+        tuomio.setView(nayta);
         /**
          * Tarkistetaan millä alueella kentän arvo on ja asetetaan sen mukaan oikea toast-teksti
          */
