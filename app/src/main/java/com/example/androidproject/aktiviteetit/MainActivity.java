@@ -724,6 +724,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Jos käyttäjä klikkaa päivämäärää ja streakkia, laukaisee toastin.
      * If elset sen varalta jos käyttäjällä ei ole nimeä.
+     *
      * @param view
      */
 
@@ -731,8 +732,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (!isoalkukirjain.equals("") && isoalkukirjain != null) {
             Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta. Hyvä " + isoalkukirjain + "!👍", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta. Hyvä!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -741,6 +741,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Salainen Easter egg
      */
+
     int clickCounter;
 
     public void onClickEasterEgg(View view) {
@@ -749,7 +750,6 @@ public class MainActivity extends AppCompatActivity {
         if (clickCounter == 10) {
             clickCounter = 0;
             Toast.makeText(this, "Au, lopeta! 😡😡", Toast.LENGTH_SHORT).show();
-
         }
     }
 }
