@@ -134,9 +134,9 @@
             android:layout_marginLeft="8dp"
             android:text="@string/cm"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/pituus"
-            app:layout_constraintStart_toEndOf="@+id/pituus"
-            app:layout_constraintTop_toTopOf="@+id/pituus" />
+            app:layout_constraintBottom_toBottomOf="@+id/paino"
+            app:layout_constraintStart_toEndOf="@+id/paino"
+            app:layout_constraintTop_toTopOf="@+id/paino" />
 
         <EditText
             android:id="@+id/paino"
@@ -159,9 +159,9 @@
             android:layout_marginLeft="8dp"
             android:text="@string/kg"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/paino"
-            app:layout_constraintStart_toEndOf="@+id/paino"
-            app:layout_constraintTop_toTopOf="@+id/paino" />
+            app:layout_constraintBottom_toBottomOf="@+id/pituus"
+            app:layout_constraintStart_toEndOf="@+id/pituus"
+            app:layout_constraintTop_toTopOf="@+id/pituus" />
 
         <EditText
             android:id="@+id/pituus"
