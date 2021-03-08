@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Yläpalkin napin toiminnallisuus
+     *
      * @param item Yläpalkin info-nappi
      */
     @Override
@@ -216,7 +217,6 @@ public class MainActivity extends AppCompatActivity {
         int kalorit = (int) Math.round(aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(0));
         double syodytProtskut = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(1);
         double syodytHiilarit = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(2);
-        //double syodytRasvat = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(3);
 
         /**
          * Haetaan pysyväismuistista käyttäjän tiedot ja tavoitteet.
@@ -256,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
 
             //Ei ole pelkät proteiinit, vaan paremminkin tavoite2.
             double proteiinitDouble = Double.parseDouble(proteiinit);
-            //Pikaliimateippiviritelmä.
             double tavoite2Double = proteiinitDouble;
 
             /**
@@ -306,8 +305,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             } else if (tiedot1_1.equals("Hiilihydraatti")) {
-                //tee jotain
-                //  double syodytHiilarit = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(2);
 
                 int hiilariProsentit = (int) Math.round(syodytHiilarit / tavoite2Double * 100);
 
@@ -342,9 +339,7 @@ public class MainActivity extends AppCompatActivity {
                     ylitys2.setText("Päivän tavoite 1 ylitetty.");
                 }
             } else if (tiedot1_1.equals("Kalorit")) {
-                //    String[] tiedot1_lista = tiedot1.split(" ");
                 String tiedot1_kalorit = tiedot1_lista[1];
-                //      String tavoite1_nimi = tiedot1_lista[0];
                 float saatuTieto1 = Float.parseFloat(tiedot1_kalorit);
                 int kaloritYht = (int) Math.round(saatuTieto1);
                 TextView prossat = findViewById(R.id.prossat);
@@ -436,7 +431,6 @@ public class MainActivity extends AppCompatActivity {
 
             //Ei ole pelkät proteiinit, vaan paremminkin tavoite2.
             double proteiinitDouble = Double.parseDouble(proteiinit);
-            //Pikaliimateippiviritelmä.
             double tavoite2Double = proteiinitDouble;
 
             /**
@@ -486,8 +480,6 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             } else if (tiedot2_1.equals("Hiilihydraatti")) {
-                //tee jotain
-                //  double syodytHiilarit = aterialista.haeSyodytRavintoarvot(paiva, kuukausi, vuosi).get(2);
 
                 int hiilariProsentit = (int) Math.round(syodytHiilarit / tavoite2Double * 100);
 
@@ -728,6 +720,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Jos käyttäjä klikkaa päivämäärää ja streakkia, laukaisee toastin.
+     *
      * @param view
      */
 
