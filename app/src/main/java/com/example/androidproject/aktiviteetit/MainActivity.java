@@ -726,6 +726,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickStreakki(View view) {
 
-        Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta. Hyvä sinä!", Toast.LENGTH_SHORT).show();
     }
 }
