@@ -39,7 +39,7 @@ public class TiedotActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-        getWindow().setLayout((int) (width * .8), (int) (height * 0.4));
+        getWindow().setLayout((int) (width * .8), (int) (height * 0.5));
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         /**

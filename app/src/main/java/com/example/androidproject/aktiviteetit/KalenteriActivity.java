@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
 import android.widget.CalendarView;
 import com.example.androidproject.R;
 
@@ -56,7 +57,10 @@ public class KalenteriActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    public void poistu(View v) {
+        finish();
     }
 }
 
