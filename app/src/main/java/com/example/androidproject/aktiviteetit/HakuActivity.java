@@ -88,10 +88,7 @@ public class HakuActivity extends AppCompatActivity {
      * Asetetaan takaisin-painikkeelle fade-animaatio.
      */
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-    }
+    public void onBackPressed() {}
 
     /**
      * Hakee Elintarvikkeita Fineli:n avoimesta rajapinnasta EditText-kentän merkkijonon perusteella.

@@ -17,9 +17,9 @@ import java.util.List;
  *  Singleton jota käytetään aterioiden listaamiseen ja SharedPreferencesiin tallentamiseen.
  */
 public class AteriaLista {
+
     private List<Ateria> lista;
     private List<Ateria> syodytAteriat;
-
     private static final AteriaLista haeLista = new AteriaLista();
     private int id;
 

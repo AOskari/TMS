@@ -19,8 +19,8 @@ import com.example.androidproject.R;
  */
 public class KalenteriActivity extends AppCompatActivity {
 
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

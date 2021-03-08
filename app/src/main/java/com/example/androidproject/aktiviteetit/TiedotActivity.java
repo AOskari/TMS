@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class TiedotActivity extends AppCompatActivity {
 
-    Gson gson = new Gson();
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -34,6 +34,7 @@ import java.util.regex.Pattern;
  * Asetukset-aktiviteetissa käyttäjä syöttää haluamansa tiedot ja ne tallennetaan SharedPrefences-kansioon
  */
 public class Asetukset extends AppCompatActivity {
+
     private TextView yksikko1, yksikko2, paino, pituus, tav1, tav2;
     private Spinner tavoite1, tavoite2;
     private Button tallenna;
@@ -49,7 +50,6 @@ public class Asetukset extends AppCompatActivity {
 
     private String trendiJson, kuka;
     private float kg, cm;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

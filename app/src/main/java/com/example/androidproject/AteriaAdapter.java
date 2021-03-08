@@ -25,12 +25,12 @@ import java.util.List;
  */
 public class AteriaAdapter extends BaseAdapter {
 
-    Context context;
-    Ateria ateria;
-    String ateriaJson;
-    SharedPreferences pref;
-    SharedPreferences.Editor edit;
-    Gson gson = new Gson();
+    private Context context;
+    private Ateria ateria;
+    private String ateriaJson;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor edit;
+    private Gson gson = new Gson();
 
     /**
      * Adapterin konstruktori.
