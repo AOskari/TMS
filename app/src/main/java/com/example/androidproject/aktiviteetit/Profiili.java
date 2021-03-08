@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -252,11 +251,7 @@ public class Profiili extends AppCompatActivity {
     public void annaLisatiedot(View v){
         float tieto = laskeBmi();
         Toast tuomio = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
-        //View nayta = tuomio.getView();
-        //nayta.setBackgroundResource(R.drawable.toast);
-
-        //tuomio.setView(nayta);
-        tuomio.setGravity(Gravity.TOP|Gravity.END, 150, 620);
+        tuomio.setGravity(Gravity.TOP|Gravity.END, 150, 600);
 
         /**
          * Tarkistetaan millä alueella kentän arvo on ja asetetaan sen mukaan oikea toast-teksti

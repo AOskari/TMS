@@ -201,10 +201,6 @@ public class Asetukset extends AppCompatActivity {
         String json = gson.toJson(paTrendi);
         tallListat.putString("Paino", json);
         tallListat.commit();
-        /*Log.d("Listan koko ", String.valueOf(paTrendi.size()));
-        for (int i=0; i<paTrendi.size(); i++){
-            Log.d("Lista "+i, String.valueOf(paTrendi.get(i)));
-        }*/
     }
 
     /**

@@ -11,7 +11,7 @@
     <string name="yksikko">näytä yksikkö</string>
     <string name="tallennus">Tallenna</string>
     <string name="ohje">Jos haluat sovelluksen laskevan BMI:n, syötä painon lisäksi pituus</string>
-    <string name="ohje2">Valitse ensin tavoitetyyppi ja  anna sen jälkeen haluamasi määrä</string>
+    <string name="ohje2">Valitse ensin tavoitetyyppi ja anna sen jälkeen haluttu määrä</string>
     <string-array name="valinta">
         <item>"Valinta"</item>
         <item>"Kalorit"</item>
