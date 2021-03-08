@@ -730,11 +730,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickStreakki(View view) {
 
-        if (!isoalkukirjain.equals("") && isoalkukirjain != null) {
-            Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta. Hyvä " + isoalkukirjain + "!👍", Toast.LENGTH_SHORT).show();
-        } else {
             Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta. Hyvä!", Toast.LENGTH_SHORT).show();
-        }
     }
 
 
