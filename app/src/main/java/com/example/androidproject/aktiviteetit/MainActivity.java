@@ -736,4 +736,20 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta. Hyvä!", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+    /**
+     * Salainen Easter egg
+     */
+    int clickCounter;
+
+    public void onClickEasterEgg(View view) {
+
+        clickCounter++;
+        if (clickCounter == 10) {
+            clickCounter = 0;
+            Toast.makeText(this, "Au, lopeta! 😡😡", Toast.LENGTH_SHORT).show();
+
+        }
+    }
 }

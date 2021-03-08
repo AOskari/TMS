@@ -271,6 +271,7 @@
         <TextView
             android:id="@+id/nimiteksti"
             android:layout_width="wrap_content"
+            android:onClick="onClickEasterEgg"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
