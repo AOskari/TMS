@@ -71,6 +71,7 @@ public class AteriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ateria);
+        getSupportActionBar().setTitle("TMS - Suunnittele");
 
         kalenteri = Calendar.getInstance();
         piiras = findViewById(R.id.ateria_tiedot_piiras);

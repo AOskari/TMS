@@ -55,6 +55,7 @@ public class Profiili extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profiili);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle("TMS - Profiili");
 
         pronimi = findViewById(R.id.proNimi);
         propaino = findViewById(R.id.proPaino);

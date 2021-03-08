@@ -56,6 +56,7 @@ public class AteriatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ateriat);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setTitle("TMS - Ateriat");
 
         pref = getApplicationContext().getSharedPreferences("mainPref",0);
         editor = pref.edit();

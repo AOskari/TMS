@@ -65,6 +65,7 @@ public class HakuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_haku);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("TMS - Haku");
 
         foodInfo = new ArrayList<>();
         latausKuvake = findViewById(R.id.latauskuvake);
