@@ -119,6 +119,7 @@ public class Profiili extends AppCompatActivity {
             y_aks.add(String.valueOf(paTrendi.get(i)));
             Log.d("Näytä arraylist ",  y_aks.get(i));
         }
+
         /**
          * X-akselin numeroarvot korvataan päivämäärillä. StaticLabelsFormatter pystyy hyödyntämään vain taulukoita, joten muunnetaan
          * x_aks-arraylist x_nimi-arrayksi. Pitkien merkkijonojen vuoksi niitä kallistetaan näytössä, jotta mahtuvat
@@ -126,6 +127,7 @@ public class Profiili extends AppCompatActivity {
          */
         String[] x_nimi = new String[x_aks.size()];
         x_nimi = x_aks.toArray(x_nimi);
+
         /**
          * StaticLabelsFormatter pystyy näyttämään muokatut arvot vain jos niitä on taulukossa vähintään kaksi, joten ehdollistetaan
          * niiden näyttäminen alkuperäisen listan pituuteen.
@@ -249,14 +251,13 @@ public class Profiili extends AppCompatActivity {
      */
     public void annaLisatiedot(View v){
         float tieto = laskeBmi();
-
         Toast tuomio = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
         View nayta = tuomio.getView();
         nayta.setBackgroundResource(R.drawable.toast);
 
-        //tuomio.setView(nayta);
-        tuomio.setGravity(Gravity.TOP|Gravity.END, 150, 620);
         tuomio.setView(nayta);
+        tuomio.setGravity(Gravity.TOP|Gravity.END, 150, 620);
+        
         /**
          * Tarkistetaan millä alueella kentän arvo on ja asetetaan sen mukaan oikea toast-teksti
          */
