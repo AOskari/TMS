@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
     private int paiva;
     private int kuukausi;
     private int vuosi;
+    private String nimi;
+    private String isoalkukirjain;
 
     /**
      * Ylä palkkiin napin luominen.
@@ -222,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
          * Haetaan pysyväismuistista käyttäjän tiedot ja tavoitteet.
          */
         SharedPreferences sharedPreferences = getSharedPreferences("Tiedot", Context.MODE_PRIVATE);
-        String nimi = sharedPreferences.getString("Käyttäjä", "");
+        nimi = sharedPreferences.getString("Käyttäjä", "");
         String tiedot1 = sharedPreferences.getString("Tavoite1", "");
         String tiedot2 = sharedPreferences.getString("Tavoite2", "");
 
@@ -597,7 +599,7 @@ public class MainActivity extends AppCompatActivity {
              * Lisätään nimeen iso alkukirjain, jos käyttäjä itse ei ole pistänyt.
              */
 
-            String isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
+            isoalkukirjain = nimi.substring(0, 1).toUpperCase() + nimi.substring(1);
             nimitextview.setText("Hei, " + isoalkukirjain + "!");
         } else {
             nimitextview.setText("Hei!");
@@ -720,12 +722,17 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Jos käyttäjä klikkaa päivämäärää ja streakkia, laukaisee toastin.
-     *
+     * If elset sen varalta jos käyttäjällä ei ole nimeä.
      * @param view
      */
 
     public void onClickStreakki(View view) {
 
-        Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta. Hyvä sinä!", Toast.LENGTH_SHORT).show();
+        if (!isoalkukirjain.equals("") && isoalkukirjain != null) {
+            Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta. Hyvä " + isoalkukirjain + "!👍", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, "Näyttää kuinka monta päivää putkeen olet käyttänyt sovellusta. Hyvä!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
