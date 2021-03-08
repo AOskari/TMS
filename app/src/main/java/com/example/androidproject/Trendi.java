@@ -12,9 +12,6 @@ public class Trendi {
 
     private static final Trendi trendit = new Trendi();
     private List<Paino> paino;
-    private List<Double> kal;
-    private List<Double> prot;
-    private List<Double> hh;
 
     /**
      * Metodi, jolla päästään käsiksi singletonin sisältämiin metodeihin
@@ -29,9 +26,6 @@ public class Trendi {
      */
     private Trendi() {
         paino = new ArrayList<>();
-        kal = new ArrayList<>();
-        prot = new ArrayList<>();
-        hh = new ArrayList<>();
     }
 
     /**
@@ -40,15 +34,6 @@ public class Trendi {
      */
     public List<Paino>getPaino(){
         return this.paino;
-    }
-    public List<Double> getKal() {
-        return kal;
-    }
-    public List<Double>getProt(){
-        return prot;
-    }
-    public List<Double> getHh() {
-        return hh;
     }
 
     /**

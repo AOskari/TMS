@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,7 +14,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.androidproject.AteriaLista;
 import com.example.androidproject.Paino;
 import com.example.androidproject.R;
 import com.example.androidproject.Trendi;
@@ -28,7 +28,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.androidproject.AteriaLista.haeLista;
 import static com.example.androidproject.Trendi.getInstance;
 
 /**
@@ -41,7 +40,6 @@ public class Profiili extends AppCompatActivity {
     private SharedPreferences trendit;
     private SharedPreferences.Editor tallListat;
     private Trendi trendi;
-
     private List<Paino> paTrendi;
     private ArrayList<String> y_aks;
     private ArrayList<String> x_aks;
@@ -50,10 +48,8 @@ public class Profiili extends AppCompatActivity {
     private GraphView historia;
     private LineGraphSeries<DataPoint> sarja1;
 
-    private float paino, pituus;
-    private float BMI;
-    private  String trendiJson;
-    private String nimi, tiedot1, tiedot2, paiva;
+    private float paino, pituus, BMI;
+    private String trendiJson, nimi, tiedot1, tiedot2, paiva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +99,7 @@ public class Profiili extends AppCompatActivity {
     /**
      * Metodissa haetaan paino-olioiden lista Trendi-Singletonista
      */
-    public void listaHae(){
+    private void listaHae(){
        paTrendi = trendi.getPaino();
     }
 
@@ -114,7 +110,7 @@ public class Profiili extends AppCompatActivity {
      * optimointi/konfigurointi: https://www.javatips.net/api/GraphView-master/src/main/java/com/jjoe64/graphview/GridLabelRenderer.java. Viimeksi
      * mainitussa kerrottu kaikki GraphView:n käyttöön liittyvät metodit.
      */
-    public void teeKuvaaja(){
+    private void teeKuvaaja(){
         x_aks = new ArrayList<>();
         y_aks = new ArrayList<>();
 
@@ -154,9 +150,7 @@ public class Profiili extends AppCompatActivity {
         historia.getViewport().setXAxisBoundsManual(true);
         historia.getViewport().setScalable(true);
         historia.getViewport().setScrollable(true);
-
         historia.getLegendRenderer().setVisible(true);
-
         historia.getGridLabelRenderer().setNumHorizontalLabels(paTrendi.size());
         historia.getGridLabelRenderer().setHorizontalLabelsAngle(100);
         historia.getGridLabelRenderer().setHumanRounding(false);
@@ -170,7 +164,7 @@ public class Profiili extends AppCompatActivity {
      * y_aks-lista, x-muuttujaksi tulee indeksinumero ja y-muuttujaksi indeksissä oleva arvo
      * @return palauttaa datapisteen (x,y)-muodossa
      */
-    public DataPoint[] data(){
+    private DataPoint[] data(){
         DataPoint[] painoArvot = new DataPoint[paTrendi.size()];
         for (int i = 0; i < paTrendi.size(); i++) {
             DataPoint v = new DataPoint(i, Double.parseDouble(y_aks.get(i)));
@@ -178,7 +172,6 @@ public class Profiili extends AppCompatActivity {
         }
         return painoArvot;
     }
-
 
     /**
      * Haetaan SharedPreferencesistä halutut tiedot ja asetetaan ne profiili-aktiviteetin näkymän kenttiin
@@ -238,7 +231,7 @@ public class Profiili extends AppCompatActivity {
      * @return palautetaan desimaaliarvo, joka myöhemmin arvoa käytettäessä pyöristeään tarvittaessa DecimalFormat-luokan avulla
      * kahden desimaalin tarkkuuteen
      */
-    public float laskeBmi(){
+    private float laskeBmi(){
         paino = tiedot.getFloat("Paino", 0.0f);
         pituus = tiedot.getFloat("Pituus", 0.0f) / 100;
         float lasku = paino / (pituus*pituus);
@@ -256,41 +249,45 @@ public class Profiili extends AppCompatActivity {
      */
     public void annaLisatiedot(View v){
         float tieto = laskeBmi();
-        Toast toast = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.TOP|Gravity.END, 100, 350);
 
-        //toast.getView().setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#34495E")));
+        Toast tuomio = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
+        View nayta = tuomio.getView();
+        nayta.setBackgroundResource(R.drawable.toast);
+
+        //tuomio.setView(nayta);
+        tuomio.setGravity(Gravity.TOP|Gravity.END, 150, 620);
+
         /**
          * Tarkistetaan millä alueella kentän arvo on ja asetetaan sen mukaan oikea toast-teksti
          */
         if (tieto > 0.0 && tieto < 18.5){
-            toast.setText("Alipaino");
-            toast.show();
-        } else if (tieto >= 18.5 && tieto < 25.0){
-            toast.setText("Normaali paino");
-            toast.show();
+            tuomio.setText("Alipaino");
+            tuomio.show();
+        } else if (tieto >= 18.5 && tieto <= 25.0){
+            tuomio.setText("Normaali paino");
+            tuomio.show();
         } else if (tieto > 25.0 && tieto <= 30.0){
-            toast.setText("Lievä ylipaino");
-            toast.show();
+            tuomio.setText("Lievä ylipaino");
+            tuomio.show();
         } else if (tieto > 30.0 && tieto <= 35.0){
-            toast.setText("Merkittävä lihavuus");
-            toast.show();
+            tuomio.setText("Merkittävä lihavuus");
+            tuomio.show();
         } else if (tieto > 35.0 && tieto <= 40.0){
-            toast.setText("Vaikea lihavuus");
-            toast.show();
+            tuomio.setText("Vaikea lihavuus");
+            tuomio.show();
         } else if (tieto > 40.0){
-            toast.setText("Sairaalloinen lihavuus");
-            toast.show();
+            tuomio.setText("Sairaalloinen lihavuus");
+            tuomio.show();
         } else if (tieto == 0.0){
-            toast.setText("Pituutta tai painoa ei ole asetettu");
-            toast.show();
+            tuomio.setText("Pituutta tai painoa ei ole asetettu");
+            tuomio.show();
         }
     }
 
     /**
      * Asetetaan kentän arvon mukaan vaihtuva kehysväri (https://www.viralandroid.com/2015/10/android-button-and-textview-border-color.html)
      */
-    public void setReuna(){
+    private void setReuna(){
         float tieto = laskeBmi();
         /**
          * Tarkistetaan millä alueella arvo on ja asetetaan sen mukaan kehysväri
