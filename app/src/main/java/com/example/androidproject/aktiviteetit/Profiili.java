@@ -252,12 +252,12 @@ public class Profiili extends AppCompatActivity {
     public void annaLisatiedot(View v){
         float tieto = laskeBmi();
         Toast tuomio = Toast.makeText(getApplicationContext(), "teksti", Toast.LENGTH_SHORT);
-        View nayta = tuomio.getView();
-        nayta.setBackgroundResource(R.drawable.toast);
+        //View nayta = tuomio.getView();
+        //nayta.setBackgroundResource(R.drawable.toast);
 
-        tuomio.setView(nayta);
+        //tuomio.setView(nayta);
         tuomio.setGravity(Gravity.TOP|Gravity.END, 150, 620);
-        
+
         /**
          * Tarkistetaan millä alueella kentän arvo on ja asetetaan sen mukaan oikea toast-teksti
          */
