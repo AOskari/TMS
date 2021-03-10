@@ -13,7 +13,9 @@ You can also navigate to the TiedotMeista activity using the info button on the 
 </p>
 
 The Ateriat portion displays the planned meals according to the selected date. The list which contains all the meals is sorted according to their time. Using the buttons set on the meals, you can either check the information, copy, delete, edit or set the meal as eaten.
-By pressing the plus button on the top right corner, you can open the Ateria activity. Here, you can plan your meals and set the wanted date and time for the meal. By pressing the plus button on the bottom, you can open the Haku activity. Here, you can search for groceries and add the wanted amount to the meal you are planning. The groceries are fetched from Fineli's API (https://fineli.fi/fineli/api/v1/foods?q=).
+By pressing the plus button on the top right corner, you can open the Ateria activity. Here, you can plan your meals and set the wanted date and time for the meal. By pressing the plus button on the bottom, you can open the Haku activity. 
+
+In the Haku activity, you can search for groceries and add the wanted amount to the meal you are planning. The groceries are fetched from Fineli's API (https://fineli.fi/fineli/api/v1/foods?q=).
 <p>
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateriat.jpg" height="550" width="250">
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateria.jpg" height="550" width="250">
