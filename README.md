@@ -4,6 +4,7 @@ This is a schoolproject for a mobile application development course. The main go
 
 The application consists of three main portions: Koti, Profiili, and Ateriat. You can navigate through the activities using the bottom navigation bar.
 
+# Koti
 The Koti portion displays the user's information and his or her goal progression. If the user surpasses the daily goals, the progress bar will turn red and an indicator text is displayed on the screen.
 
 You can also navigate to the TiedotMeista activity using the info button on the top right corner, which displays the names of the developers and also describes what the app is all about.
