@@ -4,6 +4,8 @@ Tämä on kouluprojekti Mobiilit Terveyssovellukset -kurssille. Projektin päät
 
 The application consists of three main portions: Koti, Profiili, and Ateriat. You can navigate through the activities using the bottom navigation bar.
 
-<img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_profiili.jpg" height="600" width="250">
-<img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_main.jpg" height="600" width="250">
-<img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateriat.jpg" height="600" width="250">
+<p>
+  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_profiili.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_main.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateriat.jpg" height="550" width="250">
+</p>
