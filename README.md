@@ -1,6 +1,6 @@
 # TMS (Tiedä Mitä Syöt) / Know What You Eat
 
-Tämä on kouluprojekti Mobiilit Terveyssovellukset -kurssille. Projektin päätavoitteena on harjoitella mobiilikehitystä ja  olio-ohjelmointia, hyödyntäen Java ohjelmointikieltä ja Android studiota ohjelmointiympäristönä. 
+This is a schoolproject for a mobile application development course. The main goal of the project is to practice mobile app development using object-oriented programming, using Java as the programming language and Android Studio as the IDE.
 
 The application consists of three main portions: Koti, Profiili, and Ateriat. You can navigate through the activities using the bottom navigation bar.
 
@@ -12,12 +12,14 @@ You can also navigate to the TiedotMeista activity using the info button on the 
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_tietoameista.jpg" height="550" width="250">
 </p>
 
-The Ateriat portion displays the planned meals according to the selected date. The list which contains all the meals is sorted according to their time.
+The Ateriat portion displays the planned meals according to the selected date. The list which contains all the meals is sorted according to their time. Using the buttons set on the meals, you can either check the information, copy, delete, edit or set the meal as eaten.
+By pressing the plus button on the top right corner, you can open the Ateria activity. Here, you can plan your meals and set the wanted date and time for the meal. By pressing the plus button on the bottom, you can open the Haku activity. Here, you can search for groceries and add the wanted amount to the meal you are planning. The groceries are fetched from Fineli's API (https://fineli.fi/fineli/api/v1/foods?q=).
 <p>
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateriat.jpg" height="550" width="250">
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateria.jpg" height="550" width="250">
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_haku.jpg" height="550" width="250">
 </p>
+<br/>
 
 There are also a few popups, which are either used for choosing a date, or examining the information of the groceries or meals.
 <p>
@@ -25,6 +27,7 @@ There are also a few popups, which are either used for choosing a date, or exami
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_tiedot.jpg" height="550" width="250">
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateriainfo.jpg" height="550" width="250">
 </p>
+<br/>
 
 <p>
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_profiili.jpg" height="550" width="250">
