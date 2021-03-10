@@ -12,6 +12,7 @@ You can also navigate to the TiedotMeista activity using the info button on the 
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_tietoameista.jpg" height="550" width="250">
 </p>
 
+
 The Ateriat portion displays the planned meals according to the selected date. The list which contains all the meals is sorted according to their time. Using the buttons set on the meals, you can either check the information, copy, delete, edit or set the meal as eaten.
 By pressing the plus button on the top right corner, you can open the Ateria activity. Here, you can plan your meals and set the wanted date and time for the meal. By pressing the plus button on the bottom, you can open the Haku activity. 
 
@@ -21,7 +22,7 @@ In the Haku activity, you can search for groceries and add the wanted amount to 
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateria.jpg" height="550" width="250">
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_haku.jpg" height="550" width="250">
 </p>
-<br/>
+
 
 There are also a few popups, which are either used for choosing a date, or examining the information of the groceries or meals.
 <p>
@@ -31,6 +32,10 @@ There are also a few popups, which are either used for choosing a date, or exami
 </p>
 <br/>
 
+The Profiili portion consists of two activities: Profiili and Asetukset. The profiili activity displays the user's information and goals. It also displays a GraphView, which shows the user's weight progression. 
+
+The Asetukset activity is used for setting the user's information. In this case, the name, weight, height and the chosen goals. Kalories, protein and carbohydrates can be set as goals.
 <p>
   <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_profiili.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_asetukset.jpg" height="550" width="250">
 </p>
