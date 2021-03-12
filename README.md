@@ -9,8 +9,8 @@ The Koti portion displays the user's information and his or her goal progression
 
 You can also navigate to the TiedotMeista activity using the info button on the top right corner, which displays the names of the developers and also describes what the app is all about.
 <p>
-  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_main.jpg" height="550" width="250">
-  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_tietoameista.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/TMS/blob/master/images/tms_main.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/TMS/blob/master/images/tms_tietoameista.jpg" height="550" width="250">
 </p>
 
 # Ateriat
@@ -19,17 +19,17 @@ By pressing the plus button on the top right corner, you can open the Ateria act
 
 In the Haku activity, you can search for groceries and add the wanted amount to the meal you are planning. The groceries are fetched from Fineli's API (https://fineli.fi/fineli/api/v1/foods?q=).
 <p>
-  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateriat.jpg" height="550" width="250">
-  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateria.jpg" height="550" width="250">
-  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_haku.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/TMS/blob/master/images/tms_ateriat.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/TMS/blob/master/images/tms_ateria.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/TMS/blob/master/images/tms_haku.jpg" height="550" width="250">
 </p>
 
 
 There are also a few popups, which are either used for choosing a date, or examining the information of the groceries or meals.
 <p>
-  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_kalenteri.jpg" height="550" width="250">
-  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_tiedot.jpg" height="550" width="250">
-  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_ateriainfo.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/TMS/blob/master/images/tms_kalenteri.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/TMS/blob/master/images/tms_tiedot.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/TMS/blob/master/images/tms_ateriainfo.jpg" height="550" width="250">
 </p>
 <br/>
 
@@ -38,6 +38,6 @@ The Profiili portion consists of two activities: Profiili and Asetukset. The pro
 
 The Asetukset activity is used for setting the user's information. In this case, the name, weight, height and the chosen goals. Kalories, protein and carbohydrates can be set as goals.
 <p>
-  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_profiili.jpg" height="550" width="250">
-  <img src="https://github.com/AOskari/Images/blob/main/tms-pictures/tms_asetukset.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/TMS/blob/master/images/tms_profiili.jpg" height="550" width="250">
+  <img src="https://github.com/AOskari/TMS/blob/master/images/tms_asetukset.jpg" height="550" width="250">
 </p>
