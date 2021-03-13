@@ -1,8 +1,8 @@
 # TMS (Tiedä Mitä Syöt) / Know What You Eat
 
-This is a schoolproject for a mobile application development course. The main goal of the project is to practice mobile app development using object-oriented programming, using Java as the programming language and Android Studio as the IDE.
+This is a school project for a mobile application development course. The main goal of the project is to practice mobile app development using object-oriented programming, using Java as the programming language and Android Studio as the IDE.
 
-The application consists of three main portions: Koti, Profiili, and Ateriat. You can navigate through the activities using the bottom navigation bar.
+The application consists of three main portions: Koti, Profiili, and Ateriat. You can navigate through the activities using the bottom navigation bar. Data and singletons are stored in the user's SharedPreferences folder. 
 
 # Koti
 The Koti portion displays the user's information and his or her goal progression. If the user surpasses the daily goals, the progress bar will turn red and an indicator text is displayed on the screen.
