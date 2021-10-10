@@ -1,6 +1,6 @@
 # TMS (Tiedä Mitä Syöt) / Know What You Eat
 
-The main goal of this project is to practice native Android development using object-oriented programming, utilizing Java as the programming language and Android Studio as the IDE.
+The main goal of this project is to practice Android native development using object-oriented programming, utilizing Java as the programming language and Android Studio as the IDE.
 
 The application consists of three main portions: Koti, Profiili, and Ateriat. You can navigate through the activities using the bottom navigation bar. Data and singletons are stored in the user's SharedPreferences folder. 
 
